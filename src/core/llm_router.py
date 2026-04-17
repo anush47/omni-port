@@ -33,17 +33,27 @@ class LLMRouter:
         self.azure_api_key = os.getenv("AZURE_OPENAI_API_KEY")
         self.azure_api_version = os.getenv("OPENAI_API_VERSION", "2024-02-15-preview")
 
+    # Models that only accept temperature=1 (the API default).
+    _NO_TEMPERATURE_PREFIXES = ("o1", "o3", "o4", "gpt-5")
+
     def _create_model(self, model_name: str, temperature: float):
+        # Reasoning and gpt-5 family models reject any temperature != 1.
+        # Omit the parameter entirely so the API uses its default.
+        supports_temperature = not any(
+            model_name.startswith(p) for p in self._NO_TEMPERATURE_PREFIXES
+        )
+        extra = {"temperature": temperature} if supports_temperature else {}
+
         if self.azure_endpoint and self.azure_api_key:
             return AzureChatOpenAI(
                 azure_endpoint=self.azure_endpoint,
                 api_key=self.azure_api_key,
                 api_version=self.azure_api_version,
                 azure_deployment=model_name,
-                temperature=temperature
+                **extra
             )
         else:
-            return ChatOpenAI(model=model_name, temperature=temperature)
+            return ChatOpenAI(model=model_name, **extra)
 
     def _effective_tier(self, requested: LLMTier, tokens_used: int) -> LLMTier:
         """Apply circuit-breaker downgrade rules based on token budget consumption."""
