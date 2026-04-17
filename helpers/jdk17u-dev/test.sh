@@ -24,6 +24,12 @@ else
     TEST_LIST="${TEST_TARGETS}"
 fi
 
+# Canonical output dirs at the repo root — predictable for the host-side collector.
+JTWORK_DIR="/repo/JTwork"
+JTREPORT_DIR="/repo/JTreport"
+rm -rf "${JTWORK_DIR}" "${JTREPORT_DIR}"
+mkdir -p "${JTWORK_DIR}" "${JTREPORT_DIR}"
+
 echo "--- Starting Test Execution in ${BUILD_DIR_ABS} ---"
 
 FINAL_EXIT_CODE=0
@@ -43,16 +49,24 @@ for TARGET in ${TEST_LIST}; do
             continue
         fi
         TARGET_ABS="/repo/${TARGET}"
+        # -xml generates JUnit XML in the report dir so collect_test_results can parse it.
+        # -w / -r place output at known paths independent of cwd.
         "${JTREG_BIN}" \
             -verbose:fail,error \
+            -xml \
+            -w "${JTWORK_DIR}" \
+            -r "${JTREPORT_DIR}" \
             -jdk:"${BUILD_DIR_ABS}/images/jdk" \
             "${TARGET_ABS}"
         EXIT_CODE=$?
     else
         echo "Detected tier/group test. Using make test."
+        # JTREG_REPORT_DIR ensures make-driven jtreg writes XML to our known dir.
         make test TEST="${TARGET}" \
              JOBS=$(nproc) \
-             JTREG="VERBOSE=fail,error"
+             JTREG="VERBOSE=fail,error" \
+             JTREG_REPORT_DIR="${JTREPORT_DIR}" \
+             JTREG_WORK_DIR="${JTWORK_DIR}"
         EXIT_CODE=$?
     fi
 

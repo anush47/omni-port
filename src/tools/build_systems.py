@@ -212,6 +212,9 @@ def _is_test_file(file_path: str) -> bool:
     p = (file_path or "").replace("\\", "/").lower()
     if any(d.lower() in p for d in _TEST_SOURCE_DIRS):
         return True
+    # JDK/OpenJDK: jtreg tests live under a top-level test/ directory
+    if p.startswith("test/") and p.endswith(".java"):
+        return True
     filename = os.path.basename(p)
     return (
         any(filename.endswith(s.lower()) for s in _TEST_SUFFIXES)
@@ -504,6 +507,8 @@ def collect_test_results(
         os.path.join(repo_path, "build", "all-test-results", "TEST-*.xml"),
         os.path.join(repo_path, "**/target/surefire-reports/*.xml"),
         os.path.join(repo_path, "**/JTwork/**/*.xml"),
+        os.path.join(repo_path, "JTreport", "**", "*.xml"),
+        os.path.join(repo_path, "**/JTreport/**/*.xml"),
     ]
     xml_paths: set[str] = set()
     for pat in patterns:

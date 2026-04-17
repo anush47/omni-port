@@ -41,8 +41,14 @@ _AUTOGEN_PATTERNS = [
 
 def _is_test_file(file_path: str) -> bool:
     p = (file_path or "").replace("\\", "/").lower()
-    # Path-based detection
+    # Path-based detection (Maven/Gradle convention)
     if any(d in p for d in (d.lower() for d in _TEST_SOURCE_DIRS)):
+        return True
+    # JDK/OpenJDK repos keep jtreg tests under a top-level test/ directory
+    # (e.g. test/jdk/..., test/hotspot/jtreg/..., test/langtools/...).
+    # Paths like "src/test/java/" are already caught above; this handles the
+    # case where "test/" is the very first path component.
+    if p.startswith("test/") and p.endswith(".java"):
         return True
     # File-name based: TestFoo.java or FooTest.java / FooTests.java / FooIT.java
     filename = os.path.basename(p)
