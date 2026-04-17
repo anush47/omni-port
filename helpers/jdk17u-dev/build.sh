@@ -27,7 +27,7 @@ fi
 
 cd "${BUILD_DIR_ABS}"
 
-if [ "${NEED_CONFIGURE}" = true ]; then
+_do_configure() {
     echo "--- Configuring build ---"
     bash ../configure \
         --with-boot-jdk="${BOOT_JDK}" \
@@ -35,11 +35,31 @@ if [ "${NEED_CONFIGURE}" = true ]; then
         --enable-ccache \
         --disable-warnings-as-errors \
         --with-debug-level=release
+}
+
+if [ "${NEED_CONFIGURE}" = true ]; then
+    _do_configure
 else
     echo "--- Skipping configure (incremental build) ---"
 fi
 
 echo "--- Running incremental make ---"
+set +e
 make JOBS="${MAKE_JOBS:-$(nproc)}" images COMPILER_WARNINGS_FATAL=false
+MAKE_EXIT=$?
+set -e
+
+if [ ${MAKE_EXIT} -ne 0 ]; then
+    if [ "${NEED_CONFIGURE}" = false ]; then
+        # Incremental make failed — the build tree may be stale from a previous
+        # commit.  Force a full reconfigure and retry once.
+        echo "--- Incremental make failed — forcing reconfigure and retry ---"
+        _do_configure
+        make JOBS="${MAKE_JOBS:-$(nproc)}" images COMPILER_WARNINGS_FATAL=false
+    else
+        # Configure already ran but make still failed — real build error.
+        exit ${MAKE_EXIT}
+    fi
+fi
 
 echo "=== Build OK ==="

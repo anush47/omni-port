@@ -336,15 +336,25 @@ def restore_repo_state(repo_path: str) -> bool:
             check=True,
             timeout=30,
         )
+        # Preserve JDK build dirs (untracked but expensive to rebuild) and jtreg
+        # output dirs.  Other projects don't use these names so the excludes are safe.
         result = subprocess.run(
-            ["git", "clean", "-fd"],
+            ["git", "clean", "-fd",
+             "--exclude=build_shared",
+             "--exclude=JTwork",
+             "--exclude=JTreport",
+            ],
             cwd=repo_path,
             capture_output=True,
             timeout=30,
         )
         if result.returncode != 0:
             subprocess.run(
-                ["git", "clean", "-ffdX"],
+                ["git", "clean", "-ffdX",
+                 "--exclude=build_shared",
+                 "--exclude=JTwork",
+                 "--exclude=JTreport",
+                ],
                 cwd=repo_path,
                 capture_output=True,
                 timeout=30,
@@ -751,6 +761,10 @@ def run_build(repo_path: str, project: str = "", changed_files: list[str] | None
                         "BUILD_DIR_NAME": "build_shared",
                     })
                 res = _run_cmd(["bash", build_sh], cwd=abs_repo_path, env=env, timeout=3600)
+                if not res["success"]:
+                    # Print the last 3000 chars so the actual error is visible
+                    tail = res["output"][-3000:] if res["output"] else "(no output)"
+                    print(f"  [build_systems] Build FAILED — last output:\n{tail}")
                 print(f"  [build_systems] Build {'succeeded' if res['success'] else 'failed'} using {normalized}-helper")
                 return BuildResult(
                     success=res["success"],
