@@ -1,0 +1,122 @@
+diff --git a/src/java.net.http/share/classes/jdk/internal/net/http/HttpRequestImpl.java b/src/java.net.http/share/classes/jdk/internal/net/http/HttpRequestImpl.java
+index 4f9d3cf56f..97312e5e9f 100644
+--- a/src/java.net.http/share/classes/jdk/internal/net/http/HttpRequestImpl.java
++++ b/src/java.net.http/share/classes/jdk/internal/net/http/HttpRequestImpl.java
+@@ -41,6 +41,7 @@ import java.util.Optional;
+ import java.net.http.HttpClient;
+ import java.net.http.HttpHeaders;
+ import java.net.http.HttpRequest;
++
+ import jdk.internal.net.http.common.HttpHeadersBuilder;
+ import jdk.internal.net.http.common.Utils;
+ import jdk.internal.net.http.websocket.OpeningHandshake;
+@@ -152,13 +153,14 @@ public class HttpRequestImpl extends HttpRequest implements WebSocketRequest {
+     /** Returns a new instance suitable for redirection. */
+     public static HttpRequestImpl newInstanceForRedirection(URI uri,
+                                                             String method,
+-                                                            HttpRequestImpl other) {
+-        return new HttpRequestImpl(uri, method, other);
++                                                            HttpRequestImpl other,
++                                                            boolean mayHaveBody) {
++        return new HttpRequestImpl(uri, method, other, mayHaveBody);
+     }
+ 
+     /** Returns a new instance suitable for authentication. */
+     public static HttpRequestImpl newInstanceForAuthentication(HttpRequestImpl other) {
+-        HttpRequestImpl request = new HttpRequestImpl(other.uri(), other.method(), other);
++        HttpRequestImpl request = new HttpRequestImpl(other.uri(), other.method(), other, true);
+         if (request.isWebSocket()) {
+             Utils.setWebSocketUpgradeHeaders(request);
+         }
+@@ -171,7 +173,8 @@ public class HttpRequestImpl extends HttpRequest implements WebSocketRequest {
+      */
+     private HttpRequestImpl(URI uri,
+                             String method,
+-                            HttpRequestImpl other) {
++                            HttpRequestImpl other,
++                            boolean mayHaveBody) {
+         assert method == null || Utils.isValidName(method);
+         this.method = method == null? "GET" : method;
+         this.userHeaders = other.userHeaders;
+@@ -184,13 +187,21 @@ public class HttpRequestImpl extends HttpRequest implements WebSocketRequest {
+         this.proxy = other.proxy;
+         this.expectContinue = other.expectContinue;
+         this.secure = uri.getScheme().toLowerCase(Locale.US).equals("https");
+-        this.requestPublisher = other.requestPublisher;  // may be null
++        this.requestPublisher = mayHaveBody ? publisher(other) : null; // may be null
+         this.acc = other.acc;
+         this.timeout = other.timeout;
+         this.version = other.version();
+         this.authority = null;
+     }
+ 
++    private BodyPublisher publisher(HttpRequestImpl other) {
++        BodyPublisher res = other.requestPublisher;
++        if (!Objects.equals(method, other.method)) {
++            res = null;
++        }
++        return res;
++    }
++
+     /* used for creating CONNECT requests  */
+     HttpRequestImpl(String method, InetSocketAddress authority, HttpHeaders headers) {
+         // TODO: isWebSocket flag is not specified, but the assumption is that
+diff --git a/src/java.net.http/share/classes/jdk/internal/net/http/RedirectFilter.java b/src/java.net.http/share/classes/jdk/internal/net/http/RedirectFilter.java
+index 3161132f31..79e2a2fbfc 100644
+--- a/src/java.net.http/share/classes/jdk/internal/net/http/RedirectFilter.java
++++ b/src/java.net.http/share/classes/jdk/internal/net/http/RedirectFilter.java
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 2015, 2018, Oracle and/or its affiliates. All rights reserved.
++ * Copyright (c) 2015, 2019, Oracle and/or its affiliates. All rights reserved.
+  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+  *
+  * This code is free software; you can redistribute it and/or modify it
+@@ -89,6 +89,31 @@ class RedirectFilter implements HeaderFilter {
+         }
+     }
+ 
++    private static boolean isRedirecting(int statusCode) {
++        // < 300: not a redirect codes
++        if (statusCode < 300) return false;
++        // 309-399 Unassigned => don't follow
++        // > 399: not a redirect code
++        if (statusCode > 308) return false;
++        switch (statusCode) {
++            // 300: MultipleChoice => don't follow
++            case 300:
++                return false;
++            // 304: Not Modified => don't follow
++            case 304:
++                return false;
++            // 305: Proxy Redirect => don't follow.
++            case 305:
++                return false;
++            // 306: Unused => don't follow
++            case 306:
++                return false;
++            // 301, 302, 303, 307, 308: OK to follow.
++            default:
++                return true;
++        }
++    }
++
+     /**
+      * Checks to see if a new request is needed and returns it.
+      * Null means response is ok to return to user.
+@@ -102,13 +127,13 @@ class RedirectFilter implements HeaderFilter {
+         if (rcode == HTTP_NOT_MODIFIED)
+             return null;
+ 
+-        if (rcode >= 300 && rcode <= 399) {
++        if (isRedirecting(rcode)) {
+             URI redir = getRedirectedURI(r.headers());
+             String newMethod = redirectedMethod(rcode, method);
+             Log.logTrace("response code: {0}, redirected URI: {1}", rcode, redir);
+             if (canRedirect(redir) && ++exchange.numberOfRedirects < max_redirects) {
+                 Log.logTrace("redirect to: {0} with method: {1}", redir, newMethod);
+-                return HttpRequestImpl.newInstanceForRedirection(redir, newMethod, request);
++                return HttpRequestImpl.newInstanceForRedirection(redir, newMethod, request, rcode != 303);
+             } else {
+                 Log.logTrace("not redirecting");
+                 return null;
