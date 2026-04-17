@@ -1,0 +1,242 @@
+{
+  "run_timestamp": "2026-04-17T20:06:58.581072",
+  "repo": "jdk17u-dev",
+  "patch_type": "TYPE-I",
+  "original_commit": "5fab27e1b8fdf2ea27cb3b349bd339a4a6ec828b",
+  "backport_commit": "8b306de46d88219722a57f6e72d0b4456eb6faf0",
+  "description": "main \u2192 jdk17u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "java_hunks": 1,
+      "aux_hunks": 1,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.base/share/classes/jdk/internal/util/random/RandomSupport.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 265,
+          "end_line": 271,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 3.7,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_I",
+        "confidence": 0.95,
+        "reasoning": "The patch modifies a single line in the RandomSupport.java file by adding a bitwise AND with 0xFF to prevent sign extension issues. This is a straightforward, exact string replacement fix. The new test file addition does not affect the classification as it is a new test, not a modification of existing code. The localization evidence confirms the hunk was found via 'git_exact' with high confidence, supporting a TYPE_I classification. The token budget estimate is moderate due to the small size of the change and the addition of a test file.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.01,
+      "error": null,
+      "applied_count": 1,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/jdk/internal/util/random/RandomSupport.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "adapted_count": 0
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.08,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 0,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": []
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [],
+      "synthesized_count_after_repair": 0
+    },
+    "agent7_validator": {
+      "validation_passed": false,
+      "validation_failure_category": "unknown",
+      "validation_error_context": "Build failed (jdk17u-dev-helper): === Build FAILED for 0877d64 ===",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": false,
+      "build_mode": "jdk17u-dev-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": []
+    },
+    "agent9_fallback_1": {
+      "fallback_status": "failed",
+      "fallback_attempts": 1,
+      "synthesized_count": 0,
+      "hunk_descriptions": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.base/share/classes/jdk/internal/util/random/RandomSupport.java",
+          "what_changed": "Modified the byte-to-integer conversion in the seed distribution loop by masking each seed byte with 0xFF before combining it into the result array.",
+          "where_in_code": "RandomSupport class, within the method responsible for converting seed bytes into words (likely a seed initialization or conversion method).",
+          "intent": "To ensure that each seed byte is treated as an unsigned value when shifted and combined, preventing sign extension issues that could corrupt the resulting seed words.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "result",
+            "seed"
+          ]
+        }
+      ]
+    },
+    "agent8_syntax_repair_fallback_1": {
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": []
+    },
+    "agent7_validator_retry1": {
+      "validation_passed": false,
+      "validation_failure_category": "unknown",
+      "validation_error_context": "Build failed (jdk17u-dev-helper): === Build FAILED for 0877d64 ===",
+      "validation_attempts": 2,
+      "retry_files": [],
+      "build_success": false,
+      "build_mode": "jdk17u-dev-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": []
+    },
+    "agent9_fallback_2": {
+      "fallback_status": "failed",
+      "fallback_attempts": 2,
+      "synthesized_count": 0,
+      "hunk_descriptions": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.base/share/classes/jdk/internal/util/random/RandomSupport.java",
+          "what_changed": "Modified the way seed bytes are combined into words by masking each seed byte with 0xFF before bitwise OR operation.",
+          "where_in_code": "RandomSupport class, within the method that processes seed bytes into word arrays (exact method not specified)",
+          "intent": "To ensure that seed bytes are treated as unsigned values when combined into words, preventing sign extension issues during byte-to-int conversion.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "result",
+            "seed"
+          ]
+        }
+      ]
+    },
+    "agent8_syntax_repair_fallback_2": {
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": []
+    },
+    "agent7_validator_retry2": {
+      "validation_passed": false,
+      "validation_failure_category": "unknown",
+      "validation_error_context": "Build failed (jdk17u-dev-helper): === Build FAILED for 0877d64 ===",
+      "validation_attempts": 3,
+      "retry_files": [],
+      "build_success": false,
+      "build_mode": "jdk17u-dev-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 2,
+    "developer_aux_hunks_from_target": 1,
+    "phase0_baseline": {
+      "mode": "baseline-jdk17u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 1
+    },
+    "java_production_hunks": 1,
+    "developer_aux_hunks": 1,
+    "processed_hunk_indices": [
+      0
+    ],
+    "tokens_used": 1449,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent9_fallback": {
+        "input": 1130,
+        "output": 319
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 1,
+    "synthesized_count": 0,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "failed",
+    "fallback_attempts": 2,
+    "retry_contexts": [
+      {
+        "error_type": "unknown",
+        "error_message": "=== Build FAILED for 0877d64 ===",
+        "attempt_count": 1,
+        "suggested_action": "inspect_and_retry"
+      },
+      {
+        "error_type": "unknown",
+        "error_message": "=== Build FAILED for 0877d64 ===",
+        "attempt_count": 2,
+        "suggested_action": "inspect_and_retry"
+      },
+      {
+        "error_type": "unknown",
+        "error_message": "=== Build FAILED for 0877d64 ===",
+        "attempt_count": 3,
+        "suggested_action": "inspect_and_retry"
+      }
+    ],
+    "failed_hunks": [],
+    "generated_patch_bytes": 1442,
+    "target_patch_bytes": 3896,
+    "patch_exact_match": false,
+    "validation_passed": false,
+    "validation_failure_category": "unknown",
+    "build_success": false,
+    "test_success": null,
+    "test_mode": null,
+    "test_transition": {},
+    "fail_to_pass_count": 0,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": false
+  }
+}

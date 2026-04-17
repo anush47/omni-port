@@ -1,0 +1,29 @@
+diff --git a/src/java.base/share/classes/jdk/internal/util/random/RandomSupport.java b/src/java.base/share/classes/jdk/internal/util/random/RandomSupport.java
+index 1fc1eeff46a..bfbde41b938 100644
+--- a/src/java.base/share/classes/jdk/internal/util/random/RandomSupport.java
++++ b/src/java.base/share/classes/jdk/internal/util/random/RandomSupport.java
+@@ -265,7 +265,7 @@ public class RandomSupport {
+         final int m = Math.min(seed.length, n << 3);
+         // Distribute seed bytes into the words to be formed.
+         for (int j = 0; j < m; j++) {
+-            result[j>>3] = (result[j>>3] << 8) | seed[j];
++            result[j>>3] = (result[j>>3] << 8) | (seed[j] & 0xFF);
+         }
+         // If there aren't enough seed bytes for all the words we need,
+         // use a SplitMix-style PRNG to fill in the rest.
+@@ -1701,7 +1701,6 @@ public class RandomSupport {
+             return stream(makeLeapsSpliterator(0L, streamSize, leapDistance()));
+         }
+ 
+-
+         /**
+          * Spliterator for int streams. We multiplex the four int versions into
+          * one class by treating a bound less than origin as unbounded, and also
+@@ -2426,7 +2425,6 @@ public class RandomSupport {
+ 
+         public abstract SplittableGenerator split(SplittableGenerator source, long brine);
+ 
+-
+         /* ---------------- spliterator ---------------- */
+         /**
+          * Alternate spliterator for stream of generators of type

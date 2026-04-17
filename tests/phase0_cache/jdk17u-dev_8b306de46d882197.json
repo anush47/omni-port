@@ -1,0 +1,22 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/java/util/Random/T8282144.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "java/util/Random/T8282144.java#T8282144": "failed"
+    },
+    "classes": {
+      "java/util/Random/T8282144.java": "failed"
+    },
+    "summary": {
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "total": 1
+    }
+  },
+  "mode": "baseline-jdk17u-dev-helper",
+  "skipped": false
+}
