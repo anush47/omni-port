@@ -244,20 +244,21 @@ def git_diff(repo_path: str) -> str:
         capture_output=True, text=True
     )
     # Unstage build/test artefacts that Docker wrote into the repo during Phase-0
-    # baseline / validation runs (e.g. build/all-test-results/TEST-*.xml).
-    # These are NOT part of the backport patch and must not appear in generated.patch.
-    for artifact_dir in ("build/", "target/"):
+    # baseline / validation runs.  Include JDK-specific build dirs (build_shared/,
+    # JTwork/, JTreport/) which contain large binary objects that corrupt the diff.
+    for artifact_dir in ("build/", "target/", "build_shared/", "JTwork/", "JTreport/"):
         subprocess.run(
             ["git", "-C", repo_path, "reset", "HEAD", "--", artifact_dir],
             capture_output=True, text=True
         )
     # git diff --cached shows the staged changes relative to HEAD.
-    # This includes new files (with "new file mode"), modifications, and deletions.
+    # Use bytes mode then decode with errors='replace' so binary blobs in any
+    # remaining tracked files never cause a UnicodeDecodeError.
     result = subprocess.run(
         ["git", "-C", repo_path, "diff", "--cached"],
-        capture_output=True, text=True
+        capture_output=True,
     )
-    return result.stdout
+    return result.stdout.decode("utf-8", errors="replace")
 
 
 def _extract_production_diff_hunks(patch_text: str) -> str:
