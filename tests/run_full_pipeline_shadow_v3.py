@@ -87,6 +87,18 @@ REPO_PATH_MAP: dict[str, str] = {
     "sql": "repos/sql",
     "spring-framework": "repos/spring-framework",
     "hadoop": "repos/hadoop",
+    "jdk17u-dev": "repos/jdk17u-dev",
+}
+
+# Projects where original_commit lives in a different (mainline) repo than backport_commit.
+# Value is the repo path for the mainline commit (git show original_commit).
+MAINLINE_REPO_PATH_MAP: dict[str, str] = {
+    "jdk17u-dev": "repos/jdk",
+}
+
+# Default branch to restore after processing (OpenJDK repos use master, not main).
+DEFAULT_BRANCH_MAP: dict[str, str] = {
+    "jdk17u-dev": "master",
 }
 
 
@@ -123,6 +135,8 @@ def get_patches_from_config(
             patches.append({
                 "repo": repo_name,
                 "repo_path": repo_path,
+                "mainline_repo_path": None,
+                "default_branch": DEFAULT_BRANCH_MAP.get(repo_name, "main"),
                 "type": patch.get("type", "UNKNOWN"),
                 "original_commit": original_commit,
                 "backport_commit": patch.get("backport_commit"),
@@ -180,9 +194,22 @@ def get_patches_from_csv(
             if not os.path.isdir(repo_path):
                 continue  # repo not cloned
 
+            # For projects where mainline commit lives in a separate repo (e.g. jdk17u-dev
+            # backports from repos/jdk mainline into repos/jdk17u-dev), resolve both paths.
+            mainline_rel = MAINLINE_REPO_PATH_MAP.get(project)
+            mainline_repo_path: str | None = None
+            if mainline_rel:
+                mainline_repo_path = str(project_root / mainline_rel)
+                if not os.path.isdir(mainline_repo_path):
+                    print(f"  [dataset] WARNING: mainline repo not found for {project}: "
+                          f"{mainline_repo_path} — skipping")
+                    continue
+
             patches.append({
                 "repo": project,
                 "repo_path": repo_path,
+                "mainline_repo_path": mainline_repo_path,
+                "default_branch": DEFAULT_BRANCH_MAP.get(project, "main"),
                 "type": patch_type,
                 "original_commit": original_commit,
                 "backport_commit": backport_commit,
@@ -746,6 +773,9 @@ def process_patch(
     repo_path = item["repo_path"]
     repo_name = item["repo"]
     description = item.get("description", "")
+    # For split-repo projects (e.g. jdk17u-dev), the original commit lives in a
+    # separate mainline repo.  All other operations use repo_path (target repo).
+    mainline_repo_path = item.get("mainline_repo_path") or repo_path
 
     out_dir = OUTPUT_DIR / repo_name / f"{patch_type}_{original_commit[:8]}"
 
@@ -786,9 +816,10 @@ def process_patch(
     # ── 1. Capture reference patches ─────────────────────────────────────────
 
     print(f"  [pipeline] Capturing reference patches for {original_commit}")
-    mainline_patch = git_show(repo_path, original_commit)
+    mainline_patch = git_show(mainline_repo_path, original_commit)
     if not mainline_patch:
-        print(f"  [pipeline] ERROR: Cannot retrieve commit {original_commit}")
+        print(f"  [pipeline] ERROR: Cannot retrieve commit {original_commit} "
+              f"from {mainline_repo_path}")
         return
     (out_dir / "mainline.patch").write_text(mainline_patch, encoding="utf-8")
     print(f"  [pipeline] mainline.patch saved to {out_dir}")
@@ -1349,7 +1380,8 @@ Examples:
             print(f"\n  FATAL ERROR for {item['type']}:")
             traceback.print_exc()
         finally:
-            git_checkout(repo_path, "main")
+            default_branch = item.get("default_branch", "main")
+            git_checkout(repo_path, default_branch)
         update_summary_md(OUTPUT_DIR, no_notifications=args.no_notifications)
 
     print(f"\n{'='*64}")

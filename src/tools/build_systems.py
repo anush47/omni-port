@@ -45,6 +45,14 @@ ELASTICSEARCH_HARNESS_EXCLUDED_TEST_MODULES: frozenset[str] = frozenset(
     }
 )
 
+# JDK-family projects that use jtreg + Docker make-based builds.
+# For these projects: (a) extra env vars are injected into the Docker run,
+# (b) test result collection uses an empty target-class filter so all JTwork
+#     XML reports are gathered (jtreg XML classnames don't map to Java FQCNs).
+JDK_PROJECTS: frozenset[str] = frozenset(
+    {"jdk17u-dev", "jdk11u-dev", "jdk21u-dev", "jdk25u-dev"}
+)
+
 _TEST_SOURCE_DIRS = (
     "/src/test/java/",
     "/src/internalClusterTest/java/",
@@ -731,6 +739,12 @@ def run_build(repo_path: str, project: str = "", changed_files: list[str] | None
                     "WORKTREE_MODE": "1",
                     "SOURCE_MODULES": source_modules_str,
                 })
+                if normalized in JDK_PROJECTS:
+                    env.update({
+                        "BOOT_JDK": os.getenv("BOOT_JDK", "/opt/java/openjdk"),
+                        "JTREG_HOME": os.getenv("JTREG_HOME", "/opt/jtreg"),
+                        "BUILD_DIR_NAME": "build_shared",
+                    })
                 res = _run_cmd(["bash", build_sh], cwd=abs_repo_path, env=env, timeout=3600)
                 print(f"  [build_systems] Build {'succeeded' if res['success'] else 'failed'} using {normalized}-helper")
                 return BuildResult(
@@ -823,6 +837,7 @@ def run_tests(
                 env.update({
                     "PROJECT_NAME": normalized,
                     "PROJECT_DIR": abs_repo_path,
+                    "TOOLKIT_DIR": hdir,
                     "BUILDER_IMAGE_TAG": image_tag,
                     "IMAGE_TAG": image_tag,
                     "COMMIT_SHA": _get_current_head(repo_path),
@@ -833,16 +848,26 @@ def run_tests(
                     ),
                     "TEST_MODULES": "" if test_targets else ",".join(sorted(set(source_modules))),
                 })
+                if normalized in JDK_PROJECTS:
+                    env.update({
+                        "JTREG_HOME": os.getenv("JTREG_HOME", "/opt/jtreg"),
+                        "BUILD_DIR_NAME": "build_shared",
+                    })
                 res = _run_cmd(["bash", test_sh], cwd=abs_repo_path, env=env, timeout=900)
                 output = res["output"]
                 is_compile_error = (not res["success"]) and "compilation error" in output.lower()
 
-                # Collect results — use bare class names so XML matching works.
-                # Module-level targets (no --tests filter) return "" — filter them
-                # out so collect_test_results uses an empty set (= collect all).
-                target_classes_for_collection = [
-                    c for c in (_extract_class_name_from_target(t) for t in test_targets) if c
-                ]
+                # For JDK projects, jtreg XML classnames don't map to Java FQCNs, so
+                # collect all JTwork XML results rather than filtering by class name.
+                if normalized in JDK_PROJECTS:
+                    target_classes_for_collection = []
+                else:
+                    # Collect results — use bare class names so XML matching works.
+                    # Module-level targets (no --tests filter) return "" — filter them
+                    # out so collect_test_results uses an empty set (= collect all).
+                    target_classes_for_collection = [
+                        c for c in (_extract_class_name_from_target(t) for t in test_targets) if c
+                    ]
                 print(f"  [build_systems] Collecting results for {len(target_classes_for_collection)} classes")
                 test_state = collect_test_results(
                     repo_path, normalized, target_classes_for_collection, output
