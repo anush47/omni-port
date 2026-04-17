@@ -1,13 +1,13 @@
 # Backport CLAW — Shadow Run Results (v3)
 
-**Last updated:** 2026-04-17 20:08:07  
-**Total:** 320 patch(es) run, **265 passed** (82%)
+**Last updated:** 2026-04-17 20:25:19  
+**Total:** 320 patch(es) run, **266 passed** (83%)
 
 > **Success** = at least one fail→pass or newly-passing test observed.
 
 | Type     |      crate       |      druid       |  elasticsearch   | graylog2-server  |    grpc-java     |      hadoop      |  hibernate-orm   |    jdk17u-dev    |     logstash     | spring-framework |       sql        |
 | -------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- |
-| TYPE-I   |      48/50       |       5/5        |      43/49       |      12/12       |      19/23       |       3/3        |       1/1        |       0/1        |       3/3        |       4/4        |        -         |
+| TYPE-I   |      48/50       |       5/5        |      43/49       |      12/12       |      19/23       |       3/3        |       1/1        |       1/1        |       3/3        |       4/4        |        -         |
 | TYPE-II  |      49/50       |       1/1        |      19/25       |       3/5        |       3/3        |       1/2        |       4/4        |        -         |        -         |       4/4        |       4/4        |
 | TYPE-III |       1/2        |        -         |       1/2        |       0/1        |        -         |        -         |       4/4        |        -         |        -         |        -         |       1/2        |
 | TYPE-IV  |       2/2        |        -         |        -         |        -         |       0/1        |        -         |       1/1        |        -         |        -         |        -         |        -         |
@@ -314,7 +314,7 @@
 | hibernate-orm | TYPE-V | `3c4a340c5e` | ✓ | ✓ | 0 / 2 / 0 | Newly: org.hibernate.orm.test.typedescriptor.NullTest#passingNullAsParameterOfNativeQuery(SessionFactoryScope), org.hibernate.orm.test.typedescriptor.NullTest#passingNullAsParameterOfQuery(SessionFactoryScope) |  |
 | hibernate-orm | TYPE-V | `6cfdc64153` | ✗ | ✗ | - | - | api_mismatch |
 | hibernate-orm | TYPE-V | `72dae39eb4` | ✗ | ✓ | 0 / 0 / 0 | - |  |
-| jdk17u-dev | TYPE-I | `5fab27e1b8` | ✗ | ✗ | - | - | unknown |
+| jdk17u-dev | TYPE-I | `5fab27e1b8` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/util/Random/T8282144.java#T8282144 |  |
 | logstash | TYPE-I | `712b37e1df` | ✓ | ✓ | 2 / 0 / 0 | patch=exact<br>F→P: org.logstash.settings.SettingStringTest$WithValueConstraintCase#whenSetConstrainedToNullThenThrowAHelpfulError, org.logstash.settings.SettingStringTest$WithoutValueConstraintCase#whenSetUnconstrainedToNullThenThrowAHelpfulError |  |
 | logstash | TYPE-I | `cc608eb88b` | ✓ | ✓ | 5 / 0 / 0 | patch=exact<br>F→P: org.logstash.jackson.StreamReadConstraintsUtilTest#configOverridesDefault, org.logstash.jackson.StreamReadConstraintsUtilTest#configuresMaxNestingDepth, org.logstash.jackson.StreamReadConstraintsUtilTest#configuresMaxNumberLength, org.logstash.jackson.StreamReadConstraintsUtilTest#configuresMaxStringLength, org.logstash.jackson.StreamReadConstraintsUtilTest#usesJacksonDefaultsWhenNoConfig |  |
 | logstash | TYPE-I | `cd729b7682` | ✓ | ✓ | 0 / 0 / 0 | patch=exact |  |
