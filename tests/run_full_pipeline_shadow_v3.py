@@ -88,17 +88,20 @@ REPO_PATH_MAP: dict[str, str] = {
     "spring-framework": "repos/spring-framework",
     "hadoop": "repos/hadoop",
     "jdk17u-dev": "repos/jdk17u-dev",
+    "jdk11u-dev": "repos/jdk11u-dev",
 }
 
 # Projects where original_commit lives in a different (mainline) repo than backport_commit.
 # Value is the repo path for the mainline commit (git show original_commit).
 MAINLINE_REPO_PATH_MAP: dict[str, str] = {
     "jdk17u-dev": "repos/jdk",
+    "jdk11u-dev": "repos/jdk",
 }
 
 # Default branch to restore after processing (OpenJDK repos use master, not main).
 DEFAULT_BRANCH_MAP: dict[str, str] = {
     "jdk17u-dev": "master",
+    "jdk11u-dev": "master",
 }
 
 
