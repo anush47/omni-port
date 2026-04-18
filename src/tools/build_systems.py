@@ -447,6 +447,11 @@ def classify_build_failure(output: str) -> str:
         or "daemon disappeared" in text_lower
         or "out of memory" in text_lower
         or "java.lang.outofmemoryerror" in text_lower
+        # Native linker errors — not fixable by changing Java source code.
+        # Caused by corrupted/stale native build objects or toolchain issues.
+        or "ld returned 1 exit status" in text_lower
+        or "collect2: error" in text_lower
+        or "linker command failed" in text_lower
     ):
         return "infrastructure"
 
