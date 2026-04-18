@@ -837,6 +837,18 @@ def run_phase0_baseline(
     # are identical regardless of current worktree state.
     changed_files = [path for _, path in file_entries]
     target_info = detect_test_targets(repo_path, project, file_entries=file_entries)
+
+    # Build the JDK from backport_commit~1 (no production fix) before running tests.
+    # Without this, tests run against build_shared left by the previous validation run
+    # (which was built WITH a fix), causing the test to pass in baseline too — killing
+    # the fail→pass signal for every subsequent patch.
+    print(f"  [agent7] phase0: building from pre-fix state (backport_commit~1)...")
+    build_res = run_build(repo_path, project)
+    if not build_res.success:
+        print(f"  [agent7] phase0: baseline build failed — skipping baseline")
+        restore_repo_state(repo_path)
+        return {"test_state": {}, "mode": "baseline-build-failed", "skipped": True}
+
     print(f"  [agent7] phase0: running baseline tests ({len(target_info.test_targets)} targets) directly...")
     test_res = run_tests(repo_path, project, target_info=target_info, changed_files=changed_files)
 
