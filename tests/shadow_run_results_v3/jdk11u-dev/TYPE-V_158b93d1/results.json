@@ -1,0 +1,367 @@
+{
+  "run_timestamp": "2026-04-18T17:33:14.833082",
+  "repo": "jdk11u-dev",
+  "patch_type": "TYPE-V",
+  "original_commit": "158b93d19a518d2b9d3d185e2d4c4dbff9c82aab",
+  "backport_commit": "f53cbeaa1459ee4a9a96b11500895a9d99c8e366",
+  "description": "main \u2192 jdk11u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 1.4,
+      "error": null,
+      "java_hunks": 5,
+      "aux_hunks": 3,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/jdk.jartool/share/classes/sun/tools/jar/GNUStyleOptions.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 188,
+          "end_line": 193,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/jdk.jartool/share/classes/sun/tools/jar/Main.java",
+          "method_used": "git_pickaxe",
+          "confidence": 0.9,
+          "start_line": 149,
+          "end_line": 156,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/jdk.jartool/share/classes/sun/tools/jar/Main.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 584,
+          "end_line": 589,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/jdk.jartool/share/classes/sun/tools/jar/Main.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 617,
+          "end_line": 622,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/jdk.jartool/share/classes/sun/tools/jar/Main.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1448,
+          "end_line": 1453,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 3.97,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_II",
+        "confidence": 0.95,
+        "reasoning": "The patch introduces a new option '-k'/'--keep-old-files' to the jar extraction command, which involves adding a new flag, modifying argument parsing, and changing extraction behavior to conditionally skip overwriting existing files. The changes are localized to existing methods and involve some logic additions but no deep structural refactoring or API redesign. The patch also adds new test files to verify the behavior. The localization evidence shows most hunks are found exactly or with high confidence, indicating the patch applies cleanly with minor adjustments. Overall, this is a moderate complexity patch involving some logic changes and new tests, fitting TYPE_II classification (whitespace/formatting drift and minor logic additions requiring fuzzy matching).",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.01,
+      "error": null,
+      "applied_count": 4,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/jdk.jartool/share/classes/sun/tools/jar/GNUStyleOptions.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jartool/share/classes/sun/tools/jar/Main.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jartool/share/classes/sun/tools/jar/Main.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jartool/share/classes/sun/tools/jar/Main.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 89.83,
+      "error": null,
+      "adapted_count": 1
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 1,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "src/jdk.jartool/share/classes/sun/tools/jar/Main.java",
+          "old_string": "    /*\n     * cflag: create\n     * uflag: update\n     * xflag: xtract\n     * tflag: table\n     * vflag: verbose\n     * flag0: no zip compression (store only)\n     * Mflag: DO NOT generate a manifest file (just ZIP)\n     * iflag: generate jar index\n     * nflag: Perform jar normalization at the end\n     * pflag: preserve/don't strip leading slash and .. component from file name\n     * dflag: print module descriptor\n     */\n    boolean cflag, uflag, xflag, tflag, vflag, flag0, Mflag, iflag, nflag, pflag, dflag;\n\n    boolean suppressDeprecateMsg = false;",
+          "new_string": "    /*\n     * cflag: create\n     * uflag: update\n     * xflag: xtract\n     * tflag: table\n     * vflag: verbose\n     * flag0: no zip compression (store only)\n     * Mflag: DO NOT generate a manifest file (just ZIP)\n     * iflag: generate jar index\n     * nflag: Perform jar normalization at the end\n     * pflag: preserve/don't strip leading slash and .. component from file name\n     * dflag: print module descriptor\n     * kflag: keep existing file\n     */\n    boolean cflag, uflag, xflag, tflag, vflag, flag0, Mflag, iflag, nflag, pflag, dflag, kflag;\n\n    boolean suppressDeprecateMsg = false;",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.17,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/jdk.jartool/share/classes/sun/tools/jar/Main.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 1
+    },
+    "agent7_validator": {
+      "validation_passed": false,
+      "validation_failure_category": "api_mismatch",
+      "validation_error_context": "Build failed (jdk11u-dev-helper) \u2014 compile errors:\nsrc/jdk.jartool/share/classes/sun/tools/jar/GNUStyleOptions.java:192: error: cannot find symbol",
+      "validation_attempts": 1,
+      "retry_files": [
+        "src/jdk.jartool/share/classes/sun/tools/jar/GNUStyleOptions.java"
+      ],
+      "build_success": false,
+      "build_mode": "jdk11u-dev-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": [
+        {
+          "file": "src/jdk.jartool/share/classes/sun/tools/jar/GNUStyleOptions.java",
+          "line": 192,
+          "message": "error: cannot find symbol"
+        }
+      ]
+    },
+    "agent9_fallback_1": {
+      "fallback_status": "failed",
+      "fallback_attempts": 1,
+      "synthesized_count": 1,
+      "hunk_descriptions": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/jdk.jartool/share/classes/sun/tools/jar/GNUStyleOptions.java",
+          "what_changed": "Added a new extract option '--keep-old-files' (alias '-k') that sets a flag in the main tool.",
+          "where_in_code": "Anonymous Option subclass inside GNUStyleOptions",
+          "intent": "Introduce a command-line option to keep existing files during extraction instead of overwriting them.",
+          "change_type": "add_field",
+          "key_symbols": [
+            "--keep-old-files",
+            "kflag"
+          ]
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/jdk.jartool/share/classes/sun/tools/jar/Main.java",
+          "what_changed": "Declared a new boolean field 'kflag' alongside existing flags.",
+          "where_in_code": "Main class field declarations",
+          "intent": "Add a flag to track whether the 'keep old files' option is enabled.",
+          "change_type": "add_field",
+          "key_symbols": [
+            "kflag"
+          ]
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/jdk.jartool/share/classes/sun/tools/jar/Main.java",
+          "what_changed": "Added handling of the 'k' option character to set the 'kflag' during command-line parsing.",
+          "where_in_code": "Main.parseArgs (or equivalent command-line option parsing switch)",
+          "intent": "Enable recognition of the '-k' option to activate the keep-old-files behavior.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "kflag",
+            "case 'k'"
+          ]
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/jdk.jartool/share/classes/sun/tools/jar/Main.java",
+          "what_changed": "Added a warning if the 'kflag' is set but extraction mode ('xflag') is not active, indicating the option is ignored.",
+          "where_in_code": "Main.parseArgs (after option parsing, before file argument processing)",
+          "intent": "Inform users that the keep-old-files option only applies during extraction and is ignored otherwise.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "kflag",
+            "xflag",
+            "warn"
+          ]
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/jdk.jartool/share/classes/sun/tools/jar/Main.java",
+          "what_changed": "Before creating or overwriting a file, added a check that if the file exists and 'kflag' is set, the file is kept and the method returns early.",
+          "where_in_code": "Main.extractFile (or equivalent method handling file extraction/writing)",
+          "intent": "Implement the behavior of preserving existing files during extraction when the keep-old-files option is enabled.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "kflag",
+            "f.exists()",
+            "return"
+          ]
+        }
+      ]
+    },
+    "agent8_syntax_repair_fallback_1": {
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/jdk.jartool/share/classes/sun/tools/jar/Main.java",
+          "outcome": "clean"
+        }
+      ]
+    },
+    "agent7_validator_retry1": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 2,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk11u-dev-helper",
+      "test_success": false,
+      "test_mode": "jdk11u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk11u-dev/JTwork/tools/jar/ExtractFilesTest.jtr.xml",
+          "/home/cseroot/omni-port/repos/jdk11u-dev/JTwork/tools/jar/MultipleManifestTest.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "tools/jar/ExtractFilesTest.java#ExtractFilesTest": "failed",
+          "tools/jar/MultipleManifestTest.java#MultipleManifestTest": "failed"
+        },
+        "classes": {
+          "tools/jar/ExtractFilesTest.java": "failed",
+          "tools/jar/MultipleManifestTest.java": "failed"
+        },
+        "summary": {
+          "passed": 0,
+          "failed": 2,
+          "skipped": 0,
+          "total": 2
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": false,
+        "fail_to_pass": [],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 0,
+        "patched_total": 2,
+        "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 11,
+    "developer_aux_hunks_from_target": 3,
+    "phase0_baseline": {
+      "mode": "baseline-jdk11u-dev-helper",
+      "skipped": false,
+      "cached": true,
+      "test_cases_total": 2
+    },
+    "java_production_hunks": 5,
+    "developer_aux_hunks": 3,
+    "processed_hunk_indices": [
+      0,
+      2,
+      3,
+      4,
+      1
+    ],
+    "tokens_used": 65051,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 6498,
+        "output": 2876
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      },
+      "agent9_fallback": {
+        "input": 63151,
+        "output": 1900
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 4,
+    "synthesized_count": 1,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "clean",
+    "fallback_status": "failed",
+    "fallback_attempts": 1,
+    "retry_contexts": [
+      {
+        "error_type": "api_mismatch",
+        "error_message": "/repo/src/jdk.jartool/share/classes/sun/tools/jar/GNUStyleOptions.java:192: error: cannot find symbol\n  symbol:   variable EXTRACT\nERROR: Build failed for target 'images' in configuration '/repo/build_shared' (exit code 2) \n/repo/src/jdk.jartool/share/classes/sun/tools/jar/GNUStyleOptions.java:192: error: cannot find symbol\n  symbol:   variable EXTRACT\n/repo/src/hotspot/share/adlc/output_c.cpp:529:36: warning: '%*d' directive writing between 1 and 2147483647 bytes into a region of size between 0 and 2147483637 [-Wformat-overflow=]\n/repo/src/hotspot/share/adlc/output_c.cpp:1173:42: warning: '_idx' directive writing 4 bytes into a region of size between 2 and 12 [-Wformat-overflow=]\n/repo/src/hotspot/share/adlc/output_c.cpp:1186:45: warning: '_idx' directive writing 4 bytes into a region of size between 2 and 12 [-Wformat-overflow=]\n/repo/src/jdk.jartool/share/classes/sun/tools/jar/GNUStyleOptions.java:192: error: cannot find symbol\n  symbol:   variable EXTRACT\nERROR: Build failed for target 'images' in configuration '/repo/build_shared' (exit code 2) \n/repo/src/jdk.jartool/share/classes/sun/tools/jar/GNUStyleOptions.java:192: error: cannot find symbol\n  symbol:   variable EXTRACT\n=== Build FAILED for 62858d8 ===",
+        "attempt_count": 1,
+        "suggested_action": "route_to_namespace_or_structural"
+      }
+    ],
+    "failed_hunks": [],
+    "generated_patch_bytes": 2869,
+    "target_patch_bytes": 24757,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": false,
+    "test_mode": "jdk11u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": false,
+      "fail_to_pass": [],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 0,
+      "patched_total": 2,
+      "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+    },
+    "fail_to_pass_count": 0,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": false
+  }
+}

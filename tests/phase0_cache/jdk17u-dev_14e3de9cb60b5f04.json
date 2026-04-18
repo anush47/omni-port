@@ -1,0 +1,22 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/javax/swing/JPopupMenu/FocusablePopupDismissTest.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "javax/swing/JPopupMenu/FocusablePopupDismissTest.java#FocusablePopupDismissTest": "passed"
+    },
+    "classes": {
+      "javax/swing/JPopupMenu/FocusablePopupDismissTest.java": "passed"
+    },
+    "summary": {
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "total": 1
+    }
+  },
+  "mode": "baseline-jdk17u-dev-helper",
+  "skipped": false
+}

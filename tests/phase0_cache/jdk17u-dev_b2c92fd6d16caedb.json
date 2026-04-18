@@ -1,14 +1,14 @@
 {
   "test_state": {
     "xml_reports": [
-      "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/java/util/Random/T8282144.jtr.xml"
+      "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/java/nio/charset/Charset/AliasesCopy.jtr.xml"
     ],
     "target_classes": [],
     "test_cases": {
-      "java/util/Random/T8282144.java#T8282144": "failed"
+      "java/nio/charset/Charset/AliasesCopy.java#AliasesCopy": "failed"
     },
     "classes": {
-      "java/util/Random/T8282144.java": "failed"
+      "java/nio/charset/Charset/AliasesCopy.java": "failed"
     },
     "summary": {
       "passed": 0,

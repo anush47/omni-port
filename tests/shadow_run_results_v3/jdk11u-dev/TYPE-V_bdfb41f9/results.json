@@ -1,0 +1,312 @@
+{
+  "run_timestamp": "2026-04-18T17:10:10.914355",
+  "repo": "jdk11u-dev",
+  "patch_type": "TYPE-V",
+  "original_commit": "bdfb41f977258831e4b0ceaef5d016d095ab6e7f",
+  "backport_commit": "710baba5abf51bbca596aa7c9efbe64b19e4f73d",
+  "description": "main \u2192 jdk11u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 4.06,
+      "error": null,
+      "java_hunks": 8,
+      "aux_hunks": 3,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/jdk.jartool/share/classes/sun/security/tools/jarsigner/Main.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 175,
+          "end_line": 180,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/jdk.jartool/share/classes/sun/security/tools/jarsigner/Main.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 695,
+          "end_line": 700,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/jdk.jartool/share/classes/sun/security/tools/jarsigner/Main.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 731,
+          "end_line": 736,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/jdk.jartool/share/classes/sun/security/tools/jarsigner/Main.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 829,
+          "end_line": 834,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/jdk.jartool/share/classes/sun/security/tools/jarsigner/Main.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1020,
+          "end_line": 1025,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/jdk.jartool/share/classes/sun/security/tools/jarsigner/Main.java",
+          "method_used": "fuzzy",
+          "confidence": 0.898,
+          "start_line": 1282,
+          "end_line": 1287,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "src/jdk.jartool/share/classes/sun/security/tools/jarsigner/Resources.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 164,
+          "end_line": 169,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "src/jdk.jartool/share/classes/sun/security/tools/jarsigner/Resources.java",
+          "method_used": "fuzzy",
+          "confidence": 0.94,
+          "start_line": 174,
+          "end_line": 179,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 3.8,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_I",
+        "confidence": 0.95,
+        "reasoning": "The patch consists mostly of exact string additions and minor logic additions in the same methods and locations as in the target branch, with most hunks found via 'git_exact' with high confidence. There is a small fuzzy match hunk with 0.90 confidence, but it is minor and does not indicate structural or API changes. The patch adds a new boolean flag, a new map, and some logic to track and warn about nonexistent signed entries in jarsigner verification. It also adds new resource strings and tests. Overall, the patch is a straightforward feature addition without structural or API refactoring, so it is classified as TYPE_I with high confidence.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.05,
+      "error": null,
+      "applied_count": 6,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/jdk.jartool/share/classes/sun/security/tools/jarsigner/Main.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jartool/share/classes/sun/security/tools/jarsigner/Main.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jartool/share/classes/sun/security/tools/jarsigner/Main.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jartool/share/classes/sun/security/tools/jarsigner/Main.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jartool/share/classes/sun/security/tools/jarsigner/Main.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jartool/share/classes/sun/security/tools/jarsigner/Resources.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 50.19,
+      "error": null,
+      "adapted_count": 2
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.1,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 2,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "src/jdk.jartool/share/classes/sun/security/tools/jarsigner/Main.java",
+          "old_string": "            if (extraAttrsDetected) {\n                warnings.add(rb.getString(\"extra.attributes.detected\"));\n            }\n        }",
+          "new_string": "            if (extraAttrsDetected) {\n                warnings.add(rb.getString(\"extra.attributes.detected\"));\n            }\n        }\n\n        if (hasNonexistentEntries) {\n            warnings.add(rb.getString(\"nonexistent.entries.found\"));\n        }",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        },
+        {
+          "file_path": "src/jdk.jartool/share/classes/sun/security/tools/jarsigner/Resources.java",
+          "old_string": "        {\"unknown.size\", \"unknown size\"},\n        {\"extra.attributes.detected\", \"POSIX file permission and/or symlink attributes detected. These attributes are ignored when signing and are not protected by the signature.\"},",
+          "new_string": "        {\"unknown.size\", \"unknown size\"},\n        {\"nonexistent.entries.found\", \"This jar contains signed entries for files that do not exist. See the -verbose output for more details.\"},\n        {\"extra.attributes.detected\", \"POSIX file permission and/or symlink attributes detected. These attributes are ignored when signing and are not protected by the signature.\"},",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.32,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/jdk.jartool/share/classes/sun/security/tools/jarsigner/Main.java",
+          "outcome": "clean"
+        },
+        {
+          "file_path": "src/jdk.jartool/share/classes/sun/security/tools/jarsigner/Resources.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 2
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk11u-dev-helper",
+      "test_success": false,
+      "test_mode": "jdk11u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk11u-dev/JTwork/jdk/test/lib/util/JarUtilsTest.jtr.xml",
+          "/home/cseroot/omni-port/repos/jdk11u-dev/JTwork/sun/security/tools/jarsigner/RemovedFiles.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "jdk/test/lib/util/JarUtilsTest.java#JarUtilsTest": "passed",
+          "sun/security/tools/jarsigner/RemovedFiles.java#RemovedFiles": "passed"
+        },
+        "classes": {
+          "jdk/test/lib/util/JarUtilsTest.java": "passed",
+          "sun/security/tools/jarsigner/RemovedFiles.java": "passed"
+        },
+        "summary": {
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "total": 2
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [
+          "sun/security/tools/jarsigner/RemovedFiles.java#RemovedFiles"
+        ],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 2,
+        "patched_total": 2,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 12,
+    "developer_aux_hunks_from_target": 3,
+    "phase0_baseline": {
+      "mode": "baseline-jdk11u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 2
+    },
+    "java_production_hunks": 8,
+    "developer_aux_hunks": 3,
+    "processed_hunk_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      6,
+      5,
+      7
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 6563,
+        "output": 2620
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 6,
+    "synthesized_count": 2,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "clean",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 5108,
+    "target_patch_bytes": 16086,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": false,
+    "test_mode": "jdk11u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [
+        "sun/security/tools/jarsigner/RemovedFiles.java#RemovedFiles"
+      ],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 2,
+      "patched_total": 2,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 1,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

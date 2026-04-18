@@ -1,0 +1,203 @@
+{
+  "run_timestamp": "2026-04-18T08:04:03.057040",
+  "repo": "jdk17u-dev",
+  "patch_type": "TYPE-II",
+  "original_commit": "d55d7e8d87670043dd22ec6a3fb6cc49b39000cd",
+  "backport_commit": "95fe05a32508fc2ac2eb235a236111e6b9a4eba7",
+  "description": "main \u2192 jdk17u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "java_hunks": 2,
+      "aux_hunks": 3,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.base/share/classes/sun/nio/cs/StreamEncoder.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 322,
+          "end_line": 329,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.base/share/classes/sun/nio/cs/StreamEncoder.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 338,
+          "end_line": 352,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 3.72,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_I",
+        "confidence": 0.95,
+        "reasoning": "The patch modifies the StreamEncoder.java file with exact matches found in the target branch, as indicated by 'git_exact' with confidence 1.00 for both hunks. The changes involve refactoring the implClose method to use try-with-resources and simplifying resource closing logic, which is a straightforward code update without structural or API changes. Additionally, new test files are added, but these do not affect the classification of the patch complexity. Therefore, this patch is classified as TYPE_I (exact match string replacement, trivial backport) with high confidence. The token budget estimate accounts for the patch size and the added test files.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "applied_count": 2,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/sun/nio/cs/StreamEncoder.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/sun/nio/cs/StreamEncoder.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "adapted_count": 0
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 0,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": []
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [],
+      "synthesized_count_after_repair": 0
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk17u-dev-helper",
+      "test_success": true,
+      "test_mode": "jdk17u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/java/io/OutputStreamWriter/CloseWriterOnFailedFlush.jtr.xml",
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/java/nio/channels/Channels/CloseWriterOnFailedFlush.jtr.xml",
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/sun/nio/cs/StreamEncoderClose.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "java/io/OutputStreamWriter/CloseWriterOnFailedFlush.java#CloseWriterOnFailedFlush": "passed",
+          "java/nio/channels/Channels/CloseWriterOnFailedFlush.java#CloseWriterOnFailedFlush": "passed",
+          "sun/nio/cs/StreamEncoderClose.java#StreamEncoderClose": "passed"
+        },
+        "classes": {
+          "java/io/OutputStreamWriter/CloseWriterOnFailedFlush.java": "passed",
+          "java/nio/channels/Channels/CloseWriterOnFailedFlush.java": "passed",
+          "sun/nio/cs/StreamEncoderClose.java": "passed"
+        },
+        "summary": {
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "total": 3
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [
+          "java/io/OutputStreamWriter/CloseWriterOnFailedFlush.java#CloseWriterOnFailedFlush",
+          "java/nio/channels/Channels/CloseWriterOnFailedFlush.java#CloseWriterOnFailedFlush"
+        ],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 3,
+        "patched_total": 3,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 7,
+    "developer_aux_hunks_from_target": 3,
+    "phase0_baseline": {
+      "mode": "baseline-jdk17u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 3
+    },
+    "java_production_hunks": 2,
+    "developer_aux_hunks": 3,
+    "processed_hunk_indices": [
+      0,
+      1
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 2,
+    "synthesized_count": 0,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 1875,
+    "target_patch_bytes": 10080,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": true,
+    "test_mode": "jdk17u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [
+        "java/io/OutputStreamWriter/CloseWriterOnFailedFlush.java#CloseWriterOnFailedFlush",
+        "java/nio/channels/Channels/CloseWriterOnFailedFlush.java#CloseWriterOnFailedFlush"
+      ],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 3,
+      "patched_total": 3,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 2,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

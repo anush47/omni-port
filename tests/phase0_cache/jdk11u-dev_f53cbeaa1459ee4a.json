@@ -1,0 +1,25 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk11u-dev/JTwork/tools/jar/ExtractFilesTest.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk11u-dev/JTwork/tools/jar/MultipleManifestTest.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "tools/jar/ExtractFilesTest.java#ExtractFilesTest": "failed",
+      "tools/jar/MultipleManifestTest.java#MultipleManifestTest": "failed"
+    },
+    "classes": {
+      "tools/jar/ExtractFilesTest.java": "failed",
+      "tools/jar/MultipleManifestTest.java": "failed"
+    },
+    "summary": {
+      "passed": 0,
+      "failed": 2,
+      "skipped": 0,
+      "total": 2
+    }
+  },
+  "mode": "baseline-jdk11u-dev-helper",
+  "skipped": false
+}

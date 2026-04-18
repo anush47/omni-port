@@ -1,0 +1,20 @@
+diff --git a/src/jdk.httpserver/share/classes/sun/net/httpserver/ExchangeImpl.java b/src/jdk.httpserver/share/classes/sun/net/httpserver/ExchangeImpl.java
+index 597760a4a24..3326622561a 100644
+--- a/src/jdk.httpserver/share/classes/sun/net/httpserver/ExchangeImpl.java
++++ b/src/jdk.httpserver/share/classes/sun/net/httpserver/ExchangeImpl.java
+@@ -188,7 +188,6 @@ class ExchangeImpl {
+         return uos;
+     }
+ 
+-
+     /* returns the place holder stream, which is the stream
+      * returned from the 1st call to getResponseBody()
+      * The "real" ouputstream is then placed inside this
+@@ -240,6 +239,7 @@ class ExchangeImpl {
+             }
+             noContentToSend = true;
+             contentLen = 0;
++            o.setWrappedStream (new FixedLengthOutputStream (this, ros, contentLen));
+         } else { /* not a HEAD request or 304 response */
+             if (contentLen == 0) {
+                 if (http10) {

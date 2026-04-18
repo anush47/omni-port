@@ -1,0 +1,32 @@
+diff --git a/src/java.base/share/classes/java/nio/file/Files.java b/src/java.base/share/classes/java/nio/file/Files.java
+index 6270f00be26..0f994188b35 100644
+--- a/src/java.base/share/classes/java/nio/file/Files.java
++++ b/src/java.base/share/classes/java/nio/file/Files.java
+@@ -806,7 +806,7 @@ public final class Files {
+         try {
+             createDirectory(dir, attrs);
+         } catch (FileAlreadyExistsException x) {
+-            if (!isDirectory(dir, LinkOption.NOFOLLOW_LINKS))
++            if (!isDirectory(dir))
+                 throw x;
+         }
+     }
+@@ -2885,10 +2885,8 @@ public final class Files {
+                             visitor);
+     }
+ 
+-
+     // -- Utility methods for simple usages --
+ 
+-
+     /**
+      * Opens a file for reading, returning a {@code BufferedReader} that may be
+      * used to read text from the file in an efficient manner. Bytes from the
+@@ -4047,7 +4045,6 @@ public final class Files {
+         }
+     }
+ 
+-
+     /**
+      * Read all lines from a file as a {@code Stream}. Unlike {@link
+      * #readAllLines(Path, Charset) readAllLines}, this method does not read

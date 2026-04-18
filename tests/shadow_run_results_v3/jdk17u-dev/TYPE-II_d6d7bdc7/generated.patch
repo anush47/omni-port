@@ -1,0 +1,41 @@
+diff --git a/src/java.base/share/classes/java/nio/charset/Charset.java b/src/java.base/share/classes/java/nio/charset/Charset.java
+index 0ac18a23ba8..ec4aced0882 100644
+--- a/src/java.base/share/classes/java/nio/charset/Charset.java
++++ b/src/java.base/share/classes/java/nio/charset/Charset.java
+@@ -41,14 +41,12 @@ import java.util.Iterator;
+ import java.util.Locale;
+ import java.util.Map;
+ import java.util.NoSuchElementException;
+-import java.util.Objects;
+ import java.util.ServiceConfigurationError;
+ import java.util.ServiceLoader;
+ import java.util.Set;
+ import java.util.SortedMap;
+ import java.util.TreeMap;
+ 
+-
+ /**
+  * A named mapping between sequences of sixteen-bit Unicode <a
+  * href="../../lang/Character.html#unicode">code units</a> and sequences of
+@@ -615,7 +613,6 @@ public abstract class Charset
+         return defaultCharset;
+     }
+ 
+-
+     /* -- Instance fields and methods -- */
+ 
+     private final String name;          // tickles a bug in oldjavac
+@@ -636,7 +633,12 @@ public abstract class Charset
+      *         If the canonical name or any of the aliases are illegal
+      */
+     protected Charset(String canonicalName, String[] aliases) {
+-        String[] as = Objects.requireNonNullElse(aliases, zeroAliases);
++        String[] as =
++            aliases == null ?
++                zeroAliases :
++                VM.isSystemDomainLoader(getClass().getClassLoader()) ?
++                    aliases :
++                    Arrays.copyOf(aliases, aliases.length);
+ 
+         // Skip checks for the standard, built-in Charsets we always load
+         // during initialization.

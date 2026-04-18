@@ -1,0 +1,96 @@
+diff --git a/src/java.naming/share/classes/com/sun/jndi/ldap/Obj.java b/src/java.naming/share/classes/com/sun/jndi/ldap/Obj.java
+index 5c4b9ab0f6c..dc69b355850 100644
+--- a/src/java.naming/share/classes/com/sun/jndi/ldap/Obj.java
++++ b/src/java.naming/share/classes/com/sun/jndi/ldap/Obj.java
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 1999, 2021, Oracle and/or its affiliates. All rights reserved.
++ * Copyright (c) 1999, 2022, Oracle and/or its affiliates. All rights reserved.
+  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+  *
+  * This code is free software; you can redistribute it and/or modify it
+@@ -239,6 +239,10 @@ final class Obj {
+                 ClassLoader cl = helper.getURLClassLoader(codebases);
+                 return deserializeObject((byte[])attr.get(), cl);
+             } else if ((attr = attrs.get(JAVA_ATTRIBUTES[REMOTE_LOC])) != null) {
++                 // javaRemoteLocation attribute (RMI stub will be created)
++                 if (!VersionHelper.isSerialDataAllowed()) {
++                     throw new NamingException("Object deserialization is not allowed");
++                 }
+                 // For backward compatibility only
+                 return decodeRmiObject(
+                     (String)attrs.get(JAVA_ATTRIBUTES[CLASSNAME]).get(),
+diff --git a/src/java.naming/share/classes/com/sun/jndi/ldap/VersionHelper.java b/src/java.naming/share/classes/com/sun/jndi/ldap/VersionHelper.java
+index 4d7ce28a841..7d11ead1964 100644
+--- a/src/java.naming/share/classes/com/sun/jndi/ldap/VersionHelper.java
++++ b/src/java.naming/share/classes/com/sun/jndi/ldap/VersionHelper.java
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 1999, 2021, Oracle and/or its affiliates. All rights reserved.
++ * Copyright (c) 1999, 2022, Oracle and/or its affiliates. All rights reserved.
+  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+  *
+  * This code is free software; you can redistribute it and/or modify it
+@@ -44,8 +44,8 @@ public final class VersionHelper {
+     private static final boolean trustURLCodebase;
+ 
+     /**
+-     * Determines whether objects may be deserialized from the content of
+-     * 'javaSerializedData' attribute.
++     * Determines whether objects may be deserialized or reconstructed from a content of
++     * 'javaSerializedData', 'javaRemoteLocation' or 'javaReferenceAddress' LDAP attributes.
+      */
+     private static final boolean trustSerialData;
+ 
+@@ -56,10 +56,10 @@ public final class VersionHelper {
+                 "com.sun.jndi.ldap.object.trustURLCodebase", "false");
+         trustURLCodebase = "true".equalsIgnoreCase(trust);
+ 
+-        // System property to control whether classes is allowed to be loaded from
+-        // 'javaSerializedData' attribute
++        // System property to control whether classes are allowed to be loaded from
++        // 'javaSerializedData', 'javaRemoteLocation' or 'javaReferenceAddress' attributes.
+         String trustSerialDataSp = getPrivilegedProperty(
+-                "com.sun.jndi.ldap.object.trustSerialData", "true");
++                "com.sun.jndi.ldap.object.trustSerialData", "false");
+         trustSerialData = "true".equalsIgnoreCase(trustSerialDataSp);
+     }
+ 
+@@ -81,8 +81,9 @@ public final class VersionHelper {
+     }
+ 
+     /**
+-     * Returns true if deserialization of objects from 'javaSerializedData'
+-     * and 'javaReferenceAddress' LDAP attributes is allowed.
++     * Returns true if deserialization or reconstruction of objects from
++     * 'javaSerializedData', 'javaRemoteLocation' and 'javaReferenceAddress'
++     * LDAP attributes is allowed.
+      *
+      * @return true if deserialization is allowed; false - otherwise
+      */
+diff --git a/src/java.naming/share/classes/module-info.java b/src/java.naming/share/classes/module-info.java
+index 09e1093c13a..b354dad89d5 100644
+--- a/src/java.naming/share/classes/module-info.java
++++ b/src/java.naming/share/classes/module-info.java
+@@ -91,11 +91,16 @@
+  * <ul>
+  *     <li>{@systemProperty com.sun.jndi.ldap.object.trustSerialData}:
+  *          <br>The value of this system property is the string representation of a boolean value
+- *          which allows to control the deserialization of java objects from the 'javaSerializedData'
+- *          LDAP attribute. To prevent the deserialization of java objects from the 'javaSerializedData'
+- *          attribute, the system property value can be set to 'false'.
+- *          <br>If the property is not specified then the deserialization of java objects
+- *          from the 'javaSerializedData' attribute is allowed.
++ *          that controls the deserialization of java objects from the {@code javaSerializedData} LDAP
++ *          attribute, reconstruction of RMI references from the {@code javaRemoteLocation} LDAP attribute, and
++ *          reconstruction of {@linkplain javax.naming.BinaryRefAddr binary reference addresses} from
++ *          the {@code javaReferenceAddress} LDAP attribute.
++ *          To allow the deserialization or reconstruction of java objects from {@code javaSerializedData},
++ *          {@code javaRemoteLocation} or {@code javaReferenceAddress} attributes, the system property value
++ *          can be set to {@code true} (case insensitive).
++ *          <br>If the property is not specified the deserialization of java objects
++ *          from the {@code javaSerializedData}, the {@code javaRemoteLocation}, or {@code javaReferenceAddress}
++ *          attributes is not allowed.
+  *     </li>
+  *     <li>{@systemProperty jdk.jndi.object.factoriesFilter}:
+  *          <br>The value of this system property defines a filter used by

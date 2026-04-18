@@ -1,0 +1,170 @@
+diff --git a/src/java.desktop/share/classes/javax/swing/JTabbedPane.java b/src/java.desktop/share/classes/javax/swing/JTabbedPane.java
+index af5c917ee76..78559834f68 100644
+--- a/src/java.desktop/share/classes/javax/swing/JTabbedPane.java
++++ b/src/java.desktop/share/classes/javax/swing/JTabbedPane.java
+@@ -55,6 +55,7 @@ import javax.accessibility.AccessibleRole;
+ import javax.accessibility.AccessibleSelection;
+ import javax.accessibility.AccessibleState;
+ import javax.accessibility.AccessibleStateSet;
++import javax.accessibility.AccessibleValue;
+ import javax.swing.event.ChangeEvent;
+ import javax.swing.event.ChangeListener;
+ import javax.swing.plaf.TabbedPaneUI;
+@@ -145,7 +146,6 @@ public class JTabbedPane extends JComponent
+     */
+     public static final int SCROLL_TAB_LAYOUT = 1;
+ 
+-
+     /**
+      * @see #getUIClassID
+      * @see #readObject
+@@ -266,7 +266,6 @@ public class JTabbedPane extends JComponent
+         setUI((TabbedPaneUI)UIManager.getUI(this));
+     }
+ 
+-
+     /**
+      * Returns the name of the UI class that implements the
+      * L&amp;F for this component.
+@@ -280,7 +279,6 @@ public class JTabbedPane extends JComponent
+         return uiClassID;
+     }
+ 
+-
+     /**
+      * We pass <code>ModelChanged</code> events along to the listeners with
+      * the tabbedpane (instead of the model itself) as the event source.
+@@ -624,7 +622,6 @@ public class JTabbedPane extends JComponent
+         setSelectedIndexImpl(index, true);
+     }
+ 
+-
+     private void setSelectedIndexImpl(int index, boolean doAccessibleChanges) {
+         int oldIndex = model.getSelectedIndex();
+         Page oldPage = null, newPage = null;
+@@ -752,7 +749,6 @@ public class JTabbedPane extends JComponent
+             newIndex,
+             new Page(this, title != null? title : "", icon, null, component, tip));
+ 
+-
+         if (component != null) {
+             addImpl(component, null, -1);
+             component.setVisible(false);
+@@ -1140,7 +1136,6 @@ public class JTabbedPane extends JComponent
+         return 0;
+     }
+ 
+-
+ // Getters for the Pages
+ 
+     /**
+@@ -1335,7 +1330,6 @@ public class JTabbedPane extends JComponent
+         return null;
+     }
+ 
+-
+ // Setters for the Pages
+ 
+     /**
+@@ -1769,7 +1763,6 @@ public class JTabbedPane extends JComponent
+         return -1;
+     }
+ 
+-
+     /**
+      * Returns the tooltip text for the component determined by the
+      * mouse event location.
+@@ -1795,7 +1788,6 @@ public class JTabbedPane extends JComponent
+         }
+     }
+ 
+-
+     /**
+      * See <code>readObject</code> and <code>writeObject</code> in
+      * <code>JComponent</code> for more
+@@ -1860,7 +1852,6 @@ public class JTabbedPane extends JComponent
+         }
+     }
+ 
+-
+     /**
+      * Returns a string representation of this <code>JTabbedPane</code>.
+      * This method
+@@ -2074,7 +2065,7 @@ public class JTabbedPane extends JComponent
+     }
+ 
+     private class Page extends AccessibleContext
+-        implements Serializable, Accessible, AccessibleComponent {
++        implements Serializable, Accessible, AccessibleComponent, AccessibleValue {
+         String title;
+         Color background;
+         Color foreground;
+@@ -2168,7 +2159,6 @@ public class JTabbedPane extends JComponent
+             return this;
+         }
+ 
+-
+         // AccessibleContext methods
+ 
+         public String getAccessibleName() {
+@@ -2202,6 +2192,43 @@ public class JTabbedPane extends JComponent
+             return states;
+         }
+ 
++        @Override
++        public AccessibleValue getAccessibleValue() {
++            return this;
++        }
++
++        @Override
++        public Number getCurrentAccessibleValue() {
++            return (getPageIndex() == parent.getSelectedIndex() ?
++                    Integer.valueOf(1) : Integer.valueOf(0));
++        }
++
++        @Override
++        public boolean setCurrentAccessibleValue(Number n) {
++            if (getPageIndex() != parent.getSelectedIndex()) {
++                if (n.intValue() != 0) {
++                    // Set current page selected
++                    parent.setSelectedIndex(getPageIndex());
++                }
++            } else {
++                if (n.intValue() == 0) {
++                    // Can not "deselect" because what page should i select instead?
++                    return false;
++                }
++            }
++            return true;
++        }
++
++        @Override
++        public Number getMinimumAccessibleValue() {
++            return Integer.valueOf(0);
++        }
++
++        @Override
++        public Number getMaximumAccessibleValue() {
++            return Integer.valueOf(1);
++        }
++
+         public int getAccessibleIndexInParent() {
+             return getPageIndex();
+         }
+@@ -2230,7 +2257,6 @@ public class JTabbedPane extends JComponent
+             return this;
+         }
+ 
+-
+         // AccessibleComponent methods
+ 
+         public Color getBackground() {
+@@ -2368,7 +2394,7 @@ public class JTabbedPane extends JComponent
+          * one exists and the page is disabled.  Otherwise, null
+          * is returned.
+          */
+-        public AccessibleIcon [] getAccessibleIcon() {
++        public AccessibleIcon[] getAccessibleIcon() {
+             AccessibleIcon accessibleIcon = null;
+             if (enabled && icon instanceof ImageIcon) {
+                 AccessibleContext ac =

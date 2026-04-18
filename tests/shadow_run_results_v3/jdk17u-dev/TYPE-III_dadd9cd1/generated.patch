@@ -1,0 +1,86 @@
+diff --git a/src/java.desktop/share/classes/java/awt/image/ColorConvertOp.java b/src/java.desktop/share/classes/java/awt/image/ColorConvertOp.java
+index 023b376d73d..7037431aa12 100644
+--- a/src/java.desktop/share/classes/java/awt/image/ColorConvertOp.java
++++ b/src/java.desktop/share/classes/java/awt/image/ColorConvertOp.java
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 1997, 2021, Oracle and/or its affiliates. All rights reserved.
++ * Copyright (c) 1997, 2024, Oracle and/or its affiliates. All rights reserved.
+  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+  *
+  * This code is free software; you can redistribute it and/or modify it
+@@ -129,7 +129,6 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
+         this.hints  = hints;
+     }
+ 
+-
+     /**
+      * Constructs a new ColorConvertOp from two ColorSpace objects.
+      * The RenderingHints argument may be null.
+@@ -170,7 +169,6 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
+         this.hints  = hints;
+     }
+ 
+-
+      /**
+      * Constructs a new ColorConvertOp from an array of ICC_Profiles.
+      * The RenderingHints argument may be null.
+@@ -211,7 +209,6 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
+         this.hints  = hints;
+     }
+ 
+-
+     /**
+      * Returns the array of ICC_Profiles used to construct this ColorConvertOp.
+      * Returns null if the ColorConvertOp was not constructed from such an
+@@ -566,7 +563,6 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
+             thisRasterTransform.colorConvert(src, dest);
+         }
+ 
+-
+         return dest;
+     }
+ 
+@@ -660,7 +656,6 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
+         return image;
+     }
+ 
+-
+     /**
+      * Creates a zeroed destination Raster with the correct size and number of
+      * bands, given this source.
+@@ -720,7 +715,6 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
+         return dstPt;
+     }
+ 
+-
+     /**
+      * Returns the RenderingIntent from the specified ICC Profile.
+      */
+@@ -811,7 +805,7 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
+             }
+             float[] srcMinVal = new float[iccSrcNumComp];
+             float[] srcInvDiffMinMax = new float[iccSrcNumComp];
+-            for (int i = 0; i < srcNumComp; i++) {
++            for (int i = 0; i < iccSrcNumComp; i++) {
+                 srcMinVal[i] = cs.getMinValue(i);
+                 srcInvDiffMinMax[i] = maxNum / (cs.getMaxValue(i) - srcMinVal[i]);
+             }
+@@ -825,7 +819,7 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
+             }
+             float[] dstMinVal = new float[iccDstNumComp];
+             float[] dstDiffMinMax = new float[iccDstNumComp];
+-            for (int i = 0; i < dstNumComp; i++) {
++            for (int i = 0; i < iccDstNumComp; i++) {
+                 dstMinVal[i] = cs.getMinValue(i);
+                 dstDiffMinMax[i] = (cs.getMaxValue(i) - dstMinVal[i]) / maxNum;
+             }
+@@ -878,7 +872,7 @@ public class ColorConvertOp implements BufferedImageOp, RasterOp {
+                                       dstDiffMinMax[i] + dstMinVal[i];
+                     }
+                     if (nonICCDst) {
+-                        color = srcColorSpace.fromCIEXYZ(dstColor);
++                        color = dstColorSpace.fromCIEXYZ(dstColor);
+                         for (int i = 0; i < dstNumComp; i++) {
+                             dstColor[i] = color[i];
+                         }

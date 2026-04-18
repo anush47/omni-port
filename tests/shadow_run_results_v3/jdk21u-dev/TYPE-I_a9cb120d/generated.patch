@@ -1,0 +1,16 @@
+diff --git a/src/jdk.compiler/share/classes/com/sun/tools/javac/comp/DeferredAttr.java b/src/jdk.compiler/share/classes/com/sun/tools/javac/comp/DeferredAttr.java
+index bc43c427a34..56249fefad9 100644
+--- a/src/jdk.compiler/share/classes/com/sun/tools/javac/comp/DeferredAttr.java
++++ b/src/jdk.compiler/share/classes/com/sun/tools/javac/comp/DeferredAttr.java
+@@ -1089,7 +1089,10 @@ public class DeferredAttr extends JCTree.Visitor {
+             boolean isLambdaOrMemberRef =
+                     dt.tree.hasTag(REFERENCE) || dt.tree.hasTag(LAMBDA);
+             boolean needsRecoveryType =
+-                    pt == null || (isLambdaOrMemberRef && !types.isFunctionalInterface(pt));
++                    pt == null ||
++                            ((dt instanceof ArgumentAttr.ArgumentType<?> at) &&
++                            at.speculativeTypes.values().stream().allMatch(type -> type.hasTag(ERROR))) ||
++                            (isLambdaOrMemberRef && !types.isFunctionalInterface(pt));
+             Type ptRecovery = needsRecoveryType ? Type.recoveryType: pt;
+             dt.check(attr.new RecoveryInfo(deferredAttrContext, ptRecovery) {
+                 @Override

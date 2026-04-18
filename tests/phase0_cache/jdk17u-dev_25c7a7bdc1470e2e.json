@@ -1,0 +1,28 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/java/security/cert/CertPathValidator/OCSP/OCSPTimeout.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/sun/security/x509/URICertStore/AIACertTimeout.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/sun/security/x509/URICertStore/CRLReadTimeout.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "java/security/cert/CertPathValidator/OCSP/OCSPTimeout.java#OCSPTimeout": "failed",
+      "sun/security/x509/URICertStore/AIACertTimeout.java#AIACertTimeout": "failed",
+      "sun/security/x509/URICertStore/CRLReadTimeout.java#CRLReadTimeout": "failed"
+    },
+    "classes": {
+      "java/security/cert/CertPathValidator/OCSP/OCSPTimeout.java": "failed",
+      "sun/security/x509/URICertStore/AIACertTimeout.java": "failed",
+      "sun/security/x509/URICertStore/CRLReadTimeout.java": "failed"
+    },
+    "summary": {
+      "passed": 0,
+      "failed": 3,
+      "skipped": 0,
+      "total": 3
+    }
+  },
+  "mode": "baseline-jdk17u-dev-helper",
+  "skipped": false
+}

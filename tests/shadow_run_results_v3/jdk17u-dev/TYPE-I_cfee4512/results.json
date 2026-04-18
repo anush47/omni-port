@@ -1,0 +1,243 @@
+{
+  "run_timestamp": "2026-04-18T08:04:03.057040",
+  "repo": "jdk17u-dev",
+  "patch_type": "TYPE-I",
+  "original_commit": "cfee4512f7048e9cf440078e9eb87d37c7ebcdd9",
+  "backport_commit": "56c03a4a4244c822eec9a45a037465d383a8fafe",
+  "description": "main \u2192 jdk17u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "java_hunks": 4,
+      "aux_hunks": 7,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/jdk.compiler/share/classes/com/sun/tools/javac/jvm/StringConcat.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 142,
+          "end_line": 166,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/jdk.compiler/share/classes/com/sun/tools/javac/jvm/StringConcat.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 305,
+          "end_line": 310,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/jdk.compiler/share/classes/com/sun/tools/javac/jvm/StringConcat.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 333,
+          "end_line": 346,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/jdk.compiler/share/classes/com/sun/tools/javac/jvm/StringConcat.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 439,
+          "end_line": 448,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 3.86,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_II",
+        "confidence": 0.95,
+        "reasoning": "The patch modifies the StringConcat.java file by removing a method and adding a new helper method, and changes the logic in two places to eagerly convert arguments to strings before passing them to invokedynamic calls. The changes are localized within the same file and involve adding method calls and changing argument types, but the overall structure and method names remain the same. The patch also adds new test files and modifies existing tests to reflect the new behavior. The localization evidence shows all hunks were found via 'git_exact' with high confidence, indicating the patch applies cleanly but involves more than trivial string replacements. Therefore, the patch complexity is best classified as TYPE_II (whitespace/formatting drift and minor logic changes requiring fuzzy matching). The confidence is high but not absolute due to the logic changes. The token budget estimate is moderate due to the size and complexity of the changes and the addition of multiple test files.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.01,
+      "error": null,
+      "applied_count": 4,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/jdk.compiler/share/classes/com/sun/tools/javac/jvm/StringConcat.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.compiler/share/classes/com/sun/tools/javac/jvm/StringConcat.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.compiler/share/classes/com/sun/tools/javac/jvm/StringConcat.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.compiler/share/classes/com/sun/tools/javac/jvm/StringConcat.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "adapted_count": 0
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 0,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": []
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [],
+      "synthesized_count_after_repair": 0
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk17u-dev-helper",
+      "test_success": true,
+      "test_mode": "jdk17u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/runtime/modules/AccessCheck/MethodAccessReadTwice.jtr.xml",
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/tools/javac/StringConcat/StringAppendEvaluatesInOrder.jtr.xml",
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/tools/javac/StringConcat/WellKnownTypeSignatures.jtr.xml",
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/tools/javac/StringConcat/WellKnownTypes.jtr.xml",
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/tools/javac/StringConcat/access/Test.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "runtime/modules/AccessCheck/MethodAccessReadTwice.java#MethodAccessReadTwice": "passed",
+          "tools/javac/StringConcat/StringAppendEvaluatesInOrder.java#StringAppendEvaluatesInOrder": "passed",
+          "tools/javac/StringConcat/WellKnownTypeSignatures.java#WellKnownTypeSignatures": "passed",
+          "tools/javac/StringConcat/WellKnownTypes.java#WellKnownTypes": "passed",
+          "tools/javac/StringConcat/access/Test.java#Test": "passed"
+        },
+        "classes": {
+          "runtime/modules/AccessCheck/MethodAccessReadTwice.java": "passed",
+          "tools/javac/StringConcat/StringAppendEvaluatesInOrder.java": "passed",
+          "tools/javac/StringConcat/WellKnownTypeSignatures.java": "passed",
+          "tools/javac/StringConcat/WellKnownTypes.java": "passed",
+          "tools/javac/StringConcat/access/Test.java": "passed"
+        },
+        "summary": {
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "total": 5
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [
+          "runtime/modules/AccessCheck/MethodAccessReadTwice.java#MethodAccessReadTwice",
+          "tools/javac/StringConcat/StringAppendEvaluatesInOrder.java#StringAppendEvaluatesInOrder",
+          "tools/javac/StringConcat/WellKnownTypeSignatures.java#WellKnownTypeSignatures",
+          "tools/javac/StringConcat/access/Test.java#Test"
+        ],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 5,
+        "patched_total": 5,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 11,
+    "developer_aux_hunks_from_target": 7,
+    "phase0_baseline": {
+      "mode": "baseline-jdk17u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 5
+    },
+    "java_production_hunks": 4,
+    "developer_aux_hunks": 7,
+    "processed_hunk_indices": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 4,
+    "synthesized_count": 0,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 3744,
+    "target_patch_bytes": 33612,
+    "patch_exact_match": true,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": true,
+    "test_mode": "jdk17u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [
+        "runtime/modules/AccessCheck/MethodAccessReadTwice.java#MethodAccessReadTwice",
+        "tools/javac/StringConcat/StringAppendEvaluatesInOrder.java#StringAppendEvaluatesInOrder",
+        "tools/javac/StringConcat/WellKnownTypeSignatures.java#WellKnownTypeSignatures",
+        "tools/javac/StringConcat/access/Test.java#Test"
+      ],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 5,
+      "patched_total": 5,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 4,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

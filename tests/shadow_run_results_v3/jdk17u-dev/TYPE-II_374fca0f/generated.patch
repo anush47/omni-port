@@ -1,0 +1,144 @@
+diff --git a/src/java.desktop/share/classes/javax/swing/text/html/CSS.java b/src/java.desktop/share/classes/javax/swing/text/html/CSS.java
+index b0f041dd8c4..310ec3ed278 100644
+--- a/src/java.desktop/share/classes/javax/swing/text/html/CSS.java
++++ b/src/java.desktop/share/classes/javax/swing/text/html/CSS.java
+@@ -181,7 +181,6 @@ public class CSS implements Serializable {
+         private String defaultValue;
+         private boolean inherited;
+ 
+-
+         /**
+          * CSS attribute "background".
+          */
+@@ -485,7 +484,6 @@ public class CSS implements Serializable {
+             new Attribute("margin-right-rtl",
+                           Integer.toString(Integer.MIN_VALUE), false);
+ 
+-
+         /**
+          * CSS attribute "margin-top".
+          */
+@@ -842,6 +840,10 @@ public class CSS implements Serializable {
+     }
+ 
+     static Object mergeTextDecoration(String value) {
++        if (value.startsWith("none")) {
++            return null;
++        }
++
+         boolean underline = value.contains("underline");
+         boolean strikeThrough = value.contains("line-through");
+         if (!underline && !strikeThrough) {
+@@ -1284,7 +1286,6 @@ public class CSS implements Serializable {
+         return valueMap.get(name);
+     }
+ 
+-
+     //
+     // Conversion related methods/classes
+     //
+@@ -1550,7 +1551,6 @@ public class CSS implements Serializable {
+         return getIndexOfSize(pt, sizeMap);
+     }
+ 
+-
+     /**
+      * @return an array of all the strings in <code>value</code>
+      *         that are separated by whitespace.
+@@ -1607,7 +1607,6 @@ public class CSS implements Serializable {
+           return sizeMap[index];
+     }
+ 
+-
+     private void translateEmbeddedAttributes(AttributeSet htmlAttrSet,
+                                              MutableAttributeSet cssAttrSet) {
+         Enumeration<?> keys = htmlAttrSet.getAttributeNames();
+@@ -1769,12 +1768,10 @@ public class CSS implements Serializable {
+         return null;
+     }
+ 
+-
+     private boolean isHTMLFontTag(HTML.Tag tag) {
+         return (tag != null && ((tag == HTML.Tag.FONT) || (tag == HTML.Tag.BASEFONT)));
+     }
+ 
+-
+     private boolean isFloater(String alignValue) {
+         return (alignValue.equals("left") || alignValue.equals("right"));
+     }
+@@ -2625,7 +2622,6 @@ public class CSS implements Serializable {
+         String units = null;
+     }
+ 
+-
+     /**
+      * BorderWidthValue is used to model BORDER_XXX_WIDTH and adds support
+      * for the thin/medium/thick values.
+@@ -2665,7 +2661,6 @@ public class CSS implements Serializable {
+         private static final float[] values = { 1, 2, 4 };
+    }
+ 
+-
+     /**
+      * Handles uniquing of CSS values, like lists, and background image
+      * repeating.
+@@ -2680,7 +2675,6 @@ public class CSS implements Serializable {
+             return retValue;
+         }
+ 
+-
+         Object parseHtmlValue(String value) {
+             Object retValue = htmlValueToCssValueMap.get(value);
+             if (retValue == null) {
+@@ -2690,7 +2684,6 @@ public class CSS implements Serializable {
+         }
+     }
+ 
+-
+     /**
+      * Used for background images, to represent the position.
+      */
+@@ -2836,7 +2829,6 @@ public class CSS implements Serializable {
+         }
+     }
+ 
+-
+     /**
+      * Used for BackgroundImages.
+      */
+@@ -3003,11 +2995,9 @@ public class CSS implements Serializable {
+         float value;
+         String units = null;
+ 
+-
+         static final short UNINITIALIZED_LENGTH = (short)10;
+     }
+ 
+-
+     /**
+      * Class used to parse font property. The font property is shorthand
+      * for the other font properties. This expands the properties, placing
+@@ -3151,7 +3141,6 @@ public class CSS implements Serializable {
+ 
+     }
+ 
+-
+     /**
+      * Parses the background property into its intrinsic values.
+      */
+@@ -3256,7 +3245,6 @@ public class CSS implements Serializable {
+         }
+     }
+ 
+-
+     /**
+      * Used to parser margin and padding.
+      */
+@@ -3633,7 +3621,6 @@ public class CSS implements Serializable {
+         }
+     }
+ 
+-
+     /*
+      * we need StyleSheet for resolving lenght units. (see
+      * isW3CLengthUnits)

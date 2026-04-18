@@ -1,0 +1,273 @@
+{
+  "run_timestamp": "2026-04-18T08:04:03.057040",
+  "repo": "jdk17u-dev",
+  "patch_type": "TYPE-II",
+  "original_commit": "7765942aeee25cbeb5fd932a93b3d8f9d4ca3655",
+  "backport_commit": "15586dc50be9c8a6a302f22df4112d2539f7fa80",
+  "description": "main \u2192 jdk17u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 0.01,
+      "error": null,
+      "java_hunks": 7,
+      "aux_hunks": 10,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.naming/share/classes/com/sun/jndi/ldap/Obj.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.naming/share/classes/com/sun/jndi/ldap/Obj.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 239,
+          "end_line": 244,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.naming/share/classes/com/sun/jndi/ldap/VersionHelper.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.naming/share/classes/com/sun/jndi/ldap/VersionHelper.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 44,
+          "end_line": 51,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.naming/share/classes/com/sun/jndi/ldap/VersionHelper.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 56,
+          "end_line": 65,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/java.naming/share/classes/com/sun/jndi/ldap/VersionHelper.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 81,
+          "end_line": 88,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "src/java.naming/share/classes/module-info.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 91,
+          "end_line": 101,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 3.31,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_I",
+        "confidence": 1.0,
+        "reasoning": "All hunks in the patch were found in the target branch via 'git_exact' with confidence 1.00, indicating exact matches. The changes are straightforward updates to system property defaults, comments, and addition of a new test file without structural or API changes. There is no evidence of whitespace drift, structural refactoring, or redesign. Therefore, the patch complexity is TYPE_I (exact match string replacement, trivial backport). The token budget estimate is moderate due to the patch size and added test files but remains low complexity.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "applied_count": 7,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.naming/share/classes/com/sun/jndi/ldap/Obj.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.naming/share/classes/com/sun/jndi/ldap/Obj.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.naming/share/classes/com/sun/jndi/ldap/VersionHelper.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.naming/share/classes/com/sun/jndi/ldap/VersionHelper.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.naming/share/classes/com/sun/jndi/ldap/VersionHelper.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.naming/share/classes/com/sun/jndi/ldap/VersionHelper.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.naming/share/classes/module-info.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "adapted_count": 0
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 0,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": []
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [],
+      "synthesized_count_after_repair": 0
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk17u-dev-helper",
+      "test_success": false,
+      "test_mode": "jdk17u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/com/sun/jndi/ldap/objects/RemoteLocationAttributeTest.jtr.xml",
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/javax/naming/module/RunBasic.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "com/sun/jndi/ldap/objects/RemoteLocationAttributeTest.java#RemoteLocationAttributeTest": "passed",
+          "javax/naming/module/RunBasic.java#RunBasic": "passed"
+        },
+        "classes": {
+          "com/sun/jndi/ldap/objects/RemoteLocationAttributeTest.java": "passed",
+          "javax/naming/module/RunBasic.java": "passed"
+        },
+        "summary": {
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "total": 2
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [
+          "com/sun/jndi/ldap/objects/RemoteLocationAttributeTest.java#RemoteLocationAttributeTest"
+        ],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 2,
+        "patched_total": 2,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 46,
+    "developer_aux_hunks_from_target": 10,
+    "phase0_baseline": {
+      "mode": "baseline-jdk17u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 2
+    },
+    "java_production_hunks": 7,
+    "developer_aux_hunks": 10,
+    "processed_hunk_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 7,
+    "synthesized_count": 0,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 5634,
+    "target_patch_bytes": 30394,
+    "patch_exact_match": true,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": false,
+    "test_mode": "jdk17u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [
+        "com/sun/jndi/ldap/objects/RemoteLocationAttributeTest.java#RemoteLocationAttributeTest"
+      ],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 2,
+      "patched_total": 2,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 1,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

@@ -1,17 +1,17 @@
 # Backport CLAW — Shadow Run Results (v3)
 
-**Last updated:** 2026-04-17 20:54:43  
-**Total:** 321 patch(es) run, **267 passed** (83%)
+**Last updated:** 2026-04-18 18:05:07  
+**Total:** 366 patch(es) run, **307 passed** (83%)
 
 > **Success** = at least one fail→pass or newly-passing test observed.
 
-| Type     |      crate       |      druid       |  elasticsearch   | graylog2-server  |    grpc-java     |      hadoop      |  hibernate-orm   |    jdk11u-dev    |    jdk17u-dev    |     logstash     | spring-framework |       sql        |
-| -------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- |
-| TYPE-I   |      48/50       |       5/5        |      43/49       |      12/12       |      19/23       |       3/3        |       1/1        |        -         |       1/1        |       3/3        |       4/4        |        -         |
-| TYPE-II  |      49/50       |       1/1        |      19/25       |       3/5        |       3/3        |       1/2        |       4/4        |       1/1        |        -         |        -         |       4/4        |       4/4        |
-| TYPE-III |       1/2        |        -         |       1/2        |       0/1        |        -         |        -         |       4/4        |        -         |        -         |        -         |        -         |       1/2        |
-| TYPE-IV  |       2/2        |        -         |        -         |        -         |       0/1        |        -         |       1/1        |        -         |        -         |        -         |        -         |        -         |
-| TYPE-V   |      14/23       |       0/1        |      10/17       |       1/3        |       0/1        |       1/1        |       1/3        |        -         |        -         |        -         |       1/1        |       1/6        |
+| Type     |      crate       |      druid       |  elasticsearch   | graylog2-server  |    grpc-java     |      hadoop      |  hibernate-orm   |    jdk11u-dev    |    jdk17u-dev    |    jdk21u-dev    |     logstash     | spring-framework |       sql        |
+| -------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- |
+| TYPE-I   |      48/50       |       5/5        |      43/49       |      12/12       |      19/23       |       3/3        |       1/1        |        -         |       9/9        |       1/1        |       3/3        |       4/4        |        -         |
+| TYPE-II  |      49/50       |       1/1        |      19/25       |       3/5        |       3/3        |       1/2        |       4/4        |       2/2        |      20/21       |        -         |        -         |       4/4        |       4/4        |
+| TYPE-III |       1/2        |        -         |       1/2        |       0/1        |        -         |        -         |       4/4        |        -         |       5/5        |        -         |        -         |        -         |       1/2        |
+| TYPE-IV  |       2/2        |        -         |        -         |        -         |       0/1        |        -         |       1/1        |        -         |       1/1        |        -         |        -         |        -         |        -         |
+| TYPE-V   |      14/23       |       0/1        |      10/17       |       1/3        |       0/1        |       1/1        |       1/3        |       1/3        |       3/5        |        -         |        -         |       1/1        |       1/6        |
 
 ---
 
@@ -315,7 +315,52 @@
 | hibernate-orm | TYPE-V | `6cfdc64153` | ✗ | ✗ | - | - | api_mismatch |
 | hibernate-orm | TYPE-V | `72dae39eb4` | ✗ | ✓ | 0 / 0 / 0 | - |  |
 | jdk11u-dev | TYPE-II | `b3477399d0` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: java/net/httpclient/HttpRedirectTest.java#HttpRedirectTest |  |
+| jdk11u-dev | TYPE-II | `cfee4512f7` | ✓ | ✓ | 4 / 0 / 0 | patch=exact<br>F→P: runtime/modules/AccessCheck/MethodAccessReadTwice.java#MethodAccessReadTwice, tools/javac/StringConcat/StringAppendEvaluatesInOrder.java#StringAppendEvaluatesInOrder, tools/javac/StringConcat/WellKnownTypeSignatures.java#WellKnownTypeSignatures, tools/javac/StringConcat/access/Test.java#Test |  |
+| jdk11u-dev | TYPE-V | `158b93d19a` | ✗ | ✓ | 0 / 0 / 0 | - |  |
+| jdk11u-dev | TYPE-V | `4d2cd26ab5` | ✗ | ✓ | 0 / 0 / 0 | - |  |
+| jdk11u-dev | TYPE-V | `bdfb41f977` | ✓ | ✓ | 1 / 0 / 0 | F→P: sun/security/tools/jarsigner/RemovedFiles.java#RemovedFiles |  |
+| jdk17u-dev | TYPE-III | `0259da9283` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: javax/net/ssl/SSLSession/ServerNameRejectedTLSSessionResumption.java#ServerNameRejectedTLSSessionResumption |  |
+| jdk17u-dev | TYPE-III | `81484d8c05` | ✓ | ✓ | 0 / 0 / 0 | patch=exact |  |
+| jdk17u-dev | TYPE-III | `bfaf5704e7` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: sun/security/x509/DNSName/LeadingPeriod.java#LeadingPeriod |  |
+| jdk17u-dev | TYPE-III | `cd3e4c0366` | ✓ | ✓ | 1 / 0 / 0 | F→P: javax/swing/text/html/HTMLDocument/HTMLTextDecoration.java#HTMLTextDecoration |  |
+| jdk17u-dev | TYPE-III | `dadd9cd1e8` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/awt/color/NonICCFilterTest.java#NonICCFilterTest |  |
+| jdk17u-dev | TYPE-II | `169a5d48af` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/nio/file/Files/CreateDirectories.java#CreateDirectories |  |
+| jdk17u-dev | TYPE-II | `25871af36b` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/awt/FontMetrics/ExtremeFontSizeTest.java#ExtremeFontSizeTest |  |
+| jdk17u-dev | TYPE-II | `374fca0fcb` | ✓ | ✓ | 1 / 0 / 0 | F→P: javax/swing/text/html/HTMLDocument/HTMLTextDecorationNone.java#HTMLTextDecorationNone |  |
+| jdk17u-dev | TYPE-II | `3828dc913a` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/util/Collections/RotateHuge.java#RotateHuge |  |
+| jdk17u-dev | TYPE-II | `460ebcd9cb` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/net/HttpURLConnection/HttpURLConnectionExpect100Test.java#HttpURLConnectionExpect100Test |  |
+| jdk17u-dev | TYPE-II | `4d2cd26ab5` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/net/httpclient/http2/PushPromiseContinuation.java#PushPromiseContinuation |  |
+| jdk17u-dev | TYPE-II | `7765942aee` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: com/sun/jndi/ldap/objects/RemoteLocationAttributeTest.java#RemoteLocationAttributeTest |  |
+| jdk17u-dev | TYPE-II | `800e68d690` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/net/httpclient/Response1xxTest.java#Response1xxTest |  |
+| jdk17u-dev | TYPE-II | `848b16a3f9` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/util/zip/ZipFile/TestTooManyEntries.java#TestTooManyEntries |  |
+| jdk17u-dev | TYPE-II | `87b314a985` | ✓ | ✓ | 1 / 0 / 0 | F→P: javax/swing/JComboBox/DisabledComboBoxFontTestAuto.java#DisabledComboBoxFontTestAuto |  |
+| jdk17u-dev | TYPE-II | `9f98136c3a` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: sun/net/www/protocol/jar/FileURLConnectionLeak.java#FileURLConnectionLeak |  |
+| jdk17u-dev | TYPE-II | `a5ffa079a0` | ✓ | ✓ | 2 / 0 / 0 | F→P: com/sun/net/httpserver/bugs/ExceptionKeepAlive.java#ExceptionKeepAlive, com/sun/net/httpserver/bugs/ZeroLengthOutputStream.java#ZeroLengthOutputStream |  |
+| jdk17u-dev | TYPE-II | `bdfb41f977` | ✓ | ✓ | 1 / 0 / 0 | F→P: sun/security/tools/jarsigner/RemovedFiles.java#RemovedFiles |  |
+| jdk17u-dev | TYPE-II | `c3226aaeb8` | ✗ | ✓ | 0 / 0 / 0 | - |  |
+| jdk17u-dev | TYPE-II | `d55d7e8d87` | ✓ | ✓ | 2 / 0 / 0 | F→P: java/io/OutputStreamWriter/CloseWriterOnFailedFlush.java#CloseWriterOnFailedFlush, java/nio/channels/Channels/CloseWriterOnFailedFlush.java#CloseWriterOnFailedFlush |  |
+| jdk17u-dev | TYPE-II | `d5cd4a3a28` | ✓ | ✓ | 1 / 0 / 0 | F→P: javax/accessibility/JTabbedPane/AccessibleTabbedPaneTest.java#AccessibleTabbedPaneTest |  |
+| jdk17u-dev | TYPE-II | `d6d7bdc774` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/nio/charset/Charset/AliasesCopy.java#AliasesCopy |  |
+| jdk17u-dev | TYPE-II | `dcd46501e6` | ✓ | ✓ | 3 / 0 / 0 | F→P: java/net/httpclient/CancelRequestTest.java#CancelRequestTest, java/net/httpclient/CancelStreamedBodyTest.java#CancelStreamedBodyTest, java/net/httpclient/SmallTimeout.java#SmallTimeout |  |
+| jdk17u-dev | TYPE-II | `ded6a81319` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: java/util/concurrent/CompletableFuture/CompletableFutureOrTimeoutExceptionallyTest.java#CompletableFutureOrTimeoutExceptionallyTest |  |
+| jdk17u-dev | TYPE-II | `e20bd018c4` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/security/Provider/InvalidServiceTest.java#InvalidServiceTest |  |
+| jdk17u-dev | TYPE-II | `fc918a73d0` | ✓ | ✓ | 1 / 0 / 0 | F→P: sun/security/tools/jarsigner/AutoKeyStore.java#AutoKeyStore |  |
+| jdk17u-dev | TYPE-IV | `e5f05b5a96` | ✓ | ✓ | 1 / 0 / 0 | F→P: sun/java2d/cmm/ColorConvertOp/CompatibleColorSpace.java#CompatibleColorSpace |  |
+| jdk17u-dev | TYPE-I | `1e4eafb4fe` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: java/beans/Introspector/DefaultMethodBeanPropertyTest.java#DefaultMethodBeanPropertyTest |  |
+| jdk17u-dev | TYPE-I | `3c4cd50e3c` | ✓ | ✓ | 1 / 0 / 0 | F→P: com/sun/net/httpserver/bugs/HeadKeepAlive.java#HeadKeepAlive |  |
+| jdk17u-dev | TYPE-I | `3d9dc8f824` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: java/util/regex/whitebox/GraphemeTest.java#GraphemeTest |  |
+| jdk17u-dev | TYPE-I | `5cacf212f0` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/io/ByteArrayInputStream/ChunkedTransferTo.java#ChunkedTransferTo |  |
 | jdk17u-dev | TYPE-I | `5fab27e1b8` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/util/Random/T8282144.java#T8282144 |  |
+| jdk17u-dev | TYPE-I | `8198807b4a` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: javax/imageio/plugins/wbmp/WBMPStreamTruncateTest.java#WBMPStreamTruncateTest |  |
+| jdk17u-dev | TYPE-I | `c7c6d47a07` | ✓ | ✓ | 0 / 0 / 0 | patch=exact |  |
+| jdk17u-dev | TYPE-I | `cfee4512f7` | ✓ | ✓ | 4 / 0 / 0 | patch=exact<br>F→P: runtime/modules/AccessCheck/MethodAccessReadTwice.java#MethodAccessReadTwice, tools/javac/StringConcat/StringAppendEvaluatesInOrder.java#StringAppendEvaluatesInOrder, tools/javac/StringConcat/WellKnownTypeSignatures.java#WellKnownTypeSignatures, tools/javac/StringConcat/access/Test.java#Test |  |
+| jdk17u-dev | TYPE-I | `e81f20b504` | ✓ | ✓ | 1 / 0 / 0 | F→P: javax/swing/text/DefaultCaret/SetCaretRateTest.java#SetCaretRateTest |  |
+| jdk17u-dev | TYPE-V | `1ec64811a3` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: sun/security/ssl/SSLLogger/DebugPropertyValuesTest.java#DebugPropertyValuesTest |  |
+| jdk17u-dev | TYPE-V | `2836c34b64` | ✗ | ✓ | 0 / 0 / 0 | - |  |
+| jdk17u-dev | TYPE-V | `47c10694c6` | ✓ | ✓ | 0 / 0 / 0 | patch=exact |  |
+| jdk17u-dev | TYPE-V | `af8fb7eef7` | ✗ | ✓ | 0 / 0 / 0 | - |  |
+| jdk17u-dev | TYPE-V | `f4b140b420` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: java/net/httpclient/http2/TrailingHeadersTest.java#TrailingHeadersTest |  |
+| jdk21u-dev | TYPE-I | `a9cb120d03` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: tools/javac/recovery/CrashDueToUnreportedError.java#CrashDueToUnreportedError |  |
 | logstash | TYPE-I | `712b37e1df` | ✓ | ✓ | 2 / 0 / 0 | patch=exact<br>F→P: org.logstash.settings.SettingStringTest$WithValueConstraintCase#whenSetConstrainedToNullThenThrowAHelpfulError, org.logstash.settings.SettingStringTest$WithoutValueConstraintCase#whenSetUnconstrainedToNullThenThrowAHelpfulError |  |
 | logstash | TYPE-I | `cc608eb88b` | ✓ | ✓ | 5 / 0 / 0 | patch=exact<br>F→P: org.logstash.jackson.StreamReadConstraintsUtilTest#configOverridesDefault, org.logstash.jackson.StreamReadConstraintsUtilTest#configuresMaxNestingDepth, org.logstash.jackson.StreamReadConstraintsUtilTest#configuresMaxNumberLength, org.logstash.jackson.StreamReadConstraintsUtilTest#configuresMaxStringLength, org.logstash.jackson.StreamReadConstraintsUtilTest#usesJacksonDefaultsWhenNoConfig |  |
 | logstash | TYPE-I | `cd729b7682` | ✓ | ✓ | 0 / 0 / 0 | patch=exact |  |
