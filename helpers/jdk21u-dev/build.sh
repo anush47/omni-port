@@ -56,7 +56,22 @@ if [ ${MAKE_EXIT} -ne 0 ]; then
         # commit.  Force a full reconfigure and retry once.
         echo "--- Incremental make failed — forcing reconfigure and retry ---"
         _do_configure
+        set +e
         make JOBS="${MAKE_JOBS:-$(nproc)}" images COMPILER_WARNINGS_FATAL=false
+        MAKE_EXIT2=$?
+        set -e
+        if [ ${MAKE_EXIT2} -ne 0 ]; then
+            # Reconfigure+retry also failed — stale native objects in build_shared
+            # (e.g. .o files referencing symbols removed between commits).
+            # Delete build_shared entirely and do a full clean rebuild.
+            echo "--- Reconfigure retry failed — doing full clean rebuild ---"
+            cd /repo
+            rm -rf "${BUILD_DIR_ABS}"
+            mkdir -p "${BUILD_DIR_ABS}"
+            cd "${BUILD_DIR_ABS}"
+            _do_configure
+            make JOBS="${MAKE_JOBS:-$(nproc)}" images COMPILER_WARNINGS_FATAL=false
+        fi
     else
         # Configure already ran but make still failed — real build error.
         exit ${MAKE_EXIT}
