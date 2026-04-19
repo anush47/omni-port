@@ -90,6 +90,7 @@ REPO_PATH_MAP: dict[str, str] = {
     "jdk17u-dev": "repos/jdk17u-dev",
     "jdk11u-dev": "repos/jdk11u-dev",
     "jdk21u-dev": "repos/jdk21u-dev",
+    "jdk25u-dev": "repos/jdk25u-dev",
 }
 
 # Projects where original_commit lives in a different (mainline) repo than backport_commit.
@@ -98,6 +99,7 @@ MAINLINE_REPO_PATH_MAP: dict[str, str] = {
     "jdk17u-dev": "repos/jdk",
     "jdk11u-dev": "repos/jdk",
     "jdk21u-dev": "repos/jdk",
+    "jdk25u-dev": "repos/jdk",
 }
 
 # Default branch to restore after processing (OpenJDK repos use master, not main).
@@ -105,6 +107,7 @@ DEFAULT_BRANCH_MAP: dict[str, str] = {
     "jdk17u-dev": "master",
     "jdk11u-dev": "master",
     "jdk21u-dev": "master",
+    "jdk25u-dev": "master",
 }
 
 
