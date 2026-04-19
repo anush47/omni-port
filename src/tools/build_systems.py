@@ -760,8 +760,12 @@ def run_build(repo_path: str, project: str = "", changed_files: list[str] | None
                     "SOURCE_MODULES": source_modules_str,
                 })
                 if normalized in JDK_PROJECTS:
+                    _default_boot_jdk = (
+                        "/opt/java/jdk-24" if normalized == "jdk25u-dev"
+                        else "/opt/java/openjdk"
+                    )
                     env.update({
-                        "BOOT_JDK": os.getenv("BOOT_JDK", "/opt/java/openjdk"),
+                        "BOOT_JDK": os.getenv("BOOT_JDK", _default_boot_jdk),
                         "JTREG_HOME": os.getenv("JTREG_HOME", "/opt/jtreg"),
                         "BUILD_DIR_NAME": "build_shared",
                     })
