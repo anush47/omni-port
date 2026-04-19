@@ -1,0 +1,98 @@
+diff --git a/src/java.base/share/classes/sun/nio/ch/DatagramChannelImpl.java b/src/java.base/share/classes/sun/nio/ch/DatagramChannelImpl.java
+index af8f0b987e9..bb77cb6ba59 100644
+--- a/src/java.base/share/classes/sun/nio/ch/DatagramChannelImpl.java
++++ b/src/java.base/share/classes/sun/nio/ch/DatagramChannelImpl.java
+@@ -178,7 +178,6 @@ class DatagramChannelImpl
+ 
+     // -- End of fields protected by stateLock
+ 
+-
+     DatagramChannelImpl(SelectorProvider sp, boolean interruptible) throws IOException {
+         this(sp, (Net.isIPv6Available()
+                 ? StandardProtocolFamily.INET6
+@@ -1927,6 +1926,11 @@ class DatagramChannelImpl
+ 
+     @Override
+     public void kill() {
++        // wait for any read/write operations to complete before trying to close
++        readLock.lock();
++        readLock.unlock();
++        writeLock.lock();
++        writeLock.unlock();
+         synchronized (stateLock) {
+             if (state == ST_CLOSING) {
+                 tryFinishClose();
+diff --git a/src/java.base/share/classes/sun/nio/ch/ServerSocketChannelImpl.java b/src/java.base/share/classes/sun/nio/ch/ServerSocketChannelImpl.java
+index 1841eebc93c..98ab7a81e3d 100644
+--- a/src/java.base/share/classes/sun/nio/ch/ServerSocketChannelImpl.java
++++ b/src/java.base/share/classes/sun/nio/ch/ServerSocketChannelImpl.java
+@@ -653,6 +653,9 @@ class ServerSocketChannelImpl
+ 
+     @Override
+     public void kill() {
++        // wait for any accept operation to complete before trying to close
++        acceptLock.lock();
++        acceptLock.unlock();
+         synchronized (stateLock) {
+             if (state == ST_CLOSING) {
+                 tryFinishClose();
+diff --git a/src/java.base/share/classes/sun/nio/ch/SocketChannelImpl.java b/src/java.base/share/classes/sun/nio/ch/SocketChannelImpl.java
+index c4e59d82507..996d7e9b7b7 100644
+--- a/src/java.base/share/classes/sun/nio/ch/SocketChannelImpl.java
++++ b/src/java.base/share/classes/sun/nio/ch/SocketChannelImpl.java
+@@ -1127,6 +1127,11 @@ class SocketChannelImpl
+ 
+     @Override
+     public void kill() {
++        // wait for any read/write operations to complete before trying to close
++        readLock.lock();
++        readLock.unlock();
++        writeLock.lock();
++        writeLock.unlock();
+         synchronized (stateLock) {
+             if (state == ST_CLOSING) {
+                 tryFinishClose();
+diff --git a/src/java.base/unix/classes/sun/nio/ch/SinkChannelImpl.java b/src/java.base/unix/classes/sun/nio/ch/SinkChannelImpl.java
+index d72a4892ef0..7334f6c6e3d 100644
+--- a/src/java.base/unix/classes/sun/nio/ch/SinkChannelImpl.java
++++ b/src/java.base/unix/classes/sun/nio/ch/SinkChannelImpl.java
+@@ -75,7 +75,6 @@ class SinkChannelImpl
+ 
+     // -- End of fields protected by stateLock
+ 
+-
+     public FileDescriptor getFD() {
+         return fd;
+     }
+@@ -201,6 +200,9 @@ class SinkChannelImpl
+ 
+     @Override
+     public void kill() {
++        // wait for any write operation to complete before trying to close
++        writeLock.lock();
++        writeLock.unlock();
+         synchronized (stateLock) {
+             if (state == ST_CLOSING) {
+                 tryFinishClose();
+diff --git a/src/java.base/unix/classes/sun/nio/ch/SourceChannelImpl.java b/src/java.base/unix/classes/sun/nio/ch/SourceChannelImpl.java
+index 7be17040b4c..3a0a0e299f9 100644
+--- a/src/java.base/unix/classes/sun/nio/ch/SourceChannelImpl.java
++++ b/src/java.base/unix/classes/sun/nio/ch/SourceChannelImpl.java
+@@ -75,7 +75,6 @@ class SourceChannelImpl
+ 
+     // -- End of fields protected by stateLock
+ 
+-
+     public FileDescriptor getFD() {
+         return fd;
+     }
+@@ -200,6 +199,9 @@ class SourceChannelImpl
+     }
+     @Override
+     public void kill() {
++        // wait for any read operation to complete before trying to close
++        readLock.lock();
++        readLock.unlock();
+         synchronized (stateLock) {
+             assert !isOpen();
+             if (state == ST_CLOSING) {

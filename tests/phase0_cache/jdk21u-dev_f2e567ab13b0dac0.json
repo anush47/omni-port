@@ -1,0 +1,22 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/javax/net/ssl/SSLSession/ServerNameRejectedTLSSessionResumption.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "javax/net/ssl/SSLSession/ServerNameRejectedTLSSessionResumption.java#ServerNameRejectedTLSSessionResumption": "failed"
+    },
+    "classes": {
+      "javax/net/ssl/SSLSession/ServerNameRejectedTLSSessionResumption.java": "failed"
+    },
+    "summary": {
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "total": 1
+    }
+  },
+  "mode": "baseline-jdk21u-dev-helper",
+  "skipped": false
+}

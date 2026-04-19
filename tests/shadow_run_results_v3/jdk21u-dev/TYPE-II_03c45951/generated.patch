@@ -1,0 +1,65 @@
+diff --git a/src/jdk.compiler/share/classes/com/sun/tools/javac/code/Types.java b/src/jdk.compiler/share/classes/com/sun/tools/javac/code/Types.java
+index f584ac2fd40..6b54c36a019 100644
+--- a/src/jdk.compiler/share/classes/com/sun/tools/javac/code/Types.java
++++ b/src/jdk.compiler/share/classes/com/sun/tools/javac/code/Types.java
+@@ -2398,20 +2398,26 @@ public class Types {
+     }
+     // where
+         private TypeMapping<Boolean> erasure = new StructuralTypeMapping<Boolean>() {
++            @SuppressWarnings("fallthrough")
+             private Type combineMetadata(final Type s,
+                                          final Type t) {
+                 if (t.getMetadata().nonEmpty()) {
+-                    switch (s.getKind()) {
+-                        case OTHER:
+-                        case UNION:
+-                        case INTERSECTION:
+-                        case PACKAGE:
+-                        case EXECUTABLE:
+-                        case NONE:
+-                        case VOID:
+-                        case ERROR:
++                    switch (s.getTag()) {
++                        case CLASS:
++                            if (s instanceof UnionClassType ||
++                                s instanceof IntersectionClassType) {
++                                return s;
++                            }
++                            //fall-through
++                        case BYTE, CHAR, SHORT, LONG, FLOAT, INT, DOUBLE, BOOLEAN,
++                             ARRAY, MODULE, TYPEVAR, WILDCARD, BOT:
++                            return s.dropMetadata(Annotations.class);
++                        case VOID, METHOD, PACKAGE, FORALL, DEFERRED,
++                             NONE, ERROR, UNKNOWN, UNDETVAR, UNINITIALIZED_THIS,
++                             UNINITIALIZED_OBJECT:
+                             return s;
+-                        default: return s.dropMetadata(Annotations.class);
++                        default:
++                            throw new AssertionError(s.getTag().name());
+                     }
+                 } else {
+                     return s;
+@@ -3091,7 +3097,6 @@ public class Types {
+     }
+     // </editor-fold>
+ 
+-
+     /** Return first abstract member of class `sym'.
+      */
+     public MethodSymbol firstUnimplementedAbstract(ClassSymbol sym) {
+@@ -4804,7 +4809,6 @@ public class Types {
+         }
+     }
+ 
+-
+     /**
+      * Create a wildcard with the given upper (extends) bound; create
+      * an unbounded wildcard if bound is Object.
+@@ -5009,7 +5013,6 @@ public class Types {
+     }
+     // </editor-fold>
+ 
+-
+     // <editor-fold defaultstate="collapsed" desc="Annotation support">
+ 
+     public RetentionPolicy getRetention(Attribute.Compound a) {

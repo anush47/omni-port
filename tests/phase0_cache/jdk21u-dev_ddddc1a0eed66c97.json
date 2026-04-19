@@ -1,0 +1,23 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/java/net/httpclient/RedirectTimeoutTest.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/java/net/httpclient/RedirectTimeoutTest.testng-results.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "java/net/httpclient/RedirectTimeoutTest.java#RedirectTimeoutTest": "failed"
+    },
+    "classes": {
+      "java/net/httpclient/RedirectTimeoutTest.java": "failed"
+    },
+    "summary": {
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "total": 1
+    }
+  },
+  "mode": "baseline-jdk21u-dev-helper",
+  "skipped": false
+}

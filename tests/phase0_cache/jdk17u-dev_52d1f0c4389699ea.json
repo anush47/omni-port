@@ -1,0 +1,22 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/jdk/security/logging/RecursiveEventHelper.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "jdk/security/logging/RecursiveEventHelper.java#RecursiveEventHelper": "failed"
+    },
+    "classes": {
+      "jdk/security/logging/RecursiveEventHelper.java": "failed"
+    },
+    "summary": {
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "total": 1
+    }
+  },
+  "mode": "baseline-jdk17u-dev-helper",
+  "skipped": false
+}

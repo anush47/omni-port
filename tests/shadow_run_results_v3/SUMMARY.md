@@ -1,17 +1,17 @@
 # Backport CLAW — Shadow Run Results (v3)
 
-**Last updated:** 2026-04-18 18:05:07  
-**Total:** 366 patch(es) run, **307 passed** (83%)
+**Last updated:** 2026-04-19 07:02:18  
+**Total:** 442 patch(es) run, **370 passed** (83%)
 
 > **Success** = at least one fail→pass or newly-passing test observed.
 
 | Type     |      crate       |      druid       |  elasticsearch   | graylog2-server  |    grpc-java     |      hadoop      |  hibernate-orm   |    jdk11u-dev    |    jdk17u-dev    |    jdk21u-dev    |     logstash     | spring-framework |       sql        |
 | -------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- |
-| TYPE-I   |      48/50       |       5/5        |      43/49       |      12/12       |      19/23       |       3/3        |       1/1        |        -         |       9/9        |       1/1        |       3/3        |       4/4        |        -         |
-| TYPE-II  |      49/50       |       1/1        |      19/25       |       3/5        |       3/3        |       1/2        |       4/4        |       2/2        |      20/21       |        -         |        -         |       4/4        |       4/4        |
-| TYPE-III |       1/2        |        -         |       1/2        |       0/1        |        -         |        -         |       4/4        |        -         |       5/5        |        -         |        -         |        -         |       1/2        |
+| TYPE-I   |      48/50       |       5/5        |      43/49       |      12/12       |      19/23       |       3/3        |       1/1        |        -         |      13/13       |      24/28       |       3/3        |       4/4        |        -         |
+| TYPE-II  |      49/50       |       1/1        |      19/25       |       3/5        |       3/3        |       1/2        |       4/4        |       4/5        |      26/28       |      14/14       |        -         |       4/4        |       4/4        |
+| TYPE-III |       1/2        |        -         |       1/2        |       0/1        |        -         |        -         |       4/4        |        -         |       8/9        |       3/3        |        -         |        -         |       1/2        |
 | TYPE-IV  |       2/2        |        -         |        -         |        -         |       0/1        |        -         |       1/1        |        -         |       1/1        |        -         |        -         |        -         |        -         |
-| TYPE-V   |      14/23       |       0/1        |      10/17       |       1/3        |       0/1        |       1/1        |       1/3        |       1/3        |       3/5        |        -         |        -         |       1/1        |       1/6        |
+| TYPE-V   |      14/23       |       0/1        |      10/17       |       1/3        |       0/1        |       1/1        |       1/3        |       2/5        |       4/8        |       6/9        |        -         |       1/1        |       1/6        |
 
 ---
 
@@ -314,20 +314,33 @@
 | hibernate-orm | TYPE-V | `3c4a340c5e` | ✓ | ✓ | 0 / 2 / 0 | Newly: org.hibernate.orm.test.typedescriptor.NullTest#passingNullAsParameterOfNativeQuery(SessionFactoryScope), org.hibernate.orm.test.typedescriptor.NullTest#passingNullAsParameterOfQuery(SessionFactoryScope) |  |
 | hibernate-orm | TYPE-V | `6cfdc64153` | ✗ | ✗ | - | - | api_mismatch |
 | hibernate-orm | TYPE-V | `72dae39eb4` | ✗ | ✓ | 0 / 0 / 0 | - |  |
+| jdk11u-dev | TYPE-II | `2fcb816858` | ✗ | ✓ | 0 / 0 / 0 | - | infrastructure |
+| jdk11u-dev | TYPE-II | `42ecc8a37f` | ✓ | ✓ | 2 / 0 / 0 | patch=exact<br>F→P: tools/javac/processing/environment/round/TestContext.java#TestContext, tools/javac/processing/options/TestProcOption.java#TestProcOption |  |
+| jdk11u-dev | TYPE-II | `687567822a` | ✓ | ✓ | 1 / 0 / 0 | F→P: javax/print/PrintServiceLookup/FlushCustomClassLoader.java#FlushCustomClassLoader |  |
 | jdk11u-dev | TYPE-II | `b3477399d0` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: java/net/httpclient/HttpRedirectTest.java#HttpRedirectTest |  |
 | jdk11u-dev | TYPE-II | `cfee4512f7` | ✓ | ✓ | 4 / 0 / 0 | patch=exact<br>F→P: runtime/modules/AccessCheck/MethodAccessReadTwice.java#MethodAccessReadTwice, tools/javac/StringConcat/StringAppendEvaluatesInOrder.java#StringAppendEvaluatesInOrder, tools/javac/StringConcat/WellKnownTypeSignatures.java#WellKnownTypeSignatures, tools/javac/StringConcat/access/Test.java#Test |  |
 | jdk11u-dev | TYPE-V | `158b93d19a` | ✗ | ✓ | 0 / 0 / 0 | - |  |
 | jdk11u-dev | TYPE-V | `4d2cd26ab5` | ✗ | ✓ | 0 / 0 / 0 | - |  |
+| jdk11u-dev | TYPE-V | `a26f7c03c7` | ✗ | ✓ | 0 / 0 / 0 | - |  |
 | jdk11u-dev | TYPE-V | `bdfb41f977` | ✓ | ✓ | 1 / 0 / 0 | F→P: sun/security/tools/jarsigner/RemovedFiles.java#RemovedFiles |  |
+| jdk11u-dev | TYPE-V | `f4b140b420` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: java/net/httpclient/http2/TrailingHeadersTest.java#TrailingHeadersTest |  |
 | jdk17u-dev | TYPE-III | `0259da9283` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: javax/net/ssl/SSLSession/ServerNameRejectedTLSSessionResumption.java#ServerNameRejectedTLSSessionResumption |  |
+| jdk17u-dev | TYPE-III | `80b63b6729` | ✓ | ✓ | 1 / 0 / 0 | F→P: javax/swing/text/html/HTMLDocument/HTMLUnderlineStrike.java#HTMLUnderlineStrike |  |
 | jdk17u-dev | TYPE-III | `81484d8c05` | ✓ | ✓ | 0 / 0 / 0 | patch=exact |  |
+| jdk17u-dev | TYPE-III | `82796bdebb` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/lang/String/CompactString/NegativeSize.java#NegativeSize |  |
+| jdk17u-dev | TYPE-III | `a26f7c03c7` | ✗ | ✓ | 0 / 0 / 0 | - |  |
 | jdk17u-dev | TYPE-III | `bfaf5704e7` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: sun/security/x509/DNSName/LeadingPeriod.java#LeadingPeriod |  |
 | jdk17u-dev | TYPE-III | `cd3e4c0366` | ✓ | ✓ | 1 / 0 / 0 | F→P: javax/swing/text/html/HTMLDocument/HTMLTextDecoration.java#HTMLTextDecoration |  |
+| jdk17u-dev | TYPE-III | `d44aaa37f9` | ✓ | ✓ | 0 / 0 / 0 | patch=exact |  |
 | jdk17u-dev | TYPE-III | `dadd9cd1e8` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/awt/color/NonICCFilterTest.java#NonICCFilterTest |  |
+| jdk17u-dev | TYPE-II | `099a8f5b2f` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/net/httpclient/whitebox/SSLFlowDelegateTestDriver.java#SSLFlowDelegateTestDriver |  |
 | jdk17u-dev | TYPE-II | `169a5d48af` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/nio/file/Files/CreateDirectories.java#CreateDirectories |  |
+| jdk17u-dev | TYPE-II | `1caba0f13c` | ✓ | ✓ | 1 / 0 / 0 | F→P: javax/swing/text/html/StyleSheet/TestExternalCSSFontSize.java#TestExternalCSSFontSize |  |
+| jdk17u-dev | TYPE-II | `1f81e5b19e` | ✓ | ✓ | 1 / 0 / 0 | F→P: tools/javac/patterns/T8312229.java#T8312229 |  |
 | jdk17u-dev | TYPE-II | `25871af36b` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/awt/FontMetrics/ExtremeFontSizeTest.java#ExtremeFontSizeTest |  |
 | jdk17u-dev | TYPE-II | `374fca0fcb` | ✓ | ✓ | 1 / 0 / 0 | F→P: javax/swing/text/html/HTMLDocument/HTMLTextDecorationNone.java#HTMLTextDecorationNone |  |
 | jdk17u-dev | TYPE-II | `3828dc913a` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/util/Collections/RotateHuge.java#RotateHuge |  |
+| jdk17u-dev | TYPE-II | `3ccb3c0e09` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/net/httpclient/http2/ConnectionReuseTest.java#ConnectionReuseTest |  |
 | jdk17u-dev | TYPE-II | `460ebcd9cb` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/net/HttpURLConnection/HttpURLConnectionExpect100Test.java#HttpURLConnectionExpect100Test |  |
 | jdk17u-dev | TYPE-II | `4d2cd26ab5` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/net/httpclient/http2/PushPromiseContinuation.java#PushPromiseContinuation |  |
 | jdk17u-dev | TYPE-II | `7765942aee` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: com/sun/jndi/ldap/objects/RemoteLocationAttributeTest.java#RemoteLocationAttributeTest |  |
@@ -336,6 +349,8 @@
 | jdk17u-dev | TYPE-II | `87b314a985` | ✓ | ✓ | 1 / 0 / 0 | F→P: javax/swing/JComboBox/DisabledComboBoxFontTestAuto.java#DisabledComboBoxFontTestAuto |  |
 | jdk17u-dev | TYPE-II | `9f98136c3a` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: sun/net/www/protocol/jar/FileURLConnectionLeak.java#FileURLConnectionLeak |  |
 | jdk17u-dev | TYPE-II | `a5ffa079a0` | ✓ | ✓ | 2 / 0 / 0 | F→P: com/sun/net/httpserver/bugs/ExceptionKeepAlive.java#ExceptionKeepAlive, com/sun/net/httpserver/bugs/ZeroLengthOutputStream.java#ZeroLengthOutputStream |  |
+| jdk17u-dev | TYPE-II | `acaab6fd74` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/net/httpclient/HttpInputStreamAvailableTest.java#HttpInputStreamAvailableTest |  |
+| jdk17u-dev | TYPE-II | `b85500e524` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/util/zip/ZipFile/ZipFileDuplicateEntryTest.java#ZipFileDuplicateEntryTest |  |
 | jdk17u-dev | TYPE-II | `bdfb41f977` | ✓ | ✓ | 1 / 0 / 0 | F→P: sun/security/tools/jarsigner/RemovedFiles.java#RemovedFiles |  |
 | jdk17u-dev | TYPE-II | `c3226aaeb8` | ✗ | ✓ | 0 / 0 / 0 | - |  |
 | jdk17u-dev | TYPE-II | `d55d7e8d87` | ✓ | ✓ | 2 / 0 / 0 | F→P: java/io/OutputStreamWriter/CloseWriterOnFailedFlush.java#CloseWriterOnFailedFlush, java/nio/channels/Channels/CloseWriterOnFailedFlush.java#CloseWriterOnFailedFlush |  |
@@ -344,23 +359,84 @@
 | jdk17u-dev | TYPE-II | `dcd46501e6` | ✓ | ✓ | 3 / 0 / 0 | F→P: java/net/httpclient/CancelRequestTest.java#CancelRequestTest, java/net/httpclient/CancelStreamedBodyTest.java#CancelStreamedBodyTest, java/net/httpclient/SmallTimeout.java#SmallTimeout |  |
 | jdk17u-dev | TYPE-II | `ded6a81319` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: java/util/concurrent/CompletableFuture/CompletableFutureOrTimeoutExceptionallyTest.java#CompletableFutureOrTimeoutExceptionallyTest |  |
 | jdk17u-dev | TYPE-II | `e20bd018c4` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/security/Provider/InvalidServiceTest.java#InvalidServiceTest |  |
+| jdk17u-dev | TYPE-II | `f3ed27582e` | ✗ | ✓ | 0 / 0 / 0 | - |  |
 | jdk17u-dev | TYPE-II | `fc918a73d0` | ✓ | ✓ | 1 / 0 / 0 | F→P: sun/security/tools/jarsigner/AutoKeyStore.java#AutoKeyStore |  |
 | jdk17u-dev | TYPE-IV | `e5f05b5a96` | ✓ | ✓ | 1 / 0 / 0 | F→P: sun/java2d/cmm/ColorConvertOp/CompatibleColorSpace.java#CompatibleColorSpace |  |
 | jdk17u-dev | TYPE-I | `1e4eafb4fe` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: java/beans/Introspector/DefaultMethodBeanPropertyTest.java#DefaultMethodBeanPropertyTest |  |
 | jdk17u-dev | TYPE-I | `3c4cd50e3c` | ✓ | ✓ | 1 / 0 / 0 | F→P: com/sun/net/httpserver/bugs/HeadKeepAlive.java#HeadKeepAlive |  |
 | jdk17u-dev | TYPE-I | `3d9dc8f824` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: java/util/regex/whitebox/GraphemeTest.java#GraphemeTest |  |
+| jdk17u-dev | TYPE-I | `42ecc8a37f` | ✓ | ✓ | 2 / 0 / 0 | patch=exact<br>F→P: tools/javac/processing/environment/round/TestContext.java#TestContext, tools/javac/processing/options/TestProcOption.java#TestProcOption |  |
 | jdk17u-dev | TYPE-I | `5cacf212f0` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/io/ByteArrayInputStream/ChunkedTransferTo.java#ChunkedTransferTo |  |
 | jdk17u-dev | TYPE-I | `5fab27e1b8` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/util/Random/T8282144.java#T8282144 |  |
+| jdk17u-dev | TYPE-I | `620c8a045f` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/lang/ProcessBuilder/PipelineLeaksFD.java#PipelineLeaksFD |  |
 | jdk17u-dev | TYPE-I | `8198807b4a` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: javax/imageio/plugins/wbmp/WBMPStreamTruncateTest.java#WBMPStreamTruncateTest |  |
+| jdk17u-dev | TYPE-I | `a183bfb436` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: java/lang/invoke/MethodHandleProxies/Driver.java#Driver |  |
 | jdk17u-dev | TYPE-I | `c7c6d47a07` | ✓ | ✓ | 0 / 0 / 0 | patch=exact |  |
 | jdk17u-dev | TYPE-I | `cfee4512f7` | ✓ | ✓ | 4 / 0 / 0 | patch=exact<br>F→P: runtime/modules/AccessCheck/MethodAccessReadTwice.java#MethodAccessReadTwice, tools/javac/StringConcat/StringAppendEvaluatesInOrder.java#StringAppendEvaluatesInOrder, tools/javac/StringConcat/WellKnownTypeSignatures.java#WellKnownTypeSignatures, tools/javac/StringConcat/access/Test.java#Test |  |
 | jdk17u-dev | TYPE-I | `e81f20b504` | ✓ | ✓ | 1 / 0 / 0 | F→P: javax/swing/text/DefaultCaret/SetCaretRateTest.java#SetCaretRateTest |  |
+| jdk17u-dev | TYPE-I | `f608e81ad8` | ✓ | ✓ | 1 / 0 / 0 | F→P: tools/jlink/plugins/CDSPluginTest.java#CDSPluginTest |  |
 | jdk17u-dev | TYPE-V | `1ec64811a3` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: sun/security/ssl/SSLLogger/DebugPropertyValuesTest.java#DebugPropertyValuesTest |  |
+| jdk17u-dev | TYPE-V | `268ec61d4f` | ✗ | ✓ | 0 / 0 / 0 | - |  |
 | jdk17u-dev | TYPE-V | `2836c34b64` | ✗ | ✓ | 0 / 0 / 0 | - |  |
+| jdk17u-dev | TYPE-V | `3b582dff84` | ✗ | ✓ | 0 / 0 / 0 | - |  |
 | jdk17u-dev | TYPE-V | `47c10694c6` | ✓ | ✓ | 0 / 0 / 0 | patch=exact |  |
+| jdk17u-dev | TYPE-V | `925d82931c` | ✓ | ✓ | 1 / 0 / 0 | F→P: jdk/security/logging/RecursiveEventHelper.java#RecursiveEventHelper |  |
 | jdk17u-dev | TYPE-V | `af8fb7eef7` | ✗ | ✓ | 0 / 0 / 0 | - |  |
 | jdk17u-dev | TYPE-V | `f4b140b420` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: java/net/httpclient/http2/TrailingHeadersTest.java#TrailingHeadersTest |  |
+| jdk21u-dev | TYPE-III | `80b63b6729` | ✓ | ✓ | 1 / 0 / 0 | F→P: javax/swing/text/html/HTMLDocument/HTMLUnderlineStrike.java#HTMLUnderlineStrike |  |
+| jdk21u-dev | TYPE-III | `82796bdebb` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/lang/String/CompactString/NegativeSize.java#NegativeSize |  |
+| jdk21u-dev | TYPE-III | `b0ac633b2d` | ✓ | ✓ | 0 / 2 / 0 | Newly: java/net/httpclient/GZIPInputStreamTest.java#GZIPInputStreamTest, java/net/httpclient/ProxySelectorTest.java#ProxySelectorTest |  |
+| jdk21u-dev | TYPE-II | `03c4595173` | ✓ | ✓ | 1 / 0 / 0 | F→P: tools/javac/annotations/ReadingMethodWithTypeAnno.java#ReadingMethodWithTypeAnno |  |
+| jdk21u-dev | TYPE-II | `374fca0fcb` | ✓ | ✓ | 1 / 0 / 0 | F→P: javax/swing/text/html/HTMLDocument/HTMLTextDecorationNone.java#HTMLTextDecorationNone |  |
+| jdk21u-dev | TYPE-II | `4ba94ef69e` | ✓ | ✓ | 1 / 0 / 0 | F→P: tools/javac/patterns/T8320145.java#T8320145 |  |
+| jdk21u-dev | TYPE-II | `9bb675f89d` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/nio/channels/Selector/DeferredClose/DeferredCloseTest.java#DeferredCloseTest |  |
+| jdk21u-dev | TYPE-II | `9e282e5c96` | ✓ | ✓ | 1 / 0 / 0 | F→P: tools/javac/annotations/typeAnnotations/CompletionErrorOnEnclosingType.java#CompletionErrorOnEnclosingType |  |
+| jdk21u-dev | TYPE-II | `b3bf31a0a0` | ✓ | ✓ | 2 / 0 / 0 | F→P: com/sun/jdi/BreakpointOnClassPrepare.java#BreakpointOnClassPrepare, runtime/Thread/TestThreadDumpClassInitMonitor.java#TestThreadDumpClassInitMonitor |  |
+| jdk21u-dev | TYPE-II | `bddcd086b7` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: java/net/httpclient/RedirectTimeoutTest.java#RedirectTimeoutTest |  |
+| jdk21u-dev | TYPE-II | `bdfb41f977` | ✓ | ✓ | 1 / 0 / 0 | F→P: sun/security/tools/jarsigner/RemovedFiles.java#RemovedFiles |  |
+| jdk21u-dev | TYPE-II | `cd3e4c0366` | ✓ | ✓ | 1 / 0 / 0 | F→P: javax/swing/text/html/HTMLDocument/HTMLTextDecoration.java#HTMLTextDecoration |  |
+| jdk21u-dev | TYPE-II | `d5c6158ced` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: jdk/jfr/jvm/TestLongStringsInPool.java#TestLongStringsInPool |  |
+| jdk21u-dev | TYPE-II | `d6d7bdc774` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/nio/charset/Charset/AliasesCopy.java#AliasesCopy |  |
+| jdk21u-dev | TYPE-II | `d9e7b7e7da` | ✓ | ✓ | 0 / 0 / 0 | patch=exact |  |
+| jdk21u-dev | TYPE-II | `e20bd018c4` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/security/Provider/InvalidServiceTest.java#InvalidServiceTest |  |
+| jdk21u-dev | TYPE-II | `f3be138eb8` | ✓ | ✓ | 1 / 0 / 0 | F→P: tools/jlink/plugins/SystemModuleDescriptors/ModuleMainClassTest.java#ModuleMainClassTest |  |
+| jdk21u-dev | TYPE-I | `0259da9283` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: javax/net/ssl/SSLSession/ServerNameRejectedTLSSessionResumption.java#ServerNameRejectedTLSSessionResumption |  |
+| jdk21u-dev | TYPE-I | `099a8f5b2f` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/net/httpclient/whitebox/SSLFlowDelegateTestDriver.java#SSLFlowDelegateTestDriver |  |
+| jdk21u-dev | TYPE-I | `10335f60f9` | ✗ | ✗ | - | - | unknown |
+| jdk21u-dev | TYPE-I | `1f81e5b19e` | ✓ | ✓ | 1 / 0 / 0 | F→P: tools/javac/patterns/T8312229.java#T8312229 |  |
+| jdk21u-dev | TYPE-I | `25871af36b` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/awt/FontMetrics/ExtremeFontSizeTest.java#ExtremeFontSizeTest |  |
+| jdk21u-dev | TYPE-I | `3828dc913a` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/util/Collections/RotateHuge.java#RotateHuge |  |
+| jdk21u-dev | TYPE-I | `47c10694c6` | ✓ | ✓ | 0 / 0 / 0 | patch=exact |  |
+| jdk21u-dev | TYPE-I | `80edd5c298` | ✓ | ✓ | 2 / 0 / 0 | F→P: sun/security/ssl/SSLEngineImpl/TestBadDNForPeerCA.java#TestBadDNForPeerCA, sun/security/ssl/SSLEngineImpl/TestBadDNForPeerCA12.java#TestBadDNForPeerCA12 |  |
+| jdk21u-dev | TYPE-I | `81484d8c05` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: sun/jvmstat/monitor/MonitoredVm/ConcurrentGetMonitoredHost.java#ConcurrentGetMonitoredHost |  |
+| jdk21u-dev | TYPE-I | `819f3d6fc7` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: java/io/ByteArrayOutputStream/WriteToReleasesCarrier.java#WriteToReleasesCarrier |  |
+| jdk21u-dev | TYPE-I | `89a15f1414` | ✗ | ✓ | 0 / 0 / 0 | - |  |
+| jdk21u-dev | TYPE-I | `925d82931c` | ✓ | ✓ | 1 / 0 / 0 | F→P: jdk/security/logging/RecursiveEventHelper.java#RecursiveEventHelper |  |
+| jdk21u-dev | TYPE-I | `9f98136c3a` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: sun/net/www/protocol/jar/FileURLConnectionLeak.java#FileURLConnectionLeak |  |
+| jdk21u-dev | TYPE-I | `a26f7c03c7` | ✓ | ✓ | 1 / 0 / 0 | F→P: javax/swing/text/rtf/RTFReadFontCharsetTest.java#RTFReadFontCharsetTest |  |
 | jdk21u-dev | TYPE-I | `a9cb120d03` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: tools/javac/recovery/CrashDueToUnreportedError.java#CrashDueToUnreportedError |  |
+| jdk21u-dev | TYPE-I | `acaab6fd74` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/net/httpclient/HttpInputStreamAvailableTest.java#HttpInputStreamAvailableTest |  |
+| jdk21u-dev | TYPE-I | `bfaf5704e7` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: sun/security/x509/DNSName/LeadingPeriod.java#LeadingPeriod |  |
+| jdk21u-dev | TYPE-I | `c7c6d47a07` | ✓ | ✓ | 0 / 0 / 0 | patch=exact |  |
+| jdk21u-dev | TYPE-I | `cd3a607576` | ✓ | ✓ | 0 / 0 / 0 | patch=exact |  |
+| jdk21u-dev | TYPE-I | `d2e2c4cef1` | ✗ | ✓ | 0 / 0 / 0 | - |  |
+| jdk21u-dev | TYPE-I | `d44aaa37f9` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: javax/net/ssl/TLSv13/EngineOutOfSeqCCS.java#EngineOutOfSeqCCS |  |
+| jdk21u-dev | TYPE-I | `d55d7e8d87` | ✓ | ✓ | 2 / 0 / 0 | F→P: java/io/OutputStreamWriter/CloseWriterOnFailedFlush.java#CloseWriterOnFailedFlush, java/nio/channels/Channels/CloseWriterOnFailedFlush.java#CloseWriterOnFailedFlush |  |
+| jdk21u-dev | TYPE-I | `dadd9cd1e8` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/awt/color/NonICCFilterTest.java#NonICCFilterTest |  |
+| jdk21u-dev | TYPE-I | `e702646545` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: java/security/cert/CertPathValidator/crlDP/CheckAllCRLs.java#CheckAllCRLs |  |
+| jdk21u-dev | TYPE-I | `ee4d9aa4c1` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/util/concurrent/LinkedTransferQueue/SubclassTest.java#SubclassTest |  |
+| jdk21u-dev | TYPE-I | `f3ed27582e` | ✗ | ✓ | 0 / 0 / 0 | - |  |
+| jdk21u-dev | TYPE-I | `f8e81d2339` | ✓ | ✓ | 1 / 0 / 0 | F→P: sun/security/provider/certpath/OCSP/OCSPReadTimeoutDefault.java#OCSPReadTimeoutDefault |  |
+| jdk21u-dev | TYPE-I | `ffd43c922e` | ✓ | ✓ | 1 / 0 / 0 | F→P: sun/security/pkcs12/GetSetEntryTest.java#GetSetEntryTest |  |
+| jdk21u-dev | TYPE-V | `158b93d19a` | ✗ | ✓ | 0 / 0 / 0 | - |  |
+| jdk21u-dev | TYPE-V | `245514da51` | ✓ | ✓ | 1 / 0 / 0 | F→P: javax/swing/JEditorPane/EditorPaneCharset.java#EditorPaneCharset |  |
+| jdk21u-dev | TYPE-V | `3989a19957` | ✓ | ✓ | 1 / 0 / 0 | F→P: javax/xml/jaxp/unittest/transform/PropertiesTest.java#PropertiesTest |  |
+| jdk21u-dev | TYPE-V | `3b582dff84` | ✗ | ✓ | 0 / 0 / 0 | - |  |
+| jdk21u-dev | TYPE-V | `4beb77192f` | ✓ | ✓ | 0 / 1 / 0 | Newly: com/sun/jndi/dns/ConfigTests/Timeout.java#Timeout |  |
+| jdk21u-dev | TYPE-V | `6af0af5934` | ✓ | ✓ | 1 / 0 / 0 | F→P: jdk/internal/util/ReferencedKeyTest.java#ReferencedKeyTest |  |
+| jdk21u-dev | TYPE-V | `720b44648b` | ✗ | ✓ | 0 / 0 / 0 | - |  |
+| jdk21u-dev | TYPE-V | `fc98998627` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/net/httpclient/HttpGetInCancelledFuture.java#HttpGetInCancelledFuture |  |
+| jdk21u-dev | TYPE-V | `fdfe503d01` | ✓ | ✓ | 0 / 1 / 0 | Newly: sun/security/pkcs11/Provider/RequiredMechCheck.java#RequiredMechCheck |  |
 | logstash | TYPE-I | `712b37e1df` | ✓ | ✓ | 2 / 0 / 0 | patch=exact<br>F→P: org.logstash.settings.SettingStringTest$WithValueConstraintCase#whenSetConstrainedToNullThenThrowAHelpfulError, org.logstash.settings.SettingStringTest$WithoutValueConstraintCase#whenSetUnconstrainedToNullThenThrowAHelpfulError |  |
 | logstash | TYPE-I | `cc608eb88b` | ✓ | ✓ | 5 / 0 / 0 | patch=exact<br>F→P: org.logstash.jackson.StreamReadConstraintsUtilTest#configOverridesDefault, org.logstash.jackson.StreamReadConstraintsUtilTest#configuresMaxNestingDepth, org.logstash.jackson.StreamReadConstraintsUtilTest#configuresMaxNumberLength, org.logstash.jackson.StreamReadConstraintsUtilTest#configuresMaxStringLength, org.logstash.jackson.StreamReadConstraintsUtilTest#usesJacksonDefaultsWhenNoConfig |  |
 | logstash | TYPE-I | `cd729b7682` | ✓ | ✓ | 0 / 0 / 0 | patch=exact |  |

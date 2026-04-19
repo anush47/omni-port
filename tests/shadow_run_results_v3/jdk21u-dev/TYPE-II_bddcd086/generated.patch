@@ -1,0 +1,29 @@
+diff --git a/src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java b/src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java
+index 0e2d7eb2a97..3d1f9255565 100644
+--- a/src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java
++++ b/src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java
+@@ -101,7 +101,7 @@ class MultiExchange<T> implements Cancelable {
+     );
+ 
+     private final List<HeaderFilter> filters;
+-    ResponseTimerEvent responseTimerEvent;
++    volatile ResponseTimerEvent responseTimerEvent;
+     volatile boolean cancelled;
+     AtomicReference<CancellationException> interrupted = new AtomicReference<>();
+     final PushGroup<T> pushGroup;
+@@ -231,6 +231,7 @@ class MultiExchange<T> implements Cancelable {
+     private void cancelTimer() {
+         if (responseTimerEvent != null) {
+             client.cancelTimer(responseTimerEvent);
++            responseTimerEvent = null;
+         }
+     }
+ 
+@@ -426,6 +427,7 @@ class MultiExchange<T> implements Cancelable {
+                             }
+                             return completedFuture(response);
+                         } else {
++                            cancelTimer();
+                             this.response =
+                                 new HttpResponseImpl<>(currentreq, response, this.response, null, exch);
+                             Exchange<T> oldExch = exch;

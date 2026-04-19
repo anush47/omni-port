@@ -1,0 +1,25 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk11u-dev/JTwork/tools/javac/processing/environment/round/TestContext.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk11u-dev/JTwork/tools/javac/processing/options/TestProcOption.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "tools/javac/processing/environment/round/TestContext.java#TestContext": "failed",
+      "tools/javac/processing/options/TestProcOption.java#TestProcOption": "failed"
+    },
+    "classes": {
+      "tools/javac/processing/environment/round/TestContext.java": "failed",
+      "tools/javac/processing/options/TestProcOption.java": "failed"
+    },
+    "summary": {
+      "passed": 0,
+      "failed": 2,
+      "skipped": 0,
+      "total": 2
+    }
+  },
+  "mode": "baseline-jdk11u-dev-helper",
+  "skipped": false
+}

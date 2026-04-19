@@ -1,0 +1,50 @@
+diff --git a/src/java.base/share/classes/jdk/internal/loader/URLClassPath.java b/src/java.base/share/classes/jdk/internal/loader/URLClassPath.java
+index 02b9614971c..00cd0b3eb74 100644
+--- a/src/java.base/share/classes/jdk/internal/loader/URLClassPath.java
++++ b/src/java.base/share/classes/jdk/internal/loader/URLClassPath.java
+@@ -50,17 +50,7 @@ import java.security.cert.Certificate;
+ import java.util.ArrayDeque;
+ import java.util.ArrayList;
+ import java.util.Arrays;
+-import java.util.Collections;
+-import java.util.Enumeration;
+-import java.util.HashMap;
+-import java.util.HashSet;
+-import java.util.LinkedList;
+-import java.util.List;
+-import java.util.NoSuchElementException;
+-import java.util.Properties;
+-import java.util.Set;
+-import java.util.StringTokenizer;
+-import java.util.jar.JarFile;
++
+ import java.util.zip.CRC32;
+ import java.util.zip.ZipEntry;
+ import java.util.jar.JarEntry;
+@@ -212,7 +202,9 @@ public class URLClassPath {
+ 
+         this.unopenedUrls = unopenedUrls;
+         this.path = path;
+-        this.jarHandler = null;
++        // the application class loader uses the built-in protocol handler to avoid protocol
++        // handler lookup when opening JAR files on the class path.
++        this.jarHandler = new sun.net.www.protocol.jar.Handler();
+         this.acc = null;
+     }
+ 
+@@ -902,7 +894,6 @@ public class URLClassPath {
+             };
+         }
+ 
+-
+         /*
+          * Returns true iff at least one resource in the jar file has the same
+          * package name as that of the specified resource name.
+@@ -1078,7 +1069,6 @@ public class URLClassPath {
+             return null;
+         }
+ 
+-
+         /*
+          * Returns the JAR file local class path, or null if none.
+          */

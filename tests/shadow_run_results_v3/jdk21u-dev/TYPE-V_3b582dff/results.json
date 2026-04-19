@@ -1,0 +1,366 @@
+{
+  "run_timestamp": "2026-04-18T20:35:00.021911",
+  "repo": "jdk21u-dev",
+  "patch_type": "TYPE-V",
+  "original_commit": "3b582dff849f1c25336e2efc415eb121f8b12189",
+  "backport_commit": "e257ae5ecd31adb60bc54c3971ef0f25342d94f8",
+  "description": "main \u2192 jdk21u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 24.5,
+      "error": null,
+      "java_hunks": 11,
+      "aux_hunks": 1,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.base/share/classes/sun/security/util/Debug.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 27,
+          "end_line": 32,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.base/share/classes/sun/security/util/Debug.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 41,
+          "end_line": 48,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.base/share/classes/sun/security/util/Debug.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 61,
+          "end_line": 72,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.base/share/classes/sun/security/util/Debug.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 95,
+          "end_line": 100,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.base/share/classes/sun/security/util/Debug.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 139,
+          "end_line": 146,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/java.base/share/classes/sun/security/util/Debug.java",
+          "method_used": "fuzzy",
+          "confidence": 0.871,
+          "start_line": 147,
+          "end_line": 163,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "src/java.base/share/classes/sun/security/util/Debug.java",
+          "method_used": "embedding",
+          "confidence": 0.864,
+          "start_line": 148,
+          "end_line": 161,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "src/java.base/share/classes/sun/security/util/Debug.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 163,
+          "end_line": 170,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 8,
+          "file_path": "src/java.base/share/classes/sun/security/util/Debug.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 187,
+          "end_line": 204,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 9,
+          "file_path": "src/java.base/share/classes/sun/security/util/Debug.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 206,
+          "end_line": 223,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 10,
+          "file_path": "src/java.base/share/classes/sun/security/util/Debug.java",
+          "method_used": "failed",
+          "confidence": 0.0,
+          "start_line": 0,
+          "end_line": 0,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 4.6,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_IV",
+        "confidence": 0.95,
+        "reasoning": "The patch introduces significant new functionality to the Debug class, including new fields, methods, and a nested static class for date/time formatting. It modifies the way debug options are parsed and handled, adding support for thread and timestamp options, which affects the output format and internal logic. The patch also adds new test classes with parameterized tests to verify the new features. The localization evidence shows a mix of exact matches and fuzzy matches, with some hunks found via embedding and one failed localization, indicating structural changes and some API divergence. Overall, this is a deep structural refactoring rather than a simple string or formatting change, but not a complete redesign, so TYPE_IV is appropriate.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.03,
+      "error": null,
+      "applied_count": 8,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/sun/security/util/Debug.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/sun/security/util/Debug.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/sun/security/util/Debug.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/sun/security/util/Debug.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/sun/security/util/Debug.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/sun/security/util/Debug.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/sun/security/util/Debug.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/sun/security/util/Debug.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 114.46,
+      "error": null,
+      "adapted_count": 0
+    },
+    "agent5_structural": {
+      "elapsed_s": 155.37,
+      "error": null,
+      "refactored_count": 2
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 99.34,
+      "error": null,
+      "synthesized_count": 1,
+      "failed_count": 2,
+      "synthesis_status": "partial",
+      "synthesized_hunks": [
+        {
+          "file_path": "src/java.base/share/classes/sun/security/util/Debug.java",
+          "old_string": "        System.err.println(\"ocsp          dump the OCSP protocol exchanges\");\n        System.err.println(\"verbose       verbose debugging\");\n        System.err.println();\n        System.err.println(\"The following can be used with x509:\");\n        System.err.println();\n        System.err.println(\"ava           embed non-printable/non-escaped characters in AVA components as hex strings\");\n        System.err.println();\n        System.err.println(\"Note: Separate multiple options with a comma\");\n        System.exit(0);\n    }\n\n    /**\n     * Get a Debug object corresponding to whether or not the given\n     * option is set. Set the prefix to be the same as option.",
+          "new_string": "     * String property = settings.get(\"login\");\n     * Debug debug = Debug.of(\"login\", property);\n     * }\n     *\n     * +timestamp string can be appended to property value\n     * to print timestamp information. (e.g. true+timestamp)\n     * +thread string can be appended to property value\n     * to print thread and caller information. (e.g. true+thread)\n     *\n     * @param prefix the debug option name\n     * @param property debug setting for this option\n     * @return a new Debug object if the property is true\n     */\n    public static Debug of(String prefix, String property) {\n        if (property != null && property.toLowerCase(Locale.ROOT).startsWith(\"true\")) {\n            Debug d = new Debug();\n            d.prefix = prefix;\n            d.printThreadDetails = property.contains(\"+thread\");\n            d.printDateTime = property.contains(\"+timestamp\");\n            return d;\n        }\n        return null;",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [],
+      "synthesized_count_after_repair": 0
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk21u-dev-helper",
+      "test_success": false,
+      "test_mode": "jdk21u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/sun/security/util/Debug/DebugOptions.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "sun/security/util/Debug/DebugOptions.java#DebugOptions": "failed"
+        },
+        "classes": {
+          "sun/security/util/Debug/DebugOptions.java": "failed"
+        },
+        "summary": {
+          "passed": 0,
+          "failed": 1,
+          "skipped": 0,
+          "total": 1
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": false,
+        "fail_to_pass": [],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 1,
+        "patched_total": 1,
+        "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 13,
+    "developer_aux_hunks_from_target": 1,
+    "phase0_baseline": {
+      "mode": "baseline-jdk21u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 1
+    },
+    "java_production_hunks": 11,
+    "developer_aux_hunks": 1,
+    "processed_hunk_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      7,
+      8,
+      9,
+      5,
+      6
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 9861,
+        "output": 5329
+      },
+      "agent5_structural": {
+        "input": 3260,
+        "output": 7480
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "partial",
+    "applied_on_disk_ag3": 8,
+    "synthesized_count": 0,
+    "failed_hunks_total": 2,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [
+      {
+        "error_type": "synthesis_skipped_no_localization",
+        "error_message": "Hunk unclaimed; localization failed entirely",
+        "attempt_count": 4,
+        "suggested_action": "manual_review"
+      },
+      {
+        "error_type": "synthesis_failed_no_match",
+        "error_message": "Could not verify exact string in target file",
+        "attempt_count": 4,
+        "suggested_action": "relocalize"
+      },
+      {
+        "error_type": "synthesis_failed_no_match",
+        "error_message": "Could not verify exact string in target file",
+        "attempt_count": 4,
+        "suggested_action": "relocalize"
+      }
+    ],
+    "failed_hunks": [
+      {
+        "file_path": "src/java.base/share/classes/sun/security/util/Debug.java",
+        "old_file_path": null,
+        "old_content": "        return toString(b.toByteArray());\n    }\n\n}\n",
+        "new_content": "        return toString(b.toByteArray());\n    }\n\n    // Holder class to break cyclic dependency seen during build\n    private static class FormatHolder {\n        private static final String PATTERN = \"yyyy-MM-dd kk:mm:ss.SSS\";\n        private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter\n                .ofPattern(PATTERN, Locale.ENGLISH)\n                .withZone(ZoneId.systemDefault());\n    }\n}\n",
+        "is_new_file": false,
+        "is_del_file": false,
+        "is_rename": false,
+        "file_operation": "MODIFIED"
+      },
+      {
+        "file_path": "src/java.base/share/classes/sun/security/util/Debug.java",
+        "old_file_path": null,
+        "old_content": "        System.err.println();\n        System.err.println(\"ocsp          dump the OCSP protocol exchanges\");\n        System.err.println(\"verbose       verbose debugging\");\n        System.err.println();\n        System.err.println(\"The following can be used with x509:\");\n        System.err.println();\n        System.err.println(\"ava           embed non-printable/non-escaped characters in AVA components as hex strings\");\n        System.err.println();\n        System.err.println(\"Note: Separate multiple options with a comma\");\n        System.exit(0);\n    }\n\n    /**\n     * Get a Debug object corresponding to whether or not the given\n     * option is set. Set the prefix to be the same as option.\n     */\n\n",
+        "new_content": "    /**\n     * Get a Debug object corresponding to whether or not the given\n     * option is set. Set the prefix to prefix.\n     */\n    public static Debug getInstance(String option, String prefix) {\n        if (isOn(option)) {\n            Debug d = new Debug();\n            d.prefix = prefix;\n            d.configureExtras(option);\n            return d;\n        } else {\n            return null;\n        }\n    }\n\n    private static String formatCaller() {\n        return StackWalker.getInstance().walk(s ->\n                s.dropWhile(f ->\n                    f.getClassName().startsWith(\"sun.security.util.Debug\"))\n                        .map(f -> f.getFileName() + \":\" + f.getLineNumber())\n                        .findFirst().orElse(\"unknown caller\"));\n    }\n\n    // parse an option string to determine if extra details,\n    // like thread and timestamp, should be printed\n    private void configureExtras(String option) {\n        // treat \"all\" as special case, only used for java.security.debug property\n        this.printDateTime = timeStampInfoAll;\n        this.printThreadDetails = threadInfoAll;\n\n        if (printDateTime && printThreadDetails) {\n            // nothing left to configure\n            return;\n        }\n\n        // args is converted to lower case for the most part via marshal method\n        int optionIndex = args.lastIndexOf(option);\n        if (optionIndex == -1) {\n            // option not in args list. Only here since \"all\" was present\n            // in debug property argument. \"all\" option already parsed\n            return;\n        }\n        int beginIndex = optionIndex + option.length();\n        int commaIndex = args.indexOf(',', beginIndex);\n        if (commaIndex == -1) commaIndex = args.length();\n        String subOpt = args.substring(beginIndex, commaIndex);\n        printDateTime = printDateTime || subOpt.contains(TIMESTAMP_OPTION);\n        printThreadDetails = printThreadDetails || subOpt.contains(THREAD_OPTION);\n    }\n\n    /**\n     * Get a Debug object corresponding to the given option on the given",
+        "is_new_file": false,
+        "is_del_file": false,
+        "is_rename": false,
+        "file_operation": "MODIFIED",
+        "refactored": true,
+        "semantic_confidence": 0.65,
+        "loc_index": 5
+      }
+    ],
+    "generated_patch_bytes": 0,
+    "target_patch_bytes": 15935,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": false,
+    "test_mode": "jdk21u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": false,
+      "fail_to_pass": [],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 1,
+      "patched_total": 1,
+      "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+    },
+    "fail_to_pass_count": 0,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": false
+  }
+}

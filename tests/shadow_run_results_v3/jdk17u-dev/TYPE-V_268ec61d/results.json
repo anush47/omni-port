@@ -1,0 +1,427 @@
+{
+  "run_timestamp": "2026-04-18T18:13:43.618843",
+  "repo": "jdk17u-dev",
+  "patch_type": "TYPE-V",
+  "original_commit": "268ec61d4fa9c5b7d2c7bcafb942b33e5b189974",
+  "backport_commit": "0a4f92603b76181358326908497220c7d14211b1",
+  "description": "main \u2192 jdk17u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 2.05,
+      "error": null,
+      "java_hunks": 2,
+      "aux_hunks": 1,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "method_used": "fuzzy",
+          "confidence": 0.932,
+          "start_line": 53,
+          "end_line": 63,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 212,
+          "end_line": 218,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 3.45,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_II",
+        "confidence": 0.95,
+        "reasoning": "The patch modifies the constructor of URLClassPath.java by adding initialization of the jarHandler field with a new Handler instance. This is a small code addition without structural changes or API modifications, but it is not an exact string replacement since it adds new code. The localization evidence shows the main hunk was found via fuzzy matching with high confidence, indicating some formatting or minor code drift. Additionally, a new test file is added, but this does not affect the classification of the main patch complexity. Overall, the patch is a whitespace/formatting drift or minor code addition requiring fuzzy matching, consistent with TYPE_II classification.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "applied_count": 1,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 52.14,
+      "error": null,
+      "adapted_count": 1
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 1,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "old_string": "import java.util.ArrayDeque;\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.Collections;\nimport java.util.Enumeration;\nimport java.util.HashMap;\nimport java.util.HashSet;\nimport java.util.LinkedList;\nimport java.util.List;\nimport java.util.NoSuchElementException;\nimport java.util.Properties;\nimport java.util.Set;\nimport java.util.StringTokenizer;\nimport java.util.jar.JarFile;\nimport java.util.zip.CRC32;\nimport java.util.zip.ZipEntry;\nimport java.util.jar.JarEntry;\n",
+          "new_string": "import java.util.ArrayDeque;\nimport java.util.ArrayList;\nimport java.util.Arrays;\n\nimport java.util.zip.CRC32;\nimport java.util.zip.ZipEntry;\nimport java.util.jar.JarEntry;\n",
+          "confidence": 1.0,
+          "context_lines_included": 3,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 1
+    },
+    "agent7_validator": {
+      "validation_passed": false,
+      "validation_failure_category": "api_mismatch",
+      "validation_error_context": "Build failed (jdk17u-dev-helper) \u2014 compile errors:\nsrc/java.base/share/classes/jdk/internal/loader/URLClassPath.java:116: error: cannot find symbol\nsrc/java.base/share/classes/jdk/internal/loader/URLClassPath.java:211: error: cannot find symbol\nsrc/java.base/share/classes/jdk/internal/loader/URLClassPath.java:326: error: cannot find symbol\nsrc/java.base/share/classes/jdk/internal/loader/URLClassPath.java:373: error: cannot find symbol\nsrc/java.base/share/classes/jdk/internal/loader/URLClassPath.",
+      "validation_attempts": 1,
+      "retry_files": [
+        "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java"
+      ],
+      "build_success": false,
+      "build_mode": "jdk17u-dev-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": [
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 116,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 211,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 326,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 373,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 409,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 578,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 701,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 705,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 717,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 741,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 794,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 809,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 965,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 87,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 213,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 215,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 328,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 347,
+          "message": "error: method does not override or implement a method from a supertype"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 351,
+          "message": "error: method does not override or implement a method from a supertype"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 353,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 375,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 394,
+          "message": "error: method does not override or implement a method from a supertype"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 398,
+          "message": "error: method does not override or implement a method from a supertype"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 400,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 816,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 817,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 821,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 910,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 952,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 969,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "line": 1106,
+          "message": "error: cannot find symbol"
+        }
+      ]
+    },
+    "agent9_fallback_1": {
+      "fallback_status": "failed",
+      "fallback_attempts": 1,
+      "synthesized_count": 0,
+      "hunk_descriptions": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "what_changed": "Removed unused imports of HashSet and Set from the import statements.",
+          "where_in_code": "Top-level imports in URLClassPath.java",
+          "intent": "To clean up the import statements by removing unused imports, improving code clarity and possibly reducing compilation overhead.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "HashSet",
+            "Set"
+          ]
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.base/share/classes/jdk/internal/loader/URLClassPath.java",
+          "what_changed": "Initialized the jarHandler field with a new instance of sun.net.www.protocol.jar.Handler instead of null.",
+          "where_in_code": "URLClassPath constructor",
+          "intent": "To ensure that the application class loader uses the built-in protocol handler for JAR files, avoiding the overhead of protocol handler lookup when opening JAR files on the class path.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "jarHandler",
+            "sun.net.www.protocol.jar.Handler"
+          ]
+        }
+      ]
+    },
+    "agent8_syntax_repair_fallback_1": {
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": []
+    },
+    "agent7_validator_retry1": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 2,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk17u-dev-helper",
+      "test_success": false,
+      "test_mode": "jdk17u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/jdk/internal/loader/URLClassPath/LargeClasspathWithPkgPrefix.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "jdk/internal/loader/URLClassPath/LargeClasspathWithPkgPrefix.java#LargeClasspathWithPkgPrefix": "failed"
+        },
+        "classes": {
+          "jdk/internal/loader/URLClassPath/LargeClasspathWithPkgPrefix.java": "failed"
+        },
+        "summary": {
+          "passed": 0,
+          "failed": 1,
+          "skipped": 0,
+          "total": 1
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": false,
+        "fail_to_pass": [],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 0,
+        "patched_total": 1,
+        "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 3,
+    "developer_aux_hunks_from_target": 1,
+    "phase0_baseline": {
+      "mode": "baseline-jdk17u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 1
+    },
+    "java_production_hunks": 2,
+    "developer_aux_hunks": 1,
+    "processed_hunk_indices": [
+      1,
+      0
+    ],
+    "tokens_used": 80053,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 5748,
+        "output": 1870
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      },
+      "agent9_fallback": {
+        "input": 74446,
+        "output": 5607
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 1,
+    "synthesized_count": 0,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "failed",
+    "fallback_attempts": 1,
+    "retry_contexts": [
+      {
+        "error_type": "api_mismatch",
+        "error_message": "po/src/java.base/share/classes/jdk/internal/loader/URLClassPath.java:347: error: method does not override or implement a method from a supertype\n/repo/src/java.base/share/classes/jdk/internal/loader/URLClassPath.java:351: error: method does not override or implement a method from a supertype\n/repo/src/java.base/share/classes/jdk/internal/loader/URLClassPath.java:353: error: cannot find symbol\n                    throw new NoSuchElementException();\n  symbol: class NoSuchElementException\n/repo/src/java.base/share/classes/jdk/internal/loader/URLClassPath.java:375: error: cannot find symbol\n  symbol:   class Enumeration\n/repo/src/java.base/share/classes/jdk/internal/loader/URLClassPath.java:394: error: method does not override or implement a method from a supertype\n/repo/src/java.base/share/classes/jdk/internal/loader/URLClassPath.java:398: error: method does not override or implement a method from a supertype\n/repo/src/java.base/share/classes/jdk/internal/loader/URLClassPath.java:400: error: cannot find symbol\n                    throw new NoSuchElementException();\n  symbol: class NoSuchElementException\n/repo/src/java.base/share/classes/jdk/internal/loader/URLClassPath.java:816: error: cannot find symbol\n  symbol:   class JarFile\n/repo/src/java.base/share/classes/jdk/internal/loader/URLClassPath.java:817: error: cannot find symbol\n  symbol:   variable JarFile\n/repo/src/java.base/share/classes/jdk/internal/loader/URLClassPath.java:821: error: cannot find symbol\n  symbol:   class JarFile\n/repo/src/java.base/share/classes/jdk/internal/loader/URLClassPath.java:910: error: cannot find symbol\n  symbol:   class Enumeration\n/repo/src/java.base/share/classes/jdk/internal/loader/URLClassPath.java:952: error: cannot find symbol\n  symbol:   class HashSet\n/repo/src/java.base/share/classes/jdk/internal/loader/URLClassPath.java:952: error: cannot find symbol\n  symbol:   class HashSet\n/repo/src/java.base/share/classes/jdk/internal/loader/URLClassPath.java:969: error: cannot find symbol\n  symbol:   class LinkedList\n/repo/src/java.base/share/classes/jdk/internal/loader/URLClassPath.java:989: warning: [cast] redundant cast to JarLoader\n/repo/src/java.base/share/classes/jdk/internal/loader/URLClassPath.java:1106: error: cannot find symbol\n  symbol:   class StringTokenizer\n/repo/src/java.base/share/classes/jdk/internal/loader/URLClassPath.java:1106: error: cannot find symbol\n  symbol:   class StringTokenizer\nERROR: Build failed for target 'images' in configuration '/repo/build_shared' (exit code 2) \n/repo/src/java.base/share/classes/jdk/internal/loader/URLClassPath.java:116: error: cannot find symbol\n  symbol:   class HashMap\n/repo/src/java.base/share/classes/jdk/internal/loader/URLClassPath.java:211: error: cannot find symbol\n    public synchronized List<IOException> closeLoaders() {\n  symbol:   class List\n/repo/src/java.base/share/classes/jdk/internal/loader/URLClassPath.java:326: error: cannot find symbol\n  symbol:   class Enumeration\n=== Build FAILED for 08c3774 ===",
+        "attempt_count": 1,
+        "suggested_action": "route_to_namespace_or_structural"
+      }
+    ],
+    "failed_hunks": [],
+    "generated_patch_bytes": 1736,
+    "target_patch_bytes": 7916,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": false,
+    "test_mode": "jdk17u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": false,
+      "fail_to_pass": [],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 0,
+      "patched_total": 1,
+      "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+    },
+    "fail_to_pass_count": 0,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": false
+  }
+}

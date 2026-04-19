@@ -1,0 +1,228 @@
+{
+  "run_timestamp": "2026-04-18T18:13:43.618843",
+  "repo": "jdk17u-dev",
+  "patch_type": "TYPE-II",
+  "original_commit": "099a8f5b2f924fddd43ff72f3f7c6f34b6c15b0f",
+  "backport_commit": "cc3f0e52bfee9d96c464ae55999e834717aa3772",
+  "description": "main \u2192 jdk17u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 2.05,
+      "error": null,
+      "java_hunks": 3,
+      "aux_hunks": 2,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/common/SSLFlowDelegate.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 53,
+          "end_line": 69,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/common/SSLFlowDelegate.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 72,
+          "end_line": 88,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/common/SSLFlowDelegate.java",
+          "method_used": "fuzzy",
+          "confidence": 0.892,
+          "start_line": 467,
+          "end_line": 473,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 4.65,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.MIXED",
+        "confidence": 0.95,
+        "reasoning": "The patch includes multiple hunks with varying complexity. The first two hunks are exact matches in the SSLFlowDelegate.java file, indicating trivial backporting (TYPE_I). The third hunk involves a method rename from 'requestMore()' to 'requestMoreDataIfNeeded()', which is a structural change requiring fuzzy matching, thus classified as TYPE_II. Additionally, the patch adds two large new test files, which increases the token budget but does not affect the patch complexity classification. Since the patch contains both TYPE_I and TYPE_II changes, the overall classification is MIXED. The confidence is high due to clear localization evidence and straightforward changes.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "applied_count": 2,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/common/SSLFlowDelegate.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/common/SSLFlowDelegate.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 24.06,
+      "error": null,
+      "adapted_count": 1
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.1,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 1,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/common/SSLFlowDelegate.java",
+          "old_string": "                                }\n                            }\n                            // request more data and return.\n                            requestMore();\n                            return;\n                        }\n                        if (complete && result.status() == Status.CLOSED) {",
+          "new_string": "                                }\n                            }\n                            // request more data and return.\n                            requestMoreDataIfNeeded();\n                            return;\n                        }\n                        if (complete && result.status() == Status.CLOSED) {",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.16,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/common/SSLFlowDelegate.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 1
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk17u-dev-helper",
+      "test_success": false,
+      "test_mode": "jdk17u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/java/net/httpclient/whitebox/SSLFlowDelegateTestDriver.jtr.xml",
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/java/net/httpclient/whitebox/SSLFlowDelegateTestDriver.testng-results.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "java/net/httpclient/whitebox/SSLFlowDelegateTestDriver.java#SSLFlowDelegateTestDriver": "passed"
+        },
+        "classes": {
+          "java/net/httpclient/whitebox/SSLFlowDelegateTestDriver.java": "passed"
+        },
+        "summary": {
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [
+          "java/net/httpclient/whitebox/SSLFlowDelegateTestDriver.java#SSLFlowDelegateTestDriver"
+        ],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 1,
+        "patched_total": 1,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 5,
+    "developer_aux_hunks_from_target": 2,
+    "phase0_baseline": {
+      "mode": "baseline-jdk17u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 1
+    },
+    "java_production_hunks": 3,
+    "developer_aux_hunks": 2,
+    "processed_hunk_indices": [
+      0,
+      1,
+      2
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 4044,
+        "output": 779
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 2,
+    "synthesized_count": 1,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "clean",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 4913,
+    "target_patch_bytes": 37274,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": false,
+    "test_mode": "jdk17u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [
+        "java/net/httpclient/whitebox/SSLFlowDelegateTestDriver.java#SSLFlowDelegateTestDriver"
+      ],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 1,
+      "patched_total": 1,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 1,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

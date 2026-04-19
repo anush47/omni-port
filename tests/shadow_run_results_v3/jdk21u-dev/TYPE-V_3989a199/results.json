@@ -1,0 +1,300 @@
+{
+  "run_timestamp": "2026-04-18T20:35:00.021911",
+  "repo": "jdk21u-dev",
+  "patch_type": "TYPE-V",
+  "original_commit": "3989a199578fc1d91988cfdbb95f11dd6d4c7b81",
+  "backport_commit": "eb8320ce840175f1f132673824ef8e67850814da",
+  "description": "main \u2192 jdk21u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 8.2,
+      "error": null,
+      "java_hunks": 7,
+      "aux_hunks": 2,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.xml/share/classes/com/sun/org/apache/xalan/internal/xsltc/compiler/XSLTC.java",
+          "method_used": "fuzzy",
+          "confidence": 0.994,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.xml/share/classes/com/sun/org/apache/xalan/internal/xsltc/compiler/XSLTC.java",
+          "method_used": "fuzzy",
+          "confidence": 0.967,
+          "start_line": 57,
+          "end_line": 63,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.xml/share/classes/com/sun/org/apache/xalan/internal/xsltc/compiler/XSLTC.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 730,
+          "end_line": 736,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.xml/share/classes/com/sun/org/apache/xalan/internal/xsltc/trax/TransformerFactoryImpl.java",
+          "method_used": "fuzzy",
+          "confidence": 0.994,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.xml/share/classes/com/sun/org/apache/xalan/internal/xsltc/trax/TransformerFactoryImpl.java",
+          "method_used": "fuzzy",
+          "confidence": 0.976,
+          "start_line": 88,
+          "end_line": 94,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/java.xml/share/classes/com/sun/org/apache/xalan/internal/xsltc/trax/TransformerFactoryImpl.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1004,
+          "end_line": 1012,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "src/java.xml/share/classes/com/sun/org/apache/xalan/internal/xsltc/trax/TransformerFactoryImpl.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1020,
+          "end_line": 1027,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 3.13,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_II",
+        "confidence": 0.95,
+        "reasoning": "The patch involves mostly minor code rearrangements and formatting changes, such as moving a method call and updating copyright years. The localization evidence shows most hunks were found via 'fuzzy' matching with high confidence, indicating some whitespace or formatting drift rather than structural changes. There are no indications of method renaming or API changes, so the patch complexity aligns with TYPE_II. The addition of new test files is straightforward and does not increase complexity significantly. Overall, the patch is a typical minor adjustment requiring fuzzy matching for backporting.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.01,
+      "error": null,
+      "applied_count": 3,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.xml/share/classes/com/sun/org/apache/xalan/internal/xsltc/compiler/XSLTC.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.xml/share/classes/com/sun/org/apache/xalan/internal/xsltc/trax/TransformerFactoryImpl.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.xml/share/classes/com/sun/org/apache/xalan/internal/xsltc/trax/TransformerFactoryImpl.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 85.48,
+      "error": null,
+      "adapted_count": 4
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 4,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "src/java.xml/share/classes/com/sun/org/apache/xalan/internal/xsltc/compiler/XSLTC.java",
+          "old_string": "/*\n * Copyright (c) 2012, 2022, Oracle and/or its affiliates. All rights reserved.\n */",
+          "new_string": "/*\n * Copyright (c) 2012, 2025, Oracle and/or its affiliates. All rights reserved.\n */",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        },
+        {
+          "file_path": "src/java.xml/share/classes/com/sun/org/apache/xalan/internal/xsltc/compiler/XSLTC.java",
+          "old_string": " * @author G. Todd Miller\n * @author Morten Jorgensen\n * @author John Howard (johnh@schemasoft.com)\n * @LastModified: Jan 2022\n */\npublic final class XSLTC {",
+          "new_string": " * @author G. Todd Miller\n * @author Morten Jorgensen\n * @author John Howard (johnh@schemasoft.com)\n * @LastModified: Feb 2025\n */\npublic final class XSLTC {",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        },
+        {
+          "file_path": "src/java.xml/share/classes/com/sun/org/apache/xalan/internal/xsltc/trax/TransformerFactoryImpl.java",
+          "old_string": "/*\n * Copyright (c) 2007, 2022, Oracle and/or its affiliates. All rights reserved.\n */",
+          "new_string": "/*\n * Copyright (c) 2007, 2025, Oracle and/or its affiliates. All rights reserved.\n */",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        },
+        {
+          "file_path": "src/java.xml/share/classes/com/sun/org/apache/xalan/internal/xsltc/trax/TransformerFactoryImpl.java",
+          "old_string": " * @author G. Todd Miller\n * @author Morten Jorgensen\n * @author Santiago Pericas-Geertsen\n * @LastModified: Jan 2022\n */\npublic class TransformerFactoryImpl\n    extends SAXTransformerFactory implements SourceLoader",
+          "new_string": " * @author G. Todd Miller\n * @author Morten Jorgensen\n * @author Santiago Pericas-Geertsen\n * @LastModified: Feb 2025\n */\npublic class TransformerFactoryImpl\n    extends SAXTransformerFactory implements SourceLoader",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.15,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/java.xml/share/classes/com/sun/org/apache/xalan/internal/xsltc/compiler/XSLTC.java",
+          "outcome": "clean"
+        },
+        {
+          "file_path": "src/java.xml/share/classes/com/sun/org/apache/xalan/internal/xsltc/trax/TransformerFactoryImpl.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 4
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk21u-dev-helper",
+      "test_success": false,
+      "test_mode": "jdk21u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/javax/xml/jaxp/unittest/transform/PropertiesTest.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "javax/xml/jaxp/unittest/transform/PropertiesTest.java#PropertiesTest": "passed"
+        },
+        "classes": {
+          "javax/xml/jaxp/unittest/transform/PropertiesTest.java": "passed"
+        },
+        "summary": {
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [
+          "javax/xml/jaxp/unittest/transform/PropertiesTest.java#PropertiesTest"
+        ],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 1,
+        "patched_total": 1,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 9,
+    "developer_aux_hunks_from_target": 2,
+    "phase0_baseline": {
+      "mode": "baseline-jdk21u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 1
+    },
+    "java_production_hunks": 7,
+    "developer_aux_hunks": 2,
+    "processed_hunk_indices": [
+      2,
+      5,
+      6,
+      0,
+      1,
+      3,
+      4
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 10282,
+        "output": 3362
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 3,
+    "synthesized_count": 4,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "clean",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 3971,
+    "target_patch_bytes": 10828,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": false,
+    "test_mode": "jdk21u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [
+        "javax/xml/jaxp/unittest/transform/PropertiesTest.java#PropertiesTest"
+      ],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 1,
+      "patched_total": 1,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 1,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

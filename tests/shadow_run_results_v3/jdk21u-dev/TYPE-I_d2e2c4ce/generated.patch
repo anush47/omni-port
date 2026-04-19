@@ -1,0 +1,141 @@
+diff --git a/src/java.base/share/classes/sun/security/pkcs12/PKCS12KeyStore.java b/src/java.base/share/classes/sun/security/pkcs12/PKCS12KeyStore.java
+index 253301223c5..497d6ce5365 100644
+--- a/src/java.base/share/classes/sun/security/pkcs12/PKCS12KeyStore.java
++++ b/src/java.base/share/classes/sun/security/pkcs12/PKCS12KeyStore.java
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 1999, 2022, Oracle and/or its affiliates. All rights reserved.
++ * Copyright (c) 1999, 2023, Oracle and/or its affiliates. All rights reserved.
+  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+  *
+  * This code is free software; you can redistribute it and/or modify it
+@@ -75,7 +75,6 @@ import sun.security.pkcs.EncryptedPrivateKeyInfo;
+ import sun.security.provider.JavaKeyStore.JKS;
+ import sun.security.x509.AuthorityKeyIdentifierExtension;
+ 
+-
+ /**
+  * This class provides the keystore implementation referred to as "PKCS12".
+  * Implements the PKCS#12 PFX protected using the Password privacy mode.
+@@ -705,6 +704,7 @@ public final class PKCS12KeyStore extends KeyStoreSpi {
+             // set the alias
+             entry.alias = alias.toLowerCase(Locale.ENGLISH);
+             // add the entry
++            populateAttributes(entry);
+             entries.put(alias.toLowerCase(Locale.ENGLISH), entry);
+ 
+         } catch (KeyStoreException kse) {
+@@ -785,10 +785,10 @@ public final class PKCS12KeyStore extends KeyStoreSpi {
+ 
+         // add the entry
+         privateKeyCount++;
++        populateAttributes(entry);
+         entries.put(alias.toLowerCase(Locale.ENGLISH), entry);
+     }
+ 
+-
+     /*
+      * Generate random salt
+      */
+@@ -988,6 +988,7 @@ public final class PKCS12KeyStore extends KeyStoreSpi {
+             new CertEntry((X509Certificate) cert, null, alias, AnyUsage,
+                 attributes);
+         certificateCount++;
++        populateAttributes(certEntry);
+         entries.put(alias.toLowerCase(Locale.ENGLISH), certEntry);
+ 
+         if (debug != null) {
+@@ -1264,7 +1265,7 @@ public final class PKCS12KeyStore extends KeyStoreSpi {
+             return super.engineGetAttributes(alias);
+         }
+         Entry entry = entries.get(alias.toLowerCase(Locale.ENGLISH));
+-        return Collections.unmodifiableSet(new HashSet<>(getAttributes(entry)));
++        return Collections.unmodifiableSet(new HashSet<>(entry.attributes));
+     }
+ 
+     /**
+@@ -1313,7 +1314,7 @@ public final class PKCS12KeyStore extends KeyStoreSpi {
+                     }
+ 
+                     return new KeyStore.TrustedCertificateEntry(
+-                        ((CertEntry)entry).cert, getAttributes(entry));
++                        ((CertEntry)entry).cert, entry.attributes);
+                 }
+             } else {
+                 throw new UnrecoverableKeyException
+@@ -1335,12 +1336,12 @@ public final class PKCS12KeyStore extends KeyStoreSpi {
+                     Certificate[] chain = engineGetCertificateChain(alias);
+ 
+                     return new KeyStore.PrivateKeyEntry((PrivateKey)key, chain,
+-                        getAttributes(entry));
++                        entry.attributes);
+ 
+                 } else if (key instanceof SecretKey) {
+ 
+                     return new KeyStore.SecretKeyEntry((SecretKey)key,
+-                        getAttributes(entry));
++                        entry.attributes);
+                 }
+             } else if (!engineIsKeyEntry(alias)) {
+                 throw new UnsupportedOperationException
+@@ -1429,9 +1430,9 @@ public final class PKCS12KeyStore extends KeyStoreSpi {
+     }
+ 
+     /*
+-     * Assemble the entry attributes
++     * Populate the entry with additional attributes used by the implementation.
+      */
+-    private Set<KeyStore.Entry.Attribute> getAttributes(Entry entry) {
++    private void populateAttributes(Entry entry) {
+ 
+         if (entry.attributes == null) {
+             entry.attributes = new HashSet<>();
+@@ -1464,8 +1465,6 @@ public final class PKCS12KeyStore extends KeyStoreSpi {
+                 }
+             }
+         }
+-
+-        return entry.attributes;
+     }
+ 
+     /*
+@@ -1509,7 +1508,6 @@ public final class PKCS12KeyStore extends KeyStoreSpi {
+         return mData;
+     }
+ 
+-
+     /*
+      * Validate Certificate Chain
+      */
+@@ -1853,7 +1851,6 @@ public final class PKCS12KeyStore extends KeyStoreSpi {
+         return safeBagValue.toByteArray();
+     }
+ 
+-
+     /*
+      * Encrypt the contents using Password-based (PBE) encryption
+      * as defined in PKCS #5.
+@@ -1865,7 +1862,6 @@ public final class PKCS12KeyStore extends KeyStoreSpi {
+ 
+         byte[] encryptedData;
+ 
+-
+         try {
+             // create AlgorithmParameters
+             AlgorithmParameters algParams = getPBEAlgorithmParameters(
+@@ -2522,6 +2518,7 @@ public final class PKCS12KeyStore extends KeyStoreSpi {
+                    alias = getUnfriendlyName();
+                 }
+                 entry.alias = alias;
++                populateAttributes(entry);
+                 entries.put(alias.toLowerCase(Locale.ENGLISH), entry);
+ 
+             } else if (bagItem instanceof X509Certificate cert) {
+@@ -2543,6 +2540,7 @@ public final class PKCS12KeyStore extends KeyStoreSpi {
+                     CertEntry certEntry =
+                         new CertEntry(cert, keyId, alias, trustedKeyUsage,
+                             attributes);
++                    populateAttributes(certEntry);
+                     entries.put(alias.toLowerCase(Locale.ENGLISH), certEntry);
+                 } else {
+                     certEntries.add(new CertEntry(cert, keyId, alias));

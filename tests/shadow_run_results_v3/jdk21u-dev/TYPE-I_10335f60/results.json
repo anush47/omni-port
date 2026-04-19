@@ -1,0 +1,515 @@
+{
+  "run_timestamp": "2026-04-18T20:35:00.021911",
+  "repo": "jdk21u-dev",
+  "patch_type": "TYPE-I",
+  "original_commit": "10335f60f923aa4f315e64acb2bfd7bb06d47a1b",
+  "backport_commit": "93a4707f13aafc08a131e24c3c5ccbbe189da529",
+  "description": "main \u2192 jdk21u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 0.28,
+      "error": null,
+      "java_hunks": 8,
+      "aux_hunks": 1,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.desktop/share/classes/sun/print/CustomMediaSizeName.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 27,
+          "end_line": 41,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.desktop/share/classes/sun/print/CustomMediaSizeName.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 191,
+          "end_line": 194,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.desktop/share/classes/sun/print/CustomMediaTray.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 27,
+          "end_line": 32,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.desktop/share/classes/sun/print/CustomMediaTray.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 35,
+          "end_line": 40,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.desktop/share/classes/sun/print/CustomMediaTray.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 93,
+          "end_line": 96,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/java.desktop/unix/classes/sun/print/CUPSPrinter.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 225,
+          "end_line": 250,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "src/java.desktop/unix/classes/sun/print/CUPSPrinter.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 269,
+          "end_line": 276,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "src/java.desktop/unix/classes/sun/print/IPPPrintService.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1013,
+          "end_line": 1027,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 3.93,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_II",
+        "confidence": 0.95,
+        "reasoning": "The patch introduces new methods and classes to manage caching and deduplication of custom media size and tray instances, replacing direct instantiation with factory methods that use internal maps. It also modifies usage sites to use these factory methods. While the changes are localized and the hunks were found with exact matches in the target branch, the patch involves adding new data structures and logic, which is more than trivial string replacement but does not involve deep structural refactoring or redesign. Therefore, it fits best as a TYPE_II patch involving whitespace/formatting drift and moderate code additions requiring fuzzy matching. The confidence is high due to exact localization evidence, and the token budget is moderate due to the size and complexity of the additions.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.01,
+      "error": null,
+      "applied_count": 8,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/sun/print/CustomMediaSizeName.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/sun/print/CustomMediaSizeName.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/sun/print/CustomMediaTray.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/sun/print/CustomMediaTray.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/sun/print/CustomMediaTray.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/unix/classes/sun/print/CUPSPrinter.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/unix/classes/sun/print/CUPSPrinter.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/unix/classes/sun/print/IPPPrintService.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "adapted_count": 0
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 0,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": []
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [],
+      "synthesized_count_after_repair": 0
+    },
+    "agent7_validator": {
+      "validation_passed": false,
+      "validation_failure_category": "unknown",
+      "validation_error_context": "Build failed (jdk21u-dev-helper): Command timed out",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": false,
+      "build_mode": "jdk21u-dev-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": []
+    },
+    "agent9_fallback_1": {
+      "fallback_status": "failed",
+      "fallback_attempts": 1,
+      "synthesized_count": 0,
+      "hunk_descriptions": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.desktop/share/classes/sun/print/CustomMediaSizeName.java",
+          "what_changed": "Added imports for Map, HashMap, Objects, and Size2DSyntax; introduced a static Map to cache CustomMediaSizeName instances keyed by a new SizeNameChoiceItem class.",
+          "where_in_code": "class CustomMediaSizeName (fields)",
+          "intent": "To enable efficient reuse and lookup of custom media size names based on name, choice, width, and length, improving management of custom media sizes.",
+          "change_type": "add_field",
+          "key_symbols": [
+            "customMap",
+            "SizeNameChoiceItem"
+          ]
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.desktop/share/classes/sun/print/CustomMediaSizeName.java",
+          "what_changed": "Added a static factory method 'create' to obtain or create CustomMediaSizeName instances using a key object; added the SizeNameChoiceItem inner class with proper equals and hashCode implementations.",
+          "where_in_code": "class CustomMediaSizeName (methods and inner class)",
+          "intent": "To centralize creation and caching of CustomMediaSizeName objects, avoiding duplicates and ensuring consistent handling of custom media sizes with given attributes.",
+          "change_type": "add_method",
+          "key_symbols": [
+            "create",
+            "SizeNameChoiceItem"
+          ]
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.desktop/share/classes/sun/print/CustomMediaTray.java",
+          "what_changed": "Added imports for Map, HashMap, and Objects to support new caching mechanism.",
+          "where_in_code": "import statements",
+          "intent": "Prepare for adding a map-based cache to manage CustomMediaTray instances efficiently.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "Map",
+            "HashMap",
+            "Objects"
+          ]
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.desktop/share/classes/sun/print/CustomMediaTray.java",
+          "what_changed": "Introduced a static Map field to cache CustomMediaTray instances keyed by a new NameChoiceItem class.",
+          "where_in_code": "class CustomMediaTray (fields)",
+          "intent": "To enable reuse and efficient lookup of CustomMediaTray objects based on name and choice, preventing duplicate instances.",
+          "change_type": "add_field",
+          "key_symbols": [
+            "customMap",
+            "NameChoiceItem"
+          ]
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.desktop/share/classes/sun/print/CustomMediaTray.java",
+          "what_changed": "Added a static factory method 'create' to get or create CustomMediaTray instances using a NameChoiceItem key; added the NameChoiceItem inner class with equals and hashCode implementations.",
+          "where_in_code": "class CustomMediaTray (methods and inner class)",
+          "intent": "To centralize creation and caching of CustomMediaTray objects, ensuring uniqueness and consistent management of custom trays.",
+          "change_type": "add_method",
+          "key_symbols": [
+            "create",
+            "NameChoiceItem"
+          ]
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/java.desktop/unix/classes/sun/print/CUPSPrinter.java",
+          "what_changed": "Replaced direct instantiation of CustomMediaSizeName with calls to the new static factory method 'create' for obtaining instances.",
+          "where_in_code": "method handling media sizes (unnamed loop context)",
+          "intent": "To leverage the caching mechanism for CustomMediaSizeName, avoiding duplicate objects and ensuring consistent media size handling.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "CustomMediaSizeName.create"
+          ]
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "src/java.desktop/unix/classes/sun/print/CUPSPrinter.java",
+          "what_changed": "Replaced direct instantiation of CustomMediaTray with calls to the new static factory method 'create' for obtaining instances.",
+          "where_in_code": "method handling media trays (unnamed loop context)",
+          "intent": "To use the caching mechanism for CustomMediaTray, ensuring reuse and consistency of tray instances.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "CustomMediaTray.create"
+          ]
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "src/java.desktop/unix/classes/sun/print/IPPPrintService.java",
+          "what_changed": "Changed creation of sample CustomMediaSizeName and CustomMediaTray objects from direct constructor calls to use their respective static 'create' factory methods.",
+          "where_in_code": "private method getIPPMedia(String mediaName)",
+          "intent": "To unify object creation through the caching factory methods, ensuring consistent and efficient reuse of custom media and tray instances.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "CustomMediaSizeName.create",
+            "CustomMediaTray.create"
+          ]
+        }
+      ]
+    },
+    "agent8_syntax_repair_fallback_1": {
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": []
+    },
+    "agent7_validator_retry1": {
+      "validation_passed": false,
+      "validation_failure_category": "unknown",
+      "validation_error_context": "Build failed (jdk21u-dev-helper): Command timed out",
+      "validation_attempts": 2,
+      "retry_files": [],
+      "build_success": false,
+      "build_mode": "jdk21u-dev-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": []
+    },
+    "agent9_fallback_2": {
+      "fallback_status": "failed",
+      "fallback_attempts": 2,
+      "synthesized_count": 0,
+      "hunk_descriptions": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.desktop/share/classes/sun/print/CustomMediaSizeName.java",
+          "what_changed": "Added imports for Map, HashMap, Objects, and Size2DSyntax; introduced a static Map field 'customMap' to cache CustomMediaSizeName instances keyed by a new helper class.",
+          "where_in_code": "class CustomMediaSizeName",
+          "intent": "To support efficient reuse and lookup of custom media size names by their attributes, enabling caching and avoiding duplicate instances.",
+          "change_type": "add_field|modify_import",
+          "key_symbols": [
+            "customMap",
+            "Size2DSyntax",
+            "Objects"
+          ]
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.desktop/share/classes/sun/print/CustomMediaSizeName.java",
+          "what_changed": "Added a static factory method 'create' to obtain or create CustomMediaSizeName instances based on name, choice, width, and length; introduced a private static nested class 'SizeNameChoiceItem' to serve as a key in the map with proper equals and hashCode implementations.",
+          "where_in_code": "class CustomMediaSizeName",
+          "intent": "To centralize creation and caching of CustomMediaSizeName objects, ensuring uniqueness and consistent handling of media sizes including proper MediaSize registration with dimension rotation fallback.",
+          "change_type": "add_method|add_field",
+          "key_symbols": [
+            "create",
+            "SizeNameChoiceItem",
+            "customMap"
+          ]
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.desktop/share/classes/sun/print/CustomMediaTray.java",
+          "what_changed": "Added imports for Map, HashMap, and Objects to support new caching mechanism.",
+          "where_in_code": "top-level imports",
+          "intent": "To enable use of Map-based caching for CustomMediaTray instances.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "Map",
+            "HashMap",
+            "Objects"
+          ]
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.desktop/share/classes/sun/print/CustomMediaTray.java",
+          "what_changed": "Added a static Map field 'customMap' to cache CustomMediaTray instances keyed by a new helper class.",
+          "where_in_code": "class CustomMediaTray",
+          "intent": "To support efficient reuse and lookup of CustomMediaTray instances by their attributes, avoiding duplicates.",
+          "change_type": "add_field",
+          "key_symbols": [
+            "customMap"
+          ]
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.desktop/share/classes/sun/print/CustomMediaTray.java",
+          "what_changed": "Added a static factory method 'create' to obtain or create CustomMediaTray instances based on name and choice; introduced a private static nested class 'NameChoiceItem' with proper equals and hashCode for use as map key.",
+          "where_in_code": "class CustomMediaTray",
+          "intent": "To centralize creation and caching of CustomMediaTray objects, ensuring uniqueness and consistent instance management.",
+          "change_type": "add_method|add_field",
+          "key_symbols": [
+            "create",
+            "NameChoiceItem",
+            "customMap"
+          ]
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/java.desktop/unix/classes/sun/print/CUPSPrinter.java",
+          "what_changed": "Replaced direct instantiation of CustomMediaSizeName with calls to the new static factory method 'create' passing name, choice, width, and length; removed redundant MediaSize creation logic from this location.",
+          "where_in_code": "method initializing media sizes (unnamed in snippet)",
+          "intent": "To leverage the centralized caching and creation logic for CustomMediaSizeName, improving consistency and avoiding duplicate instances.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "CustomMediaSizeName.create"
+          ]
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "src/java.desktop/unix/classes/sun/print/CUPSPrinter.java",
+          "what_changed": "Replaced direct instantiation of CustomMediaTray with calls to the new static factory method 'create' passing name and choice.",
+          "where_in_code": "method initializing media trays (unnamed in snippet)",
+          "intent": "To use the centralized caching and creation mechanism for CustomMediaTray, ensuring instance reuse and consistency.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "CustomMediaTray.create"
+          ]
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "src/java.desktop/unix/classes/sun/print/IPPPrintService.java",
+          "what_changed": "Replaced direct instantiation of CustomMediaSizeName and CustomMediaTray with calls to their respective static factory 'create' methods when obtaining sample instances for media lookup.",
+          "where_in_code": "private method getIPPMedia(String mediaName)",
+          "intent": "To unify instance creation and reuse of CustomMediaSizeName and CustomMediaTray, leveraging caching and consistent construction.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "CustomMediaSizeName.create",
+            "CustomMediaTray.create"
+          ]
+        }
+      ]
+    },
+    "agent8_syntax_repair_fallback_2": {
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": []
+    },
+    "agent7_validator_retry2": {
+      "validation_passed": false,
+      "validation_failure_category": "unknown",
+      "validation_error_context": "Build failed (jdk21u-dev-helper): Command timed out",
+      "validation_attempts": 3,
+      "retry_files": [],
+      "build_success": false,
+      "build_mode": "jdk21u-dev-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 9,
+    "developer_aux_hunks_from_target": 1,
+    "phase0_baseline": {
+      "mode": "baseline-build-failed",
+      "skipped": true,
+      "cached": false,
+      "test_cases_total": 0
+    },
+    "java_production_hunks": 8,
+    "developer_aux_hunks": 1,
+    "processed_hunk_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "tokens_used": 154977,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent9_fallback": {
+        "input": 149570,
+        "output": 5407
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 8,
+    "synthesized_count": 0,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "failed",
+    "fallback_attempts": 2,
+    "retry_contexts": [
+      {
+        "error_type": "unknown",
+        "error_message": "Command timed out",
+        "attempt_count": 1,
+        "suggested_action": "inspect_and_retry"
+      },
+      {
+        "error_type": "unknown",
+        "error_message": "Command timed out",
+        "attempt_count": 2,
+        "suggested_action": "inspect_and_retry"
+      },
+      {
+        "error_type": "unknown",
+        "error_message": "Command timed out",
+        "attempt_count": 3,
+        "suggested_action": "inspect_and_retry"
+      }
+    ],
+    "failed_hunks": [],
+    "generated_patch_bytes": 19425,
+    "target_patch_bytes": 11763,
+    "patch_exact_match": false,
+    "validation_passed": false,
+    "validation_failure_category": "unknown",
+    "build_success": false,
+    "test_success": null,
+    "test_mode": null,
+    "test_transition": {},
+    "fail_to_pass_count": 0,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": false
+  }
+}

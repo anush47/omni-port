@@ -1,0 +1,242 @@
+{
+  "run_timestamp": "2026-04-18T20:35:00.021911",
+  "repo": "jdk21u-dev",
+  "patch_type": "TYPE-II",
+  "original_commit": "f3be138eb80c9e7f6cc21afb75cda9e49b667c8a",
+  "backport_commit": "d383ba546ca749d21ad39288e47335135e7b2142",
+  "description": "main \u2192 jdk21u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 2.06,
+      "error": null,
+      "java_hunks": 4,
+      "aux_hunks": 5,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/plugins/SystemModulesPlugin.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/plugins/SystemModulesPlugin.java",
+          "method_used": "fuzzy",
+          "confidence": 0.986,
+          "start_line": 1811,
+          "end_line": 1816,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/plugins/SystemModulesPlugin.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1861,
+          "end_line": 1870,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/plugins/SystemModulesPlugin.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1882,
+          "end_line": 1891,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 3.9,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.MIXED",
+        "confidence": 0.95,
+        "reasoning": "The patch consists of multiple hunks with varying complexity. The first hunk updates a copyright year, which is trivial and exact (TYPE_I). The second hunk modifies code to sort a map before processing, involving code restructuring but no deep API changes; it was found with high fuzzy confidence, indicating minor structural changes (TYPE_II). The third and fourth hunks adjust loops to iterate over sorted map entries instead of keys and values separately, which is a structural change but not a deep refactor (TYPE_III). Additionally, the patch adds a substantial new test suite with multiple new files and classes, which increases complexity but is additive and does not modify existing logic deeply. Overall, the patch combines trivial, minor structural, and moderate structural changes, justifying a MIXED classification with high confidence. The token budget estimate is moderate due to the size and complexity of the added test code and the structural changes in the main plugin class.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.02,
+      "error": null,
+      "applied_count": 3,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/plugins/SystemModulesPlugin.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/plugins/SystemModulesPlugin.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/plugins/SystemModulesPlugin.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 69.66,
+      "error": null,
+      "adapted_count": 1
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 1,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/plugins/SystemModulesPlugin.java",
+          "old_string": "\n        // write the class file to the pool as a resource\n        String rn = \"/java.base/\" + SYSTEM_MODULES_MAP_CLASSNAME + \".class\";",
+          "new_string": "\n        // write the class file to the pool as a resource\n        String rn = \"/java.base/\" + SYSTEM_MODULES_MAP_CLASSNAME + \".class\";\n        // sort the map of module name to the class name of the generated SystemModules class\n        List<Map.Entry<String, String>> systemModulesMap = map.entrySet()\n                .stream().sorted(Map.Entry.comparingByKey()).toList();",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.17,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/plugins/SystemModulesPlugin.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 1
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk21u-dev-helper",
+      "test_success": false,
+      "test_mode": "jdk21u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/tools/jlink/plugins/SystemModuleDescriptors/ModuleMainClassTest.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "tools/jlink/plugins/SystemModuleDescriptors/ModuleMainClassTest.java#ModuleMainClassTest": "passed"
+        },
+        "classes": {
+          "tools/jlink/plugins/SystemModuleDescriptors/ModuleMainClassTest.java": "passed"
+        },
+        "summary": {
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [
+          "tools/jlink/plugins/SystemModuleDescriptors/ModuleMainClassTest.java#ModuleMainClassTest"
+        ],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 1,
+        "patched_total": 1,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 9,
+    "developer_aux_hunks_from_target": 5,
+    "phase0_baseline": {
+      "mode": "baseline-jdk21u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 1
+    },
+    "java_production_hunks": 4,
+    "developer_aux_hunks": 5,
+    "processed_hunk_indices": [
+      0,
+      2,
+      3,
+      1
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 6807,
+        "output": 3126
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 3,
+    "synthesized_count": 1,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "clean",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 4563,
+    "target_patch_bytes": 17235,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": false,
+    "test_mode": "jdk21u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [
+        "tools/jlink/plugins/SystemModuleDescriptors/ModuleMainClassTest.java#ModuleMainClassTest"
+      ],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 1,
+      "patched_total": 1,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 1,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

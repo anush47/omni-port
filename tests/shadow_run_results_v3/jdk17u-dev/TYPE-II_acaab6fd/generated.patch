@@ -1,0 +1,23 @@
+diff --git a/src/java.net.http/share/classes/jdk/internal/net/http/ResponseSubscribers.java b/src/java.net.http/share/classes/jdk/internal/net/http/ResponseSubscribers.java
+index 1d2414c1a1a..03701f54ab8 100644
+--- a/src/java.net.http/share/classes/jdk/internal/net/http/ResponseSubscribers.java
++++ b/src/java.net.http/share/classes/jdk/internal/net/http/ResponseSubscribers.java
+@@ -532,8 +532,8 @@ public class ResponseSubscribers {
+             if (available != 0) return available;
+             Iterator<?> iterator = currentListItr;
+             if (iterator != null && iterator.hasNext()) return 1;
+-            if (buffers.isEmpty()) return 0;
+-            return 1;
++            if (!buffers.isEmpty() && buffers.peek() != LAST_LIST ) return 1;
++            return available;
+         }
+ 
+         @Override
+@@ -1062,7 +1062,6 @@ public class ResponseSubscribers {
+         return new PublishingBodySubscriber();
+     }
+ 
+-
+     /**
+      * Tries to determine whether bs::getBody must be invoked asynchronously,
+      * and if so, uses the provided executor to do it.

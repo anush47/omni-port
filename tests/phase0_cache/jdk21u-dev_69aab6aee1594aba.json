@@ -1,0 +1,25 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/com/sun/jdi/BreakpointOnClassPrepare.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/runtime/Thread/TestThreadDumpClassInitMonitor.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "com/sun/jdi/BreakpointOnClassPrepare.java#BreakpointOnClassPrepare": "failed",
+      "runtime/Thread/TestThreadDumpClassInitMonitor.java#TestThreadDumpClassInitMonitor": "failed"
+    },
+    "classes": {
+      "com/sun/jdi/BreakpointOnClassPrepare.java": "failed",
+      "runtime/Thread/TestThreadDumpClassInitMonitor.java": "failed"
+    },
+    "summary": {
+      "passed": 0,
+      "failed": 2,
+      "skipped": 0,
+      "total": 2
+    }
+  },
+  "mode": "baseline-jdk21u-dev-helper",
+  "skipped": false
+}

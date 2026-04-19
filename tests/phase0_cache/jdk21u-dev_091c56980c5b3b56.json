@@ -1,0 +1,25 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/sun/security/pkcs12/AttributesCorrectness.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/sun/security/pkcs12/AttributesMultiThread.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "sun/security/pkcs12/AttributesCorrectness.java#AttributesCorrectness": "passed",
+      "sun/security/pkcs12/AttributesMultiThread.java#AttributesMultiThread": "passed"
+    },
+    "classes": {
+      "sun/security/pkcs12/AttributesCorrectness.java": "passed",
+      "sun/security/pkcs12/AttributesMultiThread.java": "passed"
+    },
+    "summary": {
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "total": 2
+    }
+  },
+  "mode": "baseline-jdk21u-dev-helper",
+  "skipped": false
+}

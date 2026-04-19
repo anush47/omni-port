@@ -1,0 +1,267 @@
+{
+  "run_timestamp": "2026-04-18T18:13:43.618843",
+  "repo": "jdk17u-dev",
+  "patch_type": "TYPE-III",
+  "original_commit": "82796bdebbf56b98ec97a6d572ed68c2842f60c6",
+  "backport_commit": "fc01ffe952f781f7510575b015c64cfc6b7431ed",
+  "description": "main \u2192 jdk17u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 99.29,
+      "error": null,
+      "java_hunks": 5,
+      "aux_hunks": 1,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.base/share/classes/java/lang/String.java",
+          "method_used": "embedding",
+          "confidence": 0.894,
+          "start_line": 566,
+          "end_line": 575,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.base/share/classes/java/lang/String.java",
+          "method_used": "git_pickaxe",
+          "confidence": 0.753,
+          "start_line": 571,
+          "end_line": 577,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.base/share/classes/java/lang/String.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 589,
+          "end_line": 595,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.base/share/classes/java/lang/String.java",
+          "method_used": "git_pickaxe",
+          "confidence": 0.81,
+          "start_line": 721,
+          "end_line": 735,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.base/share/classes/java/lang/String.java",
+          "method_used": "git_pickaxe",
+          "confidence": 0.869,
+          "start_line": 1268,
+          "end_line": 1274,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 3.36,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_IV",
+        "confidence": 0.85,
+        "reasoning": "The patch modifies multiple byte array allocations in the String class to use a new method StringUTF16.newBytesFor(length) instead of direct byte array allocations. This indicates a structural change in how UTF-16 byte arrays are allocated, reflecting a deeper API or implementation divergence rather than a simple string replacement or formatting change. The patch also adds a new test file, which is a significant addition but does not affect the classification of the main patch complexity. The localization evidence shows mixed methods of discovery, including embedding and git_pickaxe, with high confidence, supporting the assessment that the patch involves structural changes. Therefore, the patch is best classified as TYPE_IV (deep structural refactoring). The confidence is reasonably high but not absolute due to the presence of some exact matches and pickaxe findings. The token budget estimate is moderate to high due to the multiple changes across the file and the new test addition.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.01,
+      "error": null,
+      "applied_count": 1,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/java/lang/String.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 174.87,
+      "error": null,
+      "adapted_count": 4
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 4,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "src/java.base/share/classes/java/lang/String.java",
+          "old_string": "                if (dp == 0 || dst == null) {\n                    dst = new byte[length << 1];\n                } else {\n                    byte[] buf = new byte[length << 1];\n                    StringLatin1.inflate(dst, 0, buf, 0, dp);\n                    dst = buf;\n                }\n                dp = decodeUTF8_UTF16(bytes, offset, sl, dst, dp, true);\n                if (dp != length) {\n                    dst = Arrays.copyOf(dst, dp << 1);\n                }",
+          "new_string": "                if (dp == 0 || dst == null) {\n                    dst = StringUTF16.newBytesFor(length);\n                } else {\n                    byte[] buf = StringUTF16.newBytesFor(length);\n                    StringLatin1.inflate(dst, 0, buf, 0, dp);\n                    dst = buf;\n                }\n                dp = decodeUTF8_UTF16(bytes, offset, sl, dst, dp, true);\n                if (dp != length) {\n                    dst = Arrays.copyOf(dst, dp << 1);\n                }",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        },
+        {
+          "file_path": "src/java.base/share/classes/java/lang/String.java",
+          "old_string": "                if (dp == 0 || dst == null) {\n                    dst = new byte[length << 1];\n                } else {\n                    byte[] buf = new byte[length << 1];\n                    StringLatin1.inflate(dst, 0, buf, 0, dp);\n                    dst = buf;\n                }",
+          "new_string": "                if (dp == 0 || dst == null) {\n                    dst = StringUTF16.newBytesFor(length);\n                } else {\n                    byte[] buf = new byte[length << 1];\n                    StringLatin1.inflate(dst, 0, buf, 0, dp);\n                    dst = buf;\n                }",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        },
+        {
+          "file_path": "src/java.base/share/classes/java/lang/String.java",
+          "old_string": "                    }\n                    return new String(dst, LATIN1);\n                }\n            }\n            if (dp == 0 || dst == null) {\n                dst = new byte[length << 1];\n            } else {\n                byte[] buf = new byte[length << 1];\n                StringLatin1.inflate(dst, 0, buf, 0, dp);\n                dst = buf;\n            }\n            dp = decodeUTF8_UTF16(bytes, offset, sl, dst, dp, false);\n            if (dp != length) {\n                dst = Arrays.copyOf(dst, dp << 1);\n            }",
+          "new_string": "                    }\n                    return new String(dst, LATIN1);\n                }\n            }\n            if (dp == 0 || dst == null) {\n                dst = StringUTF16.newBytesFor(length);\n            } else {\n                byte[] buf = StringUTF16.newBytesFor(length);\n                StringLatin1.inflate(dst, 0, buf, 0, dp);\n                dst = buf;\n            }\n            dp = decodeUTF8_UTF16(bytes, offset, sl, dst, dp, false);\n            if (dp != length) {\n                dst = Arrays.copyOf(dst, dp << 1);\n            }",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        },
+        {
+          "file_path": "src/java.base/share/classes/java/lang/String.java",
+          "old_string": "        int dp = 0;\n        byte[] dst = new byte[val.length << 1];\n        for (byte c : val) {\n            if (c < 0) {\n                dst[dp++] = (byte) (0xc0 | ((c & 0xff) >> 6));\n                dst[dp++] = (byte) (0x80 | (c & 0x3f));\n            } else {\n                dst[dp++] = c;\n            }\n        }\n        if (dp == dst.length)\n            return dst;\n        return Arrays.copyOf(dst, dp);",
+          "new_string": "        int dp = 0;\n        byte[] dst = StringUTF16.newBytesFor(val.length);\n        for (byte c : val) {\n            if (c < 0) {\n                dst[dp++] = (byte) (0xc0 | ((c & 0xff) >> 6));\n                dst[dp++] = (byte) (0x80 | (c & 0x3f));\n            } else {\n                dst[dp++] = c;\n            }\n        }\n        if (dp == dst.length)\n            return dst;\n        return Arrays.copyOf(dst, dp);",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/java.base/share/classes/java/lang/String.java",
+          "outcome": "skipped",
+          "reason": "apply errors: [\"old_string not found in src/java.base/share/classes/java/lang/String.java (first 60 chars: '                if (dp == 0 || dst == null) {\\\\n              ')\"]"
+        }
+      ],
+      "synthesized_count_after_repair": 4
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk17u-dev-helper",
+      "test_success": true,
+      "test_mode": "jdk17u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/java/lang/String/CompactString/NegativeSize.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "java/lang/String/CompactString/NegativeSize.java#NegativeSize": "passed"
+        },
+        "classes": {
+          "java/lang/String/CompactString/NegativeSize.java": "passed"
+        },
+        "summary": {
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [
+          "java/lang/String/CompactString/NegativeSize.java#NegativeSize"
+        ],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 1,
+        "patched_total": 1,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 6,
+    "developer_aux_hunks_from_target": 1,
+    "phase0_baseline": {
+      "mode": "baseline-jdk17u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 1
+    },
+    "java_production_hunks": 5,
+    "developer_aux_hunks": 1,
+    "processed_hunk_indices": [
+      2,
+      0,
+      1,
+      3,
+      4
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 11635,
+        "output": 7187
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 1,
+    "synthesized_count": 4,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "clean",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 2254,
+    "target_patch_bytes": 5474,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": true,
+    "test_mode": "jdk17u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [
+        "java/lang/String/CompactString/NegativeSize.java#NegativeSize"
+      ],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 1,
+      "patched_total": 1,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 1,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

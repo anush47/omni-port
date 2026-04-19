@@ -1,0 +1,31 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/javax/swing/text/html/HTMLDocument/HTMLStrikeOnly.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/javax/swing/text/html/HTMLDocument/HTMLTextDecoration.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/javax/swing/text/html/HTMLDocument/HTMLUnderlineOnly.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/javax/swing/text/html/HTMLDocument/HTMLUnderlineStrike.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "javax/swing/text/html/HTMLDocument/HTMLStrikeOnly.java#HTMLStrikeOnly": "passed",
+      "javax/swing/text/html/HTMLDocument/HTMLTextDecoration.java#HTMLTextDecoration": "failed",
+      "javax/swing/text/html/HTMLDocument/HTMLUnderlineOnly.java#HTMLUnderlineOnly": "passed",
+      "javax/swing/text/html/HTMLDocument/HTMLUnderlineStrike.java#HTMLUnderlineStrike": "passed"
+    },
+    "classes": {
+      "javax/swing/text/html/HTMLDocument/HTMLStrikeOnly.java": "passed",
+      "javax/swing/text/html/HTMLDocument/HTMLTextDecoration.java": "failed",
+      "javax/swing/text/html/HTMLDocument/HTMLUnderlineOnly.java": "passed",
+      "javax/swing/text/html/HTMLDocument/HTMLUnderlineStrike.java": "passed"
+    },
+    "summary": {
+      "passed": 3,
+      "failed": 1,
+      "skipped": 0,
+      "total": 4
+    }
+  },
+  "mode": "baseline-jdk21u-dev-helper",
+  "skipped": false
+}

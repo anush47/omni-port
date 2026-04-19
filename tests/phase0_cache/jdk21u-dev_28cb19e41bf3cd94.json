@@ -1,0 +1,28 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/java/io/OutputStreamWriter/CloseWriterOnFailedFlush.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/java/nio/channels/Channels/CloseWriterOnFailedFlush.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/sun/nio/cs/StreamEncoderClose.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "java/io/OutputStreamWriter/CloseWriterOnFailedFlush.java#CloseWriterOnFailedFlush": "failed",
+      "java/nio/channels/Channels/CloseWriterOnFailedFlush.java#CloseWriterOnFailedFlush": "failed",
+      "sun/nio/cs/StreamEncoderClose.java#StreamEncoderClose": "passed"
+    },
+    "classes": {
+      "java/io/OutputStreamWriter/CloseWriterOnFailedFlush.java": "failed",
+      "java/nio/channels/Channels/CloseWriterOnFailedFlush.java": "failed",
+      "sun/nio/cs/StreamEncoderClose.java": "passed"
+    },
+    "summary": {
+      "passed": 1,
+      "failed": 2,
+      "skipped": 0,
+      "total": 3
+    }
+  },
+  "mode": "baseline-jdk21u-dev-helper",
+  "skipped": false
+}

@@ -1,0 +1,25 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/jdk/test/lib/util/JarUtilsTest.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/sun/security/tools/jarsigner/RemovedFiles.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "jdk/test/lib/util/JarUtilsTest.java#JarUtilsTest": "passed",
+      "sun/security/tools/jarsigner/RemovedFiles.java#RemovedFiles": "failed"
+    },
+    "classes": {
+      "jdk/test/lib/util/JarUtilsTest.java": "passed",
+      "sun/security/tools/jarsigner/RemovedFiles.java": "failed"
+    },
+    "summary": {
+      "passed": 1,
+      "failed": 1,
+      "skipped": 0,
+      "total": 2
+    }
+  },
+  "mode": "baseline-jdk21u-dev-helper",
+  "skipped": false
+}
