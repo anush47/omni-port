@@ -87,6 +87,7 @@ REPO_PATH_MAP: dict[str, str] = {
     "sql": "repos/sql",
     "spring-framework": "repos/spring-framework",
     "hadoop": "repos/hadoop",
+    "hbase": "repos/hbase",
     "jdk17u-dev": "repos/jdk17u-dev",
     "jdk11u-dev": "repos/jdk11u-dev",
     "jdk21u-dev": "repos/jdk21u-dev",
@@ -104,6 +105,7 @@ MAINLINE_REPO_PATH_MAP: dict[str, str] = {
 
 # Default branch to restore after processing (OpenJDK repos use master, not main).
 DEFAULT_BRANCH_MAP: dict[str, str] = {
+    "hbase": "master",
     "jdk17u-dev": "master",
     "jdk11u-dev": "master",
     "jdk21u-dev": "master",
