@@ -1,0 +1,217 @@
+{
+  "run_timestamp": "2026-04-19T08:38:09.725343",
+  "repo": "jdk25u-dev",
+  "patch_type": "TYPE-II",
+  "original_commit": "376d77e8a71478f456af5baaf47f446eebd79e36",
+  "backport_commit": "c03914817da13ae0bab37a35d94b3569a19964b1",
+  "description": "main \u2192 jdk25u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 2.04,
+      "error": null,
+      "java_hunks": 2,
+      "aux_hunks": 2,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.base/share/classes/java/text/DigitList.java",
+          "method_used": "fuzzy",
+          "confidence": 0.883,
+          "start_line": 361,
+          "end_line": 366,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.base/share/classes/java/text/DigitList.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 387,
+          "end_line": 397,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 3.42,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_II",
+        "confidence": 0.9,
+        "reasoning": "The patch modifies the DigitList.java file by moving a loop that eliminates trailing zeros to an earlier position in the method. This is a whitespace/formatting drift or minor code rearrangement rather than a structural change. The change was found via fuzzy matching with high confidence (0.88) for the first hunk and exact match for the second hunk, indicating minor differences in code layout. Additionally, a new test file and a minor test regression update are added, but these do not affect the classification of the core patch. The patch does not involve structural or API changes, so it is classified as TYPE_II with high confidence. The token budget estimate accounts for the code changes and test additions, requiring moderate effort to backport and verify.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "applied_count": 1,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/java/text/DigitList.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 42.62,
+      "error": null,
+      "adapted_count": 1
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 1,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "src/java.base/share/classes/java/text/DigitList.java",
+          "old_string": "            decimalAt += exponent - leadingZerosAfterDecimal;\n        }\n\n        if (fixedPoint) {\n            // The negative of the exponent represents the number of leading\n            // zeros between the decimal and the first non-zero digit, for",
+          "new_string": "            decimalAt += exponent - leadingZerosAfterDecimal;\n        }\n\n        // Eliminate trailing zeros.\n        while (count > 1 && digits[count - 1] == '0') {\n            --count;\n        }\n\n        if (fixedPoint) {\n            // The negative of the exponent represents the number of leading\n            // zeros between the decimal and the first non-zero digit, for",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.05,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/java.base/share/classes/java/text/DigitList.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 1
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk25u-dev-helper",
+      "test_success": true,
+      "test_mode": "jdk25u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/java/text/Format/DecimalFormat/RoundingTiesNearZeroTest.jtr.xml",
+          "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/java/text/Format/NumberFormat/NumberRegression.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "java/text/Format/DecimalFormat/RoundingTiesNearZeroTest.java#RoundingTiesNearZeroTest": "passed",
+          "java/text/Format/NumberFormat/NumberRegression.java#NumberRegression": "passed"
+        },
+        "classes": {
+          "java/text/Format/DecimalFormat/RoundingTiesNearZeroTest.java": "passed",
+          "java/text/Format/NumberFormat/NumberRegression.java": "passed"
+        },
+        "summary": {
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "total": 2
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [
+          "java/text/Format/DecimalFormat/RoundingTiesNearZeroTest.java#RoundingTiesNearZeroTest",
+          "java/text/Format/NumberFormat/NumberRegression.java#NumberRegression"
+        ],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 2,
+        "patched_total": 2,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 5,
+    "developer_aux_hunks_from_target": 2,
+    "phase0_baseline": {
+      "mode": "baseline-jdk25u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 2
+    },
+    "java_production_hunks": 2,
+    "developer_aux_hunks": 2,
+    "processed_hunk_indices": [
+      1,
+      0
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 2808,
+        "output": 1920
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 1,
+    "synthesized_count": 1,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "clean",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 1607,
+    "target_patch_bytes": 6637,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": true,
+    "test_mode": "jdk25u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [
+        "java/text/Format/DecimalFormat/RoundingTiesNearZeroTest.java#RoundingTiesNearZeroTest",
+        "java/text/Format/NumberFormat/NumberRegression.java#NumberRegression"
+      ],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 2,
+      "patched_total": 2,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 2,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

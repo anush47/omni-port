@@ -1,0 +1,156 @@
+diff --git a/src/java.desktop/share/classes/javax/swing/plaf/basic/BasicPasswordFieldUI.java b/src/java.desktop/share/classes/javax/swing/plaf/basic/BasicPasswordFieldUI.java
+index 6a78e2d6871..2e7ac97c0c9 100644
+--- a/src/java.desktop/share/classes/javax/swing/plaf/basic/BasicPasswordFieldUI.java
++++ b/src/java.desktop/share/classes/javax/swing/plaf/basic/BasicPasswordFieldUI.java
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 1997, 2006, Oracle and/or its affiliates. All rights reserved.
++ * Copyright (c) 1997, 2025, Oracle and/or its affiliates. All rights reserved.
+  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+  *
+  * This code is free software; you can redistribute it and/or modify it
+@@ -30,7 +30,6 @@
+ import javax.swing.event.*;
+ import javax.swing.plaf.*;
+ 
+-
+ /**
+  * Provides the Windows look and feel for a password field.
+  * The only difference from the standard text field is that
+@@ -68,7 +67,6 @@ protected String getPropertyPrefix() {
+         return "PasswordField";
+     }
+ 
+-
+     /**
+      * Installs the necessary properties on the JPasswordField.
+      * @since 1.6
+@@ -91,23 +89,4 @@ protected void installDefaults() {
+     public View create(Element elem) {
+         return new PasswordView(elem);
+     }
+-
+-    /**
+-     * Create the action map for Password Field.  This map provides
+-     * same actions for double mouse click and
+-     * and for triple mouse click (see bug 4231444).
+-     */
+-
+-    ActionMap createActionMap() {
+-        ActionMap map = super.createActionMap();
+-        if (map.get(DefaultEditorKit.selectWordAction) != null) {
+-            Action a = map.get(DefaultEditorKit.selectLineAction);
+-            if (a != null) {
+-                map.remove(DefaultEditorKit.selectWordAction);
+-                map.put(DefaultEditorKit.selectWordAction, a);
+-            }
+-        }
+-        return map;
+-    }
+-
+ }
+diff --git a/src/java.desktop/share/classes/javax/swing/plaf/basic/BasicTextUI.java b/src/java.desktop/share/classes/javax/swing/plaf/basic/BasicTextUI.java
+index ec0fbaf9928..4a8b23bbaa1 100644
+--- a/src/java.desktop/share/classes/javax/swing/plaf/basic/BasicTextUI.java
++++ b/src/java.desktop/share/classes/javax/swing/plaf/basic/BasicTextUI.java
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 1997, 2023, Oracle and/or its affiliates. All rights reserved.
++ * Copyright (c) 1997, 2025, Oracle and/or its affiliates. All rights reserved.
+  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+  *
+  * This code is free software; you can redistribute it and/or modify it
+@@ -519,7 +519,6 @@ void updateFocusAcceleratorBinding(boolean changed) {
+         }
+     }
+ 
+-
+     /**
+      * Invoked when editable property is changed.
+      *
+@@ -647,6 +646,22 @@ ActionMap createActionMap() {
+                 TransferHandler.getCopyAction());
+         map.put(TransferHandler.getPasteAction().getValue(Action.NAME),
+                 TransferHandler.getPasteAction());
++
++        if (getComponent() instanceof JPasswordField) {
++            // Edit the action map for Password Field.  This map provides
++            // same actions for double mouse click and
++            // and for triple mouse click (see bugs 4231444, 8354646).
++
++            if (map.get(DefaultEditorKit.selectWordAction) != null) {
++                map.remove(DefaultEditorKit.selectWordAction);
++
++                Action a = map.get(DefaultEditorKit.selectLineAction);
++                if (a != null) {
++                    map.put(DefaultEditorKit.selectWordAction, a);
++                }
++            }
++        }
++
+         return map;
+     }
+ 
+@@ -1011,7 +1026,6 @@ public Dimension getMaximumSize(JComponent c) {
+ 
+     // ---- TextUI methods -------------------------------------------
+ 
+-
+     /**
+      * Gets the allocation to give the root View.  Due
+      * to an unfortunate set of historical events this
+@@ -1298,7 +1312,6 @@ public View getRootView(JTextComponent tc) {
+         return rootView;
+     }
+ 
+-
+     /**
+      * Returns the string to be used as the tooltip at the passed in location.
+      * This forwards the method onto the root View.
+@@ -2200,7 +2213,6 @@ public boolean isEnabled() {
+         TextAction action = null;
+     }
+ 
+-
+     /**
+      * Registered in the ActionMap.
+      */
+@@ -2371,7 +2383,6 @@ protected DataFlavor getImportFlavor(DataFlavor[] flavors, JTextComponent c) {
+                 return null;
+             }
+ 
+-
+             for (int i = 0; i < flavors.length; i++) {
+                 String mime = flavors[i].getMimeType();
+                 if (mime.startsWith("text/plain")) {
+diff --git a/src/java.desktop/share/classes/javax/swing/plaf/synth/SynthPasswordFieldUI.java b/src/java.desktop/share/classes/javax/swing/plaf/synth/SynthPasswordFieldUI.java
+index 083a118c209..dbdeac3da1f 100644
+--- a/src/java.desktop/share/classes/javax/swing/plaf/synth/SynthPasswordFieldUI.java
++++ b/src/java.desktop/share/classes/javax/swing/plaf/synth/SynthPasswordFieldUI.java
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
++ * Copyright (c) 2002, 2025, Oracle and/or its affiliates. All rights reserved.
+  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+  *
+  * This code is free software; you can redistribute it and/or modify it
+@@ -108,19 +108,4 @@ public void paintBorder(SynthContext context, Graphics g, int x,
+                             int y, int w, int h) {
+         context.getPainter().paintPasswordFieldBorder(context, g, x, y, w, h);
+     }
+-
+-    /**
+-     * {@inheritDoc}
+-     */
+-    @Override
+-    protected void installKeyboardActions() {
+-        super.installKeyboardActions();
+-        ActionMap map = SwingUtilities.getUIActionMap(getComponent());
+-        if (map != null && map.get(DefaultEditorKit.selectWordAction) != null) {
+-            Action a = map.get(DefaultEditorKit.selectLineAction);
+-            if (a != null) {
+-                map.put(DefaultEditorKit.selectWordAction, a);
+-            }
+-        }
+-    }
+ }

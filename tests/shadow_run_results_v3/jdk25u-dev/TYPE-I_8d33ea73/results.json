@@ -1,0 +1,254 @@
+{
+  "run_timestamp": "2026-04-19T08:38:09.725343",
+  "repo": "jdk25u-dev",
+  "patch_type": "TYPE-I",
+  "original_commit": "8d33ea7395e5dd504b899d8972617f6696546d84",
+  "backport_commit": "4d68cf059653b8cd1888c8a0e6aecd892227662c",
+  "description": "main \u2192 jdk25u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 0.02,
+      "error": null,
+      "java_hunks": 6,
+      "aux_hunks": 2,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.desktop/share/classes/javax/swing/plaf/basic/BasicPasswordFieldUI.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.desktop/share/classes/javax/swing/plaf/basic/BasicPasswordFieldUI.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 91,
+          "end_line": 113,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.desktop/share/classes/javax/swing/plaf/basic/BasicTextUI.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.desktop/share/classes/javax/swing/plaf/basic/BasicTextUI.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 647,
+          "end_line": 652,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.desktop/share/classes/javax/swing/plaf/synth/SynthPasswordFieldUI.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/java.desktop/share/classes/javax/swing/plaf/synth/SynthPasswordFieldUI.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 108,
+          "end_line": 126,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 3.14,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_I",
+        "confidence": 0.95,
+        "reasoning": "The patch consists primarily of exact string replacements and removals of code blocks that are found exactly in the target branch, as indicated by the localization evidence showing 'git_exact' with confidence 1.00 for all hunks. The changes include copyright year updates, removal of a method in BasicPasswordFieldUI, addition of conditional logic in BasicTextUI, and removal of a method in SynthPasswordFieldUI, all of which are straightforward edits without structural or API changes. The addition of a new test file is also a straightforward addition. Overall, the patch does not involve structural or API refactoring, so it is classified as TYPE_I with high confidence. The token budget estimate is moderate due to multiple files and a new test addition but remains low complexity.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.03,
+      "error": null,
+      "applied_count": 6,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/javax/swing/plaf/basic/BasicPasswordFieldUI.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/javax/swing/plaf/basic/BasicPasswordFieldUI.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/javax/swing/plaf/basic/BasicTextUI.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/javax/swing/plaf/basic/BasicTextUI.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/javax/swing/plaf/synth/SynthPasswordFieldUI.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/javax/swing/plaf/synth/SynthPasswordFieldUI.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "adapted_count": 0
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 0,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": []
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [],
+      "synthesized_count_after_repair": 0
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk25u-dev-helper",
+      "test_success": false,
+      "test_mode": "jdk25u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/java/awt/TextField/SetEchoCharWordOpsTest.jtr.xml",
+          "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/javax/swing/plaf/basic/BasicTextUI/PasswordSelectionWordTest.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "java/awt/TextField/SetEchoCharWordOpsTest.java#SetEchoCharWordOpsTest": "failed",
+          "javax/swing/plaf/basic/BasicTextUI/PasswordSelectionWordTest.java#PasswordSelectionWordTest": "passed"
+        },
+        "classes": {
+          "java/awt/TextField/SetEchoCharWordOpsTest.java": "failed",
+          "javax/swing/plaf/basic/BasicTextUI/PasswordSelectionWordTest.java": "passed"
+        },
+        "summary": {
+          "passed": 1,
+          "failed": 1,
+          "skipped": 0,
+          "total": 2
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": false,
+        "fail_to_pass": [],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 2,
+        "patched_total": 2,
+        "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 9,
+    "developer_aux_hunks_from_target": 2,
+    "phase0_baseline": {
+      "mode": "baseline-jdk25u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 2
+    },
+    "java_production_hunks": 6,
+    "developer_aux_hunks": 2,
+    "processed_hunk_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 6,
+    "synthesized_count": 0,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 6014,
+    "target_patch_bytes": 9682,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": false,
+    "test_mode": "jdk25u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": false,
+      "fail_to_pass": [],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 2,
+      "patched_total": 2,
+      "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+    },
+    "fail_to_pass_count": 0,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": false
+  }
+}

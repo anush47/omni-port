@@ -1,0 +1,33 @@
+diff --git a/src/java.base/share/classes/sun/security/ssl/DTLSInputRecord.java b/src/java.base/share/classes/sun/security/ssl/DTLSInputRecord.java
+index e0196f3009c..c0e262fd241 100644
+--- a/src/java.base/share/classes/sun/security/ssl/DTLSInputRecord.java
++++ b/src/java.base/share/classes/sun/security/ssl/DTLSInputRecord.java
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 2015, 2024, Oracle and/or its affiliates. All rights reserved.
++ * Copyright (c) 2015, 2025, Oracle and/or its affiliates. All rights reserved.
+  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+  *
+  * This code is free software; you can redistribute it and/or modify it
+@@ -188,7 +188,6 @@ Plaintext[] decode(ByteBuffer packet) throws SSLProtocolException {
+                 return null;
+             }
+ 
+-
+             // Not ready to decrypt this record, may be an encrypted Finished
+             // message, need to buffer it.
+             byte[] fragment = new byte[contentLen];
+@@ -801,8 +800,11 @@ void queueUpHandshake(HandshakeFragment hsf) throws SSLProtocolException {
+ 
+             // buffer this fragment
+             if (hsf.handshakeType == SSLHandshake.FINISHED.id) {
+-                // Need no status update.
+-                bufferedFragments.add(hsf);
++                // Make sure it's not a retransmitted message
++                if (hsf.recordEpoch > handshakeEpoch) {
++                    bufferedFragments.add(hsf);
++                    flightIsReady = holes.isEmpty();
++                }
+             } else {
+                 bufferFragment(hsf);
+             }

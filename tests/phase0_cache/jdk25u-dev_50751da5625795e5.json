@@ -1,0 +1,28 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/tools/javac/flags/ExtendedStandardFlagsOverlayFlagsConflict.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/tools/javac/flags/NoFalseSealedError.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/tools/javac/platform/RequiresIdentityTest.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "tools/javac/flags/ExtendedStandardFlagsOverlayFlagsConflict.java#ExtendedStandardFlagsOverlayFlagsConflict": "failed",
+      "tools/javac/flags/NoFalseSealedError.java#NoFalseSealedError": "failed",
+      "tools/javac/platform/RequiresIdentityTest.java#RequiresIdentityTest": "failed"
+    },
+    "classes": {
+      "tools/javac/flags/ExtendedStandardFlagsOverlayFlagsConflict.java": "failed",
+      "tools/javac/flags/NoFalseSealedError.java": "failed",
+      "tools/javac/platform/RequiresIdentityTest.java": "failed"
+    },
+    "summary": {
+      "passed": 0,
+      "failed": 3,
+      "skipped": 0,
+      "total": 3
+    }
+  },
+  "mode": "baseline-jdk25u-dev-helper",
+  "skipped": false
+}

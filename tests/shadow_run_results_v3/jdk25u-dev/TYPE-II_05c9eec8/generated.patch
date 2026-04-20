@@ -1,0 +1,45 @@
+diff --git a/src/jdk.compiler/share/classes/com/sun/tools/javac/comp/Attr.java b/src/jdk.compiler/share/classes/com/sun/tools/javac/comp/Attr.java
+index 9c9672151c7..30a0291e203 100644
+--- a/src/jdk.compiler/share/classes/com/sun/tools/javac/comp/Attr.java
++++ b/src/jdk.compiler/share/classes/com/sun/tools/javac/comp/Attr.java
+@@ -490,7 +490,6 @@ public boolean installPostInferenceHook() {
+         }
+     }
+ 
+-
+     class ResultInfo {
+         final KindSelector pkind;
+         final Type pt;
+@@ -1002,7 +1001,6 @@ public void visitMethodDef(JCMethodDecl tree) {
+             deferredLintHandler.flush(tree, lint);
+             chk.checkDeprecatedAnnotation(tree.pos(), m);
+ 
+-
+             // Create a new environment with local scope
+             // for attributing the method.
+             Env<AttrContext> localEnv = memberEnter.methodEnv(tree, env);
+@@ -2079,7 +2077,6 @@ public void visitConditional(JCConditional tree) {
+                 unknownExprInfo :
+                 resultInfo.dup(conditionalContext(resultInfo.checkContext));
+ 
+-
+         // x ? y : z
+         // include x's bindings when true in y
+         // include x's bindings when false in z
+@@ -2834,7 +2831,7 @@ public void visitNewClass(final JCNewClass tree) {
+                     resultInfo.checkContext.deferredAttrContext().mode == DeferredAttr.AttrMode.SPECULATIVE;
+             boolean skipNonDiamondPath = false;
+             // Check that class is not abstract
+-            if (cdef == null && !isSpeculativeDiamondInferenceRound && // class body may be nulled out in speculative tree copy
++            if (cdef == null && !tree.classDeclRemoved() && !isSpeculativeDiamondInferenceRound && // class body may be nulled out in speculative tree copy
+                 (clazztype.tsym.flags() & (ABSTRACT | INTERFACE)) != 0) {
+                 log.error(tree.pos(),
+                           Errors.AbstractCantBeInstantiated(clazztype.tsym));
+@@ -3811,7 +3808,6 @@ ResultInfo memberReferenceQualifierResult(JCMemberReference tree) {
+                                   Type.noType);
+         }
+ 
+-
+     @SuppressWarnings("fallthrough")
+     void checkReferenceCompatible(JCMemberReference tree, Type descriptor, Type refType, CheckContext checkContext, boolean speculativeAttr) {
+         InferenceContext inferenceContext = checkContext.inferenceContext();

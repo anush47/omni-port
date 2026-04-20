@@ -1,0 +1,22 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/java/net/CookieStoreTest.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "java/net/CookieStoreTest.java#CookieStoreTest": "failed"
+    },
+    "classes": {
+      "java/net/CookieStoreTest.java": "failed"
+    },
+    "summary": {
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "total": 1
+    }
+  },
+  "mode": "baseline-jdk25u-dev-helper",
+  "skipped": false
+}

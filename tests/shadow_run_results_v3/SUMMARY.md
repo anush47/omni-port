@@ -1,17 +1,17 @@
 # Backport CLAW — Shadow Run Results (v3)
 
-**Last updated:** 2026-04-19 07:02:18  
-**Total:** 442 patch(es) run, **370 passed** (83%)
+**Last updated:** 2026-04-19 10:51:54  
+**Total:** 468 patch(es) run, **391 passed** (83%)
 
 > **Success** = at least one fail→pass or newly-passing test observed.
 
-| Type     |      crate       |      druid       |  elasticsearch   | graylog2-server  |    grpc-java     |      hadoop      |  hibernate-orm   |    jdk11u-dev    |    jdk17u-dev    |    jdk21u-dev    |     logstash     | spring-framework |       sql        |
-| -------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- |
-| TYPE-I   |      48/50       |       5/5        |      43/49       |      12/12       |      19/23       |       3/3        |       1/1        |        -         |      13/13       |      24/28       |       3/3        |       4/4        |        -         |
-| TYPE-II  |      49/50       |       1/1        |      19/25       |       3/5        |       3/3        |       1/2        |       4/4        |       4/5        |      26/28       |      14/14       |        -         |       4/4        |       4/4        |
-| TYPE-III |       1/2        |        -         |       1/2        |       0/1        |        -         |        -         |       4/4        |        -         |       8/9        |       3/3        |        -         |        -         |       1/2        |
-| TYPE-IV  |       2/2        |        -         |        -         |        -         |       0/1        |        -         |       1/1        |        -         |       1/1        |        -         |        -         |        -         |        -         |
-| TYPE-V   |      14/23       |       0/1        |      10/17       |       1/3        |       0/1        |       1/1        |       1/3        |       2/5        |       4/8        |       6/9        |        -         |       1/1        |       1/6        |
+| Type     |      crate       |      druid       |  elasticsearch   | graylog2-server  |    grpc-java     |      hadoop      |  hibernate-orm   |    jdk11u-dev    |    jdk17u-dev    |    jdk21u-dev    |    jdk25u-dev    |     logstash     | spring-framework |       sql        |
+| -------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- |
+| TYPE-I   |      48/50       |       5/5        |      43/49       |      12/12       |      19/23       |       3/3        |       1/1        |        -         |      13/13       |      24/28       |      17/21       |       3/3        |       4/4        |        -         |
+| TYPE-II  |      49/50       |       1/1        |      19/25       |       3/5        |       3/3        |       1/2        |       4/4        |       4/5        |      26/28       |      14/14       |       4/5        |        -         |       4/4        |       4/4        |
+| TYPE-III |       1/2        |        -         |       1/2        |       0/1        |        -         |        -         |       4/4        |        -         |       8/9        |       3/3        |        -         |        -         |        -         |       1/2        |
+| TYPE-IV  |       2/2        |        -         |        -         |        -         |       0/1        |        -         |       1/1        |        -         |       1/1        |        -         |        -         |        -         |        -         |        -         |
+| TYPE-V   |      14/23       |       0/1        |      10/17       |       1/3        |       0/1        |       1/1        |       1/3        |       2/5        |       4/8        |       6/9        |        -         |        -         |       1/1        |       1/6        |
 
 ---
 
@@ -437,6 +437,32 @@
 | jdk21u-dev | TYPE-V | `720b44648b` | ✗ | ✓ | 0 / 0 / 0 | - |  |
 | jdk21u-dev | TYPE-V | `fc98998627` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/net/httpclient/HttpGetInCancelledFuture.java#HttpGetInCancelledFuture |  |
 | jdk21u-dev | TYPE-V | `fdfe503d01` | ✓ | ✓ | 0 / 1 / 0 | Newly: sun/security/pkcs11/Provider/RequiredMechCheck.java#RequiredMechCheck |  |
+| jdk25u-dev | TYPE-II | `05c9eec8d0` | ✓ | ✓ | 1 / 0 / 0 | F→P: tools/javac/generics/diamond/AnonymousLabeledAsAbstractTest.java#AnonymousLabeledAsAbstractTest |  |
+| jdk25u-dev | TYPE-II | `0e98ec3662` | ✗ | ✓ | 0 / 0 / 0 | - |  |
+| jdk25u-dev | TYPE-II | `35dabb1a5f` | ✓ | ✓ | 5 / 0 / 0 | F→P: java/security/KeyStore/TestDisabledAlgorithms.java#TestDisabledAlgorithms, java/security/MessageDigest/TestDisabledAlgorithms.java#TestDisabledAlgorithms, java/security/Signature/TestDisabledAlgorithms.java#TestDisabledAlgorithms, javax/crypto/Cipher/TestDisabledAlgorithms.java#TestDisabledAlgorithms, sun/security/util/AlgorithmConstraints/InvalidCryptoDisabledAlgos.java#InvalidCryptoDisabledAlgos |  |
+| jdk25u-dev | TYPE-II | `376d77e8a7` | ✓ | ✓ | 2 / 0 / 0 | F→P: java/text/Format/DecimalFormat/RoundingTiesNearZeroTest.java#RoundingTiesNearZeroTest, java/text/Format/NumberFormat/NumberRegression.java#NumberRegression |  |
+| jdk25u-dev | TYPE-II | `bdf6853cfd` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/text/Format/CompactNumberFormat/TestClone.java#TestClone |  |
+| jdk25u-dev | TYPE-I | `022e29a775` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/net/CookieStoreTest.java#CookieStoreTest |  |
+| jdk25u-dev | TYPE-I | `12e6a0b6d0` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: sun/java2d/cmm/ColorConvertOp/FilterSemiCustomImages.java#FilterSemiCustomImages |  |
+| jdk25u-dev | TYPE-I | `2f2acb2e3f` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: jdk/jfr/event/tracing/TestTracedString.java#TestTracedString |  |
+| jdk25u-dev | TYPE-I | `2fe1298447` | ✓ | ✓ | 2 / 0 / 0 | F→P: compiler/jvmci/jdk.vm.ci.code.test/src/jdk/vm/ci/code/test/CodeInvalidationReasonTest.java#CodeInvalidationReasonTest, compiler/jvmci/jdk.vm.ci.code.test/src/jdk/vm/ci/code/test/SimpleCodeInstallationTest.java#SimpleCodeInstallationTest |  |
+| jdk25u-dev | TYPE-I | `37b725d9c1` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: java/util/TimeZone/SimpleTimeZoneEqualsHashCodeTest.java#SimpleTimeZoneEqualsHashCodeTest |  |
+| jdk25u-dev | TYPE-I | `57266064a7` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/net/HttpURLConnection/HostHeaderTest.java#HostHeaderTest |  |
+| jdk25u-dev | TYPE-I | `6f8d07ae21` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: java/util/concurrent/forkjoin/ContextClassLoaderTest.java#ContextClassLoaderTest |  |
+| jdk25u-dev | TYPE-I | `80cb0ead50` | ✓ | ✓ | 1 / 0 / 0 | F→P: javax/net/ssl/DTLS/FragmentedFinished.java#FragmentedFinished |  |
+| jdk25u-dev | TYPE-I | `81985d422d` | ✓ | ✓ | 0 / 0 / 0 | patch=exact |  |
+| jdk25u-dev | TYPE-I | `853319439e` | ✓ | ✓ | 3 / 0 / 0 | F→P: tools/javac/flags/ExtendedStandardFlagsOverlayFlagsConflict.java#ExtendedStandardFlagsOverlayFlagsConflict, tools/javac/flags/NoFalseSealedError.java#NoFalseSealedError, tools/javac/platform/RequiresIdentityTest.java#RequiresIdentityTest |  |
+| jdk25u-dev | TYPE-I | `8d33ea7395` | ✗ | ✓ | 0 / 0 / 0 | - |  |
+| jdk25u-dev | TYPE-I | `8d73fe91bc` | ✓ | ✓ | 0 / 0 / 0 | patch=exact |  |
+| jdk25u-dev | TYPE-I | `8ea544c33f` | ✓ | ✓ | 1 / 0 / 0 | F→P: jdk/jfr/event/tracing/TestLazyPlatformTracer.java#TestLazyPlatformTracer |  |
+| jdk25u-dev | TYPE-I | `99829950f6` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: java/util/Calendar/JapaneseCalendarNameTest.java#JapaneseCalendarNameTest |  |
+| jdk25u-dev | TYPE-I | `bcff857ba0` | ✗ | ✓ | 0 / 0 / 0 | - |  |
+| jdk25u-dev | TYPE-I | `c71be802b5` | ✗ | ✓ | 0 / 0 / 0 | - |  |
+| jdk25u-dev | TYPE-I | `cc5b35bf69` | ✓ | ✓ | 1 / 0 / 0 | F→P: java/util/concurrent/DelayScheduler/AscendingOrderAfterReplace.java#AscendingOrderAfterReplace |  |
+| jdk25u-dev | TYPE-I | `ced3f13f4e` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: java/util/Calendar/RollHoursTest.java#RollHoursTest |  |
+| jdk25u-dev | TYPE-I | `da0d9598d0` | ✓ | ✓ | 1 / 0 / 0 | patch=exact<br>F→P: jdk/jfr/jmx/streaming/TestWithers.java#TestWithers |  |
+| jdk25u-dev | TYPE-I | `e5196fc24d` | ✗ | ✓ | 0 / 0 / 0 | - |  |
+| jdk25u-dev | TYPE-I | `fd13e1ce98` | ✓ | ✓ | 1 / 0 / 0 | F→P: tools/javac/patterns/T8358801.java#T8358801 |  |
 | logstash | TYPE-I | `712b37e1df` | ✓ | ✓ | 2 / 0 / 0 | patch=exact<br>F→P: org.logstash.settings.SettingStringTest$WithValueConstraintCase#whenSetConstrainedToNullThenThrowAHelpfulError, org.logstash.settings.SettingStringTest$WithoutValueConstraintCase#whenSetUnconstrainedToNullThenThrowAHelpfulError |  |
 | logstash | TYPE-I | `cc608eb88b` | ✓ | ✓ | 5 / 0 / 0 | patch=exact<br>F→P: org.logstash.jackson.StreamReadConstraintsUtilTest#configOverridesDefault, org.logstash.jackson.StreamReadConstraintsUtilTest#configuresMaxNestingDepth, org.logstash.jackson.StreamReadConstraintsUtilTest#configuresMaxNumberLength, org.logstash.jackson.StreamReadConstraintsUtilTest#configuresMaxStringLength, org.logstash.jackson.StreamReadConstraintsUtilTest#usesJacksonDefaultsWhenNoConfig |  |
 | logstash | TYPE-I | `cd729b7682` | ✓ | ✓ | 0 / 0 / 0 | patch=exact |  |

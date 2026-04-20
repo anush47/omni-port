@@ -1,0 +1,25 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/java/awt/font/GlyphVector/GetGlyphCharIndexTest.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/java/awt/font/LineBreakMeasurer/KhmerLineBreakTest.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "java/awt/font/GlyphVector/GetGlyphCharIndexTest.java#GetGlyphCharIndexTest": "passed",
+      "java/awt/font/LineBreakMeasurer/KhmerLineBreakTest.java#KhmerLineBreakTest": "passed"
+    },
+    "classes": {
+      "java/awt/font/GlyphVector/GetGlyphCharIndexTest.java": "passed",
+      "java/awt/font/LineBreakMeasurer/KhmerLineBreakTest.java": "passed"
+    },
+    "summary": {
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "total": 2
+    }
+  },
+  "mode": "baseline-jdk25u-dev-helper",
+  "skipped": false
+}

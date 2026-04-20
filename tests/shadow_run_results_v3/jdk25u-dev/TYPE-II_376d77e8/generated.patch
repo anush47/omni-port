@@ -1,0 +1,44 @@
+diff --git a/src/java.base/share/classes/java/text/DigitList.java b/src/java.base/share/classes/java/text/DigitList.java
+index d757f03bb84..85bce581570 100644
+--- a/src/java.base/share/classes/java/text/DigitList.java
++++ b/src/java.base/share/classes/java/text/DigitList.java
+@@ -115,7 +115,6 @@ boolean isZero() {
+         return !nonZeroAfterIndex(0);
+     }
+ 
+-
+     /**
+      * Return true if there exists a non-zero digit in the digit list
+      * from the given index until the end.
+@@ -361,6 +360,11 @@ private void set(boolean isNegative, String s,
+             decimalAt += exponent - leadingZerosAfterDecimal;
+         }
+ 
++        // Eliminate trailing zeros.
++        while (count > 1 && digits[count - 1] == '0') {
++            --count;
++        }
++
+         if (fixedPoint) {
+             // The negative of the exponent represents the number of leading
+             // zeros between the decimal and the first non-zero digit, for
+@@ -387,11 +391,6 @@ private void set(boolean isNegative, String s,
+             // else fall through
+         }
+ 
+-        // Eliminate trailing zeros.
+-        while (count > 1 && digits[count - 1] == '0') {
+-            --count;
+-        }
+-
+         // Eliminate digits beyond maximum digits to be displayed.
+         // Round up if appropriate.
+         round(fixedPoint ? (maximumDigits + decimalAt) : maximumDigits,
+@@ -438,7 +437,6 @@ private final void round(int maximumDigits,
+         }
+     }
+ 
+-
+     /**
+      * Return true if truncating the representation to the given number
+      * of digits will result in an increment to the last digit.  This

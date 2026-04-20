@@ -1,0 +1,67 @@
+diff --git a/src/java.base/share/classes/sun/net/www/protocol/http/HttpURLConnection.java b/src/java.base/share/classes/sun/net/www/protocol/http/HttpURLConnection.java
+index 5d8e6f467aa..42909cb03a7 100644
+--- a/src/java.base/share/classes/sun/net/www/protocol/http/HttpURLConnection.java
++++ b/src/java.base/share/classes/sun/net/www/protocol/http/HttpURLConnection.java
+@@ -88,7 +88,6 @@
+  * A class to represent an HTTP connection to a remote object.
+  */
+ 
+-
+ public class HttpURLConnection extends java.net.HttpURLConnection {
+ 
+     static final String HTTP_CONNECT = "CONNECT";
+@@ -151,7 +150,6 @@ public class HttpURLConnection extends java.net.HttpURLConnection {
+      *     default is 4k
+      */
+ 
+-
+     /* Should we enable buffering of error streams? */
+     private static final boolean enableESBuffer;
+ 
+@@ -621,10 +619,10 @@ private void writeRequests() throws IOException {
+             if (port != -1 && port != url.getDefaultPort()) {
+                 host += ":" + String.valueOf(port);
+             }
+-            String reqHost = requests.findValue("Host");
+-            if (reqHost == null || !reqHost.equalsIgnoreCase(host)) {
+-                requests.set("Host", host);
+-            }
++            // if the "Host" header hasn't been explicitly set, then set its
++            // value to the one determined through the request URL
++            requests.setIfNotSet("Host", host);
++
+             requests.setIfNotSet("Accept", acceptString);
+ 
+             /*
+@@ -766,7 +764,6 @@ protected void setNewClient (URL url, boolean useCache)
+         http.setReadTimeout(readTimeout);
+     }
+ 
+-
+     /**
+      * Create a new HttpClient object, set up so that it uses
+      * per-instance proxying to the given HTTP proxy.  This
+@@ -2743,7 +2740,6 @@ public void disconnect() {
+                     hc.closeIdleConnection();
+                 }
+ 
+-
+             } else {
+                 // We are deliberately being disconnected so HttpClient
+                 // should not try to resend the request no matter what stage
+@@ -3077,7 +3073,6 @@ public void setConnectTimeout(int timeout) {
+         connectTimeout = timeout;
+     }
+ 
+-
+     /**
+      * Returns setting for connect timeout.
+      * <p>
+@@ -3492,7 +3487,6 @@ public void close () throws IOException {
+         }
+     }
+ 
+-
+     static class ErrorStream extends InputStream {
+         ByteBuffer buffer;
+         InputStream is;

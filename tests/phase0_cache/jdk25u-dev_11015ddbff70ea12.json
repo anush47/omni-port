@@ -1,0 +1,40 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/java/security/KeyStore/TestDisabledAlgorithms.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/java/security/MessageDigest/TestDisabledAlgorithms.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/java/security/Signature/TestDisabledAlgorithms.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/javax/crypto/Cipher/TestDisabledAlgorithms.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/sun/security/pkcs11/Cipher/TestDisabledAlgorithms.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/sun/security/pkcs11/Signature/TestNONEwithRSA.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/sun/security/util/AlgorithmConstraints/InvalidCryptoDisabledAlgos.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "java/security/KeyStore/TestDisabledAlgorithms.java#TestDisabledAlgorithms": "failed",
+      "java/security/MessageDigest/TestDisabledAlgorithms.java#TestDisabledAlgorithms": "failed",
+      "java/security/Signature/TestDisabledAlgorithms.java#TestDisabledAlgorithms": "failed",
+      "javax/crypto/Cipher/TestDisabledAlgorithms.java#TestDisabledAlgorithms": "failed",
+      "sun/security/pkcs11/Cipher/TestDisabledAlgorithms.java#TestDisabledAlgorithms": "passed",
+      "sun/security/pkcs11/Signature/TestNONEwithRSA.java#TestNONEwithRSA": "passed",
+      "sun/security/util/AlgorithmConstraints/InvalidCryptoDisabledAlgos.java#InvalidCryptoDisabledAlgos": "failed"
+    },
+    "classes": {
+      "java/security/KeyStore/TestDisabledAlgorithms.java": "failed",
+      "java/security/MessageDigest/TestDisabledAlgorithms.java": "failed",
+      "java/security/Signature/TestDisabledAlgorithms.java": "failed",
+      "javax/crypto/Cipher/TestDisabledAlgorithms.java": "failed",
+      "sun/security/pkcs11/Cipher/TestDisabledAlgorithms.java": "passed",
+      "sun/security/pkcs11/Signature/TestNONEwithRSA.java": "passed",
+      "sun/security/util/AlgorithmConstraints/InvalidCryptoDisabledAlgos.java": "failed"
+    },
+    "summary": {
+      "passed": 2,
+      "failed": 5,
+      "skipped": 0,
+      "total": 7
+    }
+  },
+  "mode": "baseline-jdk25u-dev-helper",
+  "skipped": false
+}
