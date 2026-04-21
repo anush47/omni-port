@@ -1,0 +1,211 @@
+{
+  "run_timestamp": "2026-04-20T20:33:33.263771",
+  "repo": "hbase",
+  "patch_type": "TYPE-I",
+  "original_commit": "63b26b126dd61257e1a6fdf2f6eb1737ad99d71c",
+  "backport_commit": "dbf8acf196ad74ce932eb1a5ad78368f207e0a6c",
+  "description": "master \u2192 branch-2.6",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 0.04,
+      "error": null,
+      "java_hunks": 2,
+      "aux_hunks": 1,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "hbase-client/src/main/java/org/apache/hadoop/hbase/client/AsyncTableImpl.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 28,
+          "end_line": 33,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "hbase-client/src/main/java/org/apache/hadoop/hbase/client/AsyncTableImpl.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 298,
+          "end_line": 316,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 4.93,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_II",
+        "confidence": 0.95,
+        "reasoning": "The patch modifies AsyncTableImpl.java by adding synchronization logic using Phaser to ensure callbacks are called in a defined order. The changes involve adding new concurrency control constructs and wrapping existing callback executions, which is more than simple string replacement but does not restructure the entire class or API. The patch also adds a new test file, which is a new addition but does not affect the complexity of backporting the main patch. Both hunks were found via 'git_exact' with high confidence, indicating the patch applies cleanly with minor formatting or context adjustments. Therefore, the patch is best classified as TYPE_II, involving some formatting and concurrency logic additions requiring fuzzy matching but not deep structural changes.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "applied_count": 2,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "hbase-client/src/main/java/org/apache/hadoop/hbase/client/AsyncTableImpl.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-client/src/main/java/org/apache/hadoop/hbase/client/AsyncTableImpl.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "adapted_count": 0
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.08,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 0,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": []
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [],
+      "synthesized_count_after_repair": 0
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "hbase-helper",
+      "test_success": true,
+      "test_mode": "hbase-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.TestSplitMergeQuotaTable.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.TestHBackupFileSystem.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.TestIncrementalBackup.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.client.TestAsyncAggregationClientWithCallbackThreadPool.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.client.TestFlushFromClient.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.client.TestFlushFromClientWithDisabledFlushProcedure.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.compress.zstd.TestZstdByteBuffDecompressor.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.hfile.TestHFileBlockHeaderCorruption.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.hfile.TestRowIndexV1RoundTrip.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.mapreduce.TestWALInputFormat.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.master.region.TestMasterRegionWALSyncTimeoutIOException.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.regionserver.TestCompaction.xml",
+          "/home/cseroot/omni-port/repos/hbase/hbase-endpoint/target/surefire-reports/TEST-org.apache.hadoop.hbase.client.TestAsyncAggregationClientWithCallbackThreadPool.xml"
+        ],
+        "target_classes": [
+          "org.apache.hadoop.hbase.client.TestAsyncAggregationClientWithCallbackThreadPool"
+        ],
+        "test_cases": {
+          "org.apache.hadoop.hbase.client.TestAsyncAggregationClientWithCallbackThreadPool#testAvg": "passed",
+          "org.apache.hadoop.hbase.client.TestAsyncAggregationClientWithCallbackThreadPool#testMax": "passed",
+          "org.apache.hadoop.hbase.client.TestAsyncAggregationClientWithCallbackThreadPool#testMin": "passed",
+          "org.apache.hadoop.hbase.client.TestAsyncAggregationClientWithCallbackThreadPool#testStd": "passed",
+          "org.apache.hadoop.hbase.client.TestAsyncAggregationClientWithCallbackThreadPool#testSum": "passed",
+          "org.apache.hadoop.hbase.client.TestAsyncAggregationClientWithCallbackThreadPool#testRowCount": "passed"
+        },
+        "classes": {
+          "org.apache.hadoop.hbase.client.TestAsyncAggregationClientWithCallbackThreadPool": "passed"
+        },
+        "summary": {
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "total": 6
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": false,
+        "fail_to_pass": [],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 6,
+        "patched_total": 6,
+        "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 3,
+    "developer_aux_hunks_from_target": 1,
+    "phase0_baseline": {
+      "mode": "baseline-hbase-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 6
+    },
+    "java_production_hunks": 2,
+    "developer_aux_hunks": 1,
+    "processed_hunk_indices": [
+      0,
+      1
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 2,
+    "synthesized_count": 0,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 2266,
+    "target_patch_bytes": 9203,
+    "patch_exact_match": true,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": true,
+    "test_mode": "hbase-helper",
+    "test_transition": {
+      "valid_backport_signal": false,
+      "fail_to_pass": [],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 6,
+      "patched_total": 6,
+      "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+    },
+    "fail_to_pass_count": 0,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

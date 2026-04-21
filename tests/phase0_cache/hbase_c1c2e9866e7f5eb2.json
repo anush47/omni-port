@@ -1,0 +1,28 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.hfile.TestRowIndexV1RoundTrip.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.mapreduce.TestWALInputFormat.xml",
+      "/home/cseroot/omni-port/repos/hbase/hbase-server/target/surefire-reports/TEST-org.apache.hadoop.hbase.io.hfile.TestRowIndexV1RoundTrip.xml"
+    ],
+    "target_classes": [
+      "org.apache.hadoop.hbase.io.hfile.TestRowIndexV1RoundTrip"
+    ],
+    "test_cases": {
+      "org.apache.hadoop.hbase.io.hfile.TestRowIndexV1RoundTrip#testReadMyWritesOnHeap": "passed",
+      "org.apache.hadoop.hbase.io.hfile.TestRowIndexV1RoundTrip#testReadMyWritesOnDirectMem": "passed"
+    },
+    "classes": {
+      "org.apache.hadoop.hbase.io.hfile.TestRowIndexV1RoundTrip": "passed"
+    },
+    "summary": {
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "total": 2
+    }
+  },
+  "mode": "baseline-hbase-helper",
+  "skipped": false
+}

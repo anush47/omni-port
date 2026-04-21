@@ -1,0 +1,289 @@
+{
+  "run_timestamp": "2026-04-20T20:33:33.263771",
+  "repo": "hbase",
+  "patch_type": "TYPE-I",
+  "original_commit": "30ce21bcadb403feef1007c22c5549fdcf8d13d9",
+  "backport_commit": "c1c2e9866e7f5eb2a961e771e5484ac022e7ab01",
+  "description": "master \u2192 branch-2.6",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 0.81,
+      "error": null,
+      "java_hunks": 7,
+      "aux_hunks": 1,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/ByteBufferKeyOnlyKeyValue.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 296,
+          "end_line": 299,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/io/encoding/RowIndexSeekerV1.java",
+          "method_used": "fuzzy",
+          "confidence": 0.991,
+          "start_line": 84,
+          "end_line": 93,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/io/encoding/RowIndexSeekerV1.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 254,
+          "end_line": 262,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/io/encoding/RowIndexSeekerV1.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 270,
+          "end_line": 282,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/io/encoding/RowIndexSeekerV1.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 286,
+          "end_line": 304,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/io/encoding/RowIndexSeekerV1.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 306,
+          "end_line": 312,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/io/encoding/RowIndexSeekerV1.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 320,
+          "end_line": 332,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 5.43,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_II",
+        "confidence": 0.95,
+        "reasoning": "The patch involves multiple changes primarily in the RowIndexSeekerV1.java file and a small addition in ByteBufferKeyOnlyKeyValue.java. Most changes are adjustments to offsets and buffer handling, which are structural but not deeply refactoring or redesigning the code. The localization evidence shows most hunks found with high confidence via 'git_exact' except one hunk found via 'fuzzy' with 0.99 confidence, indicating minor formatting or offset adjustments rather than major structural changes. The addition of a clear() method and resetting fields is straightforward. The patch also adds a new test file, which does not affect complexity classification. Overall, the patch requires fuzzy matching due to offset adjustments and minor structural tweaks but no deep refactoring or redesign, fitting TYPE_II complexity.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.01,
+      "error": null,
+      "applied_count": 6,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/ByteBufferKeyOnlyKeyValue.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/io/encoding/RowIndexSeekerV1.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/io/encoding/RowIndexSeekerV1.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/io/encoding/RowIndexSeekerV1.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/io/encoding/RowIndexSeekerV1.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/io/encoding/RowIndexSeekerV1.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 23.13,
+      "error": null,
+      "adapted_count": 1
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 1,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/io/encoding/RowIndexSeekerV1.java",
+          "old_string": "  public Cell getKey() {\n    if (current.keyBuffer.hasArray()) {\n      return new KeyValue.KeyOnlyKeyValue(current.keyBuffer.array(),\n        current.keyBuffer.arrayOffset() + current.keyBuffer.position(), current.keyLength);\n    } else {\n      final byte[] key = new byte[current.keyLength];\n      ByteBufferUtils.copyFromBufferToArray(key, current.keyBuffer, current.keyBuffer.position(), 0,\n        current.keyLength);\n      return new KeyValue.KeyOnlyKeyValue(key, 0, current.keyLength);\n    }",
+          "new_string": "  public Cell getKey() {\n    if (current.keyBuffer.hasArray()) {\n      return new KeyValue.KeyOnlyKeyValue(current.keyBuffer.array(),\n        current.keyBuffer.arrayOffset() + current.keyOffset, current.keyLength);\n    } else {\n      final byte[] key = new byte[current.keyLength];\n      ByteBufferUtils.copyFromBufferToArray(key, current.keyBuffer, current.keyOffset, 0,\n        current.keyLength);\n      return new KeyValue.KeyOnlyKeyValue(key, 0, current.keyLength);\n    }",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.06,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/io/encoding/RowIndexSeekerV1.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 1
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "hbase-helper",
+      "test_success": true,
+      "test_mode": "hbase-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.hfile.TestRowIndexV1RoundTrip.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.mapreduce.TestWALInputFormat.xml",
+          "/home/cseroot/omni-port/repos/hbase/hbase-server/target/surefire-reports/TEST-org.apache.hadoop.hbase.io.hfile.TestRowIndexV1RoundTrip.xml"
+        ],
+        "target_classes": [
+          "org.apache.hadoop.hbase.io.hfile.TestRowIndexV1RoundTrip"
+        ],
+        "test_cases": {
+          "org.apache.hadoop.hbase.io.hfile.TestRowIndexV1RoundTrip#testReadMyWritesOnHeap": "passed",
+          "org.apache.hadoop.hbase.io.hfile.TestRowIndexV1RoundTrip#testReadMyWritesOnDirectMem": "passed"
+        },
+        "classes": {
+          "org.apache.hadoop.hbase.io.hfile.TestRowIndexV1RoundTrip": "passed"
+        },
+        "summary": {
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "total": 2
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": false,
+        "fail_to_pass": [],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 2,
+        "patched_total": 2,
+        "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 8,
+    "developer_aux_hunks_from_target": 1,
+    "phase0_baseline": {
+      "mode": "baseline-hbase-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 2
+    },
+    "java_production_hunks": 7,
+    "developer_aux_hunks": 1,
+    "processed_hunk_indices": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      6,
+      1
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 3673,
+        "output": 874
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 6,
+    "synthesized_count": 1,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "clean",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 5876,
+    "target_patch_bytes": 12287,
+    "patch_exact_match": true,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": true,
+    "test_mode": "hbase-helper",
+    "test_transition": {
+      "valid_backport_signal": false,
+      "fail_to_pass": [],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 2,
+      "patched_total": 2,
+      "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+    },
+    "fail_to_pass_count": 0,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

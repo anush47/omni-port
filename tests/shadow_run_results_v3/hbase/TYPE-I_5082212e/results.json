@@ -1,0 +1,293 @@
+{
+  "run_timestamp": "2026-04-20T20:33:33.263771",
+  "repo": "hbase",
+  "patch_type": "TYPE-I",
+  "original_commit": "5082212e04911310e540b3851b94cebae6593361",
+  "backport_commit": "7ac7f054df2c76a6086239524d7c062ab25e16ef",
+  "description": "master \u2192 branch-2",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "java_hunks": 6,
+      "aux_hunks": 1,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/DefaultOperationQuota.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 111,
+          "end_line": 118,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/NoopQuotaLimiter.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 65,
+          "end_line": 70,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/NoopQuotaLimiter.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 75,
+          "end_line": 80,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/QuotaLimiter.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 79,
+          "end_line": 84,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/TimeBasedLimiter.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 240,
+          "end_line": 245,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/TimeBasedLimiter.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 250,
+          "end_line": 255,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 3.33,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_I",
+        "confidence": 1.0,
+        "reasoning": "All hunks in the patch were found in the target branch via 'git_exact' with confidence 1.00, indicating exact matches. The changes involve adding new methods to interfaces and classes and modifying method calls with additional parameters, but the structure and method names remain consistent. There is no evidence of structural or API divergence requiring complex refactoring. The patch is straightforward and can be classified as TYPE_I (exact match string replacement, trivial backport).",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.01,
+      "error": null,
+      "applied_count": 6,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/DefaultOperationQuota.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/NoopQuotaLimiter.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/NoopQuotaLimiter.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/QuotaLimiter.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/TimeBasedLimiter.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/TimeBasedLimiter.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "adapted_count": 0
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 0,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": []
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [],
+      "synthesized_count_after_repair": 0
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "hbase-helper",
+      "test_success": true,
+      "test_mode": "hbase-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.TestSplitMergeQuotaTable.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.TestHBackupFileSystem.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.TestIncrementalBackup.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.mapreduce.TestMapReduceBackupCopyJob.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.client.TestAsyncAggregationClientWithCallbackThreadPool.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.client.TestFlushFromClient.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.client.TestFlushFromClientWithDisabledFlushProcedure.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.coprocessor.TestRegionCoprocessorQuotaUsage.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.compress.zstd.TestZstdByteBuffDecompressor.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.hfile.TestHFileBlockHeaderCorruption.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.hfile.TestRowIndexV1RoundTrip.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.mapreduce.TestWALInputFormat.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.master.region.TestMasterRegionWALSyncTimeoutIOException.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.regionserver.TestCompaction.xml",
+          "/home/cseroot/omni-port/repos/hbase/hbase-server/target/surefire-reports/TEST-org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota.xml"
+        ],
+        "target_classes": [
+          "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota"
+        ],
+        "test_cases": {
+          "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testScanEstimateNewScanner": "passed",
+          "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testTooLargeReadBatchIsNotBlocked": "passed",
+          "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testTooLargeWriteSizeIsNotBlocked": "passed",
+          "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testTooLargeReadSizeIsNotBlocked": "passed",
+          "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testScanEstimateShrinkingWorkload": "passed",
+          "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testTooLargeRequestSizeIsNotBlocked": "passed",
+          "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testLargeBatchSaturatesReadNumLimit": "passed",
+          "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testScanEstimateGrowingWorkload": "passed",
+          "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testLargeBatchSaturatesReadWriteLimit": "passed",
+          "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testScanEstimateSecondNextCall": "passed",
+          "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testScanEstimateVariableFlatWorkload": "passed",
+          "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testTooLargeWriteBatchIsNotBlocked": "passed",
+          "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testScanEstimateFlatWorkload": "passed"
+        },
+        "classes": {
+          "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota": "passed"
+        },
+        "summary": {
+          "passed": 13,
+          "failed": 0,
+          "skipped": 0,
+          "total": 13
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [
+          "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testTooLargeReadBatchIsNotBlocked",
+          "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testTooLargeReadSizeIsNotBlocked",
+          "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testTooLargeRequestSizeIsNotBlocked",
+          "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testTooLargeWriteBatchIsNotBlocked",
+          "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testTooLargeWriteSizeIsNotBlocked"
+        ],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 13,
+        "patched_total": 13,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 8,
+    "developer_aux_hunks_from_target": 1,
+    "phase0_baseline": {
+      "mode": "baseline-hbase-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 13
+    },
+    "java_production_hunks": 6,
+    "developer_aux_hunks": 1,
+    "processed_hunk_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 6,
+    "synthesized_count": 0,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 5097,
+    "target_patch_bytes": 14528,
+    "patch_exact_match": true,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": true,
+    "test_mode": "hbase-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [
+        "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testTooLargeReadBatchIsNotBlocked",
+        "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testTooLargeReadSizeIsNotBlocked",
+        "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testTooLargeRequestSizeIsNotBlocked",
+        "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testTooLargeWriteBatchIsNotBlocked",
+        "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testTooLargeWriteSizeIsNotBlocked"
+      ],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 13,
+      "patched_total": 13,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 5,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

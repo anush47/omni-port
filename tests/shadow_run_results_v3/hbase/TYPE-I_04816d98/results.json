@@ -1,0 +1,337 @@
+{
+  "run_timestamp": "2026-04-20T20:33:33.263771",
+  "repo": "hbase",
+  "patch_type": "TYPE-I",
+  "original_commit": "04816d98a201efc6c6d50eed4a3b6d7154caf5e7",
+  "backport_commit": "f56248673aead5c1252165253bb85f6d24942416",
+  "description": "master \u2192 branch-2",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 0.21,
+      "error": null,
+      "java_hunks": 10,
+      "aux_hunks": 2,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/BackupManager.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 25,
+          "end_line": 31,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/BackupManager.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 34,
+          "end_line": 41,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/BackupManager.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 267,
+          "end_line": 368,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/BackupManifest.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 548,
+          "end_line": 651,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/FullTableBackupClient.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 190,
+          "end_line": 196,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/IncrementalTableBackupClient.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 311,
+          "end_line": 317,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/TableBackupClient.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 19,
+          "end_line": 26,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/TableBackupClient.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 271,
+          "end_line": 278,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 8,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/TableBackupClient.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 281,
+          "end_line": 293,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 9,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/TableBackupClient.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 312,
+          "end_line": 326,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 4.39,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_IV",
+        "confidence": 0.95,
+        "reasoning": "The patch removes a large block of code related to backup ancestor calculation and replaces it with a new implementation that changes the logic significantly. It also modifies multiple classes and methods, including BackupManager, BackupManifest, FullTableBackupClient, IncrementalTableBackupClient, and TableBackupClient. The changes involve structural refactoring of the backup ancestor calculation logic, including changes in method signatures, logic flow, and data structures used (e.g., use of Sets and Lists differently). Additionally, a new test class is added to cover scenarios related to incremental backup with data loss, indicating a deeper change in behavior and testing. The localization evidence shows all hunks were found via exact matches, but the nature of the changes is deep structural refactoring rather than simple string or whitespace changes. Therefore, the patch complexity is best classified as TYPE_IV (Deep structural refactoring, significant API divergence). The confidence is high due to exact localization and clear structural changes. The token budget estimate is relatively high due to the size and complexity of the patch and the need to understand and adapt the new logic fully.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.03,
+      "error": null,
+      "applied_count": 10,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/BackupManager.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/BackupManager.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/BackupManager.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/BackupManifest.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/FullTableBackupClient.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/IncrementalTableBackupClient.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/TableBackupClient.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/TableBackupClient.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/TableBackupClient.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/TableBackupClient.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "adapted_count": 0
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.08,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 0,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": []
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [],
+      "synthesized_count_after_repair": 0
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "hbase-helper",
+      "test_success": true,
+      "test_mode": "hbase-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.TestSplitMergeQuotaTable.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.TestBackupMerge.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.TestHBackupFileSystem.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.TestIncrementalBackup.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.TestIncrementalBackupWithDataLoss.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.mapreduce.TestMapReduceBackupCopyJob.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.master.TestBackupLogCleaner.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.client.TestAsyncAggregationClientWithCallbackThreadPool.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.client.TestFlushFromClient.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.client.TestFlushFromClientWithDisabledFlushProcedure.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.coprocessor.TestRegionCoprocessorQuotaUsage.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.compress.zstd.TestZstdByteBuffDecompressor.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.hfile.TestHFileBlockHeaderCorruption.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.hfile.TestRowIndexV1RoundTrip.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.mapreduce.TestWALInputFormat.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.master.region.TestMasterRegionWALSyncTimeoutIOException.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.regionserver.TestCompaction.xml",
+          "/home/cseroot/omni-port/repos/hbase/hbase-backup/target/surefire-reports/TEST-org.apache.hadoop.hbase.backup.TestIncrementalBackupWithDataLoss.xml"
+        ],
+        "target_classes": [
+          "org.apache.hadoop.hbase.backup.TestBackupBase",
+          "org.apache.hadoop.hbase.backup.TestIncrementalBackupWithDataLoss"
+        ],
+        "test_cases": {
+          "org.apache.hadoop.hbase.backup.TestIncrementalBackupWithDataLoss#testFullBackupBreaksDependencyOnOlderBackups": "passed"
+        },
+        "classes": {
+          "org.apache.hadoop.hbase.backup.TestIncrementalBackupWithDataLoss": "passed"
+        },
+        "summary": {
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [],
+        "pass_to_fail": [],
+        "newly_passing": [
+          "org.apache.hadoop.hbase.backup.TestIncrementalBackupWithDataLoss#testFullBackupBreaksDependencyOnOlderBackups"
+        ],
+        "baseline_total": 0,
+        "patched_total": 1,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 13,
+    "developer_aux_hunks_from_target": 2,
+    "phase0_baseline": {
+      "mode": "baseline-build-failed",
+      "skipped": true,
+      "cached": false,
+      "test_cases_total": 0
+    },
+    "java_production_hunks": 10,
+    "developer_aux_hunks": 2,
+    "processed_hunk_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 10,
+    "synthesized_count": 0,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 17137,
+    "target_patch_bytes": 23001,
+    "patch_exact_match": true,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": true,
+    "test_mode": "hbase-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [],
+      "pass_to_fail": [],
+      "newly_passing": [
+        "org.apache.hadoop.hbase.backup.TestIncrementalBackupWithDataLoss#testFullBackupBreaksDependencyOnOlderBackups"
+      ],
+      "baseline_total": 0,
+      "patched_total": 1,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 0,
+    "newly_passing_count": 1,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

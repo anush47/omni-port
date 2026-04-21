@@ -1,0 +1,32 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.compress.zstd.TestZstdByteBuffDecompressor.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.hfile.TestRowIndexV1RoundTrip.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.mapreduce.TestWALInputFormat.xml",
+      "/home/cseroot/omni-port/repos/hbase/hbase-compression/hbase-compression-zstd/target/surefire-reports/TEST-org.apache.hadoop.hbase.io.compress.zstd.TestZstdByteBuffDecompressor.xml"
+    ],
+    "target_classes": [
+      "org.apache.hadoop.hbase.io.compress.zstd.TestZstdByteBuffDecompressor"
+    ],
+    "test_cases": {
+      "org.apache.hadoop.hbase.io.compress.zstd.TestZstdByteBuffDecompressor#testDecompressHeapToDirect": "error",
+      "org.apache.hadoop.hbase.io.compress.zstd.TestZstdByteBuffDecompressor#testDecompressDirectToHeap": "error",
+      "org.apache.hadoop.hbase.io.compress.zstd.TestZstdByteBuffDecompressor#testCapabilities": "failed",
+      "org.apache.hadoop.hbase.io.compress.zstd.TestZstdByteBuffDecompressor#testDecompressHeapToHeap": "passed",
+      "org.apache.hadoop.hbase.io.compress.zstd.TestZstdByteBuffDecompressor#testDecompressDirectToDirect": "passed"
+    },
+    "classes": {
+      "org.apache.hadoop.hbase.io.compress.zstd.TestZstdByteBuffDecompressor": "failed"
+    },
+    "summary": {
+      "passed": 2,
+      "failed": 3,
+      "skipped": 0,
+      "total": 5
+    }
+  },
+  "mode": "baseline-hbase-helper",
+  "skipped": false
+}

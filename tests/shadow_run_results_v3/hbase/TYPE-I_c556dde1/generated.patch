@@ -1,0 +1,178 @@
+diff --git a/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/BackupInfo.java b/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/BackupInfo.java
+index 5a0094740d..f0dc10b836 100644
+--- a/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/BackupInfo.java
++++ b/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/BackupInfo.java
+@@ -267,7 +267,7 @@ public class BackupInfo implements Comparable<BackupInfo> {
+   }
+ 
+   public void setFailedMsg(String failedMsg) {
+-    if (failedMsg.length() > MAX_FAILED_MESSAGE_LENGTH) {
++    if (failedMsg != null && failedMsg.length() > MAX_FAILED_MESSAGE_LENGTH) {
+       failedMsg = failedMsg.substring(0, MAX_FAILED_MESSAGE_LENGTH);
+     }
+     this.failedMsg = failedMsg;
+diff --git a/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/HBackupFileSystem.java b/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/HBackupFileSystem.java
+index 2b27e75274..d5fd9aaf4c 100644
+--- a/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/HBackupFileSystem.java
++++ b/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/HBackupFileSystem.java
+@@ -17,6 +17,7 @@
+  */
+ package org.apache.hadoop.hbase.backup;
+ 
++import com.google.errorprone.annotations.RestrictedApi;
+ import java.io.IOException;
+ import org.apache.hadoop.conf.Configuration;
+ import org.apache.hadoop.fs.FileSystem;
+@@ -27,6 +28,8 @@ import org.apache.yetus.audience.InterfaceAudience;
+ import org.slf4j.Logger;
+ import org.slf4j.LoggerFactory;
+ 
++import org.apache.hbase.thirdparty.com.google.common.base.Preconditions;
++
+ /**
+  * View to an on-disk Backup Image FileSytem Provides the set of methods necessary to interact with
+  * the on-disk Backup Image data.
+@@ -97,10 +100,18 @@ public final class HBackupFileSystem {
+ 
+   private static Path getManifestPath(Configuration conf, Path backupRootPath, String backupId)
+     throws IOException {
++    return getManifestPath(conf, backupRootPath, backupId, true);
++  }
++
++  /* Visible for testing only */
++  @RestrictedApi(explanation = "Should only be called internally or in tests", link = "",
++      allowedOnPath = "(.*/src/test/.*|.*/org/apache/hadoop/hbase/backup/HBackupFileSystem.java)")
++  static Path getManifestPath(Configuration conf, Path backupRootPath, String backupId,
++    boolean throwIfNotFound) throws IOException {
+     FileSystem fs = backupRootPath.getFileSystem(conf);
+     Path manifestPath = new Path(getBackupPath(backupRootPath.toString(), backupId) + Path.SEPARATOR
+       + BackupManifest.MANIFEST_FILE_NAME);
+-    if (!fs.exists(manifestPath)) {
++    if (throwIfNotFound && !fs.exists(manifestPath)) {
+       String errorMsg = "Could not find backup manifest " + BackupManifest.MANIFEST_FILE_NAME
+         + " for " + backupId + ". File " + manifestPath + " does not exists. Did " + backupId
+         + " correspond to previously taken backup ?";
+@@ -109,6 +120,15 @@ public final class HBackupFileSystem {
+     return manifestPath;
+   }
+ 
++  public static Path getRootDirFromBackupPath(Path backupPath, String backupId) {
++    if (backupPath.getName().equals(BackupManifest.MANIFEST_FILE_NAME)) {
++      backupPath = backupPath.getParent();
++    }
++    Preconditions.checkArgument(backupPath.getName().equals(backupId),
++      String.format("Backup path %s must end in backupId %s", backupPath, backupId));
++    return backupPath.getParent();
++  }
++
+   public static BackupManifest getManifest(Configuration conf, Path backupRootPath, String backupId)
+     throws IOException {
+     BackupManifest manifest =
+diff --git a/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/BackupManifest.java b/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/BackupManifest.java
+index d66b588679..59ae3857f2 100644
+--- a/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/BackupManifest.java
++++ b/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/BackupManifest.java
+@@ -17,6 +17,7 @@
+  */
+ package org.apache.hadoop.hbase.backup.impl;
+ 
++import com.google.errorprone.annotations.RestrictedApi;
+ import java.io.IOException;
+ import java.util.ArrayList;
+ import java.util.Collections;
+@@ -158,12 +159,17 @@ public class BackupManifest {
+       return image;
+     }
+ 
++    /**
++     * This method deliberately does not include the backup root dir on the produced proto. This is
++     * because we don't want to persist the root dir on the backup itself, so that backups can still
++     * be used after they have moved locations. A restore's operator will always provide the root
++     * dir.
++     */
+     BackupProtos.BackupImage toProto() {
+       BackupProtos.BackupImage.Builder builder = BackupProtos.BackupImage.newBuilder();
+       builder.setBackupId(backupId);
+       builder.setCompleteTs(completeTs);
+       builder.setStartTs(startTs);
+-      builder.setBackupRootDir(rootDir);
+       if (type == BackupType.FULL) {
+         builder.setBackupType(BackupProtos.BackupType.FULL);
+       } else {
+@@ -439,7 +445,7 @@ public class BackupManifest {
+           } catch (Exception e) {
+             throw new BackupException(e);
+           }
+-          this.backupImage = BackupImage.fromProto(proto);
++          this.backupImage = hydrateRootDir(BackupImage.fromProto(proto), backupPath);
+           LOG.debug("Loaded manifest instance from manifest file: "
+             + BackupUtils.getPath(subFile.getPath()));
+           return;
+@@ -452,6 +458,20 @@ public class BackupManifest {
+     }
+   }
+ 
++  /* Visible for testing only */
++  @RestrictedApi(explanation = "Should only be called internally or in tests", link = "",
++      allowedOnPath = "(.*/src/test/.*|.*/org/apache/hadoop/hbase/backup/impl/BackupManifest.java)")
++  public static BackupImage hydrateRootDir(BackupImage backupImage, Path backupPath)
++    throws IOException {
++    String providedRootDir =
++      HBackupFileSystem.getRootDirFromBackupPath(backupPath, backupImage.backupId).toString();
++    backupImage.setRootDir(providedRootDir);
++    for (BackupImage ancestor : backupImage.getAncestors()) {
++      ancestor.setRootDir(providedRootDir);
++    }
++    return backupImage;
++  }
++
+   public BackupType getType() {
+     return backupImage.getType();
+   }
+diff --git a/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/mapreduce/MapReduceBackupMergeJob.java b/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/mapreduce/MapReduceBackupMergeJob.java
+index 1f9ae16c1d..0549a3371c 100644
+--- a/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/mapreduce/MapReduceBackupMergeJob.java
++++ b/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/mapreduce/MapReduceBackupMergeJob.java
+@@ -228,6 +228,7 @@ public class MapReduceBackupMergeJob implements BackupMergeJob {
+       if (
+         fileName.indexOf(FSTableDescriptors.TABLEINFO_DIR) > 0
+           || fileName.indexOf(HRegionFileSystem.REGION_INFO_FILE) > 0
++          || fileName.indexOf(BackupManifest.MANIFEST_FILE_NAME) > 0
+       ) {
+         toKeep.add(p);
+       }
+@@ -235,6 +236,7 @@ public class MapReduceBackupMergeJob implements BackupMergeJob {
+     // Copy meta to destination
+     for (Path p : toKeep) {
+       Path newPath = convertToDest(p, backupDirPath);
++      LOG.info("Copying tmp metadata from {} to {}", p, newPath);
+       copyFile(fs, p, newPath);
+     }
+   }
+@@ -310,8 +312,11 @@ public class MapReduceBackupMergeJob implements BackupMergeJob {
+     List<String> backupsToDelete) throws IllegalArgumentException, IOException {
+     BackupManifest manifest =
+       HBackupFileSystem.getManifest(conf, new Path(backupRoot), mergedBackupId);
++    LOG.info("Removing ancestors from merged backup {} : {}", mergedBackupId, backupsToDelete);
+     manifest.getBackupImage().removeAncestors(backupsToDelete);
+     // save back
++    LOG.info("Creating new manifest file for merged backup {} at root {}", mergedBackupId,
++      backupRoot);
+     manifest.store(conf);
+   }
+ 
+@@ -320,12 +325,14 @@ public class MapReduceBackupMergeJob implements BackupMergeJob {
+     // Delete from backup system table
+     try (BackupSystemTable table = new BackupSystemTable(conn)) {
+       for (String backupId : backupIds) {
++        LOG.info("Removing metadata for backup {}", backupId);
+         table.deleteBackupInfo(backupId);
+       }
+     }
+ 
+     // Delete from file system
+     for (String backupId : backupIds) {
++      LOG.info("Purging backup {} from FileSystem", backupId);
+       Path backupDirPath = HBackupFileSystem.getBackupPath(backupRoot, backupId);
+ 
+       if (!fs.delete(backupDirPath, true)) {

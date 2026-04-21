@@ -1,0 +1,40 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.compress.zstd.TestZstdByteBuffDecompressor.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.hfile.TestHFileBlockHeaderCorruption.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.hfile.TestRowIndexV1RoundTrip.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.mapreduce.TestWALInputFormat.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.regionserver.TestCompaction.xml",
+      "/home/cseroot/omni-port/repos/hbase/hbase-server/target/surefire-reports/TEST-org.apache.hadoop.hbase.regionserver.TestCompaction.xml"
+    ],
+    "target_classes": [
+      "org.apache.hadoop.hbase.regionserver.TestCompaction"
+    ],
+    "test_cases": {
+      "org.apache.hadoop.hbase.regionserver.TestCompaction#testCompactionFailure": "passed",
+      "org.apache.hadoop.hbase.regionserver.TestCompaction#testStopStartCompaction": "passed",
+      "org.apache.hadoop.hbase.regionserver.TestCompaction#testMultipleCustomCompactionRequests": "passed",
+      "org.apache.hadoop.hbase.regionserver.TestCompaction#testCompactionWithCorruptBlock": "error",
+      "org.apache.hadoop.hbase.regionserver.TestCompaction#testCompactionSeqId": "passed",
+      "org.apache.hadoop.hbase.regionserver.TestCompaction#testInterruptCompactionBySize": "passed",
+      "org.apache.hadoop.hbase.regionserver.TestCompaction#testInterruptCompactionByTime": "passed",
+      "org.apache.hadoop.hbase.regionserver.TestCompaction#testInterruptingRunningCompactions": "passed",
+      "org.apache.hadoop.hbase.regionserver.TestCompaction#testCompactionWithCorruptResult": "passed",
+      "org.apache.hadoop.hbase.regionserver.TestCompaction#testTrackingCompactionRequest": "passed",
+      "org.apache.hadoop.hbase.regionserver.TestCompaction#testCompactionQueuePriorities": "passed"
+    },
+    "classes": {
+      "org.apache.hadoop.hbase.regionserver.TestCompaction": "failed"
+    },
+    "summary": {
+      "passed": 10,
+      "failed": 1,
+      "skipped": 0,
+      "total": 11
+    }
+  },
+  "mode": "baseline-hbase-helper",
+  "skipped": false
+}

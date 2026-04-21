@@ -1,0 +1,818 @@
+{
+  "run_timestamp": "2026-04-20T20:33:33.263771",
+  "repo": "hbase",
+  "patch_type": "TYPE-I",
+  "original_commit": "8c989c92a67cc4373c1291f400aa372bca2d33b6",
+  "backport_commit": "e1cebb0deaf8c55071b9e490172e725b37e78d4a",
+  "description": "master \u2192 branch-2",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 37.43,
+      "error": null,
+      "java_hunks": 15,
+      "aux_hunks": 1,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/HConstants.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1709,
+          "end_line": 1714,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/DecommissionedHostRejectedException.java",
+          "method_used": "new_file",
+          "confidence": 1.0,
+          "start_line": 0,
+          "end_line": 0,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/HMaster.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 508,
+          "end_line": 514,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/HMaster.java",
+          "method_used": "git_pickaxe",
+          "confidence": 0.869,
+          "start_line": 967,
+          "end_line": 973,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 27,
+          "end_line": 32,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "method_used": "git_pickaxe",
+          "confidence": 0.814,
+          "start_line": 45,
+          "end_line": 50,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 88,
+          "end_line": 94,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 140,
+          "end_line": 145,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 8,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "method_used": "failed",
+          "confidence": 0.0,
+          "start_line": 0,
+          "end_line": 0,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 9,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 196,
+          "end_line": 206,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 10,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 262,
+          "end_line": 267,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 11,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 607,
+          "end_line": 619,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 12,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 623,
+          "end_line": 644,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 13,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/HRegionServer.java",
+          "method_used": "git_pickaxe",
+          "confidence": 0.886,
+          "start_line": 143,
+          "end_line": 148,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 14,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/HRegionServer.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 3078,
+          "end_line": 3083,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 4.63,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_III",
+        "confidence": 0.95,
+        "reasoning": "The patch introduces a new configuration key and default value, adds a new exception class, modifies existing classes with new methods and logic, and implements a new interface (ConfigurationObserver). It also adds logic to reject decommissioned hosts based on configuration and server state, modifies server lifecycle management, and updates test cases to cover the new behavior. These changes involve structural modifications to multiple classes, including adding new methods, implementing interfaces, and changing control flow, which go beyond simple string replacements or formatting changes. The patch is not a deep refactoring or complete redesign but involves structural changes consistent with TYPE_III complexity. The confidence is high due to the clear structural changes and the localization evidence showing mostly exact matches and some fuzzy matches indicating moderate complexity. The token budget estimate is moderate to high due to the size and complexity of the patch and the need to carefully backport structural changes and new files.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.02,
+      "error": null,
+      "applied_count": 10,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/HConstants.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/HMaster.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/HRegionServer.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 94.55,
+      "error": null,
+      "adapted_count": 3
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.08,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 97.3,
+      "error": null,
+      "synthesized_count": 4,
+      "failed_count": 1,
+      "synthesis_status": "partial",
+      "synthesized_hunks": [
+        {
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/DecommissionedHostRejectedException.java",
+          "old_string": "",
+          "new_string": "/*\n * Licensed to the Apache Software Foundation (ASF) under one\n * or more contributor license agreements.  See the NOTICE file\n * distributed with this work for additional information\n * regarding copyright ownership.  The ASF licenses this file\n * to you under the Apache License, Version 2.0 (the\n * \"License\"); you may not use this file except in compliance\n * with the License.  You may obtain a copy of the License at\n *\n *     http://www.apache.org/licenses/LICENSE-2.0\n *\n * Unless required by applicable law or agreed to in writing, software\n * distributed under the License is distributed on an \"AS IS\" BASIS,\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n * See the License for the specific language governing permissions and\n * limitations under the License.\n */\npackage org.apache.hadoop.hbase.master;\n\nimport org.apache.hadoop.hbase.HBaseIOException;\nimport org.apache.yetus.audience.InterfaceAudience;\n\n@InterfaceAudience.Private\npublic class DecommissionedHostRejectedException extends HBaseIOException {\n  public DecommissionedHostRejectedException(String message) {\n    super(message);\n  }\n}",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        },
+        {
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/HMaster.java",
+          "old_string": "    this.serverManager = createServerManager(this, rsListStorage);",
+          "new_string": "    this.serverManager = createServerManager(this, rsListStorage);\n    // Initialize the ServerManager and register it as a configuration observer\n    this.configurationManager.registerObserver(this.serverManager);",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        },
+        {
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "old_string": "import org.apache.hadoop.hbase.client.RegionInfo;\nimport org.apache.hadoop.hbase.ipc.HBaseRpcController;",
+          "new_string": "import org.apache.hadoop.hbase.client.RegionInfo;\nimport org.apache.hadoop.hbase.conf.ConfigurationObserver;\nimport org.apache.hadoop.hbase.ipc.HBaseRpcController;",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        },
+        {
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/HRegionServer.java",
+          "old_string": "import org.apache.hadoop.hbase.log.HBaseMarkers;",
+          "new_string": "import org.apache.hadoop.hbase.log.HBaseMarkers;\nimport org.apache.hadoop.hbase.master.DecommissionedHostRejectedException;",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.61,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/DecommissionedHostRejectedException.java",
+          "outcome": "clean"
+        },
+        {
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/HMaster.java",
+          "outcome": "clean"
+        },
+        {
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/HRegionServer.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 3
+    },
+    "agent7_validator": {
+      "validation_passed": false,
+      "validation_failure_category": "unknown",
+      "validation_error_context": "Build failed (hbase-helper): [\u001b[1;31mERROR\u001b[m] COMPILATION ERROR : \n[\u001b[1;31mERROR\u001b[m] /repo/hbase-server/src/main/java/org/apache/hadoop/hbase/master/HMaster.java:[971,52] incompatible types: org.apache.hadoop.hbase.master.ServerManager cannot be converted to org.apache.hadoop.hbase.conf.ConfigurationObserver\n[\u001b[1;34mINFO\u001b[m] \u001b[1;31mBUILD FAILURE\u001b[m\n[\u001b[1;31mERROR\u001b[m] Failed to execute goal \u001b[32morg.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile\u001b[m \u001b[1m(default-compile)\u001b[m on project \u001b[",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": false,
+      "build_mode": "hbase-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": []
+    },
+    "agent9_fallback_1": {
+      "fallback_status": "failed",
+      "fallback_attempts": 1,
+      "synthesized_count": 0,
+      "hunk_descriptions": [
+        {
+          "hunk_index": 0,
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/HConstants.java",
+          "what_changed": "Added new configuration key and default value constants related to rejecting hosts of decommissioned RegionServers.",
+          "where_in_code": "HConstants class, static fields",
+          "intent": "Introduce configuration options to control whether the HMaster should reject RegionServers whose hosts are marked as decommissioned, enabling finer control over server admission.",
+          "change_type": "add_field",
+          "key_symbols": [
+            "REJECT_DECOMMISSIONED_HOSTS_KEY",
+            "REJECT_DECOMMISSIONED_HOSTS_DEFAULT"
+          ]
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/DecommissionedHostRejectedException.java",
+          "what_changed": "Added a new exception class to represent rejection of RegionServers from decommissioned hosts.",
+          "where_in_code": "DecommissionedHostRejectedException class",
+          "intent": "Provide a specific exception type to signal when a RegionServer is rejected due to its host being decommissioned, improving error handling and clarity.",
+          "change_type": "add_method",
+          "key_symbols": [
+            "DecommissionedHostRejectedException"
+          ]
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/HMaster.java",
+          "what_changed": "Whitespace/formatting adjustment around status publishing code, no semantic change.",
+          "where_in_code": "HMaster class, initialization code",
+          "intent": "No functional change; likely formatting cleanup.",
+          "change_type": "other",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/HMaster.java",
+          "what_changed": "Registered ServerManager as a configuration observer during HMaster initialization.",
+          "where_in_code": "HMaster constructor or initialization block",
+          "intent": "Enable ServerManager to receive live configuration updates dynamically, allowing it to react to configuration changes without restart.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "serverManager",
+            "configurationManager.registerObserver"
+          ]
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "what_changed": "Added import of java.util.Objects.",
+          "where_in_code": "ServerManager imports",
+          "intent": "Support null-safe object comparisons in the ServerManager class.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "Objects"
+          ]
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "what_changed": "Added import of ConfigurationObserver interface.",
+          "where_in_code": "ServerManager imports",
+          "intent": "Prepare ServerManager to implement configuration observation for dynamic config updates.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "ConfigurationObserver"
+          ]
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "what_changed": "ServerManager class now implements ConfigurationObserver interface.",
+          "where_in_code": "ServerManager class declaration",
+          "intent": "Allow ServerManager to observe and react to configuration changes at runtime.",
+          "change_type": "modify_signature",
+          "key_symbols": [
+            "ServerManager",
+            "ConfigurationObserver"
+          ]
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "what_changed": "Added a volatile boolean field to hold the current configuration value for rejecting decommissioned hosts.",
+          "where_in_code": "ServerManager class fields",
+          "intent": "Maintain the current state of the reject decommissioned hosts configuration for runtime checks.",
+          "change_type": "add_field",
+          "key_symbols": [
+            "rejectDecommissionedHostsConfig"
+          ]
+        },
+        {
+          "hunk_index": 8,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "what_changed": "Implemented ConfigurationObserver's onConfigurationChange method to update rejectDecommissionedHostsConfig dynamically; added helper method to read this config from Configuration.",
+          "where_in_code": "ServerManager class, onConfigurationChange(Configuration) and getRejectDecommissionedHostsConfig(Configuration) methods",
+          "intent": "Enable ServerManager to live-update its behavior based on changes to the reject decommissioned hosts configuration without restart.",
+          "change_type": "add_method",
+          "key_symbols": [
+            "onConfigurationChange",
+            "getRejectDecommissionedHostsConfig"
+          ]
+        },
+        {
+          "hunk_index": 9,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "what_changed": "Inserted a call to checkRejectableDecommissionedStatus during RegionServer startup processing to potentially reject servers from decommissioned hosts.",
+          "where_in_code": "ServerManager class, method handling RegionServer startup (likely processRegionServerStartup or similar)",
+          "intent": "Enforce the configured policy to reject RegionServers whose hosts are marked as decommissioned at the point of their startup request.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "checkRejectableDecommissionedStatus"
+          ]
+        },
+        {
+          "hunk_index": 10,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "what_changed": "Added private method checkRejectableDecommissionedStatus that throws an exception if a RegionServer's host is in the decommissioned list and rejection is enabled.",
+          "where_in_code": "ServerManager class, private method checkRejectableDecommissionedStatus(ServerName)",
+          "intent": "Implement the logic to enforce rejection of RegionServers from decommissioned hosts based on current configuration and internal decommissioned servers list.",
+          "change_type": "add_method",
+          "key_symbols": [
+            "checkRejectableDecommissionedStatus",
+            "DecommissionedHostRejectedException"
+          ]
+        },
+        {
+          "hunk_index": 11,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "what_changed": "Simplified removeServerFromDrainList method by removing warnings when server is not online and adding an info log on removal.",
+          "where_in_code": "ServerManager class, removeServerFromDrainList(ServerName) method",
+          "intent": "Clean up logging to reduce noise and provide clearer info-level logging when servers are removed from the draining list.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "removeServerFromDrainList"
+          ]
+        },
+        {
+          "hunk_index": 12,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "what_changed": "Modified addServerToDrainList to allow adding servers not currently online if the master is configured to reject decommissioned hosts; otherwise, warn and ignore offline servers.",
+          "where_in_code": "ServerManager class, addServerToDrainList(ServerName) method",
+          "intent": "Support adding decommissioned servers to the draining list even if they are offline, aligning with the new rejection policy and improving draining management.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "addServerToDrainList",
+            "rejectDecommissionedHostsConfig"
+          ]
+        },
+        {
+          "hunk_index": 13,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/HRegionServer.java",
+          "what_changed": "Added import of DecommissionedHostRejectedException to HRegionServer.",
+          "where_in_code": "HRegionServer imports",
+          "intent": "Prepare HRegionServer to handle the new exception type thrown when the master rejects startup due to decommissioned host status.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "DecommissionedHostRejectedException"
+          ]
+        },
+        {
+          "hunk_index": 14,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/HRegionServer.java",
+          "what_changed": "Added handling for DecommissionedHostRejectedException in RegionServer startup exception handling to log a fatal error and abort startup.",
+          "where_in_code": "HRegionServer class, RegionServer startup exception handling block",
+          "intent": "Ensure that when the master rejects the RegionServer due to decommissioned host status, the RegionServer logs the reason and aborts startup cleanly.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "DecommissionedHostRejectedException"
+          ]
+        }
+      ]
+    },
+    "agent8_syntax_repair_fallback_1": {
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": []
+    },
+    "agent7_validator_retry1": {
+      "validation_passed": false,
+      "validation_failure_category": "api_mismatch",
+      "validation_error_context": "Build failed (hbase-helper): [\u001b[1;31mERROR\u001b[m] COMPILATION ERROR : \n[\u001b[1;31mERROR\u001b[m] /repo/hbase-server/src/test/java/org/apache/hadoop/hbase/regionserver/TestRegionServerReportForDuty.java:[42,38] cannot find symbol\n  symbol:   class DecommissionedHostRejectedException\n[\u001b[1;34mINFO\u001b[m] \u001b[1;31mBUILD FAILURE\u001b[m\n[\u001b[1;31mERROR\u001b[m] Failed to execute goal \u001b[32morg.apache.maven.plugins:maven-compiler-plugin:3.8.1:testCompile\u001b[m \u001b[1m(default-testCompile)\u001b[m on project \u001b[36mhbase-server\u001b[m: \u001b[1;31mComp",
+      "validation_attempts": 2,
+      "retry_files": [],
+      "build_success": false,
+      "build_mode": "hbase-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": []
+    },
+    "agent9_fallback_2": {
+      "fallback_status": "failed",
+      "fallback_attempts": 2,
+      "synthesized_count": 0,
+      "hunk_descriptions": [
+        {
+          "hunk_index": 0,
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/HConstants.java",
+          "what_changed": "Added new configuration key and default value constants related to rejecting hosts of decommissioned RegionServers in the HMaster.",
+          "where_in_code": "HConstants class, static fields",
+          "intent": "To introduce configuration options that control whether the HMaster should reject RegionServers whose hosts are marked as decommissioned, enabling finer control over server acceptance.",
+          "change_type": "add_field",
+          "key_symbols": [
+            "REJECT_DECOMMISSIONED_HOSTS_KEY",
+            "REJECT_DECOMMISSIONED_HOSTS_DEFAULT"
+          ]
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/DecommissionedHostRejectedException.java",
+          "what_changed": "Added a new exception class named DecommissionedHostRejectedException extending HBaseIOException.",
+          "where_in_code": "DecommissionedHostRejectedException class",
+          "intent": "To provide a specific exception type to signal when a RegionServer is rejected due to being on a decommissioned host, improving error handling clarity.",
+          "change_type": "add_method",
+          "key_symbols": [
+            "DecommissionedHostRejectedException"
+          ]
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/HMaster.java",
+          "what_changed": "Whitespace or formatting adjustment around status publishing code, no semantic change.",
+          "where_in_code": "HMaster class, initialization code",
+          "intent": "No functional change; likely formatting cleanup.",
+          "change_type": "other",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/HMaster.java",
+          "what_changed": "Registered the ServerManager instance as a configuration observer during HMaster initialization.",
+          "where_in_code": "HMaster class, constructor or initialization block",
+          "intent": "To enable ServerManager to receive live configuration updates dynamically, allowing it to react to configuration changes without restart.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "serverManager",
+            "configurationManager.registerObserver"
+          ]
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "what_changed": "Added import of java.util.Objects.",
+          "where_in_code": "ServerManager imports",
+          "intent": "To support null-safe equality checks or other utility methods from Objects class.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "Objects"
+          ]
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "what_changed": "Added import of ConfigurationObserver interface.",
+          "where_in_code": "ServerManager imports",
+          "intent": "To allow ServerManager to implement configuration change observation for dynamic config updates.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "ConfigurationObserver"
+          ]
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "what_changed": "Modified ServerManager class to implement ConfigurationObserver interface.",
+          "where_in_code": "ServerManager class declaration",
+          "intent": "To enable ServerManager to receive and handle configuration changes dynamically.",
+          "change_type": "modify_signature",
+          "key_symbols": [
+            "ServerManager",
+            "ConfigurationObserver"
+          ]
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "what_changed": "Added a volatile boolean field rejectDecommissionedHostsConfig to ServerManager.",
+          "where_in_code": "ServerManager class, fields",
+          "intent": "To store the current configuration value indicating whether to reject decommissioned hosts, supporting dynamic config updates.",
+          "change_type": "add_field",
+          "key_symbols": [
+            "rejectDecommissionedHostsConfig"
+          ]
+        },
+        {
+          "hunk_index": 8,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "what_changed": "Implemented onConfigurationChange method to update rejectDecommissionedHostsConfig dynamically when configuration changes; added helper method to read this config value.",
+          "where_in_code": "ServerManager class, onConfigurationChange(Configuration) and getRejectDecommissionedHostsConfig(Configuration)",
+          "intent": "To enable ServerManager to live-update its behavior regarding rejecting decommissioned hosts based on configuration changes without restart.",
+          "change_type": "add_method",
+          "key_symbols": [
+            "onConfigurationChange",
+            "getRejectDecommissionedHostsConfig",
+            "rejectDecommissionedHostsConfig"
+          ]
+        },
+        {
+          "hunk_index": 9,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "what_changed": "Inserted a call to checkRejectableDecommissionedStatus during RegionServer startup processing to potentially reject servers from decommissioned hosts.",
+          "where_in_code": "ServerManager class, method handling RegionServer startup (likely processRegionServerStartup or similar)",
+          "intent": "To enforce the new policy of rejecting RegionServers whose hosts are marked as decommissioned, preventing them from joining the cluster.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "checkRejectableDecommissionedStatus"
+          ]
+        },
+        {
+          "hunk_index": 10,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "what_changed": "Added private method checkRejectableDecommissionedStatus that throws DecommissionedHostRejectedException if the server's hostname is in the decommissioned servers list and the config to reject such hosts is enabled.",
+          "where_in_code": "ServerManager class, private method checkRejectableDecommissionedStatus(ServerName)",
+          "intent": "To encapsulate the logic for rejecting RegionServers from decommissioned hosts based on current configuration and internal decommissioned servers list.",
+          "change_type": "add_method",
+          "key_symbols": [
+            "checkRejectableDecommissionedStatus",
+            "DecommissionedHostRejectedException",
+            "rejectDecommissionedHostsConfig"
+          ]
+        },
+        {
+          "hunk_index": 11,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "what_changed": "Simplified removeServerFromDrainList method by removing warnings when server is not online and added an info log on removal.",
+          "where_in_code": "ServerManager class, method removeServerFromDrainList(ServerName)",
+          "intent": "To reduce noisy warnings and provide clearer logging when removing servers from the draining list, regardless of their online status.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "removeServerFromDrainList"
+          ]
+        },
+        {
+          "hunk_index": 12,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+          "what_changed": "Modified addServerToDrainList to allow adding servers not currently online if the master is configured to reject decommissioned hosts; otherwise, warn and ignore. Adjusted logging accordingly.",
+          "where_in_code": "ServerManager class, method addServerToDrainList(ServerName)",
+          "intent": "To support adding servers to the draining list even if offline when rejecting decommissioned hosts is enabled, ensuring proper handling of decommissioned servers.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "addServerToDrainList",
+            "rejectDecommissionedHostsConfig"
+          ]
+        },
+        {
+          "hunk_index": 13,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/HRegionServer.java",
+          "what_changed": "Added import of DecommissionedHostRejectedException in HRegionServer.",
+          "where_in_code": "HRegionServer imports",
+          "intent": "To enable handling of the new exception type thrown when the master rejects a RegionServer due to decommissioned host status.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "DecommissionedHostRejectedException"
+          ]
+        },
+        {
+          "hunk_index": 14,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/HRegionServer.java",
+          "what_changed": "Added handling for DecommissionedHostRejectedException in RegionServer startup exception handling to log a fatal error and abort startup.",
+          "where_in_code": "HRegionServer class, RegionServer startup exception handling block",
+          "intent": "To properly handle and log the scenario where the master rejects the RegionServer startup due to the host being decommissioned, ensuring the RS aborts with clear diagnostics.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "DecommissionedHostRejectedException"
+          ]
+        }
+      ]
+    },
+    "agent8_syntax_repair_fallback_2": {
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": []
+    },
+    "agent7_validator_retry2": {
+      "validation_passed": false,
+      "validation_failure_category": "api_mismatch",
+      "validation_error_context": "Build failed (hbase-helper): [\u001b[1;31mERROR\u001b[m] COMPILATION ERROR : \n[\u001b[1;31mERROR\u001b[m] /repo/hbase-server/src/test/java/org/apache/hadoop/hbase/regionserver/TestRegionServerReportForDuty.java:[42,38] cannot find symbol\n  symbol:   class DecommissionedHostRejectedException\n[\u001b[1;34mINFO\u001b[m] \u001b[1;31mBUILD FAILURE\u001b[m\n[\u001b[1;31mERROR\u001b[m] Failed to execute goal \u001b[32morg.apache.maven.plugins:maven-compiler-plugin:3.8.1:testCompile\u001b[m \u001b[1m(default-testCompile)\u001b[m on project \u001b[36mhbase-server\u001b[m: \u001b[1;31mComp",
+      "validation_attempts": 3,
+      "retry_files": [],
+      "build_success": false,
+      "build_mode": "hbase-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 18,
+    "developer_aux_hunks_from_target": 1,
+    "phase0_baseline": {
+      "mode": "baseline-build-failed",
+      "skipped": true,
+      "cached": false,
+      "test_cases_total": 0
+    },
+    "java_production_hunks": 15,
+    "developer_aux_hunks": 1,
+    "processed_hunk_indices": [
+      0,
+      2,
+      4,
+      6,
+      7,
+      9,
+      10,
+      11,
+      12,
+      14,
+      3,
+      5,
+      13
+    ],
+    "tokens_used": 202983,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 11452,
+        "output": 3024
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 2240,
+        "output": 631
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      },
+      "agent9_fallback": {
+        "input": 194670,
+        "output": 5442
+      }
+    },
+    "synthesis_status": "partial",
+    "applied_on_disk_ag3": 10,
+    "synthesized_count": 0,
+    "failed_hunks_total": 1,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "failed",
+    "fallback_attempts": 2,
+    "retry_contexts": [
+      {
+        "error_type": "synthesis_skipped_no_localization",
+        "error_message": "Hunk unclaimed; localization failed entirely",
+        "attempt_count": 4,
+        "suggested_action": "manual_review"
+      },
+      {
+        "error_type": "synthesis_failed_no_match",
+        "error_message": "Could not verify exact string in target file",
+        "attempt_count": 4,
+        "suggested_action": "relocalize"
+      },
+      {
+        "error_type": "unknown",
+        "error_message": "[\u001b[1;31mERROR\u001b[m] COMPILATION ERROR : \n[\u001b[1;31mERROR\u001b[m] /repo/hbase-server/src/main/java/org/apache/hadoop/hbase/master/HMaster.java:[971,52] incompatible types: org.apache.hadoop.hbase.master.ServerManager cannot be converted to org.apache.hadoop.hbase.conf.ConfigurationObserver\n[\u001b[1;34mINFO\u001b[m] \u001b[1;31mBUILD FAILURE\u001b[m\n[\u001b[1;31mERROR\u001b[m] Failed to execute goal \u001b[32morg.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile\u001b[m \u001b[1m(default-compile)\u001b[m on project \u001b[36mhbase-server\u001b[m: \u001b[1;31mCompilation failure\u001b[m\n[\u001b[1;31mERROR\u001b[m] \u001b[1;31m/repo/hbase-server/src/main/java/org/apache/hadoop/hbase/master/HMaster.java:[971,52] incompatible types: org.apache.hadoop.hbase.master.ServerManager cannot be converted to org.apache.hadoop.hbase.conf.ConfigurationObserver\u001b[m\n[\u001b[1;31mERROR\u001b[m] \u001b[1;31m\u001b[m\n[\u001b[1;31mERROR\u001b[m] -> \u001b[1m[Help 1]\u001b[m\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] To see the full stack trace of the errors, re-run Maven with the \u001b[1m-e\u001b[m switch.\n[\u001b[1;31mERROR\u001b[m] Re-run Maven using the \u001b[1m-X\u001b[m switch to enable full debug logging.\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] For more information about the errors and possible solutions, please read the following articles:\n[\u001b[1;31mERROR\u001b[m] \u001b[1m[Help 1]\u001b[m http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] After correcting the problems, you can resume the build with the command\n[\u001b[1;31mERROR\u001b[m]   \u001b[1mmvn <args> -rf :hbase-server\u001b[m",
+        "attempt_count": 1,
+        "suggested_action": "inspect_and_retry"
+      },
+      {
+        "error_type": "api_mismatch",
+        "error_message": "[\u001b[1;31mERROR\u001b[m] COMPILATION ERROR : \n[\u001b[1;31mERROR\u001b[m] /repo/hbase-server/src/test/java/org/apache/hadoop/hbase/regionserver/TestRegionServerReportForDuty.java:[42,38] cannot find symbol\n  symbol:   class DecommissionedHostRejectedException\n[\u001b[1;34mINFO\u001b[m] \u001b[1;31mBUILD FAILURE\u001b[m\n[\u001b[1;31mERROR\u001b[m] Failed to execute goal \u001b[32morg.apache.maven.plugins:maven-compiler-plugin:3.8.1:testCompile\u001b[m \u001b[1m(default-testCompile)\u001b[m on project \u001b[36mhbase-server\u001b[m: \u001b[1;31mCompilation failure\u001b[m\n[\u001b[1;31mERROR\u001b[m] \u001b[1;31m/repo/hbase-server/src/test/java/org/apache/hadoop/hbase/regionserver/TestRegionServerReportForDuty.java:[42,38] cannot find symbol\u001b[m\n[\u001b[1;31mERROR\u001b[m] \u001b[1;31m  symbol:   class DecommissionedHostRejectedException\u001b[m\n[\u001b[1;31mERROR\u001b[m] \u001b[1;31m  location: package org.apache.hadoop.hbase.master\u001b[m\n[\u001b[1;31mERROR\u001b[m] \u001b[1;31m\u001b[m\n[\u001b[1;31mERROR\u001b[m] -> \u001b[1m[Help 1]\u001b[m\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] To see the full stack trace of the errors, re-run Maven with the \u001b[1m-e\u001b[m switch.\n[\u001b[1;31mERROR\u001b[m] Re-run Maven using the \u001b[1m-X\u001b[m switch to enable full debug logging.\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] For more information about the errors and possible solutions, please read the following articles:\n[\u001b[1;31mERROR\u001b[m] \u001b[1m[Help 1]\u001b[m http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] After correcting the problems, you can resume the build with the command\n[\u001b[1;31mERROR\u001b[m]   \u001b[1mmvn <args> -rf :hbase-server\u001b[m",
+        "attempt_count": 2,
+        "suggested_action": "route_to_namespace_or_structural"
+      },
+      {
+        "error_type": "api_mismatch",
+        "error_message": "[\u001b[1;31mERROR\u001b[m] COMPILATION ERROR : \n[\u001b[1;31mERROR\u001b[m] /repo/hbase-server/src/test/java/org/apache/hadoop/hbase/regionserver/TestRegionServerReportForDuty.java:[42,38] cannot find symbol\n  symbol:   class DecommissionedHostRejectedException\n[\u001b[1;34mINFO\u001b[m] \u001b[1;31mBUILD FAILURE\u001b[m\n[\u001b[1;31mERROR\u001b[m] Failed to execute goal \u001b[32morg.apache.maven.plugins:maven-compiler-plugin:3.8.1:testCompile\u001b[m \u001b[1m(default-testCompile)\u001b[m on project \u001b[36mhbase-server\u001b[m: \u001b[1;31mCompilation failure\u001b[m\n[\u001b[1;31mERROR\u001b[m] \u001b[1;31m/repo/hbase-server/src/test/java/org/apache/hadoop/hbase/regionserver/TestRegionServerReportForDuty.java:[42,38] cannot find symbol\u001b[m\n[\u001b[1;31mERROR\u001b[m] \u001b[1;31m  symbol:   class DecommissionedHostRejectedException\u001b[m\n[\u001b[1;31mERROR\u001b[m] \u001b[1;31m  location: package org.apache.hadoop.hbase.master\u001b[m\n[\u001b[1;31mERROR\u001b[m] \u001b[1;31m\u001b[m\n[\u001b[1;31mERROR\u001b[m] -> \u001b[1m[Help 1]\u001b[m\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] To see the full stack trace of the errors, re-run Maven with the \u001b[1m-e\u001b[m switch.\n[\u001b[1;31mERROR\u001b[m] Re-run Maven using the \u001b[1m-X\u001b[m switch to enable full debug logging.\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] For more information about the errors and possible solutions, please read the following articles:\n[\u001b[1;31mERROR\u001b[m] \u001b[1m[Help 1]\u001b[m http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] After correcting the problems, you can resume the build with the command\n[\u001b[1;31mERROR\u001b[m]   \u001b[1mmvn <args> -rf :hbase-server\u001b[m",
+        "attempt_count": 3,
+        "suggested_action": "route_to_namespace_or_structural"
+      }
+    ],
+    "failed_hunks": [
+      {
+        "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java",
+        "old_file_path": null,
+        "old_content": "    warningSkew = c.getLong(\"hbase.master.warningclockskew\", 10000);\n    persistFlushedSequenceId =\n      c.getBoolean(PERSIST_FLUSHEDSEQUENCEID, PERSIST_FLUSHEDSEQUENCEID_DEFAULT);\n  }\n\n  /**\n",
+        "new_content": "    warningSkew = c.getLong(\"hbase.master.warningclockskew\", 10000);\n    persistFlushedSequenceId =\n      c.getBoolean(PERSIST_FLUSHEDSEQUENCEID, PERSIST_FLUSHEDSEQUENCEID_DEFAULT);\n    rejectDecommissionedHostsConfig = getRejectDecommissionedHostsConfig(c);\n  }\n\n  /**\n   * Implementation of the ConfigurationObserver interface. We are interested in live-loading the\n   * configuration value of HConstants.REJECT_DECOMMISSIONED_HOSTS_KEY\n   * @param conf Server configuration instance\n   */\n  @Override\n  public void onConfigurationChange(Configuration conf) {\n    final boolean newValue = getRejectDecommissionedHostsConfig(conf);\n    if (rejectDecommissionedHostsConfig == newValue) {\n      // no-op\n      return;\n    }\n\n    LOG.info(\"Config Reload for RejectDecommissionedHosts. previous value: {}, new value: {}\",\n      rejectDecommissionedHostsConfig, newValue);\n\n    rejectDecommissionedHostsConfig = newValue;\n  }\n\n  /**\n   * Reads the value of HConstants.REJECT_DECOMMISSIONED_HOSTS_KEY from the config and returns it\n   * @param conf Configuration instance of the Master\n   */\n  public boolean getRejectDecommissionedHostsConfig(Configuration conf) {\n    return conf.getBoolean(HConstants.REJECT_DECOMMISSIONED_HOSTS_KEY,\n      HConstants.REJECT_DECOMMISSIONED_HOSTS_DEFAULT);\n  }\n\n  /**\n",
+        "is_new_file": false,
+        "is_del_file": false,
+        "is_rename": false,
+        "file_operation": "MODIFIED"
+      }
+    ],
+    "generated_patch_bytes": 5529,
+    "target_patch_bytes": 19799,
+    "patch_exact_match": false,
+    "validation_passed": false,
+    "validation_failure_category": "api_mismatch",
+    "build_success": false,
+    "test_success": null,
+    "test_mode": null,
+    "test_transition": {},
+    "fail_to_pass_count": 0,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": false
+  }
+}

@@ -1,0 +1,373 @@
+diff --git a/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/BackupManager.java b/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/BackupManager.java
+index a543b577b7..a3be218ac0 100644
+--- a/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/BackupManager.java
++++ b/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/BackupManager.java
+@@ -25,7 +25,6 @@ import java.util.List;
+ import java.util.Map;
+ import java.util.Set;
+ import org.apache.hadoop.conf.Configuration;
+-import org.apache.hadoop.fs.Path;
+ import org.apache.hadoop.hbase.HConstants;
+ import org.apache.hadoop.hbase.TableName;
+ import org.apache.hadoop.hbase.backup.BackupHFileCleaner;
+@@ -34,8 +33,6 @@ import org.apache.hadoop.hbase.backup.BackupInfo.BackupState;
+ import org.apache.hadoop.hbase.backup.BackupObserver;
+ import org.apache.hadoop.hbase.backup.BackupRestoreConstants;
+ import org.apache.hadoop.hbase.backup.BackupType;
+-import org.apache.hadoop.hbase.backup.HBackupFileSystem;
+-import org.apache.hadoop.hbase.backup.impl.BackupManifest.BackupImage;
+ import org.apache.hadoop.hbase.backup.master.BackupLogCleaner;
+ import org.apache.hadoop.hbase.backup.master.LogRollMasterProcedureManager;
+ import org.apache.hadoop.hbase.backup.regionserver.LogRollRegionServerProcedureManager;
+@@ -267,102 +264,6 @@ public class BackupManager implements Closeable {
+     this.backupInfo = backupInfo;
+   }
+ 
+-  /**
+-   * Get direct ancestors of the current backup.
+-   * @param backupInfo The backup info for the current backup
+-   * @return The ancestors for the current backup
+-   * @throws IOException exception
+-   */
+-  public ArrayList<BackupImage> getAncestors(BackupInfo backupInfo) throws IOException {
+-    LOG.debug("Getting the direct ancestors of the current backup {}", backupInfo.getBackupId());
+-
+-    ArrayList<BackupImage> ancestors = new ArrayList<>();
+-
+-    // full backup does not have ancestor
+-    if (backupInfo.getType() == BackupType.FULL) {
+-      LOG.debug("Current backup is a full backup, no direct ancestor for it.");
+-      return ancestors;
+-    }
+-
+-    // get all backup history list in descending order
+-    ArrayList<BackupInfo> allHistoryList = getBackupHistory(true);
+-    for (BackupInfo backup : allHistoryList) {
+-
+-      BackupImage.Builder builder = BackupImage.newBuilder();
+-
+-      BackupImage image = builder.withBackupId(backup.getBackupId()).withType(backup.getType())
+-        .withRootDir(backup.getBackupRootDir()).withTableList(backup.getTableNames())
+-        .withStartTime(backup.getStartTs()).withCompleteTime(backup.getCompleteTs()).build();
+-
+-      // Only direct ancestors for a backup are required and not entire history of backup for this
+-      // table resulting in verifying all of the previous backups which is unnecessary and backup
+-      // paths need not be valid beyond the lifetime of a backup.
+-      //
+-      // RootDir is way of grouping a single backup including one full and many incremental backups
+-      if (!image.getRootDir().equals(backupInfo.getBackupRootDir())) {
+-        continue;
+-      }
+-
+-      // add the full backup image as an ancestor until the last incremental backup
+-      if (backup.getType().equals(BackupType.FULL)) {
+-        // check the backup image coverage, if previous image could be covered by the newer ones,
+-        // then no need to add
+-        if (!BackupManifest.canCoverImage(ancestors, image)) {
+-          ancestors.add(image);
+-        }
+-      } else {
+-        // found last incremental backup, if previously added full backup ancestor images can cover
+-        // it, then this incremental ancestor is not the dependent of the current incremental
+-        // backup, that is to say, this is the backup scope boundary of current table set.
+-        // Otherwise, this incremental backup ancestor is the dependent ancestor of the ongoing
+-        // incremental backup
+-        if (BackupManifest.canCoverImage(ancestors, image)) {
+-          LOG.debug("Met the backup boundary of the current table set:");
+-          for (BackupImage image1 : ancestors) {
+-            LOG.debug("  BackupID={}, BackupDir={}", image1.getBackupId(), image1.getRootDir());
+-          }
+-        } else {
+-          Path logBackupPath =
+-            HBackupFileSystem.getBackupPath(backup.getBackupRootDir(), backup.getBackupId());
+-          LOG.debug(
+-            "Current backup has an incremental backup ancestor, "
+-              + "touching its image manifest in {}" + " to construct the dependency.",
+-            logBackupPath.toString());
+-          BackupManifest lastIncrImgManifest = new BackupManifest(conf, logBackupPath);
+-          BackupImage lastIncrImage = lastIncrImgManifest.getBackupImage();
+-          ancestors.add(lastIncrImage);
+-
+-          LOG.debug("Last dependent incremental backup image: {BackupID={}" + "BackupDir={}}",
+-            lastIncrImage.getBackupId(), lastIncrImage.getRootDir());
+-        }
+-      }
+-    }
+-    LOG.debug("Got {} ancestors for the current backup.", ancestors.size());
+-    return ancestors;
+-  }
+-
+-  /**
+-   * Get the direct ancestors of this backup for one table involved.
+-   * @param backupInfo backup info
+-   * @param table      table
+-   * @return backupImages on the dependency list
+-   * @throws IOException exception
+-   */
+-  public ArrayList<BackupImage> getAncestors(BackupInfo backupInfo, TableName table)
+-    throws IOException {
+-    ArrayList<BackupImage> ancestors = getAncestors(backupInfo);
+-    ArrayList<BackupImage> tableAncestors = new ArrayList<>();
+-    for (BackupImage image : ancestors) {
+-      if (image.hasTable(table)) {
+-        tableAncestors.add(image);
+-        if (image.getType() == BackupType.FULL) {
+-          break;
+-        }
+-      }
+-    }
+-    return tableAncestors;
+-  }
+-
+   /*
+    * backup system table operations
+    */
+diff --git a/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/BackupManifest.java b/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/BackupManifest.java
+index 237d8686ab..d66b588679 100644
+--- a/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/BackupManifest.java
++++ b/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/BackupManifest.java
+@@ -548,104 +548,6 @@ public class BackupManifest {
+     return tableImageList;
+   }
+ 
+-  /**
+-   * Get the full dependent image list in the whole dependency scope for a specific table of this
+-   * backup in time order from old to new.
+-   * @param table table
+-   * @return the full backup image list for a table in time order in the whole scope of the
+-   *         dependency of this image
+-   */
+-  public ArrayList<BackupImage> getAllDependentListByTable(TableName table) {
+-    ArrayList<BackupImage> tableImageList = new ArrayList<>();
+-    ArrayList<BackupImage> imageList = getRestoreDependentList(false);
+-    for (BackupImage image : imageList) {
+-      if (image.hasTable(table)) {
+-        tableImageList.add(image);
+-      }
+-    }
+-    return tableImageList;
+-  }
+-
+-  /**
+-   * Check whether backup image1 could cover backup image2 or not.
+-   * @param image1 backup image 1
+-   * @param image2 backup image 2
+-   * @return true if image1 can cover image2, otherwise false
+-   */
+-  public static boolean canCoverImage(BackupImage image1, BackupImage image2) {
+-    // image1 can cover image2 only when the following conditions are satisfied:
+-    // - image1 must not be an incremental image;
+-    // - image1 must be taken after image2 has been taken;
+-    // - table set of image1 must cover the table set of image2.
+-    if (image1.getType() == BackupType.INCREMENTAL) {
+-      return false;
+-    }
+-    if (image1.getStartTs() < image2.getStartTs()) {
+-      return false;
+-    }
+-    List<TableName> image1TableList = image1.getTableNames();
+-    List<TableName> image2TableList = image2.getTableNames();
+-    boolean found;
+-    for (int i = 0; i < image2TableList.size(); i++) {
+-      found = false;
+-      for (int j = 0; j < image1TableList.size(); j++) {
+-        if (image2TableList.get(i).equals(image1TableList.get(j))) {
+-          found = true;
+-          break;
+-        }
+-      }
+-      if (!found) {
+-        return false;
+-      }
+-    }
+-
+-    LOG.debug("Backup image " + image1.getBackupId() + " can cover " + image2.getBackupId());
+-    return true;
+-  }
+-
+-  /**
+-   * Check whether backup image set could cover a backup image or not.
+-   * @param fullImages The backup image set
+-   * @param image      The target backup image
+-   * @return true if fullImages can cover image, otherwise false
+-   */
+-  public static boolean canCoverImage(ArrayList<BackupImage> fullImages, BackupImage image) {
+-    // fullImages can cover image only when the following conditions are satisfied:
+-    // - each image of fullImages must not be an incremental image;
+-    // - each image of fullImages must be taken after image has been taken;
+-    // - sum table set of fullImages must cover the table set of image.
+-    for (BackupImage image1 : fullImages) {
+-      if (image1.getType() == BackupType.INCREMENTAL) {
+-        return false;
+-      }
+-      if (image1.getStartTs() < image.getStartTs()) {
+-        return false;
+-      }
+-    }
+-
+-    ArrayList<String> image1TableList = new ArrayList<>();
+-    for (BackupImage image1 : fullImages) {
+-      List<TableName> tableList = image1.getTableNames();
+-      for (TableName table : tableList) {
+-        image1TableList.add(table.getNameAsString());
+-      }
+-    }
+-    ArrayList<String> image2TableList = new ArrayList<>();
+-    List<TableName> tableList = image.getTableNames();
+-    for (TableName table : tableList) {
+-      image2TableList.add(table.getNameAsString());
+-    }
+-
+-    for (int i = 0; i < image2TableList.size(); i++) {
+-      if (image1TableList.contains(image2TableList.get(i)) == false) {
+-        return false;
+-      }
+-    }
+-
+-    LOG.debug("Full image set can cover image " + image.getBackupId());
+-    return true;
+-  }
+-
+   public BackupInfo toBackupInfo() {
+     BackupInfo info = new BackupInfo();
+     info.setType(backupImage.getType());
+diff --git a/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/FullTableBackupClient.java b/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/FullTableBackupClient.java
+index fee2e82572..06dad8880b 100644
+--- a/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/FullTableBackupClient.java
++++ b/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/FullTableBackupClient.java
+@@ -190,7 +190,7 @@ public class FullTableBackupClient extends TableBackupClient {
+       backupManager.writeBackupStartCode(newStartCode);
+ 
+       // backup complete
+-      completeBackup(conn, backupInfo, backupManager, BackupType.FULL, conf);
++      completeBackup(conn, backupInfo, BackupType.FULL, conf);
+     } catch (Exception e) {
+       failBackup(conn, backupInfo, backupManager, e, "Unexpected BackupException : ",
+         BackupType.FULL, conf);
+diff --git a/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/IncrementalTableBackupClient.java b/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/IncrementalTableBackupClient.java
+index 87cb722b89..9b9ffcf7a0 100644
+--- a/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/IncrementalTableBackupClient.java
++++ b/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/IncrementalTableBackupClient.java
+@@ -311,7 +311,7 @@ public class IncrementalTableBackupClient extends TableBackupClient {
+ 
+       handleBulkLoad(backupInfo.getTableNames());
+       // backup complete
+-      completeBackup(conn, backupInfo, backupManager, BackupType.INCREMENTAL, conf);
++      completeBackup(conn, backupInfo, BackupType.INCREMENTAL, conf);
+ 
+     } catch (IOException e) {
+       failBackup(conn, backupInfo, backupManager, e, "Unexpected Exception : ",
+diff --git a/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/TableBackupClient.java b/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/TableBackupClient.java
+index e758ced3f8..0aa6516fe4 100644
+--- a/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/TableBackupClient.java
++++ b/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/impl/TableBackupClient.java
+@@ -19,8 +19,12 @@ package org.apache.hadoop.hbase.backup.impl;
+ 
+ import java.io.IOException;
+ import java.util.ArrayList;
++import java.util.Collections;
++import java.util.HashSet;
+ import java.util.List;
+ import java.util.Map;
++import java.util.Objects;
++import java.util.Set;
+ import org.apache.hadoop.conf.Configuration;
+ import org.apache.hadoop.fs.FileStatus;
+ import org.apache.hadoop.fs.FileSystem;
+@@ -271,8 +275,8 @@ public abstract class TableBackupClient {
+    * @param backupInfo The current backup info
+    * @throws IOException exception
+    */
+-  protected void addManifest(BackupInfo backupInfo, BackupManager backupManager, BackupType type,
+-    Configuration conf) throws IOException {
++  protected void addManifest(BackupInfo backupInfo, BackupType type, Configuration conf)
++    throws IOException {
+     // set the overall backup phase : store manifest
+     backupInfo.setPhase(BackupPhase.STORE_MANIFEST);
+ 
+@@ -281,13 +285,65 @@ public abstract class TableBackupClient {
+       // set the table region server start and end timestamps for incremental backup
+       manifest.setIncrTimestampMap(backupInfo.getIncrTimestampMap());
+     }
+-    ArrayList<BackupImage> ancestors = backupManager.getAncestors(backupInfo);
++    List<BackupImage> ancestors = getAncestors(backupInfo);
+     for (BackupImage image : ancestors) {
+       manifest.addDependentImage(image);
+     }
+     manifest.store(conf);
+   }
+ 
++  /**
++   * Gets the direct ancestors of the currently being created backup.
++   * @param backupInfo The backup info for the backup being created
++   */
++  protected List<BackupImage> getAncestors(BackupInfo backupInfo) throws IOException {
++    LOG.debug("Getting the direct ancestors of the current backup {}", backupInfo.getBackupId());
++
++    // Full backups do not have ancestors
++    if (backupInfo.getType() == BackupType.FULL) {
++      LOG.debug("Current backup is a full backup, no direct ancestor for it.");
++      return Collections.emptyList();
++    }
++
++    List<BackupImage> ancestors = new ArrayList<>();
++    Set<TableName> tablesToCover = new HashSet<>(backupInfo.getTables());
++
++    // Go over the backup history list from newest to oldest
++    List<BackupInfo> allHistoryList = backupManager.getBackupHistory(true);
++    for (BackupInfo backup : allHistoryList) {
++      // If the image has a different rootDir, it cannot be an ancestor.
++      if (!Objects.equals(backup.getBackupRootDir(), backupInfo.getBackupRootDir())) {
++        continue;
++      }
++
++      BackupImage.Builder builder = BackupImage.newBuilder();
++      BackupImage image = builder.withBackupId(backup.getBackupId()).withType(backup.getType())
++        .withRootDir(backup.getBackupRootDir()).withTableList(backup.getTableNames())
++        .withStartTime(backup.getStartTs()).withCompleteTime(backup.getCompleteTs()).build();
++
++      // The ancestors consist of the most recent FULL backups that cover the list of tables
++      // required in the new backup and all INCREMENTAL backups that came after one of those FULL
++      // backups.
++      if (backup.getType().equals(BackupType.INCREMENTAL)) {
++        ancestors.add(image);
++        LOG.debug("Dependent incremental backup image: {BackupID={}}", image.getBackupId());
++      } else {
++        if (tablesToCover.removeAll(new HashSet<>(image.getTableNames()))) {
++          ancestors.add(image);
++          LOG.debug("Dependent full backup image: {BackupID={}}", image.getBackupId());
++
++          if (tablesToCover.isEmpty()) {
++            LOG.debug("Got {} ancestors for the current backup.", ancestors.size());
++            return Collections.unmodifiableList(ancestors);
++          }
++        }
++      }
++    }
++
++    throw new IllegalStateException(
++      "Unable to find full backup that contains tables: " + tablesToCover);
++  }
++
+   /**
+    * Get backup request meta data dir as string.
+    * @param backupInfo backup info
+@@ -312,15 +368,15 @@ public abstract class TableBackupClient {
+    * @param backupInfo backup info
+    * @throws IOException exception
+    */
+-  protected void completeBackup(final Connection conn, BackupInfo backupInfo,
+-    BackupManager backupManager, BackupType type, Configuration conf) throws IOException {
++  protected void completeBackup(final Connection conn, BackupInfo backupInfo, BackupType type,
++    Configuration conf) throws IOException {
+     // set the complete timestamp of the overall backup
+     backupInfo.setCompleteTs(EnvironmentEdgeManager.currentTime());
+     // set overall backup status: complete
+     backupInfo.setState(BackupState.COMPLETE);
+     backupInfo.setProgress(100);
+     // add and store the manifest for the backup
+-    addManifest(backupInfo, backupManager, type, conf);
++    addManifest(backupInfo, type, conf);
+ 
+     // compose the backup complete data
+     String backupCompleteData =
