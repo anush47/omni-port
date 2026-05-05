@@ -27,3 +27,8 @@ omniport_memory.db-journal
 repos/
 .claude/
 CLAUDE.md
+
+node_modules/
+vscode-extension/out/
+vscode-extension/node_modules/
+

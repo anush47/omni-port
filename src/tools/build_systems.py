@@ -713,15 +713,32 @@ def detect_test_targets(
     )
 
 
-def run_build(repo_path: str, project: str = "", changed_files: list[str] | None = None) -> BuildResult:
+def run_build(repo_path: str, project: str = "", changed_files: list[str] | None = None, build_cmd: str | None = None) -> BuildResult:
     """
     Compile the project.
 
     Order:
+      0. build_cmd (custom shell command, if provided)
       1. helpers/{project}/run_build.sh (Docker) — full compile + testClasses
       2. Gradle testClasses
       3. Maven compile test-compile
     """
+    if build_cmd:
+        print(f"  [build_systems] Using custom build command: {build_cmd}")
+        try:
+            result = subprocess.run(
+                build_cmd, shell=True, cwd=repo_path, env=os.environ.copy(),
+                stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=3600,
+            )
+            output = (result.stdout or "").strip()
+            success = result.returncode == 0
+        except subprocess.TimeoutExpired:
+            output, success = "Command timed out", False
+        except Exception as e:
+            output, success = str(e), False
+        print(f"  [build_systems] Build {'succeeded' if success else 'failed'} using custom command")
+        return BuildResult(success=success, output=output, mode="custom")
+
     normalized = project.strip().lower() or _detect_project_name(repo_path)
     print(f"  [build_systems] Starting build for project {normalized} in {repo_path}")
 
@@ -813,15 +830,40 @@ def run_tests(
     project: str = "",
     target_info: TestTargetInfo | None = None,
     changed_files: list[str] | None = None,
+    test_cmd: str | None = None,
 ) -> TestResult:
     """
     Run targeted tests.
 
     Order:
+      0. test_cmd (custom shell command, if provided)
       1. helpers/{project}/run_tests.sh (Docker) — if known project with Docker image
       2. Gradle --tests ClassName
       3. Maven -Dtest=ClassName
     """
+    if test_cmd:
+        print(f"  [build_systems] Using custom test command: {test_cmd}")
+        try:
+            result = subprocess.run(
+                test_cmd, shell=True, cwd=repo_path, env=os.environ.copy(),
+                stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=900,
+            )
+            output = (result.stdout or "").strip()
+            success = result.returncode == 0
+        except subprocess.TimeoutExpired:
+            output, success = "Command timed out", False
+        except Exception as e:
+            output, success = str(e), False
+        print(f"  [build_systems] Tests {'passed' if success else 'failed'} using custom command")
+        return TestResult(
+            success=success,
+            compile_error=False,
+            output=output,
+            mode="custom",
+            targets={},
+            test_state={"summary": {"passed": int(success), "failed": int(not success), "skipped": 0, "total": 1}},
+        )
+
     normalized = project.strip().lower() or _detect_project_name(repo_path)
     print(f"  [build_systems] Starting tests for project {normalized} in {repo_path}")
 

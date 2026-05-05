@@ -32,6 +32,9 @@ The Send-API per-hunk parallel fan-out is a Phase 3 enhancement; this graph
 handles the conditional-entry baseline.
 """
 
+import subprocess
+from pathlib import Path
+
 from langgraph.graph import StateGraph, START, END
 
 from src.core.state import BackportState
@@ -45,6 +48,49 @@ from src.agents.agent7_validator import run_validation
 from src.agents.agent8_syntax_repair import syntax_repair_agent
 from src.agents.agent9_fallback import fallback_agent_node
 from src.agents.hunk_router import route_hunks, select_entry_agent
+
+
+def atomic_rollback_node(state: BackportState) -> BackportState:
+    """
+    Fix E: if any hunk in a file failed synthesis, roll back ALL changes to that
+    file so the build doesn't see a half-migrated state. Filters rolled-back files
+    out of synthesized_hunks so the validator doesn't try to re-apply them.
+    """
+    repo_path = state.get("worktree_path") or state.get("target_repo_path", "")
+    failed_hunks = state.get("failed_hunks", [])
+    if not repo_path or not failed_hunks:
+        return state
+
+    affected_files = {
+        fp for h in failed_hunks
+        if (fp := (h.get("file_path") or h.get("target_file") or ""))
+    }
+
+    for fp in sorted(affected_files):
+        abs_fp = Path(repo_path) / fp
+        in_head = subprocess.run(
+            ["git", "-C", repo_path, "cat-file", "-e", f"HEAD:{fp}"],
+            capture_output=True, text=True,
+        )
+        if in_head.returncode != 0:
+            if abs_fp.exists():
+                abs_fp.unlink()
+                print(f"  [atomic_rollback] deleted new file {fp}")
+        else:
+            r = subprocess.run(
+                ["git", "-C", repo_path, "checkout", "HEAD", "--", fp],
+                capture_output=True, text=True,
+            )
+            if r.returncode == 0:
+                print(f"  [atomic_rollback] rolled back {fp}")
+            else:
+                print(f"  [atomic_rollback] could not roll back {fp}: {r.stderr[:200]}")
+
+    state["synthesized_hunks"] = [
+        h for h in state.get("synthesized_hunks", [])
+        if (h.get("file_path") or "") not in affected_files
+    ]
+    return state
 
 
 def route_after_syntax_repair(state: BackportState) -> str:
@@ -100,6 +146,7 @@ def build_graph():
     graph.add_node("namespace_adapter", namespace_adapter_agent)
     graph.add_node("structural_refactor", structural_refactor_agent)
     graph.add_node("hunk_synthesizer", hunk_synthesizer_agent)
+    graph.add_node("atomic_rollback", atomic_rollback_node)
     graph.add_node("syntax_repair", syntax_repair_agent)    # Agent 8
     graph.add_node("validator", run_validation)
     graph.add_node("fallback_agent", fallback_agent_node)   # Agent 9
@@ -125,8 +172,9 @@ def build_graph():
     graph.add_edge("namespace_adapter", "structural_refactor")
     graph.add_edge("structural_refactor", "hunk_synthesizer")
 
-    # Synthesizer feeds syntax_repair (Agent 8) before validation.
-    graph.add_edge("hunk_synthesizer", "syntax_repair")
+    # Synthesizer feeds atomic_rollback (Fix E) then syntax_repair before validation.
+    graph.add_edge("hunk_synthesizer", "atomic_rollback")
+    graph.add_edge("atomic_rollback", "syntax_repair")
 
     # If syntax repair fixed (or found no) errors → validator.
     # If syntax repair failed (errors remain) → skip the build, go to fallback.

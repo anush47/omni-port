@@ -160,6 +160,10 @@ class BackportState(TypedDict):
     # targets directly from the patch, guaranteeing phase 0 == validation targets.
     target_patch_file_entries: List[tuple]
 
+    # Custom build/test commands (optional — for non-helper projects)
+    custom_build_cmd: Optional[str]
+    custom_test_cmd: Optional[str]
+
     # Metrics
     tokens_used: int
     llm_token_usage: Dict[str, Dict[str, int]]

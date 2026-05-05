@@ -1035,7 +1035,7 @@ def run_validation(state: BackportState) -> BackportState:
 
     # ── Step 4: Build ─────────────────────────────────────────────────────────
     print(f"  agent7: running build for {project}...")
-    build_res: BuildResult = run_build(repo_path, project, changed_files=all_modified_java)
+    build_res: BuildResult = run_build(repo_path, project, changed_files=all_modified_java, build_cmd=state.get("custom_build_cmd"))
     validation_results["build"] = {
         "success": build_res.success,
         "raw": build_res.output,
@@ -1126,7 +1126,7 @@ def run_validation(state: BackportState) -> BackportState:
             f"({len(test_targets.test_targets)} target(s))..."
         )
         test_res: TestResult = run_tests(
-            repo_path, project, target_info=test_targets
+            repo_path, project, target_info=test_targets, test_cmd=state.get("custom_test_cmd")
         )
 
         # ── Step 7: Evaluate test state transition vs baseline ────────────────────

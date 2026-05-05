@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{cssUri}}" />
+  <title>OmniPort</title>
+</head>
+<body>
+  <div class="root">
+
+    <!-- ── Header ─────────────────────────────────────────────────── -->
+    <header class="header">
+      <span class="header-icon">⬡</span>
+      <span class="header-title">OmniPort</span>
+      <button class="icon-btn settings-btn" id="settingsBtn" title="Settings">⚙</button>
+    </header>
+
+    <!-- ── Setup Form ─────────────────────────────────────────────── -->
+    <form id="backportForm" class="form" autocomplete="off">
+
+      <section class="section">
+        <div class="section-label">Source</div>
+
+        <div class="field">
+          <label>Mainline Repository</label>
+          <div class="path-row">
+            <input type="text" id="mainlineRepo" placeholder="/path/to/jdk" required />
+            <button type="button" class="icon-btn" data-pick="mainlineRepo" title="Browse">📁</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Commit or Patch</label>
+          <div class="tabs" id="sourceTabs">
+            <button type="button" class="tab active" data-tab="commit">Commit SHA</button>
+            <button type="button" class="tab" data-tab="patch">Raw Diff</button>
+          </div>
+          <input type="text" id="commit" placeholder="abc1234f…" class="tab-content active" data-tab="commit" />
+          <textarea id="patchText" placeholder="Paste unified diff here…" class="tab-content" data-tab="patch" rows="6"></textarea>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-label">Target</div>
+
+        <div class="field">
+          <label>Target Repository</label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="repoMode" value="same" checked /> Same repo, different branch
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="repoMode" value="other" /> Different repository
+            </label>
+          </div>
+        </div>
+
+        <div class="field hidden" id="targetRepoField">
+          <label>Repository Path</label>
+          <div class="path-row">
+            <input type="text" id="targetRepo" placeholder="/path/to/jdk17u-dev" />
+            <button type="button" class="icon-btn" data-pick="targetRepo" title="Browse">📁</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Target Branch</label>
+          <input type="text" id="targetBranch" placeholder="jdk17u-dev" required />
+        </div>
+      </section>
+
+      <section class="section collapsible" id="advancedSection">
+        <button type="button" class="section-label toggle-btn" id="advancedToggle">
+          Build &amp; Test <span class="chevron">▸</span>
+        </button>
+        <div class="collapsible-body" id="advancedBody">
+          <div class="field">
+            <label>Build Command <span class="hint">(optional)</span></label>
+            <input type="text" id="buildCmd" placeholder="mvn compile test-compile" />
+          </div>
+          <div class="field">
+            <label>Test Command <span class="hint">(optional)</span></label>
+            <input type="text" id="testCmd" placeholder="mvn test -pl module" />
+          </div>
+          <p class="hint-text">Leave blank to use auto-detected build system (Gradle / Maven).</p>
+        </div>
+      </section>
+
+      <button type="submit" class="run-btn" id="runBtn">
+        <span class="run-icon">▶</span> Run Backport
+      </button>
+    </form>
+
+    <!-- ── Progress / Log ─────────────────────────────────────────── -->
+    <div class="log-panel hidden" id="logPanel">
+      <div class="log-header">
+        <span class="log-title">Agent Log</span>
+        <button type="button" class="icon-btn" id="clearLogBtn" title="Clear">✕</button>
+      </div>
+      <div class="log-body" id="logBody"></div>
+    </div>
+
+    <!-- ── Result Banner ──────────────────────────────────────────── -->
+    <div class="banner hidden" id="resultBanner"></div>
+
+  </div>
+  <script src="{{jsUri}}"></script>
+</body>
+</html>

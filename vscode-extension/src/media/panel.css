@@ -1,0 +1,333 @@
+/* OmniPort Panel — VSCode-native design */
+:root {
+  --radius: 5px;
+  --gap: 10px;
+  --font: var(--vscode-font-family);
+  --fg: var(--vscode-foreground);
+  --bg: var(--vscode-sideBar-background, var(--vscode-editor-background));
+  --border: var(--vscode-panel-border, var(--vscode-widget-border));
+  --input-bg: var(--vscode-input-background);
+  --input-border: var(--vscode-input-border);
+  --input-fg: var(--vscode-input-foreground);
+  --btn-bg: var(--vscode-button-background);
+  --btn-fg: var(--vscode-button-foreground);
+  --btn-hover: var(--vscode-button-hoverBackground);
+  --section-bg: var(--vscode-editorWidget-background, rgba(128,128,128,0.06));
+  --accent: var(--vscode-focusBorder);
+  --success: #4caf50;
+  --warn: #ff9800;
+  --error: #f44336;
+  --muted: var(--vscode-descriptionForeground);
+  --tag-bg: rgba(128,128,128,0.15);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  font-size: 12px;
+  color: var(--fg);
+  background: var(--bg);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-height: 100vh;
+  padding-bottom: 16px;
+}
+
+/* ── Header ────────────────────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px 8px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+}
+
+.header-icon {
+  font-size: 16px;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.header-title {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  flex: 1;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 13px;
+  line-height: 1;
+  transition: color 0.15s, background 0.15s;
+}
+.icon-btn:hover { color: var(--fg); background: var(--tag-bg); }
+
+/* ── Form ──────────────────────────────────────────────────────────── */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 0;
+}
+
+.section {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 2px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--fg);
+}
+
+.field .hint {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+input[type="text"],
+textarea {
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  color: var(--input-fg);
+  border-radius: var(--radius);
+  padding: 5px 8px;
+  font-size: 11px;
+  font-family: var(--vscode-editor-font-family, monospace);
+  width: 100%;
+  outline: none;
+  transition: border-color 0.15s;
+  resize: vertical;
+}
+input[type="text"]:focus,
+textarea:focus { border-color: var(--accent); }
+
+.path-row {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.path-row input { flex: 1; }
+
+/* ── Tabs ──────────────────────────────────────────────────────────── */
+.tabs {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 4px;
+}
+.tab {
+  background: var(--tag-bg);
+  border: 1px solid transparent;
+  color: var(--muted);
+  border-radius: var(--radius);
+  padding: 3px 10px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.tab.active {
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  border-color: var(--btn-bg);
+}
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ── Radio group ───────────────────────────────────────────────────── */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  cursor: pointer;
+  color: var(--fg);
+}
+.radio-label input[type="radio"] { accent-color: var(--accent); }
+
+/* ── Collapsible advanced ──────────────────────────────────────────── */
+.collapsible .section-label.toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: left;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  margin-bottom: 0;
+  transition: color 0.15s;
+}
+.collapsible .toggle-btn:hover { color: var(--fg); }
+.chevron { font-size: 9px; transition: transform 0.2s; }
+.chevron.open { transform: rotate(90deg); }
+
+.collapsible-body {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+.collapsible-body.open { display: flex; }
+
+.hint-text {
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* ── Run button ────────────────────────────────────────────────────── */
+.run-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 12px 12px 0;
+  padding: 8px 0;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  border: none;
+  border-radius: var(--radius);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.run-btn:hover { background: var(--btn-hover); }
+.run-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.run-icon { font-size: 10px; }
+
+/* ── Log panel ─────────────────────────────────────────────────────── */
+.log-panel {
+  margin: 12px 0 0;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.log-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.log-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.log-body {
+  padding: 6px 12px;
+  font-family: var(--vscode-editor-font-family, monospace);
+  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.log-entry {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  line-height: 1.4;
+}
+.log-entry:last-child { background: var(--tag-bg); }
+
+.log-tag {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  min-width: 70px;
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.tag-phase0   { background: #5c6bc020; color: #7986cb; }
+.tag-setup    { background: #78909c20; color: #90a4ae; }
+.tag-agent    { background: #26a69a20; color: #4db6ac; }
+.tag-validator{ background: #ff985020; color: #ffa726; }
+.tag-fallback { background: #ab47bc20; color: #ba68c8; }
+.tag-syntax   { background: #26c6da20; color: #4dd0e1; }
+.tag-success  { background: #66bb6a20; color: #81c784; }
+.tag-error    { background: #ef535020; color: #ef9a9a; }
+.tag-info     { background: var(--tag-bg); color: var(--muted); }
+
+.log-msg { flex: 1; color: var(--fg); }
+
+/* ── Result banner ─────────────────────────────────────────────────── */
+.banner {
+  margin: 10px 12px 0;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.banner.success { background: #4caf5018; border: 1px solid #4caf5040; color: var(--success); }
+.banner.failure { background: #f4433618; border: 1px solid #f4433640; color: var(--error); }
+
+.hidden { display: none !important; }
