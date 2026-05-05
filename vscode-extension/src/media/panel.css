@@ -347,6 +347,7 @@ textarea:focus { border-color: var(--accent); }
 .tag-success  { background: #66bb6a20; color: #81c784; }
 .tag-error    { background: #ef535020; color: #ef9a9a; }
 .tag-info     { background: var(--tag-bg); color: var(--muted); }
+.tag-build    { background: #ffd54f20; color: #ffd54f; }
 
 .log-msg { flex: 1; color: var(--fg); }
 

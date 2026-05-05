@@ -313,6 +313,11 @@ def _run_pipeline(job_id: str, req: BackportRequest, loop: asyncio.AbstractEvent
                         "failed":   "Syntax errors could not be repaired — escalating to fallback",
                         "skipped":  "Syntax check skipped (no hunks to check)",
                     }.get(rs, label)
+                    emit(event)
+                    if rs != "failed":
+                        emit({"agent": "validator", "status": "building",
+                              "message": "Starting build — this may take several minutes…"})
+                    continue
                 elif node_name == "hunk_router":
                     rd = node_output.get("routing_decision", "")
                     event["routing_decision"] = rd

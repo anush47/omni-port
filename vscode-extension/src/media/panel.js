@@ -206,6 +206,10 @@ function handleLogEvent(event) {
   // Per-agent events
   if (agent) {
     if (agent === "validator") {
+      if (status === "building") {
+        appendLog("info", "build", message || "Starting build…");
+        return;
+      }
       const passed = validation_passed;
       appendLog(
         passed ? "success" : "warn",
@@ -256,6 +260,7 @@ function appendLog(type, tag, text) {
     error:     "tag-error",
     warn:      "tag-validator",
     info:      "tag-info",
+    build:     "tag-build",
   }[type] || "tag-info";
   tagEl.className = `log-tag ${tagClass}`;
   tagEl.textContent = tag;
