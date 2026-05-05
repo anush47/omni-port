@@ -222,13 +222,19 @@ textarea:focus { border-color: var(--accent); }
   line-height: 1.4;
 }
 
-/* ── Run button ────────────────────────────────────────────────────── */
+/* ── Run / Stop buttons ────────────────────────────────────────────── */
+.btn-row {
+  display: flex;
+  gap: 6px;
+  margin: 12px 12px 0;
+}
+
 .run-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  margin: 12px 12px 0;
+  flex: 1;
   padding: 8px 0;
   background: var(--btn-bg);
   color: var(--btn-fg);
@@ -241,11 +247,39 @@ textarea:focus { border-color: var(--accent); }
   transition: background 0.15s;
 }
 .run-btn:hover { background: var(--btn-hover); }
-.run-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+.run-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 .run-icon { font-size: 10px; }
+
+.stop-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  background: #b71c1c22;
+  color: #ef9a9a;
+  border: 1px solid #b71c1c44;
+  border-radius: var(--radius);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.stop-btn:hover { background: #b71c1c44; }
+
+.reset-btn {
+  margin-left: auto;
+  padding: 4px 10px;
+  background: transparent;
+  color: inherit;
+  border: 1px solid currentColor;
+  border-radius: var(--radius);
+  font-size: 11px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.15s;
+}
+.reset-btn:hover { opacity: 1; }
 
 /* ── Log panel ─────────────────────────────────────────────────────── */
 .log-panel {
@@ -326,7 +360,9 @@ textarea:focus { border-color: var(--accent); }
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
 }
+#bannerText { flex: 1; }
 .banner.success { background: #4caf5018; border: 1px solid #4caf5040; color: var(--success); }
 .banner.failure { background: #f4433618; border: 1px solid #f4433640; color: var(--error); }
 

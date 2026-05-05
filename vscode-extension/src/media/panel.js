@@ -5,13 +5,17 @@ const vscode = acquireVsCodeApi();
 let activeTab = "commit";
 let useOtherRepo = false;
 let running = false;
+let currentJobId = null;
 
 // ── DOM refs ─────────────────────────────────────────────────────────────────
 const form          = document.getElementById("backportForm");
 const runBtn        = document.getElementById("runBtn");
+const stopBtn       = document.getElementById("stopBtn");
+const resetBtn      = document.getElementById("resetBtn");
 const logPanel      = document.getElementById("logPanel");
 const logBody       = document.getElementById("logBody");
 const resultBanner  = document.getElementById("resultBanner");
+const bannerText    = document.getElementById("bannerText");
 const targetRepoFld = document.getElementById("targetRepoField");
 const advancedBody  = document.getElementById("advancedBody");
 const advancedToggle= document.getElementById("advancedToggle");
@@ -58,8 +62,24 @@ document.getElementById("settingsBtn").addEventListener("click", () => {
 document.getElementById("clearLogBtn").addEventListener("click", () => {
   logBody.innerHTML = "";
   logPanel.classList.add("hidden");
-  resultBanner.classList.add("hidden");
-  resultBanner.className = "banner hidden";
+  hideBanner();
+});
+
+// ── Stop button ───────────────────────────────────────────────────────────────
+stopBtn.addEventListener("click", () => {
+  if (!currentJobId) return;
+  vscode.postMessage({ command: "cancelJob", jobId: currentJobId });
+  stopBtn.disabled = true;
+  stopBtn.textContent = "Stopping…";
+  appendLog("warn", "cancel", "Cancellation requested — waiting for current step to finish…");
+});
+
+// ── Reset button ──────────────────────────────────────────────────────────────
+resetBtn.addEventListener("click", () => {
+  if (!currentJobId) return;
+  resetBtn.disabled = true;
+  resetBtn.textContent = "Resetting…";
+  vscode.postMessage({ command: "resetRepo", jobId: currentJobId });
 });
 
 // ── Form submit ───────────────────────────────────────────────────────────────
@@ -86,24 +106,26 @@ form.addEventListener("submit", (e) => {
 // ── Message handler from extension host ──────────────────────────────────────
 window.addEventListener("message", (e) => {
   const msg = e.data;
-
   switch (msg.command) {
     case "folderPicked":
       document.getElementById(msg.field).value = msg.path;
       break;
-
     case "jobStarted":
-      appendLog("info", "pipeline", "Agent pipeline starting…");
+      currentJobId = msg.jobId;
+      appendLog("info", "pipeline", "Connected to backend — pipeline starting…");
       break;
-
     case "log":
       handleLogEvent(msg);
       break;
-
     case "error":
       appendLog("error", "error", msg.message || "Unknown error");
       showBanner(false, msg.message || "Error occurred");
       setRunning(false);
+      break;
+    case "repoReset":
+      resetBtn.disabled = false;
+      resetBtn.textContent = "Reset Repository";
+      appendLog("info", "reset", "Repository has been reset to its original state");
       break;
   }
 });
@@ -111,88 +133,114 @@ window.addEventListener("message", (e) => {
 // ── Log rendering ─────────────────────────────────────────────────────────────
 function handleLogEvent(event) {
   const { phase, status, agent, message, error, validation_passed,
-          repair_status, routing_decision, attempt } = event;
+          repair_status, routing_decision, attempt, via, patch, category } = event;
 
+  // Phase 0 events
   if (phase === "phase0") {
-    const icons = {
-      trying_direct_apply: "Trying direct apply…",
-      building:            "Building…",
-      testing:             "Running tests…",
-      success:             "✓ Direct apply succeeded",
-      failed:              `✗ ${event.reason || "Failed"}`,
-      skipped:             `↷ ${event.reason || "Skipped — using agent pipeline"}`,
+    const styles = {
+      checking:     ["info",    "phase-0", message],
+      applying:     ["phase0",  "phase-0", message],
+      building:     ["phase0",  "phase-0", message],
+      testing:      ["phase0",  "phase-0", message],
+      success:      ["success", "phase-0", message],
+      skipped:      ["info",    "phase-0", message],
+      build_failed: ["warn",    "phase-0", message],
+      test_failed:  ["warn",    "phase-0", message],
+      failed:       ["warn",    "phase-0", message],
     };
-    const isError = status === "failed";
-    appendLog(isError ? "warn" : "phase0", "phase-0", icons[status] || status);
+    const [type, tag, text] = styles[status] || ["info", "phase-0", message || status];
+    appendLog(type, tag, text);
     return;
   }
 
-  if (status === "setup" || phase === "setup") {
+  // Setup events
+  if (status === "setup") {
     appendLog("setup", "setup", message || status);
     return;
   }
 
-  if (status === "complete") {
-    const passed = event.validation_passed;
-    showBanner(passed, passed ? "Backport complete — diff view opened" : (error || "Pipeline failed"));
-    setRunning(false);
-    if (passed) appendLog("success", "done", "✓ Validation passed");
-    else appendLog("error", "done", `✗ ${error || "Validation failed"} [${event.category || ""}]`);
-    return;
-  }
-
-  if (status === "diff_ready") {
-    appendLog("success", "diff", message || "Opening diff…");
-    return;
-  }
-
+  // Pipeline start
   if (status === "pipeline_start") {
-    appendLog("info", "pipeline", message || "Starting agentic pipeline…");
+    appendLog("info", "pipeline", message);
+    return;
+  }
+
+  // Final complete event
+  if (status === "complete") {
+    setRunning(false);
+    const passed = validation_passed;
+    const viaLabel = via === "direct_apply" ? " (direct apply)" : " (agentic pipeline)";
+
+    if (passed) {
+      appendLog("success", "done", `✓ Backport succeeded${viaLabel}`);
+      showBanner(true, `Backport complete${viaLabel} — changes are on disk`, true);
+      if (patch) {
+        vscode.postMessage({ command: "onComplete", jobId: currentJobId, passed: true, patch });
+      }
+    } else {
+      appendLog("error", "done", `✗ Pipeline finished — ${error || "see errors above"}`);
+      showBanner(false, `Partial changes on disk — ${error || "see log for details"}`, true);
+      if (patch) {
+        vscode.postMessage({ command: "onComplete", jobId: currentJobId, passed: false, patch });
+      }
+    }
+    return;
+  }
+
+  // Cancelled
+  if (status === "cancelled") {
+    setRunning(false);
+    appendLog("warn", "cancel", message || "Cancelled — repository reset");
+    showBanner(false, "Job cancelled — repository has been reset", false);
+    return;
+  }
+
+  // Error
+  if (status === "error") {
+    setRunning(false);
+    appendLog("error", "error", message || "Unexpected error");
+    showBanner(false, message || "Unexpected error", true);
     return;
   }
 
   // Per-agent events
   if (agent) {
-    const agentLabel = agentDisplayName(agent);
     if (agent === "validator") {
-      const ok = validation_passed;
-      appendLog(ok ? "success" : "warn", "validator",
-        ok ? "✓ Build & tests passed" : `✗ ${error || "Failed"} [${event.category || ""}]`);
+      const passed = validation_passed;
+      appendLog(
+        passed ? "success" : "warn",
+        "validator",
+        message || (passed ? "Build and tests passed" : `Failed: ${error}`)
+      );
     } else if (agent === "fallback_agent") {
-      appendLog("fallback", "fallback", `Fallback attempt ${attempt || ""}…`);
+      appendLog("fallback", "fallback", message || `Retry attempt ${attempt}`);
     } else if (agent === "syntax_repair") {
-      const label = repair_status === "clean" ? "✓ Syntax clean"
-                  : repair_status === "repaired" ? "⚙ Syntax repaired"
-                  : repair_status === "failed"   ? "✗ Syntax repair failed"
-                  : "Checking syntax…";
-      appendLog("syntax", "syntax", label);
+      const type = repair_status === "clean" ? "success"
+                 : repair_status === "repaired" ? "syntax"
+                 : repair_status === "failed" ? "error" : "info";
+      appendLog(type, "syntax", message);
     } else if (agent === "hunk_router") {
-      appendLog("info", "router", `Route → ${routing_decision || "?"}`);
+      appendLog("info", "router", message);
     } else {
-      appendLog("agent", agentLabel.toLowerCase(), `${agentLabel} complete`);
+      appendLog("agent", agentShortName(agent), message);
     }
   }
 }
 
-function agentDisplayName(agent) {
+function agentShortName(agent) {
   return {
-    code_localizer:      "Localizer",
-    patch_classifier:    "Classifier",
-    hunk_router:         "Router",
-    fast_apply:          "FastApply",
-    namespace_adapter:   "Namespace",
-    structural_refactor: "Structural",
-    hunk_synthesizer:    "Synthesizer",
-    atomic_rollback:     "Rollback",
-    syntax_repair:       "SyntaxRepair",
-    validator:           "Validator",
-    fallback_agent:      "Fallback",
+    code_localizer:      "localizer",
+    patch_classifier:    "classifier",
+    fast_apply:          "fast-apply",
+    namespace_adapter:   "namespace",
+    structural_refactor: "structural",
+    hunk_synthesizer:    "synthesizer",
+    atomic_rollback:     "rollback",
   }[agent] || agent;
 }
 
 function appendLog(type, tag, text) {
   logPanel.classList.remove("hidden");
-
   const entry = document.createElement("div");
   entry.className = "log-entry";
 
@@ -214,7 +262,7 @@ function appendLog(type, tag, text) {
 
   const msgEl = document.createElement("span");
   msgEl.className = "log-msg";
-  msgEl.textContent = text;
+  msgEl.textContent = text || "";
 
   entry.appendChild(tagEl);
   entry.appendChild(msgEl);
@@ -222,9 +270,17 @@ function appendLog(type, tag, text) {
   logBody.scrollTop = logBody.scrollHeight;
 }
 
-function showBanner(success, text) {
+function showBanner(success, text, showReset) {
   resultBanner.className = `banner ${success ? "success" : "failure"}`;
-  resultBanner.textContent = (success ? "✓ " : "✗ ") + text;
+  bannerText.textContent = (success ? "✓ " : "✗ ") + text;
+  resetBtn.classList.toggle("hidden", !showReset);
+  resetBtn.disabled = false;
+  resetBtn.textContent = "Reset Repository";
+}
+
+function hideBanner() {
+  resultBanner.className = "banner hidden";
+  resetBtn.classList.add("hidden");
 }
 
 function setRunning(state) {
@@ -233,9 +289,13 @@ function setRunning(state) {
   runBtn.innerHTML = state
     ? '<span class="run-icon">⏳</span> Running…'
     : '<span class="run-icon">▶</span> Run Backport';
+  stopBtn.classList.toggle("hidden", !state);
+  stopBtn.disabled = false;
+  stopBtn.textContent = "⏹ Stop";
 }
 
 function resetLog() {
   logBody.innerHTML = "";
-  resultBanner.className = "banner hidden";
+  hideBanner();
+  currentJobId = null;
 }

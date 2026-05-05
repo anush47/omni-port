@@ -87,9 +87,14 @@
         </div>
       </section>
 
-      <button type="submit" class="run-btn" id="runBtn">
-        <span class="run-icon">▶</span> Run Backport
-      </button>
+      <div class="btn-row">
+        <button type="submit" class="run-btn" id="runBtn">
+          <span class="run-icon">▶</span> Run Backport
+        </button>
+        <button type="button" class="stop-btn hidden" id="stopBtn">
+          ⏹ Stop
+        </button>
+      </div>
     </form>
 
     <!-- ── Progress / Log ─────────────────────────────────────────── -->
@@ -102,7 +107,10 @@
     </div>
 
     <!-- ── Result Banner ──────────────────────────────────────────── -->
-    <div class="banner hidden" id="resultBanner"></div>
+    <div class="banner hidden" id="resultBanner">
+      <span id="bannerText"></span>
+      <button type="button" class="reset-btn hidden" id="resetBtn">Reset Repository</button>
+    </div>
 
   </div>
   <script src="{{jsUri}}"></script>

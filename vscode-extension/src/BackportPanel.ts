@@ -44,6 +44,15 @@ export class BackportPanel implements vscode.WebviewViewProvider {
         case "startBackport":
           await this._startBackport(msg.data);
           break;
+        case "cancelJob":
+          await this._cancelJob(msg.jobId);
+          break;
+        case "resetRepo":
+          await this._resetRepo(msg.jobId);
+          break;
+        case "onComplete":
+          await this._onComplete(msg.jobId, this._currentJob?.targetRepo ?? "", msg.passed, msg.patch);
+          break;
         case "openSettings":
           vscode.commands.executeCommand("workbench.action.openSettings", "omniport");
           break;
@@ -131,9 +140,7 @@ export class BackportPanel implements vscode.WebviewViewProvider {
               const event = JSON.parse(line.slice(6));
               this._post("log", event);
 
-              if (event.status === "complete") {
-                this._onComplete(jobId, targetRepo, event.validation_passed);
-              }
+              // onComplete is triggered by panel.js via postMessage("onComplete") instead
             } catch {
               // malformed line — skip
             }
@@ -145,18 +152,25 @@ export class BackportPanel implements vscode.WebviewViewProvider {
     stream().catch((err) => this._post("error", { message: String(err) }));
   }
 
-  private async _onComplete(jobId: string, targetRepo: string, passed: boolean): Promise<void> {
-    if (!passed) return;
+  private async _cancelJob(jobId: string): Promise<void> {
+    await fetch(`${this._server.baseUrl}/api/backport/${jobId}/cancel`, { method: "POST" });
+  }
 
-    // Notify the apply endpoint (pipeline already wrote to disk)
-    await fetch(`${this._server.baseUrl}/api/backport/${jobId}/apply`, { method: "POST" });
+  private async _resetRepo(jobId: string): Promise<void> {
+    const res = await fetch(`${this._server.baseUrl}/api/backport/${jobId}/reset`, { method: "POST" });
+    if (res.ok) {
+      this._post("repoReset", {});
+    } else {
+      const err = await res.text();
+      this._post("error", { message: `Reset failed: ${err}` });
+    }
+  }
 
-    this._post("log", { status: "diff_ready", message: "Opening diff view..." });
+  private async _onComplete(jobId: string, targetRepo: string, passed: boolean, patch: string): Promise<void> {
+    // Changes are already on disk — just open the diff view
+    if (!patch) return;
 
-    // Open VSCode diff for each changed file (captured via git diff --cached earlier)
-    const resultRes = await fetch(`${this._server.baseUrl}/api/backport/${jobId}/result`);
-    if (!resultRes.ok) return;
-    const { patch } = await resultRes.json() as { patch: string };
+    this._post("log", { status: "diff_ready", message: "Opening diff view…" });
 
     const changedFiles = this._parseFilesFromPatch(patch);
     if (changedFiles.length === 0) {
