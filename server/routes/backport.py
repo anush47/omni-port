@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import os
 import subprocess
 import threading
 import uuid
@@ -19,6 +20,8 @@ from typing import Any
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
+
+from src.tools.build_systems import run_build, run_tests
 
 router = APIRouter(prefix="/api/backport")
 
@@ -85,7 +88,11 @@ def _rollback_direct_apply(repo_path: str) -> None:
 
 def _try_direct_apply(patch_text: str, repo_path: str, build_cmd: str | None,
                       test_cmd: str | None, emit) -> bool:
-    """Phase 0: try git apply + build + test directly. Returns True on full success."""
+    """
+    Phase 0: try git apply + build + test directly. Returns True on full success.
+    Uses run_build/run_tests from build_systems (same as Agent 7) so Docker helpers,
+    Gradle, and Maven are all auto-detected. Custom build_cmd/test_cmd override if set.
+    """
     emit({"phase": "phase0", "status": "trying_direct_apply"})
 
     check = subprocess.run(
@@ -102,24 +109,18 @@ def _try_direct_apply(patch_text: str, repo_path: str, build_cmd: str | None,
         input=patch_text.encode(), check=True,
     )
 
-    if build_cmd:
-        emit({"phase": "phase0", "status": "building"})
-        build_ok = subprocess.run(build_cmd, shell=True, cwd=repo_path).returncode == 0
-    else:
-        build_ok = True  # no build cmd — assume ok, let agents handle validation
+    project = os.path.basename(repo_path.rstrip("/"))
 
-    if not build_ok:
+    emit({"phase": "phase0", "status": "building"})
+    build_res = run_build(repo_path, project, build_cmd=build_cmd)
+    if not build_res.success:
         _rollback_direct_apply(repo_path)
         emit({"phase": "phase0", "status": "failed", "reason": "build failed after direct apply"})
         return False
 
-    if test_cmd:
-        emit({"phase": "phase0", "status": "testing"})
-        test_ok = subprocess.run(test_cmd, shell=True, cwd=repo_path).returncode == 0
-    else:
-        test_ok = True
-
-    if not test_ok:
+    emit({"phase": "phase0", "status": "testing"})
+    test_res = run_tests(repo_path, project, test_cmd=test_cmd)
+    if not test_res.success:
         _rollback_direct_apply(repo_path)
         emit({"phase": "phase0", "status": "failed", "reason": "tests failed after direct apply"})
         return False
@@ -207,7 +208,7 @@ def _run_pipeline(job_id: str, req: BackportRequest, loop: asyncio.AbstractEvent
             "synthesized_hunks_pre_applied": False,
             "current_attempt": 1,
             "max_retries": req.max_retries,
-            "skip_test": (req.test_cmd is None and req.build_cmd is None),
+            "skip_test": False,
             "clean_state": True,
             "tokens_used": 0,
             "llm_token_usage": {},
