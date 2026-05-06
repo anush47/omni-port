@@ -16,6 +16,7 @@ import os
 import subprocess
 import threading
 import uuid
+from pathlib import Path
 from typing import Any
 
 from fastapi import APIRouter, HTTPException
@@ -23,8 +24,12 @@ from fastapi.responses import Response, StreamingResponse
 from pydantic import BaseModel
 
 from src.tools.build_systems import run_build, run_tests
+from src.agents.agent1_localizer import _is_test_file, _is_auto_generated_java_file
 
-router = APIRouter(prefix="/api/backport")
+_PROJECT_ROOT = Path(__file__).parent.parent.parent
+_PHASE0_CACHE_DIR = _PROJECT_ROOT / "tests" / "phase0_cache"
+
+router = APIRouter(prefix="/backport")
 
 # ── In-memory job store ────────────────────────────────────────────────────────
 _jobs: dict[str, dict[str, Any]] = {}
@@ -53,6 +58,11 @@ class BackportRequest(BaseModel):
     patch_text: str | None = None
     target_repo: str | None = None
     target_branch: str = "main"
+    # Shadow-mode fields: when backport_commit is provided the pipeline checks out
+    # backport_commit~1 (matching the shadow script) instead of target_branch HEAD.
+    backport_commit: str | None = None  # SHA of the developer's backport commit
+    evaluate_mode: bool = False          # True → extract developer aux hunks + load phase0 baseline
+    project: str | None = None          # project name for phase0 cache lookup (auto-derived if absent)
     build_cmd: str | None = None
     test_cmd: str | None = None
     max_retries: int = 3
@@ -99,6 +109,128 @@ def _reset_repo(repo_path: str) -> None:
     subprocess.run(["git", "-C", repo_path, "clean", "-fd"], capture_output=True)
 
 
+# ── Shadow-mode helpers ────────────────────────────────────────────────────────
+
+def _load_phase0_cache(project: str, backport_commit: str) -> dict | None:
+    key = f"{project.strip().lower()}_{backport_commit[:16]}.json"
+    path = _PHASE0_CACHE_DIR / key
+    if not path.exists():
+        return None
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return None
+
+
+def _extract_file_entries_from_patch(patch_text: str) -> list[tuple[str, str]]:
+    """Return (status, filepath) pairs from a unified diff patch."""
+    entries: list[tuple[str, str]] = []
+    seen: set[str] = set()
+    src_path = tgt_path = ""
+    is_added = is_deleted = is_rename = False
+
+    def _norm(p: str) -> str:
+        p = p.strip().replace("\\", "/")
+        while p.startswith("a/") or p.startswith("b/"):
+            p = p[2:]
+        return "" if p in ("/dev/null", "dev/null") else p
+
+    def _flush() -> None:
+        nonlocal src_path, tgt_path, is_added, is_deleted, is_rename
+        fp = tgt_path or src_path
+        if fp and fp not in seen:
+            seen.add(fp)
+            status = "A" if is_added else "D" if is_deleted else "R" if is_rename else "M"
+            entries.append((status, fp))
+        src_path = tgt_path = ""
+        is_added = is_deleted = is_rename = False
+
+    for line in (patch_text or "").splitlines():
+        if line.startswith("diff --git "):
+            _flush()
+        elif line.startswith("new file mode"):
+            is_added = True
+        elif line.startswith("deleted file mode"):
+            is_deleted = True
+        elif line.startswith("rename from ") or line.startswith("rename to "):
+            is_rename = True
+        elif line.startswith("--- "):
+            src_path = _norm(line[4:].split("\t")[0])
+        elif line.startswith("+++ "):
+            tgt_path = _norm(line[4:].split("\t")[0])
+    _flush()
+    return entries
+
+
+def _build_aux_hunks_from_target_patch(target_patch: str) -> list[dict]:
+    """
+    Extract aux-file sections (test Java, non-Java, auto-generated) from the
+    developer's backport patch with line numbers preserved for git-apply.
+    Production-Java hunks are skipped — they go through the LLM pipeline.
+    """
+    if not target_patch.strip():
+        return []
+
+    def _norm(p: str) -> str:
+        p = p.strip().replace("\\", "/")
+        while p.startswith("a/") or p.startswith("b/"):
+            p = p[2:]
+        return "" if p in ("/dev/null", "dev/null") else p
+
+    sections: list[str] = []
+    buf: list[str] = []
+    for line in target_patch.splitlines(keepends=True):
+        if line.startswith("diff --git ") and buf:
+            sections.append("".join(buf))
+            buf = []
+        buf.append(line)
+    if buf:
+        sections.append("".join(buf))
+
+    result: list[dict] = []
+    for section in sections:
+        if not section.strip():
+            continue
+        src_path = tgt_path = ""
+        is_added = is_deleted = is_rename = False
+        for line in section.splitlines():
+            if line.startswith("--- "):
+                src_path = _norm(line[4:].split("\t")[0])
+            elif line.startswith("+++ "):
+                tgt_path = _norm(line[4:].split("\t")[0])
+            elif line.startswith("new file mode"):
+                is_added = True
+            elif line.startswith("deleted file mode"):
+                is_deleted = True
+            elif line.startswith("rename from ") or line.startswith("rename to "):
+                is_rename = True
+            if src_path and tgt_path:
+                break
+
+        file_path = tgt_path or src_path
+        if not file_path:
+            continue
+
+        is_java = file_path.lower().endswith(".java")
+        if is_java and not _is_test_file(file_path) and not _is_auto_generated_java_file(file_path):
+            continue  # production Java — LLM pipeline handles this
+
+        op = ("ADDED" if is_added else "DELETED" if is_deleted else
+              "RENAMED" if (is_rename or (src_path and tgt_path and src_path != tgt_path))
+              else "MODIFIED")
+        result.append({
+            "file_path": file_path,
+            "raw_patch": section,
+            "hunk_text": "",
+            "file_operation": op,
+            "insertion_line": 0,
+            "intent_verified": True,
+            "old_target_file": src_path if op == "RENAMED" else None,
+        })
+    return result
+
+
 # ── Phase 0 ────────────────────────────────────────────────────────────────────
 
 def _try_direct_apply(patch_text: str, repo_path: str, build_cmd: str | None,
@@ -142,21 +274,29 @@ def _try_direct_apply(patch_text: str, repo_path: str, build_cmd: str | None,
               "detail": build_res.output[-1000:] if build_res.output else ""})
         return False
 
-    emit({"phase": "phase0", "status": "testing",
-          "message": "Build passed — running targeted tests…"})
-    test_res = run_tests(repo_path, project, test_cmd=test_cmd)
+    # Run tests only when the patch touches test files.
+    # Pass those exact entries via file_entries so detect_test_targets uses
+    # --files-json (reliable) instead of --worktree (misses git-applied changes).
+    patch_entries = _extract_file_entries_from_patch(patch_text)
+    test_entries = [(s, f) for s, f in patch_entries if _is_test_file(f)]
 
-    if cancel.is_set():
-        return False
+    if test_entries or test_cmd:
+        emit({"phase": "phase0", "status": "testing",
+              "message": "Build passed — running targeted tests…"})
+        test_res = run_tests(repo_path, project, test_cmd=test_cmd,
+                             file_entries=test_entries or None)
 
-    if not test_res.success:
-        emit({"phase": "phase0", "status": "test_failed",
-              "message": "Tests failed after direct apply — switching to agentic pipeline",
-              "detail": test_res.output[-1000:] if test_res.output else ""})
-        return False
+        if cancel.is_set():
+            return False
+
+        if not test_res.success:
+            emit({"phase": "phase0", "status": "test_failed",
+                  "message": "Tests failed after direct apply — switching to agentic pipeline",
+                  "detail": test_res.output[-1000:] if test_res.output else ""})
+            return False
 
     emit({"phase": "phase0", "status": "success",
-          "message": "Patch applied, built, and tested successfully — no LLM agents needed"})
+          "message": "Patch applied and built successfully — no LLM agents needed"})
     return True
 
 
@@ -204,24 +344,65 @@ def _run_pipeline(job_id: str, req: BackportRequest, loop: asyncio.AbstractEvent
         job["target_repo"] = target_repo
 
         # ── Checkout ───────────────────────────────────────────────────────────
-        emit({"status": "setup",
-              "message": f"Checking out target branch '{req.target_branch}'…"})
-        _git_checkout(target_repo, req.target_branch)
+        # When backport_commit is provided (shadow mode), check out the state
+        # immediately before that commit so the mainline patch context matches.
+        if req.backport_commit:
+            checkout_ref = f"{req.backport_commit}~1"
+            emit({"status": "setup",
+                  "message": f"Checking out {checkout_ref} (shadow mode)…"})
+        else:
+            checkout_ref = req.target_branch
+            emit({"status": "setup",
+                  "message": f"Checking out target branch '{checkout_ref}'…"})
+        _git_checkout(target_repo, checkout_ref)
 
         if cancel.is_set():
             raise InterruptedError("Cancelled before Phase 0")
 
         # ── Phase 0 ────────────────────────────────────────────────────────────
+        # Always try direct apply first — for TYPE-I shadow commits the mainline
+        # patch applies cleanly to backport_commit~1 and no agentic work is needed.
+        developer_aux_hunks: list = []
+        target_patch_file_entries: list = []
+        validation_results: dict = {}
+
         direct_ok = _try_direct_apply(
             patch_text, target_repo, req.build_cmd, req.test_cmd, cancel, emit
         )
-
         if cancel.is_set():
             raise InterruptedError("Cancelled during Phase 0")
-
         if direct_ok:
             finish(_capture_diff(target_repo), passed=True, via="direct_apply")
             return
+
+        # Direct apply failed — reset repo so agentic pipeline starts from clean state.
+        emit({"status": "setup", "message": "Resetting repository for agentic pipeline…"})
+        _reset_repo(target_repo)
+        _git_checkout(target_repo, checkout_ref)
+
+        # Fall through to agentic pipeline.
+        # In evaluate_mode extract developer aux hunks (test/non-Java) for Agent 7.
+        if req.backport_commit and req.evaluate_mode:
+            emit({"status": "setup",
+                  "message": f"Extracting developer hunks from backport commit {req.backport_commit[:8]}…"})
+            target_patch_text = _git_show(target_repo, req.backport_commit)
+            developer_aux_hunks = _build_aux_hunks_from_target_patch(target_patch_text)
+            target_patch_file_entries = _extract_file_entries_from_patch(target_patch_text)
+            emit({"status": "setup",
+                  "message": f"Extracted {len(developer_aux_hunks)} developer aux hunk(s) from backport commit"})
+
+            project = req.project or os.path.basename(target_repo.rstrip("/\\")).lower()
+            cached_baseline = _load_phase0_cache(project, req.backport_commit)
+            if cached_baseline:
+                validation_results = {"phase_0_baseline_test_result": cached_baseline}
+                emit({"status": "setup",
+                      "message": f"Loaded phase 0 baseline from cache ({project}/{req.backport_commit[:8]})"})
+            else:
+                emit({"status": "setup",
+                      "message": "No phase 0 baseline cache found — skipping baseline"})
+
+        if cancel.is_set():
+            raise InterruptedError("Cancelled before agentic pipeline")
 
         # ── Phase 1: agentic pipeline ──────────────────────────────────────────
         emit({"status": "pipeline_start",
@@ -230,13 +411,15 @@ def _run_pipeline(job_id: str, req: BackportRequest, loop: asyncio.AbstractEvent
         from src.core.graph import build_graph
         from src.tools.patch_parser import parse_unified_diff
 
+        target_patch_changed_files = [fp for _, fp in target_patch_file_entries]
+
         initial_state = {
             "patch_content": patch_text,
             "target_repo_path": target_repo,
             "worktree_path": target_repo,
-            "target_branch": req.target_branch,
+            "target_branch": checkout_ref,
             "hunks": parse_unified_diff(patch_text),
-            "developer_aux_hunks": [],
+            "developer_aux_hunks": developer_aux_hunks,
             "applied_hunks": [],
             "adapted_hunks": [],
             "refactored_hunks": [],
@@ -245,8 +428,8 @@ def _run_pipeline(job_id: str, req: BackportRequest, loop: asyncio.AbstractEvent
             "processed_hunk_indices": [],
             "structural_escalation_indices": [],
             "file_operations": [],
-            "target_patch_changed_files": [],
-            "target_patch_file_entries": [],
+            "target_patch_changed_files": target_patch_changed_files,
+            "target_patch_file_entries": target_patch_file_entries,
             "retry_contexts": [],
             "localization_results": [],
             "classification": None,
@@ -263,7 +446,7 @@ def _run_pipeline(job_id: str, req: BackportRequest, loop: asyncio.AbstractEvent
             "validation_error_context": "",
             "validation_failure_category": "",
             "validation_retry_files": [],
-            "validation_results": {},
+            "validation_results": validation_results,
             "synthesized_hunks_pre_applied": False,
             "current_attempt": 1,
             "max_retries": req.max_retries,
@@ -376,10 +559,13 @@ async def stream_job(job_id: str):
 
     async def event_generator():
         while True:
-            event = await queue.get()
-            if event is None:
-                break
-            yield f"data: {json.dumps(event)}\n\n"
+            try:
+                event = await asyncio.wait_for(queue.get(), timeout=20.0)
+                if event is None:
+                    break
+                yield f"data: {json.dumps(event)}\n\n"
+            except asyncio.TimeoutError:
+                yield ": keepalive\n\n"
 
     return StreamingResponse(event_generator(), media_type="text/event-stream",
                              headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})

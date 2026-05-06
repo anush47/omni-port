@@ -17,7 +17,6 @@ export class BackportPanel implements vscode.WebviewViewProvider {
   private readonly _extensionUri: vscode.Uri;
   private readonly _server: ServerManager;
 
-  // Stores pre-patch file contents for diff view (path → content)
   private _preApplySnapshots: Map<string, string> = new Map();
 
   constructor(extensionUri: vscode.Uri, server: ServerManager) {
@@ -52,7 +51,9 @@ export class BackportPanel implements vscode.WebviewViewProvider {
           await this._resetRepo(msg.jobId);
           break;
         case "onComplete":
-          await this._onComplete(msg.jobId, this._currentJob?.targetRepo ?? "", msg.passed, msg.patch);
+          break;
+        case "showPatch":
+          await this._showPatch(msg.patch as string);
           break;
         case "openSettings":
           vscode.commands.executeCommand("workbench.action.openSettings", "omniport");
@@ -63,21 +64,95 @@ export class BackportPanel implements vscode.WebviewViewProvider {
         case "fetchBranches":
           this._fetchBranches(msg.repo);
           break;
+        case "getConfig":
+          this._sendConfigToPanel();
+          break;
+        case "applyConfig":
+          await this._applyConfig(msg.data);
+          break;
+        case "checkCommit":
+          this._checkCommit(msg.repo, msg.commit);
+          break;
+        case "viewCommit":
+          await this._viewCommit(msg.repo, msg.commit);
+          break;
       }
+    });
+
+    // Push current config to the panel on open
+    this._sendConfigToPanel();
+
+    // If backend is already running, sync VS Code settings to it immediately
+    this._server.isRunning().then((up) => {
+      if (up) this._server.ensureRunning().catch(() => {});
     });
   }
 
   private async _checkHealth(): Promise<void> {
     try {
-      const res = await fetch(`${this._server.baseUrl}/api/health`);
+      const res = await fetch(`${this._server.baseUrl}/health`);
       if (res.ok) {
         const data = await res.json() as Record<string, unknown>;
-        this._post("healthStatus", { connected: true, port: this._server.port, ...data });
+        this._post("healthStatus", { connected: true, ...data });
       } else {
         this._post("healthStatus", { connected: false });
       }
     } catch {
       this._post("healthStatus", { connected: false });
+    }
+  }
+
+  private _sendConfigToPanel(): void {
+    const cfg = vscode.workspace.getConfiguration("omniport");
+    this._post("configLoaded", {
+      backendUrl:       cfg.get<string>("backendUrl", "http://localhost:7890/api/v1"),
+      provider:         cfg.get<string>("provider", "openai"),
+      openaiApiKey:     cfg.get<string>("openaiApiKey", ""),
+      openaiBaseUrl:    cfg.get<string>("openaiBaseUrl", ""),
+      azureApiKey:      cfg.get<string>("azureApiKey", ""),
+      azureEndpoint:    cfg.get<string>("azureEndpoint", ""),
+      azureApiVersion:  cfg.get<string>("azureApiVersion", "2024-02-15-preview"),
+      fastModel:        cfg.get<string>("fastModel", "gpt-4o-mini"),
+      balancedModel:    cfg.get<string>("balancedModel", "gpt-4o"),
+      reasoningModel:   cfg.get<string>("reasoningModel", "o1-preview"),
+      microservicesUrl: cfg.get<string>("microservicesUrl", "http://localhost:8080"),
+    });
+  }
+
+  private async _applyConfig(data: Record<string, string>): Promise<void> {
+    // Save to VS Code settings
+    const cfg = vscode.workspace.getConfiguration("omniport");
+    const target = vscode.ConfigurationTarget.Global;
+    const toPromise = (t: Thenable<void>): Promise<void> => Promise.resolve(t);
+    const saves = [
+      toPromise(cfg.update("backendUrl",       data.backendUrl,       target)),
+      toPromise(cfg.update("provider",         data.provider,         target)),
+      toPromise(cfg.update("fastModel",        data.fastModel,        target)),
+      toPromise(cfg.update("balancedModel",    data.balancedModel,    target)),
+      toPromise(cfg.update("reasoningModel",   data.reasoningModel,   target)),
+      toPromise(cfg.update("microservicesUrl", data.microservicesUrl, target)),
+    ];
+    if (data.provider === "azure") {
+      saves.push(
+        toPromise(cfg.update("azureApiKey",     data.azureApiKey,     target)),
+        toPromise(cfg.update("azureEndpoint",   data.azureEndpoint,   target)),
+        toPromise(cfg.update("azureApiVersion", data.azureApiVersion, target)),
+      );
+    } else {
+      saves.push(
+        toPromise(cfg.update("openaiApiKey",  data.openaiApiKey,  target)),
+        toPromise(cfg.update("openaiBaseUrl", data.openaiBaseUrl, target)),
+      );
+    }
+    await Promise.all(saves);
+
+    // Push to running backend
+    try {
+      await this._server.sendConfig(data);
+      this._post("configApplied", { ok: true });
+      await this._checkHealth();
+    } catch {
+      this._post("configApplied", { ok: false });
     }
   }
 
@@ -100,10 +175,8 @@ export class BackportPanel implements vscode.WebviewViewProvider {
 
   private async _pickFolder(field: string): Promise<void> {
     const uris = await vscode.window.showOpenDialog({
-      canSelectFolders: true,
-      canSelectFiles: false,
-      canSelectMany: false,
-      openLabel: "Select Repository",
+      canSelectFolders: true, canSelectFiles: false,
+      canSelectMany: false, openLabel: "Select Repository",
     });
     if (uris && uris.length > 0) {
       this._view?.webview.postMessage({ command: "folderPicked", field, path: uris[0].fsPath });
@@ -124,17 +197,19 @@ export class BackportPanel implements vscode.WebviewViewProvider {
     this._post("log", { phase: "setup", status: "connecting", message: "Connecting to backend..." });
 
     const body = JSON.stringify({
-      mainline_repo: data.mainlineRepo,
-      commit: data.commit || undefined,
-      patch_text: data.patchText || undefined,
-      target_repo: data.useOtherRepo === "true" ? data.targetRepo : undefined,
-      target_branch: data.targetBranch,
-      build_cmd: data.buildCmd || undefined,
-      test_cmd: data.testCmd || undefined,
-      max_retries: 3,
+      mainline_repo:   data.mainlineRepo,
+      commit:          data.commit || undefined,
+      patch_text:      data.patchText || undefined,
+      target_repo:     data.useOtherRepo === "true" ? data.targetRepo : undefined,
+      target_branch:   data.targetBranch,
+      backport_commit: data.backportCommit || undefined,
+      evaluate_mode:   data.evaluateMode === "true",
+      build_cmd:       data.buildCmd || undefined,
+      test_cmd:        data.testCmd || undefined,
+      max_retries:     3,
     });
 
-    const res = await fetch(`${this._server.baseUrl}/api/backport`, {
+    const res = await fetch(`${this._server.baseUrl}/backport`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body,
@@ -147,67 +222,67 @@ export class BackportPanel implements vscode.WebviewViewProvider {
 
     const { job_id } = await res.json() as { job_id: string };
     this._currentJob = { jobId: job_id, targetRepo };
-
     this._post("jobStarted", { jobId: job_id });
     this._streamJob(job_id, targetRepo);
   }
 
   private _streamJob(jobId: string, targetRepo: string): void {
-    const url = `${this._server.baseUrl}/api/backport/${jobId}/stream`;
+    const url = `${this._server.baseUrl}/backport/${jobId}/stream`;
+    const stream = async (retries = 5): Promise<void> => {
+      try {
+        const response = await fetch(url);
+        if (!response.body) return;
 
-    // We use the node http module via fetch for SSE
-    const stream = async () => {
-      const response = await fetch(url);
-      if (!response.body) return;
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = "";
 
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-      let buffer = "";
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-
-        buffer += decoder.decode(value, { stream: true });
-        const lines = buffer.split("\n");
-        buffer = lines.pop() ?? "";
-
-        for (const line of lines) {
-          if (line.startsWith("data: ")) {
-            try {
-              const event = JSON.parse(line.slice(6));
-              this._post("log", event);
-
-              // onComplete is triggered by panel.js via postMessage("onComplete") instead
-            } catch {
-              // malformed line — skip
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split("\n");
+          buffer = lines.pop() ?? "";
+          for (const line of lines) {
+            if (line.startsWith("data: ")) {
+              try {
+                const event = JSON.parse(line.slice(6));
+                this._post("log", event);
+                if (event.status === "complete" || event.status === "error" ||
+                    event.status === "cancelled") {
+                  return;
+                }
+              } catch { /* malformed line */ }
             }
           }
         }
+      } catch (err: unknown) {
+        const msg = String(err);
+        if (retries > 0 && (msg.includes("terminated") || msg.includes("network"))) {
+          await new Promise((r) => setTimeout(r, 1500));
+          return stream(retries - 1);
+        }
+        this._post("error", { message: msg });
       }
     };
-
-    stream().catch((err) => this._post("error", { message: String(err) }));
+    stream();
   }
 
   private async _cancelJob(jobId: string): Promise<void> {
-    await fetch(`${this._server.baseUrl}/api/backport/${jobId}/cancel`, { method: "POST" });
+    await fetch(`${this._server.baseUrl}/backport/${jobId}/cancel`, { method: "POST" });
   }
 
   private async _resetRepo(jobId: string): Promise<void> {
-    const res = await fetch(`${this._server.baseUrl}/api/backport/${jobId}/reset`, { method: "POST" });
+    const res = await fetch(`${this._server.baseUrl}/backport/${jobId}/reset`, { method: "POST" });
     if (res.ok) {
       this._post("repoReset", {});
     } else {
-      const err = await res.text();
-      this._post("error", { message: `Reset failed: ${err}` });
+      this._post("error", { message: `Reset failed: ${await res.text()}` });
     }
   }
 
   private async _onComplete(jobId: string, targetRepo: string, passed: boolean, patch: string): Promise<void> {
-    // Changes are already on disk — just open the diff view
     if (!patch) return;
-
     this._post("log", { status: "diff_ready", message: "Opening diff view…" });
 
     const changedFiles = this._parseFilesFromPatch(patch);
@@ -216,22 +291,18 @@ export class BackportPanel implements vscode.WebviewViewProvider {
       return;
     }
 
-    // Register a content provider for the original (pre-patch) side
     const scheme = "omniport-original";
     const provider = new OriginalContentProvider(this._preApplySnapshots);
     const disposable = vscode.workspace.registerTextDocumentContentProvider(scheme, provider);
 
-    for (const rel of changedFiles.slice(0, 5)) { // cap at 5 diffs
+    for (const rel of changedFiles.slice(0, 5)) {
       const modified = vscode.Uri.file(path.join(targetRepo, rel));
       const original = vscode.Uri.parse(`${scheme}:${path.join(targetRepo, rel)}`);
       await vscode.commands.executeCommand(
-        "vscode.diff",
-        original,
-        modified,
+        "vscode.diff", original, modified,
         `OmniPort: ${path.basename(rel)} (backported)`
       );
     }
-
     setTimeout(() => disposable.dispose(), 60_000);
     vscode.window.showInformationMessage(`OmniPort: Backport complete — ${changedFiles.length} file(s) changed.`);
   }
@@ -245,6 +316,48 @@ export class BackportPanel implements vscode.WebviewViewProvider {
     return [...new Set(files)];
   }
 
+  private _checkCommit(repo: string, commit: string): void {
+    const result = cp.spawnSync("git", ["-C", repo, "cat-file", "-e", commit], { timeout: 5000 });
+    this._post("commitStatus", { valid: result.status === 0 });
+  }
+
+  private _patchShowDisposable?: vscode.Disposable;
+  private _commitShowDisposable?: vscode.Disposable;
+  private _patchCounter = 0;
+
+  private async _showPatch(patch: string): Promise<void> {
+    if (!patch) return;
+    try {
+      const scheme = "omniport-patch";
+      if (this._patchShowDisposable) { this._patchShowDisposable.dispose(); }
+      this._patchShowDisposable = vscode.workspace.registerTextDocumentContentProvider(scheme, {
+        provideTextDocumentContent: () => patch,
+      });
+      const uri = vscode.Uri.parse(`${scheme}:backport-${this._patchCounter++}.diff`);
+      const doc = await vscode.workspace.openTextDocument(uri);
+      await vscode.window.showTextDocument(doc, { viewColumn: vscode.ViewColumn.One, preview: true });
+    } catch { /* ignore */ }
+  }
+
+  private async _viewCommit(repo: string, commit: string): Promise<void> {
+    try {
+      const result = cp.spawnSync(
+        "git", ["-C", repo, "show", "--stat", "--patch", commit],
+        { timeout: 15000, encoding: "utf8", maxBuffer: 5 * 1024 * 1024 }
+      );
+      if (result.status !== 0 || !result.stdout) return;
+      const content = result.stdout as string;
+      const scheme = "omniport-show";
+      if (this._commitShowDisposable) { this._commitShowDisposable.dispose(); }
+      this._commitShowDisposable = vscode.workspace.registerTextDocumentContentProvider(scheme, {
+        provideTextDocumentContent: () => content,
+      });
+      const uri = vscode.Uri.parse(`${scheme}:${commit.slice(0, 8)}.diff`);
+      const doc = await vscode.workspace.openTextDocument(uri);
+      await vscode.window.showTextDocument(doc, { viewColumn: vscode.ViewColumn.One, preview: true, preserveFocus: true });
+    } catch { /* ignore */ }
+  }
+
   private _post(command: string, data?: Record<string, unknown>): void {
     this._view?.webview.postMessage({ command, ...data });
   }
@@ -252,10 +365,9 @@ export class BackportPanel implements vscode.WebviewViewProvider {
   private _getHtml(webview: vscode.Webview): string {
     const mediaDir = vscode.Uri.joinPath(this._extensionUri, "src", "media");
     const cssUri = webview.asWebviewUri(vscode.Uri.joinPath(mediaDir, "panel.css"));
-    const jsUri = webview.asWebviewUri(vscode.Uri.joinPath(mediaDir, "panel.js"));
+    const jsUri  = webview.asWebviewUri(vscode.Uri.joinPath(mediaDir, "panel.js"));
     return fs.readFileSync(
-      path.join(this._extensionUri.fsPath, "src", "media", "panel.html"),
-      "utf8"
+      path.join(this._extensionUri.fsPath, "src", "media", "panel.html"), "utf8"
     )
       .replace("{{cssUri}}", cssUri.toString())
       .replace("{{jsUri}}", jsUri.toString());
@@ -264,7 +376,6 @@ export class BackportPanel implements vscode.WebviewViewProvider {
 
 class OriginalContentProvider implements vscode.TextDocumentContentProvider {
   constructor(private readonly snapshots: Map<string, string>) {}
-
   provideTextDocumentContent(uri: vscode.Uri): string {
     return this.snapshots.get(uri.fsPath) ?? "";
   }

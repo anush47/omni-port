@@ -82,10 +82,15 @@
           "default": "o1-preview",
           "description": "Reasoning-tier model name or Azure deployment name (REASONING_MODEL_NAME)"
         },
-        "omniport.serverPort": {
-          "type": "number",
-          "default": 7890,
-          "description": "Port for the OmniPort backend server"
+        "omniport.backendUrl": {
+          "type": "string",
+          "default": "http://localhost:7890/api/v1",
+          "description": "Base URL of the OmniPort backend including API version (e.g. http://localhost:7890/api/v1)"
+        },
+        "omniport.microservicesUrl": {
+          "type": "string",
+          "default": "http://localhost:8080",
+          "description": "Java microservices endpoint URL"
         },
         "omniport.javaHome": {
           "type": "string",

@@ -293,6 +293,53 @@ select:focus { border-color: var(--accent); }
   line-height: 1.4;
 }
 
+/* ── Apply config button ───────────────────────────────────────────── */
+.apply-btn {
+  margin-top: 4px;
+  padding: 5px 14px;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  border: none;
+  border-radius: var(--radius);
+  font-size: 11px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+.apply-btn:hover { background: var(--btn-hover); }
+
+/* ── Refresh button ────────────────────────────────────────────────── */
+.refresh-btn { font-size: 14px; margin-right: 2px; }
+
+/* ── Toggle switch ─────────────────────────────────────────────────── */
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.toggle-label { font-size: 11px; color: var(--fg); }
+.switch { position: relative; display: inline-block; width: 34px; height: 18px; flex-shrink: 0; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+  position: absolute; inset: 0;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.slider:before {
+  content: "";
+  position: absolute;
+  width: 12px; height: 12px;
+  left: 2px; bottom: 2px;
+  background: var(--muted);
+  border-radius: 50%;
+  transition: transform 0.2s, background 0.2s;
+}
+.switch input:checked + .slider { background: var(--accent); border-color: var(--accent); }
+.switch input:checked + .slider:before { transform: translateX(16px); background: #fff; }
+
 /* ── Run / Stop buttons ────────────────────────────────────────────── */
 .btn-row {
   display: flex;
@@ -342,8 +389,8 @@ select:focus { border-color: var(--accent); }
   margin-left: auto;
   padding: 4px 10px;
   background: transparent;
-  color: inherit;
-  border: 1px solid currentColor;
+  color: var(--error);
+  border: 1px solid var(--error);
   border-radius: var(--radius);
   font-size: 11px;
   cursor: pointer;
@@ -351,6 +398,20 @@ select:focus { border-color: var(--accent); }
   transition: opacity 0.15s;
 }
 .reset-btn:hover { opacity: 1; }
+
+.view-diff-btn {
+  padding: 4px 10px;
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  font-size: 11px;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: opacity 0.15s;
+  white-space: nowrap;
+}
+.view-diff-btn:hover { opacity: 1; }
 
 /* ── Log panel ─────────────────────────────────────────────────────── */
 .log-panel {
@@ -390,37 +451,43 @@ select:focus { border-color: var(--accent); }
 
 .log-entry {
   display: flex;
-  align-items: baseline;
-  gap: 6px;
-  padding: 2px 6px;
+  align-items: center;
+  gap: 7px;
+  padding: 2px 4px;
   border-radius: 3px;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 .log-entry:last-child { background: var(--tag-bg); }
 
-.log-tag {
-  font-size: 9px;
+/* ── Log icons ─────────────────────────────────────────────────────── */
+.log-icon-wrap {
+  width: 13px;
+  text-align: center;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  min-width: 70px;
-  padding: 1px 5px;
-  border-radius: 3px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.li-ok   { color: var(--success); }
+.li-fail { color: var(--error); }
+.li-warn { color: var(--warn); }
+.li-step { color: var(--muted); }
+.li-info { color: var(--accent); }
+
+/* ── Spinner ───────────────────────────────────────────────────────── */
+@keyframes omni-spin { to { transform: rotate(360deg); } }
+.log-spinner {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border: 1.5px solid rgba(128,128,128,0.25);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: omni-spin 0.75s linear infinite;
+  flex-shrink: 0;
 }
 
-.tag-phase0   { background: #5c6bc020; color: #7986cb; }
-.tag-setup    { background: #78909c20; color: #90a4ae; }
-.tag-agent    { background: #26a69a20; color: #4db6ac; }
-.tag-validator{ background: #ff985020; color: #ffa726; }
-.tag-fallback { background: #ab47bc20; color: #ba68c8; }
-.tag-syntax   { background: #26c6da20; color: #4dd0e1; }
-.tag-success  { background: #66bb6a20; color: #81c784; }
-.tag-error    { background: #ef535020; color: #ef9a9a; }
-.tag-info     { background: var(--tag-bg); color: var(--muted); }
-.tag-build    { background: #ffd54f20; color: #ffd54f; }
-
-.log-msg { flex: 1; color: var(--fg); }
+.log-msg { flex: 1; color: var(--fg); font-size: 11px; }
 
 /* ── Result banner ─────────────────────────────────────────────────── */
 .banner {
@@ -437,5 +504,51 @@ select:focus { border-color: var(--accent); }
 #bannerText { flex: 1; }
 .banner.success { background: #4caf5018; border: 1px solid #4caf5040; color: var(--success); }
 .banner.failure { background: #f4433618; border: 1px solid #f4433640; color: var(--error); }
+
+/* ── Branch combobox ───────────────────────────────────────────────── */
+.combobox-wrap {
+  position: relative;
+}
+
+.combobox-drop {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: var(--vscode-editorWidget-background, #252526);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.combobox-item {
+  padding: 5px 10px;
+  font-size: 11px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--fg);
+}
+.combobox-item:hover { background: var(--tag-bg); }
+.combobox-item mark {
+  background: none;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ── Commit check ──────────────────────────────────────────────────── */
+.commit-check {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 4px;
+  font-size: 11px;
+}
+.commit-icon-ok  { color: var(--success); font-weight: 700; }
+.commit-icon-err { color: var(--error);   font-weight: 700; }
 
 .hidden { display: none !important; }

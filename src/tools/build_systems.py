@@ -164,6 +164,17 @@ def _get_current_head(repo_path: str) -> str:
     return "worktree"
 
 
+def _git_root(path: str) -> str:
+    """Return the git repository root for path. Falls back to path itself."""
+    res = _run_cmd(
+        ["git", "-C", path, "rev-parse", "--show-toplevel"],
+        cwd=path, timeout=10,
+    )
+    if res["success"]:
+        return res["output"].strip().splitlines()[0]
+    return path
+
+
 def _ensure_docker_image(project: str, repo_path: str) -> tuple[str | None, str | None]:
     """Build (or reuse) the per-project Docker builder image. Returns (tag, error)."""
     hdir = _helper_dir(project)
@@ -647,6 +658,9 @@ def detect_test_targets(
     helper_script = os.path.join(_helper_dir(normalized), "get_test_targets.py")
 
     if os.path.exists(helper_script):
+        # Always pass the git root so the helper can find the project config
+        # even when repo_path is a deep subdirectory.
+        abs_root = _git_root(os.path.abspath(repo_path))
         if file_entries is not None:
             # Pass ALL file entries to the helper — it needs production Java files
             # to populate source_modules, which is used as a fallback when no
@@ -655,16 +669,15 @@ def detect_test_targets(
             print(f"  [build_systems] Using helper script with --files-json "
                   f"({len(file_entries)} entries): {helper_script}")
             res = _run_cmd(
-                ["python3", helper_script, "--repo", os.path.abspath(repo_path),
-                 "--files-json", files_json],
-                cwd=repo_path,
+                ["python3", helper_script, "--repo", abs_root, "--files-json", files_json],
+                cwd=abs_root,
                 timeout=60,
             )
         else:
             print(f"  [build_systems] Using helper script with --worktree: {helper_script}")
             res = _run_cmd(
-                ["python3", helper_script, "--repo", os.path.abspath(repo_path), "--worktree"],
-                cwd=repo_path,
+                ["python3", helper_script, "--repo", abs_root, "--worktree"],
+                cwd=abs_root,
                 timeout=60,
             )
 
@@ -750,6 +763,9 @@ def run_build(repo_path: str, project: str = "", changed_files: list[str] | None
             image_tag, err = _ensure_docker_image(normalized, repo_path)
             if image_tag:
                 abs_repo_path = os.path.realpath(repo_path)
+                # Always use the git repo root as PROJECT_DIR so Docker mounts the
+                # directory that contains pom.xml / build.gradle, not a subdirectory.
+                git_root = _git_root(abs_repo_path)
                 # Detect source modules to scope the build to only affected modules.
                 # This avoids pulling in unrelated modules with broken SNAPSHOT deps.
                 source_modules_str = ""
@@ -757,7 +773,7 @@ def run_build(repo_path: str, project: str = "", changed_files: list[str] | None
                     try:
                         # Build file_entries from changed_files (all treated as modified)
                         file_entries_for_build = [("M", f) for f in changed_files if f]
-                        ti = detect_test_targets(abs_repo_path, normalized,
+                        ti = detect_test_targets(git_root, normalized,
                                                  file_entries=file_entries_for_build)
                         if ti.source_modules:
                             source_modules_str = ",".join(ti.source_modules)
@@ -768,11 +784,11 @@ def run_build(repo_path: str, project: str = "", changed_files: list[str] | None
                 env = os.environ.copy()
                 env.update({
                     "PROJECT_NAME": normalized,
-                    "PROJECT_DIR": abs_repo_path,
+                    "PROJECT_DIR": git_root,
                     "TOOLKIT_DIR": hdir,
                     "BUILDER_IMAGE_TAG": image_tag,
                     "IMAGE_TAG": image_tag,
-                    "COMMIT_SHA": _get_current_head(repo_path),
+                    "COMMIT_SHA": _get_current_head(git_root),
                     "WORKTREE_MODE": "1",
                     "SOURCE_MODULES": source_modules_str,
                 })
@@ -786,7 +802,7 @@ def run_build(repo_path: str, project: str = "", changed_files: list[str] | None
                         "JTREG_HOME": os.getenv("JTREG_HOME", "/opt/jtreg"),
                         "BUILD_DIR_NAME": "build_shared",
                     })
-                res = _run_cmd(["bash", build_sh], cwd=abs_repo_path, env=env, timeout=3600)
+                res = _run_cmd(["bash", build_sh], cwd=git_root, env=env, timeout=3600)
                 if not res["success"]:
                     # Print the last 3000 chars so the actual error is visible
                     tail = res["output"][-3000:] if res["output"] else "(no output)"
@@ -830,6 +846,7 @@ def run_tests(
     project: str = "",
     target_info: TestTargetInfo | None = None,
     changed_files: list[str] | None = None,
+    file_entries: list[tuple[str, str]] | None = None,
     test_cmd: str | None = None,
 ) -> TestResult:
     """
@@ -868,7 +885,7 @@ def run_tests(
     print(f"  [build_systems] Starting tests for project {normalized} in {repo_path}")
 
     if target_info is None:
-        target_info = detect_test_targets(repo_path, normalized, changed_files)
+        target_info = detect_test_targets(repo_path, normalized, changed_files, file_entries)
 
     test_targets = list(target_info.test_targets)
     source_modules = list(target_info.source_modules)
@@ -902,15 +919,16 @@ def run_tests(
             image_tag, err = _ensure_docker_image(normalized, repo_path)
             if image_tag:
                 abs_repo_path = os.path.realpath(repo_path)
+                git_root = _git_root(abs_repo_path)
 
                 env = os.environ.copy()
                 env.update({
                     "PROJECT_NAME": normalized,
-                    "PROJECT_DIR": abs_repo_path,
+                    "PROJECT_DIR": git_root,
                     "TOOLKIT_DIR": hdir,
                     "BUILDER_IMAGE_TAG": image_tag,
                     "IMAGE_TAG": image_tag,
-                    "COMMIT_SHA": _get_current_head(repo_path),
+                    "COMMIT_SHA": _get_current_head(git_root),
                     "WORKTREE_MODE": "1",
                     "TEST_TARGETS": " ".join(sorted(set(test_targets))) if test_targets else "NONE",
                     "TEST_TARGET_FILES": ",".join(
@@ -923,7 +941,7 @@ def run_tests(
                         "JTREG_HOME": os.getenv("JTREG_HOME", "/opt/jtreg"),
                         "BUILD_DIR_NAME": "build_shared",
                     })
-                res = _run_cmd(["bash", test_sh], cwd=abs_repo_path, env=env, timeout=900)
+                res = _run_cmd(["bash", test_sh], cwd=git_root, env=env, timeout=900)
                 output = res["output"]
                 is_compile_error = (not res["success"]) and "compilation error" in output.lower()
 

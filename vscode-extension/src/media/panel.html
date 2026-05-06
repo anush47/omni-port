@@ -22,10 +22,77 @@
           <div class="status-popup-row"><span class="status-popup-label">Fast</span><span id="spFast">—</span></div>
           <div class="status-popup-row"><span class="status-popup-label">Balanced</span><span id="spBalanced">—</span></div>
           <div class="status-popup-row"><span class="status-popup-label">Reasoning</span><span id="spReasoning">—</span></div>
+          <div class="status-popup-divider"></div>
+          <div class="status-popup-row"><span class="status-popup-label">Microservices</span><span id="spMicroservices">—</span></div>
         </div>
       </div>
+      <button class="icon-btn refresh-btn" id="refreshBtn" title="Refresh status">↺</button>
       <button class="icon-btn settings-btn" id="settingsBtn" title="Settings">⚙</button>
     </header>
+
+    <!-- ── Config Section ────────────────────────────────────────── -->
+    <section class="section collapsible" id="configSection">
+      <button type="button" class="section-label toggle-btn" id="configToggle">
+        Configuration <span class="chevron">▸</span>
+      </button>
+      <div class="collapsible-body" id="configBody">
+
+        <div class="field">
+          <label>Backend URL</label>
+          <input type="text" id="cfgBackendUrl" placeholder="http://localhost:7890/api/v1" />
+        </div>
+
+        <div class="field">
+          <label>Provider</label>
+          <div class="tabs" id="providerTabs">
+            <button type="button" class="tab active" data-provider="openai">OpenAI</button>
+            <button type="button" class="tab" data-provider="azure">Azure</button>
+          </div>
+        </div>
+
+        <div class="field" id="cfgOpenaiKeyField">
+          <label>API Key</label>
+          <input type="password" id="cfgApiKey" placeholder="sk-…" autocomplete="off" />
+        </div>
+        <div class="field" id="cfgOpenaiBaseUrlField">
+          <label>Base URL <span class="hint">(optional)</span></label>
+          <input type="text" id="cfgBaseUrl" placeholder="https://api.openai.com/v1" />
+        </div>
+
+        <div class="field hidden" id="cfgAzureKeyField">
+          <label>Azure API Key</label>
+          <input type="password" id="cfgAzureKey" placeholder="••••" autocomplete="off" />
+        </div>
+        <div class="field hidden" id="cfgAzureEndpointField">
+          <label>Azure Endpoint</label>
+          <input type="text" id="cfgAzureEndpoint" placeholder="https://my-resource.openai.azure.com/" />
+        </div>
+        <div class="field hidden" id="cfgAzureVersionField">
+          <label>API Version</label>
+          <input type="text" id="cfgAzureVersion" placeholder="2024-02-15-preview" />
+        </div>
+
+        <div class="field">
+          <label>Fast Model</label>
+          <input type="text" id="cfgFastModel" placeholder="gpt-4o-mini" />
+        </div>
+        <div class="field">
+          <label>Balanced Model</label>
+          <input type="text" id="cfgBalancedModel" placeholder="gpt-4o" />
+        </div>
+        <div class="field">
+          <label>Reasoning Model</label>
+          <input type="text" id="cfgReasoningModel" placeholder="o1-preview" />
+        </div>
+
+        <div class="field">
+          <label>Microservices URL</label>
+          <input type="text" id="cfgMicroservicesUrl" placeholder="http://localhost:8080" />
+        </div>
+
+        <button type="button" class="apply-btn" id="applyConfigBtn">Apply</button>
+      </div>
+    </section>
 
     <!-- ── Setup Form ─────────────────────────────────────────────── -->
     <form id="backportForm" class="form" autocomplete="off">
@@ -46,7 +113,12 @@
             <button type="button" class="tab active" data-tab="commit">Commit SHA</button>
             <button type="button" class="tab" data-tab="patch">Raw Diff</button>
           </div>
-          <input type="text" id="commit" placeholder="abc1234f…" class="tab-content active" data-tab="commit" />
+          <input type="text" id="commit" placeholder="abc1234f…" class="tab-content active" data-tab="commit" autocomplete="off" />
+          <div id="commitCheck" class="commit-check hidden">
+            <span id="commitCheckIcon"></span>
+            <span id="commitCheckMsg"></span>
+            <button type="button" class="icon-btn hidden" id="viewCommitBtn" title="View commit diff">View diff</button>
+          </div>
           <textarea id="patchText" placeholder="Paste unified diff here…" class="tab-content" data-tab="patch" rows="5"></textarea>
         </div>
       </section>
@@ -58,10 +130,10 @@
           <label>Repository</label>
           <div class="radio-row">
             <label class="radio-label">
-              <input type="radio" name="repoMode" value="same" checked /> Same repo
+              <input type="radio" name="repoMode" value="same" checked /> Same Repository
             </label>
             <label class="radio-label">
-              <input type="radio" name="repoMode" value="other" /> Different repo
+              <input type="radio" name="repoMode" value="other" /> Different Repository
             </label>
           </div>
         </div>
@@ -76,9 +148,26 @@
 
         <div class="field">
           <label>Target Branch</label>
-          <input type="text" id="targetBranch" placeholder="target-branch" required />
-          <select id="targetBranchSelect" class="hidden" required></select>
-          <span id="branchHint" class="branch-hint hidden">Loading branches…</span>
+          <div class="combobox-wrap">
+            <input type="text" id="targetBranch" placeholder="target-branch" required autocomplete="off" />
+            <div class="combobox-drop hidden" id="branchDrop"></div>
+          </div>
+          <span id="branchHint" class="branch-hint hidden"></span>
+        </div>
+
+        <div class="field">
+          <div class="toggle-row">
+            <label class="toggle-label" for="evaluateMode">Evaluate Mode</label>
+            <label class="switch">
+              <input type="checkbox" id="evaluateMode" />
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="field hidden" id="backportCommitField">
+          <label>Backport Commit SHA</label>
+          <input type="text" id="backportCommit" placeholder="abc1234f…" />
         </div>
       </section>
 
@@ -121,6 +210,7 @@
     <!-- ── Result Banner ──────────────────────────────────────────── -->
     <div class="banner hidden" id="resultBanner">
       <span id="bannerText"></span>
+      <button type="button" class="view-diff-btn hidden" id="bannerViewDiffBtn">View Diff</button>
       <button type="button" class="reset-btn hidden" id="resetBtn">Reset Repository</button>
     </div>
 

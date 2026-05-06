@@ -2,90 +2,226 @@
 const vscode = acquireVsCodeApi();
 
 // ── State ────────────────────────────────────────────────────────────────────
-let activeTab = "commit";
-let useOtherRepo = false;
-let running = false;
-let currentJobId = null;
+let activeTab      = "commit";
+let activeProvider = "openai";
+let useOtherRepo   = false;
+let running        = false;
+let currentJobId   = null;
+let _activeSpinner = null;
+let _lastPatch     = null;
 
 // ── DOM refs ─────────────────────────────────────────────────────────────────
-const form          = document.getElementById("backportForm");
-const runBtn        = document.getElementById("runBtn");
-const stopBtn       = document.getElementById("stopBtn");
-const resetBtn      = document.getElementById("resetBtn");
-const logPanel      = document.getElementById("logPanel");
-const logBody       = document.getElementById("logBody");
-const resultBanner  = document.getElementById("resultBanner");
-const bannerText    = document.getElementById("bannerText");
-const targetRepoFld = document.getElementById("targetRepoField");
-const advancedBody  = document.getElementById("advancedBody");
-const advancedToggle= document.getElementById("advancedToggle");
-const chevron       = advancedToggle.querySelector(".chevron");
+const form               = document.getElementById("backportForm");
+const runBtn             = document.getElementById("runBtn");
+const stopBtn            = document.getElementById("stopBtn");
+const resetBtn           = document.getElementById("resetBtn");
+const logPanel           = document.getElementById("logPanel");
+const logBody            = document.getElementById("logBody");
+const resultBanner       = document.getElementById("resultBanner");
+const bannerText         = document.getElementById("bannerText");
+const targetRepoFld      = document.getElementById("targetRepoField");
+const advancedBody       = document.getElementById("advancedBody");
+const advancedToggle     = document.getElementById("advancedToggle");
+const chevron            = advancedToggle.querySelector(".chevron");
 const statusDot          = document.getElementById("statusDot");
-const targetBranchInput  = document.getElementById("targetBranch");
-const targetBranchSelect = document.getElementById("targetBranchSelect");
-const branchHint         = document.getElementById("branchHint");
+const targetBranchInput = document.getElementById("targetBranch");
+const branchDrop        = document.getElementById("branchDrop");
+const branchHint        = document.getElementById("branchHint");
 
-// ── Tab switching ─────────────────────────────────────────────────────────────
-document.querySelectorAll(".tab").forEach((tab) => {
+// ── Config section ────────────────────────────────────────────────────────────
+const configToggle   = document.getElementById("configToggle");
+const configBody     = document.getElementById("configBody");
+const configChevron  = configToggle.querySelector(".chevron");
+
+configToggle.addEventListener("click", () => {
+  const open = configBody.classList.toggle("open");
+  configChevron.classList.toggle("open", open);
+});
+
+// Provider tab switching inside config
+document.querySelectorAll("#providerTabs .tab").forEach((tab) => {
+  tab.addEventListener("click", () => {
+    activeProvider = tab.dataset.provider;
+    document.querySelectorAll("#providerTabs .tab").forEach((t) =>
+      t.classList.toggle("active", t === tab)
+    );
+    const isAzure = activeProvider === "azure";
+    document.getElementById("cfgOpenaiKeyField").classList.toggle("hidden", isAzure);
+    document.getElementById("cfgOpenaiBaseUrlField").classList.toggle("hidden", isAzure);
+    document.getElementById("cfgAzureKeyField").classList.toggle("hidden", !isAzure);
+    document.getElementById("cfgAzureEndpointField").classList.toggle("hidden", !isAzure);
+    document.getElementById("cfgAzureVersionField").classList.toggle("hidden", !isAzure);
+  });
+});
+
+document.getElementById("applyConfigBtn").addEventListener("click", () => {
+  const data = {
+    backendUrl:       document.getElementById("cfgBackendUrl").value.trim(),
+    provider:         activeProvider,
+    openaiApiKey:     document.getElementById("cfgApiKey").value.trim(),
+    openaiBaseUrl:    document.getElementById("cfgBaseUrl").value.trim(),
+    azureApiKey:      document.getElementById("cfgAzureKey").value.trim(),
+    azureEndpoint:    document.getElementById("cfgAzureEndpoint").value.trim(),
+    azureApiVersion:  document.getElementById("cfgAzureVersion").value.trim(),
+    fastModel:        document.getElementById("cfgFastModel").value.trim(),
+    balancedModel:    document.getElementById("cfgBalancedModel").value.trim(),
+    reasoningModel:   document.getElementById("cfgReasoningModel").value.trim(),
+    microservicesUrl: document.getElementById("cfgMicroservicesUrl").value.trim(),
+  };
+  vscode.postMessage({ command: "applyConfig", data });
+  document.getElementById("applyConfigBtn").textContent = "Applying…";
+});
+
+// ── Refresh status ────────────────────────────────────────────────────────────
+document.getElementById("refreshBtn").addEventListener("click", () => {
+  vscode.postMessage({ command: "checkHealth" });
+});
+
+// ── Button starts disabled until backend + inputs are ready ──────────────────
+runBtn.disabled = true;
+
+// ── Tab switching (source) ────────────────────────────────────────────────────
+document.querySelectorAll("#sourceTabs .tab").forEach((tab) => {
   tab.addEventListener("click", () => {
     activeTab = tab.dataset.tab;
-    document.querySelectorAll(".tab").forEach((t) => t.classList.toggle("active", t === tab));
+    document.querySelectorAll("#sourceTabs .tab").forEach((t) =>
+      t.classList.toggle("active", t === tab)
+    );
     document.querySelectorAll(".tab-content").forEach((el) =>
       el.classList.toggle("active", el.dataset.tab === activeTab)
     );
+    _updateRunBtn();
   });
 });
+
+// Watch the three required fields
+["mainlineRepo", "commit", "patchText"].forEach((id) => {
+  document.getElementById(id).addEventListener("input", _updateRunBtn);
+});
+targetBranchInput.addEventListener("input", _updateRunBtn);
+// Also fire when a branch is picked from the dropdown
+branchDrop.addEventListener("mousedown", () => setTimeout(_updateRunBtn, 0));
 
 // ── Repo mode toggle ──────────────────────────────────────────────────────────
 document.querySelectorAll("input[name='repoMode']").forEach((radio) => {
   radio.addEventListener("change", () => {
     useOtherRepo = radio.value === "other";
     targetRepoFld.classList.toggle("hidden", !useOtherRepo);
-    if (useOtherRepo) {
-      resetBranchToInput();
-    } else {
-      scheduleBranchFetch();
-    }
+    _allBranches = [];
+    branchDrop.classList.add("hidden");
+    if (!useOtherRepo) scheduleBranchFetch();
   });
 });
 
-// ── Branch auto-complete ──────────────────────────────────────────────────────
-let _branchTimer = null;
+// ── Branch combobox ───────────────────────────────────────────────────────────
+let _allBranches  = [];
+let _branchTimer  = null;
 
-function getTargetBranch() {
-  return targetBranchSelect.classList.contains("hidden")
-    ? targetBranchInput.value.trim()
-    : targetBranchSelect.value;
+function getTargetBranch() { return targetBranchInput.value.trim(); }
+
+function _repoForBranch() {
+  return useOtherRepo
+    ? document.getElementById("targetRepo").value.trim()
+    : document.getElementById("mainlineRepo").value.trim();
 }
 
-function resetBranchToInput() {
-  targetBranchSelect.classList.add("hidden");
-  targetBranchSelect.required = false;
-  targetBranchInput.classList.remove("hidden");
-  targetBranchInput.required = true;
-  branchHint.classList.add("hidden");
+function _renderBranchDrop(filter) {
+  const q = (filter || "").toLowerCase();
+  const hits = q ? _allBranches.filter(b => b.toLowerCase().includes(q)) : _allBranches;
+  if (!hits.length) { branchDrop.classList.add("hidden"); return; }
+  const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+  const hi  = s => q
+    ? s.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")})`, "gi"),
+                m => `<mark>${esc(m)}</mark>`)
+    : esc(s);
+  branchDrop.innerHTML = hits.map(b =>
+    `<div class="combobox-item" data-value="${esc(b)}">${hi(b)}</div>`
+  ).join("");
+  branchDrop.classList.remove("hidden");
 }
+
+targetBranchInput.addEventListener("focus", () => {
+  if (_allBranches.length) _renderBranchDrop(targetBranchInput.value);
+  else scheduleBranchFetch();
+});
+targetBranchInput.addEventListener("input", () => {
+  if (_allBranches.length) _renderBranchDrop(targetBranchInput.value);
+});
+targetBranchInput.addEventListener("blur", () => {
+  setTimeout(() => branchDrop.classList.add("hidden"), 150);
+});
+branchDrop.addEventListener("mousedown", (e) => {
+  const item = e.target.closest(".combobox-item");
+  if (!item) return;
+  e.preventDefault();
+  targetBranchInput.value = item.dataset.value;
+  branchDrop.classList.add("hidden");
+});
 
 function scheduleBranchFetch() {
-  if (useOtherRepo) return;
-  const repo = document.getElementById("mainlineRepo").value.trim();
-  if (!repo) { resetBranchToInput(); return; }
+  const repo = _repoForBranch();
+  if (!repo) { _allBranches = []; branchDrop.classList.add("hidden"); return; }
   branchHint.textContent = "Loading branches…";
   branchHint.classList.remove("hidden");
   clearTimeout(_branchTimer);
   _branchTimer = setTimeout(() => {
     vscode.postMessage({ command: "fetchBranches", repo });
-  }, 500);
+  }, 400);
 }
 
-document.getElementById("mainlineRepo").addEventListener("input", scheduleBranchFetch);
+document.getElementById("mainlineRepo").addEventListener("input", () => {
+  if (!useOtherRepo) scheduleBranchFetch();
+});
+document.getElementById("targetRepo").addEventListener("input", () => {
+  if (useOtherRepo) scheduleBranchFetch();
+});
+
+// ── Commit validation ─────────────────────────────────────────────────────────
+const commitInput     = document.getElementById("commit");
+const commitCheckEl   = document.getElementById("commitCheck");
+const commitCheckIcon = document.getElementById("commitCheckIcon");
+const commitCheckMsg  = document.getElementById("commitCheckMsg");
+const viewCommitBtn   = document.getElementById("viewCommitBtn");
+let _commitTimer      = null;
+
+commitInput.addEventListener("input", () => {
+  clearTimeout(_commitTimer);
+  commitCheckEl.classList.add("hidden");
+  const sha = commitInput.value.trim();
+  if (sha.length < 7) return;
+  _commitTimer = setTimeout(() => {
+    const repo = document.getElementById("mainlineRepo").value.trim();
+    if (!repo) return;
+    vscode.postMessage({ command: "checkCommit", repo, commit: sha });
+  }, 600);
+});
+
+viewCommitBtn.addEventListener("click", () => {
+  const repo = document.getElementById("mainlineRepo").value.trim();
+  const sha  = commitInput.value.trim();
+  if (repo && sha) vscode.postMessage({ command: "viewCommit", repo, commit: sha });
+});
 
 // ── Health check ──────────────────────────────────────────────────────────────
 function requestHealth() {
   vscode.postMessage({ command: "checkHealth" });
 }
 
+let _backendConnected = false;
+
+function _updateRunBtn() {
+  if (running) return;
+  const hasRepo    = !!document.getElementById("mainlineRepo").value.trim();
+  const hasBranch  = !!getTargetBranch();
+  const hasSource  = activeTab === "commit"
+    ? !!document.getElementById("commit").value.trim()
+    : !!document.getElementById("patchText").value.trim();
+  runBtn.disabled = !(_backendConnected && hasRepo && hasBranch && hasSource);
+}
+
 function updateStatusDot(connected, data) {
+  _backendConnected = connected;
+  _updateRunBtn();
   statusDot.className = "status-dot " + (
     !connected              ? "status-error" :
     !data.api_key_configured ? "status-warn"  :
@@ -93,16 +229,33 @@ function updateStatusDot(connected, data) {
   );
 
   const port = data.port ? `:${data.port}` : "";
-  document.getElementById("spBackend").textContent   = connected ? `online${port}` : "offline";
-  document.getElementById("spProvider").textContent  = data.provider || "—";
-  document.getElementById("spFast").textContent      = data.fast_model || "—";
-  document.getElementById("spBalanced").textContent  = data.balanced_model || "—";
-  document.getElementById("spReasoning").textContent = data.reasoning_model || "—";
+  document.getElementById("spBackend").textContent      = connected ? `online${port}` : "offline";
+  document.getElementById("spProvider").textContent     = data.provider || "—";
+  document.getElementById("spFast").textContent         = data.fast_model || "—";
+  document.getElementById("spBalanced").textContent     = data.balanced_model || "—";
+  document.getElementById("spReasoning").textContent    = data.reasoning_model || "—";
+
+  const msOk = data.microservices_ok;
+  const msUrl = data.microservices_url || "";
+  document.getElementById("spMicroservices").textContent =
+    msOk === undefined ? "—" :
+    msOk ? `ok  ${msUrl}` : `unreachable  ${msUrl}`;
+  document.getElementById("spMicroservices").style.color =
+    msOk === undefined ? "" : msOk ? "var(--accent)" : "var(--warn)";
 }
 
-// Poll on load + every 20s
 requestHealth();
 setInterval(requestHealth, 20_000);
+
+// ── Evaluate mode toggle ──────────────────────────────────────────────────────
+const evaluateModeChk       = document.getElementById("evaluateMode");
+const backportCommitField   = document.getElementById("backportCommitField");
+evaluateModeChk.addEventListener("change", () => {
+  backportCommitField.classList.toggle("hidden", !evaluateModeChk.checked);
+  if (!evaluateModeChk.checked) {
+    document.getElementById("backportCommit").value = "";
+  }
+});
 
 // ── Advanced collapsible ──────────────────────────────────────────────────────
 advancedToggle.addEventListener("click", () => {
@@ -135,7 +288,7 @@ stopBtn.addEventListener("click", () => {
   vscode.postMessage({ command: "cancelJob", jobId: currentJobId });
   stopBtn.disabled = true;
   stopBtn.textContent = "Stopping…";
-  appendLog("warn", "cancel", "Cancellation requested — waiting for current step to finish…");
+  appendLog("warn", "Cancellation requested — waiting for current step to finish…");
 });
 
 // ── Reset button ──────────────────────────────────────────────────────────────
@@ -146,20 +299,27 @@ resetBtn.addEventListener("click", () => {
   vscode.postMessage({ command: "resetRepo", jobId: currentJobId });
 });
 
+// ── View diff button (banner) ─────────────────────────────────────────────────
+document.getElementById("bannerViewDiffBtn").addEventListener("click", () => {
+  if (_lastPatch) vscode.postMessage({ command: "showPatch", patch: _lastPatch });
+});
+
 // ── Form submit ───────────────────────────────────────────────────────────────
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   if (running) return;
 
   const data = {
-    mainlineRepo: document.getElementById("mainlineRepo").value.trim(),
-    commit:       activeTab === "commit" ? document.getElementById("commit").value.trim() : "",
-    patchText:    activeTab === "patch"  ? document.getElementById("patchText").value.trim() : "",
-    targetRepo:   document.getElementById("targetRepo").value.trim(),
-    targetBranch: getTargetBranch(),
-    buildCmd:     document.getElementById("buildCmd").value.trim(),
-    testCmd:      document.getElementById("testCmd").value.trim(),
-    useOtherRepo: String(useOtherRepo),
+    mainlineRepo:   document.getElementById("mainlineRepo").value.trim(),
+    commit:         activeTab === "commit" ? document.getElementById("commit").value.trim() : "",
+    patchText:      activeTab === "patch"  ? document.getElementById("patchText").value.trim() : "",
+    targetRepo:     document.getElementById("targetRepo").value.trim(),
+    targetBranch:   getTargetBranch(),
+    backportCommit: document.getElementById("backportCommit").value.trim(),
+    evaluateMode:   String(document.getElementById("evaluateMode").checked),
+    buildCmd:       document.getElementById("buildCmd").value.trim(),
+    testCmd:        document.getElementById("testCmd").value.trim(),
+    useOtherRepo:   String(useOtherRepo),
   };
 
   vscode.postMessage({ command: "startBackport", data });
@@ -176,222 +336,322 @@ window.addEventListener("message", (e) => {
       break;
     case "folderPicked":
       document.getElementById(msg.field).value = msg.path;
-      if (msg.field === "mainlineRepo" && !useOtherRepo) scheduleBranchFetch();
+      if ((msg.field === "mainlineRepo" && !useOtherRepo) ||
+          (msg.field === "targetRepo"   &&  useOtherRepo)) scheduleBranchFetch();
       break;
-    case "branchList": {
-      const prev = getTargetBranch();
+    case "branchList":
+      branchHint.classList.add("hidden");
       if (!msg.branches || msg.branches.length === 0) {
-        resetBranchToInput();
-        branchHint.textContent = "No git branches found — enter branch name manually";
+        _allBranches = [];
+        branchHint.textContent = "No branches found — type manually";
         branchHint.classList.remove("hidden");
         break;
       }
-      const opts = msg.branches.map((b) => {
-        const sel = b === prev ? " selected" : "";
-        return `<option value="${b}"${sel}>${b}</option>`;
-      });
-      if (prev && !msg.branches.includes(prev)) {
-        opts.unshift(`<option value="${prev}" selected>${prev}</option>`);
+      _allBranches = msg.branches;
+      // Only open dropdown if the branch input is currently focused
+      if (document.activeElement === targetBranchInput) {
+        _renderBranchDrop(targetBranchInput.value);
       }
-      targetBranchSelect.innerHTML = opts.join("");
-      targetBranchInput.classList.add("hidden");
-      targetBranchInput.required = false;
-      targetBranchSelect.classList.remove("hidden");
-      targetBranchSelect.required = true;
-      branchHint.classList.add("hidden");
       break;
-    }
+    case "commitStatus":
+      commitCheckEl.classList.remove("hidden");
+      if (msg.valid) {
+        commitCheckIcon.textContent = "✓";
+        commitCheckIcon.className = "commit-icon-ok";
+        commitCheckMsg.textContent = "";
+        viewCommitBtn.classList.remove("hidden");
+      } else {
+        commitCheckIcon.textContent = "✗";
+        commitCheckIcon.className = "commit-icon-err";
+        commitCheckMsg.textContent = "Commit not found in repository";
+        viewCommitBtn.classList.add("hidden");
+      }
+      break;
+    case "configLoaded":
+      populateConfig(msg);
+      break;
+    case "configApplied":
+      document.getElementById("applyConfigBtn").textContent = msg.ok ? "Applied ✓" : "Apply failed ✗";
+      setTimeout(() => {
+        document.getElementById("applyConfigBtn").textContent = "Apply";
+      }, 2000);
+      break;
     case "jobStarted":
       currentJobId = msg.jobId;
-      appendLog("info", "pipeline", "Connected to backend — pipeline starting…");
+      appendLog("info", "Connected to backend…");
       break;
     case "log":
       handleLogEvent(msg);
       break;
     case "error":
-      appendLog("error", "error", msg.message || "Unknown error");
-      showBanner(false, msg.message || "Error occurred");
+      _resolveSpinner("fail", null);
+      appendLog("fail", msg.message || "Unknown error");
+      showBanner(false, msg.message || "Error occurred", false, false);
       setRunning(false);
       break;
     case "repoReset":
       resetBtn.disabled = false;
       resetBtn.textContent = "Reset Repository";
-      appendLog("info", "reset", "Repository has been reset to its original state");
+      appendLog("ok", "Repository reset to original state");
       break;
   }
 });
 
+// ── Config population ─────────────────────────────────────────────────────────
+function populateConfig(cfg) {
+  document.getElementById("cfgBackendUrl").value      = cfg.backendUrl      || "";
+  document.getElementById("cfgApiKey").value          = cfg.openaiApiKey    || "";
+  document.getElementById("cfgBaseUrl").value         = cfg.openaiBaseUrl   || "";
+  document.getElementById("cfgAzureKey").value        = cfg.azureApiKey     || "";
+  document.getElementById("cfgAzureEndpoint").value   = cfg.azureEndpoint   || "";
+  document.getElementById("cfgAzureVersion").value    = cfg.azureApiVersion || "";
+  document.getElementById("cfgFastModel").value       = cfg.fastModel       || "";
+  document.getElementById("cfgBalancedModel").value   = cfg.balancedModel   || "";
+  document.getElementById("cfgReasoningModel").value  = cfg.reasoningModel  || "";
+  document.getElementById("cfgMicroservicesUrl").value= cfg.microservicesUrl|| "";
+
+  activeProvider = cfg.provider || "openai";
+  document.querySelectorAll("#providerTabs .tab").forEach((t) =>
+    t.classList.toggle("active", t.dataset.provider === activeProvider)
+  );
+  const isAzure = activeProvider === "azure";
+  document.getElementById("cfgOpenaiKeyField").classList.toggle("hidden", isAzure);
+  document.getElementById("cfgOpenaiBaseUrlField").classList.toggle("hidden", isAzure);
+  document.getElementById("cfgAzureKeyField").classList.toggle("hidden", !isAzure);
+  document.getElementById("cfgAzureEndpointField").classList.toggle("hidden", !isAzure);
+  document.getElementById("cfgAzureVersionField").classList.toggle("hidden", !isAzure);
+}
+
 // ── Log rendering ─────────────────────────────────────────────────────────────
 function handleLogEvent(event) {
   const { phase, status, agent, message, error, validation_passed,
-          repair_status, routing_decision, attempt, via, patch, category } = event;
+          repair_status, routing_decision, attempt, via, patch } = event;
 
-  // Phase 0 events
+  // Direct apply phase
   if (phase === "phase0") {
-    const styles = {
-      checking:     ["info",    "phase-0", message],
-      applying:     ["phase0",  "phase-0", message],
-      building:     ["phase0",  "phase-0", message],
-      testing:      ["phase0",  "phase-0", message],
-      success:      ["success", "phase-0", message],
-      skipped:      ["info",    "phase-0", message],
-      build_failed: ["warn",    "phase-0", message],
-      test_failed:  ["warn",    "phase-0", message],
-      failed:       ["warn",    "phase-0", message],
-    };
-    const [type, tag, text] = styles[status] || ["info", "phase-0", message || status];
-    appendLog(type, tag, text);
-    return;
-  }
-
-  // Setup events
-  if (status === "setup") {
-    appendLog("setup", "setup", message || status);
-    return;
-  }
-
-  // Pipeline start
-  if (status === "pipeline_start") {
-    appendLog("info", "pipeline", message);
-    return;
-  }
-
-  // Final complete event
-  if (status === "complete") {
-    setRunning(false);
-    const passed = validation_passed;
-    const viaLabel = via === "direct_apply" ? " (direct apply)" : " (agentic pipeline)";
-
-    if (passed) {
-      appendLog("success", "done", `✓ Backport succeeded${viaLabel}`);
-      showBanner(true, `Backport complete${viaLabel} — changes are on disk`, true);
-      if (patch) {
-        vscode.postMessage({ command: "onComplete", jobId: currentJobId, passed: true, patch });
-      }
-    } else {
-      appendLog("error", "done", `✗ Pipeline finished — ${error || "see errors above"}`);
-      showBanner(false, `Partial changes on disk — ${error || "see log for details"}`, true);
-      if (patch) {
-        vscode.postMessage({ command: "onComplete", jobId: currentJobId, passed: false, patch });
-      }
+    switch (status) {
+      case "checking":
+        appendLog("info", "Checking if patch applies cleanly…");
+        break;
+      case "applying":
+        appendLog("info", "Patch applies — applying to target repository…");
+        break;
+      case "building":
+        appendLog("spin", message || "Building project…");
+        break;
+      case "testing":
+        _resolveSpinner("ok", "Build succeeded");
+        appendLog("spin", "Running targeted tests…");
+        break;
+      case "success":
+        _resolveSpinner("ok", "Tests passed");
+        appendLog("ok", "Patch applied and verified — no AI needed");
+        break;
+      case "skipped":
+        _resolveSpinner("step", null);
+        appendLog("info", "Patch context differs — switching to AI pipeline");
+        break;
+      case "build_failed":
+        _resolveSpinner("warn", "Build failed — switching to AI pipeline");
+        break;
+      case "test_failed":
+        _resolveSpinner("warn", "Tests failed — switching to AI pipeline");
+        break;
+      default:
+        appendLog("info", message || status);
     }
     return;
   }
 
-  // Cancelled
+  // Setup / housekeeping messages
+  if (status === "setup") {
+    const msg = message || "";
+    const type = msg.toLowerCase().startsWith("loaded phase") ? "ok" : "info";
+    appendLog(type, msg);
+    return;
+  }
+
+  if (status === "pipeline_start") {
+    appendLog("info", "Switching to AI backport pipeline…");
+    return;
+  }
+
+  // Completion
+  if (status === "complete") {
+    _resolveSpinner("ok", null);
+    setRunning(false);
+    const via2 = via === "direct_apply" ? "direct apply" : "AI pipeline";
+    if (validation_passed) {
+      appendLog("ok", `Backport complete via ${via2}`);
+      showBanner(true, `Backport complete (${via2}) — changes are on disk`, true, !!patch);
+    } else {
+      appendLog("fail", `Pipeline finished with errors${error ? ` — ${error}` : ""}`);
+      showBanner(false, `Partial changes on disk — ${error || "see log for details"}`, true, !!patch);
+    }
+    if (patch) {
+      _lastPatch = patch;
+      vscode.postMessage({ command: "showPatch", patch });
+    }
+    return;
+  }
+
   if (status === "cancelled") {
+    _resolveSpinner("warn", null);
     setRunning(false);
-    appendLog("warn", "cancel", message || "Cancelled — repository reset");
-    showBanner(false, "Job cancelled — repository has been reset", false);
+    appendLog("warn", "Job cancelled — repository has been reset");
+    showBanner(false, "Job cancelled — repository has been reset", false, false);
     return;
   }
 
-  // Error
   if (status === "error") {
+    _resolveSpinner("fail", null);
     setRunning(false);
-    appendLog("error", "error", message || "Unexpected error");
-    showBanner(false, message || "Unexpected error", true);
+    appendLog("fail", message || "Unexpected error");
+    showBanner(false, message || "Unexpected error", true, false);
     return;
   }
 
-  // Per-agent events
+  // Agent pipeline events
   if (agent) {
     if (agent === "validator") {
       if (status === "building") {
-        appendLog("info", "build", message || "Starting build…");
+        appendLog("spin", "Building project and running tests…");
         return;
       }
-      const passed = validation_passed;
-      appendLog(
-        passed ? "success" : "warn",
-        "validator",
-        message || (passed ? "Build and tests passed" : `Failed: ${error}`)
+      _resolveSpinner(
+        validation_passed ? "ok" : "warn",
+        validation_passed
+          ? "Build and tests passed"
+          : `Build or tests failed${error ? ` — ${error.slice(0, 120)}` : ""}`
       );
-    } else if (agent === "fallback_agent") {
-      appendLog("fallback", "fallback", message || `Retry attempt ${attempt}`);
-    } else if (agent === "syntax_repair") {
-      const type = repair_status === "clean" ? "success"
-                 : repair_status === "repaired" ? "syntax"
-                 : repair_status === "failed" ? "error" : "info";
-      appendLog(type, "syntax", message);
-    } else if (agent === "hunk_router") {
-      appendLog("info", "router", message);
-    } else {
-      appendLog("agent", agentShortName(agent), message);
+      return;
     }
+    if (agent === "fallback_agent") {
+      appendLog("step", `Retrying failed changes (attempt ${attempt})…`);
+      return;
+    }
+    if (agent === "syntax_repair") {
+      const map2 = {
+        clean:    ["ok",   "Syntax check passed — no issues found"],
+        repaired: ["ok",   "Syntax errors detected and automatically repaired"],
+        failed:   ["warn", "Could not repair syntax errors — escalating"],
+        skipped:  ["info", "Syntax check skipped — changes already verified clean"],
+      };
+      const [t, txt] = map2[repair_status] || ["info", message];
+      appendLog(t, txt);
+      return;
+    }
+    if (agent === "hunk_router") {
+      const strategy = (routing_decision || "").replace(/_/g, " ");
+      appendLog("step", `Strategy selected: ${strategy || "determining…"}`);
+      return;
+    }
+    const agentMap = {
+      code_localizer:      ["step", "Locating changed code in target repository…"],
+      patch_classifier:    ["step", "Analysing patch complexity…"],
+      fast_apply:          ["step", "Applying directly matching changes…"],
+      namespace_adapter:   ["step", "Adapting namespaces and imports…"],
+      structural_refactor: ["step", "Handling structural refactoring…"],
+      hunk_synthesizer:    ["spin", "Generating code changes with AI…"],
+      atomic_rollback:     ["step", "Rolling back partially applied changes…"],
+    };
+    const [t2, txt2] = agentMap[agent] || ["step", message || agent];
+    appendLog(t2, txt2);
   }
 }
 
-function agentShortName(agent) {
-  return {
-    code_localizer:      "localizer",
-    patch_classifier:    "classifier",
-    fast_apply:          "fast-apply",
-    namespace_adapter:   "namespace",
-    structural_refactor: "structural",
-    hunk_synthesizer:    "synthesizer",
-    atomic_rollback:     "rollback",
-  }[agent] || agent;
+function _resolveSpinner(type, text) {
+  if (!_activeSpinner) return;
+  const entry = _activeSpinner;
+  _activeSpinner = null;
+  const iconWrap = entry.querySelector(".log-icon-wrap");
+  const msgEl    = entry.querySelector(".log-msg");
+  const cfg = {
+    ok:   { char: "✓", cls: "li-ok"   },
+    fail: { char: "✗", cls: "li-fail" },
+    warn: { char: "!", cls: "li-warn" },
+    step: { char: "·", cls: "li-step" },
+    info: { char: "›", cls: "li-info" },
+  }[type] || { char: "·", cls: "li-step" };
+  iconWrap.innerHTML = "";
+  iconWrap.textContent = cfg.char;
+  iconWrap.className = `log-icon-wrap ${cfg.cls}`;
+  if (text) msgEl.textContent = text;
 }
 
-function appendLog(type, tag, text) {
+function appendLog(type, text) {
+  // Auto-resolve any active spinner when a static entry arrives
+  if (_activeSpinner && type !== "spin") _resolveSpinner("step", null);
+
   logPanel.classList.remove("hidden");
   const entry = document.createElement("div");
   entry.className = "log-entry";
 
-  const tagEl = document.createElement("span");
-  const tagClass = {
-    phase0:    "tag-phase0",
-    setup:     "tag-setup",
-    agent:     "tag-agent",
-    validator: "tag-validator",
-    fallback:  "tag-fallback",
-    syntax:    "tag-syntax",
-    success:   "tag-success",
-    error:     "tag-error",
-    warn:      "tag-validator",
-    info:      "tag-info",
-    build:     "tag-build",
-  }[type] || "tag-info";
-  tagEl.className = `log-tag ${tagClass}`;
-  tagEl.textContent = tag;
+  const iconWrap = document.createElement("span");
+  iconWrap.className = "log-icon-wrap";
+
+  if (type === "spin") {
+    const s = document.createElement("span");
+    s.className = "log-spinner";
+    iconWrap.appendChild(s);
+  } else {
+    const cfg = {
+      ok:   { char: "✓", cls: "li-ok"   },
+      fail: { char: "✗", cls: "li-fail" },
+      warn: { char: "!", cls: "li-warn" },
+      step: { char: "·", cls: "li-step" },
+      info: { char: "›", cls: "li-info" },
+    }[type] || { char: "›", cls: "li-info" };
+    iconWrap.textContent = cfg.char;
+    iconWrap.classList.add(cfg.cls);
+  }
 
   const msgEl = document.createElement("span");
   msgEl.className = "log-msg";
   msgEl.textContent = text || "";
 
-  entry.appendChild(tagEl);
+  entry.appendChild(iconWrap);
   entry.appendChild(msgEl);
   logBody.appendChild(entry);
   logBody.scrollTop = logBody.scrollHeight;
+
+  if (type === "spin") _activeSpinner = entry;
 }
 
-function showBanner(success, text, showReset) {
+function showBanner(success, text, showReset, showViewDiff) {
   resultBanner.className = `banner ${success ? "success" : "failure"}`;
   bannerText.textContent = (success ? "✓ " : "✗ ") + text;
   resetBtn.classList.toggle("hidden", !showReset);
   resetBtn.disabled = false;
   resetBtn.textContent = "Reset Repository";
+  document.getElementById("bannerViewDiffBtn").classList.toggle("hidden", !showViewDiff);
 }
 
 function hideBanner() {
   resultBanner.className = "banner hidden";
   resetBtn.classList.add("hidden");
+  document.getElementById("bannerViewDiffBtn").classList.add("hidden");
 }
 
 function setRunning(state) {
   running = state;
-  runBtn.disabled = state;
   runBtn.innerHTML = state
     ? '<span class="run-icon">⏳</span> Running…'
     : '<span class="run-icon">▶</span> Run Backport';
   stopBtn.classList.toggle("hidden", !state);
   stopBtn.disabled = false;
   stopBtn.textContent = "⏹ Stop";
+  if (state) {
+    runBtn.disabled = true;
+  } else {
+    _updateRunBtn();
+  }
 }
 
 function resetLog() {
   logBody.innerHTML = "";
+  _activeSpinner = null;
+  _lastPatch = null;
   hideBanner();
   currentJobId = null;
 }
