@@ -45,7 +45,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 12px 8px;
+  padding: 8px 10px 7px;
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
@@ -54,16 +54,70 @@ body {
 }
 
 .header-icon {
-  font-size: 16px;
+  font-size: 15px;
   color: var(--accent);
   line-height: 1;
 }
 
 .header-title {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   flex: 1;
+  color: var(--fg);
+}
+
+/* ── Status dot ────────────────────────────────────────────────────── */
+.status-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: box-shadow 0.2s;
+}
+.status-dot:hover { box-shadow: 0 0 0 3px rgba(128,128,128,0.15); }
+.status-unknown  { background: #555; }
+.status-ok       { background: var(--success); box-shadow: 0 0 4px #4caf5066; }
+.status-warn     { background: var(--warn); }
+.status-error    { background: var(--error); }
+
+.status-popup {
+  display: none;
+  position: absolute;
+  top: 16px;
+  right: 0;
+  z-index: 100;
+  background: var(--vscode-editorWidget-background, #252526);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 8px 10px;
+  min-width: 190px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  font-size: 11px;
+  line-height: 1.6;
+}
+.status-wrap:hover .status-popup { display: block; }
+
+.status-popup-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.status-popup-label {
+  color: var(--muted);
+  white-space: nowrap;
+}
+.status-popup-divider {
+  border-top: 1px solid var(--border);
+  margin: 4px 0;
 }
 
 .icon-btn {
@@ -122,7 +176,8 @@ body {
 }
 
 input[type="text"],
-textarea {
+textarea,
+select {
   background: var(--input-bg);
   border: 1px solid var(--input-border);
   color: var(--input-fg);
@@ -135,8 +190,23 @@ textarea {
   transition: border-color 0.15s;
   resize: vertical;
 }
+select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  padding-right: 24px;
+}
 input[type="text"]:focus,
-textarea:focus { border-color: var(--accent); }
+textarea:focus,
+select:focus { border-color: var(--accent); }
+
+.branch-hint {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 2px;
+}
 
 .path-row {
   display: flex;
@@ -170,18 +240,19 @@ textarea:focus { border-color: var(--accent); }
 .tab-content.active { display: block; }
 
 /* ── Radio group ───────────────────────────────────────────────────── */
-.radio-group {
+.radio-row {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 .radio-label {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   font-size: 11px;
   cursor: pointer;
   color: var(--fg);
+  white-space: nowrap;
 }
 .radio-label input[type="radio"] { accent-color: var(--accent); }
 

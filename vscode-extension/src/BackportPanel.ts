@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs";
+import * as cp from "child_process";
 import { ServerManager } from "./ServerManager";
 
 interface BackportJob {
@@ -56,8 +57,45 @@ export class BackportPanel implements vscode.WebviewViewProvider {
         case "openSettings":
           vscode.commands.executeCommand("workbench.action.openSettings", "omniport");
           break;
+        case "checkHealth":
+          await this._checkHealth();
+          break;
+        case "fetchBranches":
+          this._fetchBranches(msg.repo);
+          break;
       }
     });
+  }
+
+  private async _checkHealth(): Promise<void> {
+    try {
+      const res = await fetch(`${this._server.baseUrl}/api/health`);
+      if (res.ok) {
+        const data = await res.json() as Record<string, unknown>;
+        this._post("healthStatus", { connected: true, port: this._server.port, ...data });
+      } else {
+        this._post("healthStatus", { connected: false });
+      }
+    } catch {
+      this._post("healthStatus", { connected: false });
+    }
+  }
+
+  private _fetchBranches(repoPath: string): void {
+    const result = cp.spawnSync("git", ["-C", repoPath, "branch", "-r"], {
+      timeout: 5000, encoding: "utf8"
+    });
+    if (result.status !== 0 || result.error) {
+      this._post("branchList", { branches: null });
+      return;
+    }
+    const branches = (result.stdout as string)
+      .split("\n")
+      .map((l) => l.trim().replace(/^origin\//, "").trim())
+      .filter((l) => l && !l.includes("->"))
+      .filter((v, i, a) => a.indexOf(v) === i)
+      .sort();
+    this._post("branchList", { branches });
   }
 
   private async _pickFolder(field: string): Promise<void> {

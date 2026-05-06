@@ -20,6 +20,10 @@ const targetRepoFld = document.getElementById("targetRepoField");
 const advancedBody  = document.getElementById("advancedBody");
 const advancedToggle= document.getElementById("advancedToggle");
 const chevron       = advancedToggle.querySelector(".chevron");
+const statusDot          = document.getElementById("statusDot");
+const targetBranchInput  = document.getElementById("targetBranch");
+const targetBranchSelect = document.getElementById("targetBranchSelect");
+const branchHint         = document.getElementById("branchHint");
 
 // ── Tab switching ─────────────────────────────────────────────────────────────
 document.querySelectorAll(".tab").forEach((tab) => {
@@ -37,8 +41,68 @@ document.querySelectorAll("input[name='repoMode']").forEach((radio) => {
   radio.addEventListener("change", () => {
     useOtherRepo = radio.value === "other";
     targetRepoFld.classList.toggle("hidden", !useOtherRepo);
+    if (useOtherRepo) {
+      resetBranchToInput();
+    } else {
+      scheduleBranchFetch();
+    }
   });
 });
+
+// ── Branch auto-complete ──────────────────────────────────────────────────────
+let _branchTimer = null;
+
+function getTargetBranch() {
+  return targetBranchSelect.classList.contains("hidden")
+    ? targetBranchInput.value.trim()
+    : targetBranchSelect.value;
+}
+
+function resetBranchToInput() {
+  targetBranchSelect.classList.add("hidden");
+  targetBranchSelect.required = false;
+  targetBranchInput.classList.remove("hidden");
+  targetBranchInput.required = true;
+  branchHint.classList.add("hidden");
+}
+
+function scheduleBranchFetch() {
+  if (useOtherRepo) return;
+  const repo = document.getElementById("mainlineRepo").value.trim();
+  if (!repo) { resetBranchToInput(); return; }
+  branchHint.textContent = "Loading branches…";
+  branchHint.classList.remove("hidden");
+  clearTimeout(_branchTimer);
+  _branchTimer = setTimeout(() => {
+    vscode.postMessage({ command: "fetchBranches", repo });
+  }, 500);
+}
+
+document.getElementById("mainlineRepo").addEventListener("input", scheduleBranchFetch);
+
+// ── Health check ──────────────────────────────────────────────────────────────
+function requestHealth() {
+  vscode.postMessage({ command: "checkHealth" });
+}
+
+function updateStatusDot(connected, data) {
+  statusDot.className = "status-dot " + (
+    !connected              ? "status-error" :
+    !data.api_key_configured ? "status-warn"  :
+                               "status-ok"
+  );
+
+  const port = data.port ? `:${data.port}` : "";
+  document.getElementById("spBackend").textContent   = connected ? `online${port}` : "offline";
+  document.getElementById("spProvider").textContent  = data.provider || "—";
+  document.getElementById("spFast").textContent      = data.fast_model || "—";
+  document.getElementById("spBalanced").textContent  = data.balanced_model || "—";
+  document.getElementById("spReasoning").textContent = data.reasoning_model || "—";
+}
+
+// Poll on load + every 20s
+requestHealth();
+setInterval(requestHealth, 20_000);
 
 // ── Advanced collapsible ──────────────────────────────────────────────────────
 advancedToggle.addEventListener("click", () => {
@@ -92,7 +156,7 @@ form.addEventListener("submit", (e) => {
     commit:       activeTab === "commit" ? document.getElementById("commit").value.trim() : "",
     patchText:    activeTab === "patch"  ? document.getElementById("patchText").value.trim() : "",
     targetRepo:   document.getElementById("targetRepo").value.trim(),
-    targetBranch: document.getElementById("targetBranch").value.trim(),
+    targetBranch: getTargetBranch(),
     buildCmd:     document.getElementById("buildCmd").value.trim(),
     testCmd:      document.getElementById("testCmd").value.trim(),
     useOtherRepo: String(useOtherRepo),
@@ -107,9 +171,36 @@ form.addEventListener("submit", (e) => {
 window.addEventListener("message", (e) => {
   const msg = e.data;
   switch (msg.command) {
+    case "healthStatus":
+      updateStatusDot(msg.connected, msg);
+      break;
     case "folderPicked":
       document.getElementById(msg.field).value = msg.path;
+      if (msg.field === "mainlineRepo" && !useOtherRepo) scheduleBranchFetch();
       break;
+    case "branchList": {
+      const prev = getTargetBranch();
+      if (!msg.branches || msg.branches.length === 0) {
+        resetBranchToInput();
+        branchHint.textContent = "No git branches found — enter branch name manually";
+        branchHint.classList.remove("hidden");
+        break;
+      }
+      const opts = msg.branches.map((b) => {
+        const sel = b === prev ? " selected" : "";
+        return `<option value="${b}"${sel}>${b}</option>`;
+      });
+      if (prev && !msg.branches.includes(prev)) {
+        opts.unshift(`<option value="${prev}" selected>${prev}</option>`);
+      }
+      targetBranchSelect.innerHTML = opts.join("");
+      targetBranchInput.classList.add("hidden");
+      targetBranchInput.required = false;
+      targetBranchSelect.classList.remove("hidden");
+      targetBranchSelect.required = true;
+      branchHint.classList.add("hidden");
+      break;
+    }
     case "jobStarted":
       currentJobId = msg.jobId;
       appendLog("info", "pipeline", "Connected to backend — pipeline starting…");

@@ -13,6 +13,17 @@
     <header class="header">
       <span class="header-icon">⬡</span>
       <span class="header-title">OmniPort</span>
+      <div class="status-wrap">
+        <span id="statusDot" class="status-dot status-unknown" title="Checking backend…"></span>
+        <div id="statusPopup" class="status-popup">
+          <div class="status-popup-row"><span class="status-popup-label">Backend</span><span id="spBackend">—</span></div>
+          <div class="status-popup-row"><span class="status-popup-label">Provider</span><span id="spProvider">—</span></div>
+          <div class="status-popup-divider"></div>
+          <div class="status-popup-row"><span class="status-popup-label">Fast</span><span id="spFast">—</span></div>
+          <div class="status-popup-row"><span class="status-popup-label">Balanced</span><span id="spBalanced">—</span></div>
+          <div class="status-popup-row"><span class="status-popup-label">Reasoning</span><span id="spReasoning">—</span></div>
+        </div>
+      </div>
       <button class="icon-btn settings-btn" id="settingsBtn" title="Settings">⚙</button>
     </header>
 
@@ -25,19 +36,18 @@
         <div class="field">
           <label>Mainline Repository</label>
           <div class="path-row">
-            <input type="text" id="mainlineRepo" placeholder="/path/to/jdk" required />
+            <input type="text" id="mainlineRepo" placeholder="/path/to/repo" required />
             <button type="button" class="icon-btn" data-pick="mainlineRepo" title="Browse">📁</button>
           </div>
         </div>
 
         <div class="field">
-          <label>Commit or Patch</label>
           <div class="tabs" id="sourceTabs">
             <button type="button" class="tab active" data-tab="commit">Commit SHA</button>
             <button type="button" class="tab" data-tab="patch">Raw Diff</button>
           </div>
           <input type="text" id="commit" placeholder="abc1234f…" class="tab-content active" data-tab="commit" />
-          <textarea id="patchText" placeholder="Paste unified diff here…" class="tab-content" data-tab="patch" rows="6"></textarea>
+          <textarea id="patchText" placeholder="Paste unified diff here…" class="tab-content" data-tab="patch" rows="5"></textarea>
         </div>
       </section>
 
@@ -45,13 +55,13 @@
         <div class="section-label">Target</div>
 
         <div class="field">
-          <label>Target Repository</label>
-          <div class="radio-group">
+          <label>Repository</label>
+          <div class="radio-row">
             <label class="radio-label">
-              <input type="radio" name="repoMode" value="same" checked /> Same repo, different branch
+              <input type="radio" name="repoMode" value="same" checked /> Same repo
             </label>
             <label class="radio-label">
-              <input type="radio" name="repoMode" value="other" /> Different repository
+              <input type="radio" name="repoMode" value="other" /> Different repo
             </label>
           </div>
         </div>
@@ -59,14 +69,16 @@
         <div class="field hidden" id="targetRepoField">
           <label>Repository Path</label>
           <div class="path-row">
-            <input type="text" id="targetRepo" placeholder="/path/to/jdk17u-dev" />
+            <input type="text" id="targetRepo" placeholder="/path/to/target-repo" />
             <button type="button" class="icon-btn" data-pick="targetRepo" title="Browse">📁</button>
           </div>
         </div>
 
         <div class="field">
           <label>Target Branch</label>
-          <input type="text" id="targetBranch" placeholder="jdk17u-dev" required />
+          <input type="text" id="targetBranch" placeholder="target-branch" required />
+          <select id="targetBranchSelect" class="hidden" required></select>
+          <span id="branchHint" class="branch-hint hidden">Loading branches…</span>
         </div>
       </section>
 
@@ -83,7 +95,7 @@
             <label>Test Command <span class="hint">(optional)</span></label>
             <input type="text" id="testCmd" placeholder="mvn test -pl module" />
           </div>
-          <p class="hint-text">Leave blank to use auto-detected build system (Gradle / Maven).</p>
+          <p class="hint-text">Leave blank to auto-detect build system (Gradle / Maven / Docker).</p>
         </div>
       </section>
 
