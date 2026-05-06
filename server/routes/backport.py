@@ -341,6 +341,13 @@ def _run_pipeline(job_id: str, req: BackportRequest, loop: asyncio.AbstractEvent
             raise ValueError("Either commit or patch_text must be provided")
 
         target_repo = req.target_repo or req.mainline_repo
+        if target_repo:
+            try:
+                r = subprocess.run(["git", "-C", target_repo, "rev-parse", "--show-toplevel"],
+                                   capture_output=True, text=True, check=True)
+                target_repo = r.stdout.strip()
+            except Exception:
+                pass # fall back to original path if not a git repo or git fails
         job["target_repo"] = target_repo
 
         # ── Checkout ───────────────────────────────────────────────────────────

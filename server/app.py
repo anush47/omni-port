@@ -22,6 +22,9 @@ sys.path.insert(0, _PROJECT_ROOT)
 from dotenv import load_dotenv
 load_dotenv(os.path.join(_PROJECT_ROOT, ".env"))
 
+# Workaround for OpenMP duplicate library error on macOS
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 

@@ -9,10 +9,16 @@ RUN apt-get update && apt-get install -y \
 
 # Install additional JDKs
 # JDK 24 is already at /opt/java/openjdk (from base image)
-RUN mkdir -p /opt/java && \
-    wget -qO- https://github.com/adoptium/temurin22-binaries/releases/download/jdk-22.0.2%2B9/OpenJDK22U-jdk_x64_linux_hotspot_22.0.2_9.tar.gz | tar -xz -C /opt/java && \
-    wget -qO- https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.4%2B7/OpenJDK21U-jdk_x64_linux_hotspot_21.0.4_7.tar.gz | tar -xz -C /opt/java && \
-    wget -qO- https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.12%2B7/OpenJDK17U-jdk_x64_linux_hotspot_17.0.12_7.tar.gz | tar -xz -C /opt/java
+RUN ARCH=$(uname -m) && \
+    case "${ARCH}" in \
+        x86_64) JDK_ARCH="x64" ;; \
+        aarch64|arm64) JDK_ARCH="aarch64" ;; \
+        *) echo "Unsupported architecture: ${ARCH}"; exit 1 ;; \
+    esac && \
+    mkdir -p /opt/java && \
+    wget -qO- "https://github.com/adoptium/temurin22-binaries/releases/download/jdk-22.0.2%2B9/OpenJDK22U-jdk_${JDK_ARCH}_linux_hotspot_22.0.2_9.tar.gz" | tar -xz -C /opt/java && \
+    wget -qO- "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.4%2B7/OpenJDK21U-jdk_${JDK_ARCH}_linux_hotspot_21.0.4_7.tar.gz" | tar -xz -C /opt/java && \
+    wget -qO- "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.12%2B7/OpenJDK17U-jdk_${JDK_ARCH}_linux_hotspot_17.0.12_7.tar.gz" | tar -xz -C /opt/java
 
 # Set working directory
 WORKDIR /repo

@@ -434,6 +434,11 @@ function handleLogEvent(event) {
   const { phase, status, agent, message, error, validation_passed,
     repair_status, routing_decision, attempt, via, patch } = event;
 
+  // Filter out low-level build system logs
+  if (via === "build_systems") {
+    return;
+  }
+
   // Direct apply phase
   if (phase === "phase0") {
     switch (status) {
@@ -473,6 +478,9 @@ function handleLogEvent(event) {
   // Setup / housekeeping messages
   if (status === "setup") {
     let msg = message || "";
+    if (msg.toLowerCase().includes("from backport commit")) {
+      return;
+    }
     if (msg.toLowerCase().startsWith("loaded phase 0 baseline")) {
       msg = "Loaded baseline";
     }
@@ -528,16 +536,17 @@ function handleLogEvent(event) {
         appendLog("spin", "Building project and running tests…");
         return;
       }
-      _resolveSpinner(
-        validation_passed ? "ok" : "warn",
-        validation_passed
-          ? "Build and tests passed"
-          : `Build or tests failed${error ? ` — ${error.slice(0, 120)}` : ""}`
-      );
+      const label = validation_passed ? "Build and tests passed" : `Build or tests failed${error ? ` — ${error.slice(0, 120)}` : ""}`;
+      _resolveSpinner(validation_passed ? "ok" : "warn", label);
+      if (!validation_passed) {
+        appendLog("err", label);
+      }
       return;
     }
+
     if (agent === "fallback_agent") {
-      appendLog("step", `Retrying failed changes (attempt ${attempt})…`);
+      const msg = message || `Retry attempt ${attempt || 1} — re-synthesizing failed hunks`;
+      appendLog("spin", msg);
       return;
     }
     if (agent === "syntax_repair") {
