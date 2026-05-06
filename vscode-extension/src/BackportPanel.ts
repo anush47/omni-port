@@ -41,6 +41,9 @@ export class BackportPanel implements vscode.WebviewViewProvider {
         case "pickFolder":
           await this._pickFolder(msg.field);
           break;
+        case "pickFile":
+          await this._pickFile(msg.field);
+          break;
         case "startBackport":
           await this._startBackport(msg.data);
           break;
@@ -116,6 +119,9 @@ export class BackportPanel implements vscode.WebviewViewProvider {
       balancedModel:    cfg.get<string>("balancedModel", "gpt-4o"),
       reasoningModel:   cfg.get<string>("reasoningModel", "o1-preview"),
       microservicesUrl: cfg.get<string>("microservicesUrl", "http://localhost:8080"),
+      datasetPath:      cfg.get<string>("datasetPath", "dataset/all_projects_final.csv"),
+      testApply:        cfg.get<boolean>("testApply", true),
+      backportCommit:   cfg.get<string>("backportCommit", ""),
     });
   }
 
@@ -131,6 +137,9 @@ export class BackportPanel implements vscode.WebviewViewProvider {
       toPromise(cfg.update("balancedModel",    data.balancedModel,    target)),
       toPromise(cfg.update("reasoningModel",   data.reasoningModel,   target)),
       toPromise(cfg.update("microservicesUrl", data.microservicesUrl, target)),
+      toPromise(cfg.update("datasetPath",      data.datasetPath,      target)),
+      toPromise(cfg.update("testApply",        data.testApply,        target)),
+      toPromise(cfg.update("backportCommit",   data.backportCommit,   target)),
     ];
     if (data.provider === "azure") {
       saves.push(
@@ -177,6 +186,17 @@ export class BackportPanel implements vscode.WebviewViewProvider {
     const uris = await vscode.window.showOpenDialog({
       canSelectFolders: true, canSelectFiles: false,
       canSelectMany: false, openLabel: "Select Repository",
+    });
+    if (uris && uris.length > 0) {
+      this._view?.webview.postMessage({ command: "folderPicked", field, path: uris[0].fsPath });
+    }
+  }
+
+  private async _pickFile(field: string): Promise<void> {
+    const uris = await vscode.window.showOpenDialog({
+      canSelectFolders: false, canSelectFiles: true,
+      canSelectMany: false, openLabel: "Select CSV File",
+      filters: { "CSV Files": ["csv"] }
     });
     if (uris && uris.length > 0) {
       this._view?.webview.postMessage({ command: "folderPicked", field, path: uris[0].fsPath });
@@ -318,7 +338,48 @@ export class BackportPanel implements vscode.WebviewViewProvider {
 
   private _checkCommit(repo: string, commit: string): void {
     const result = cp.spawnSync("git", ["-C", repo, "cat-file", "-e", commit], { timeout: 5000 });
-    this._post("commitStatus", { valid: result.status === 0 });
+    const valid = result.status === 0;
+    let backportCommit = "";
+
+    if (valid) {
+      const cfg = vscode.workspace.getConfiguration("omniport");
+      if (cfg.get<boolean>("testApply", true)) {
+        backportCommit = this._lookupBackportCommit(commit);
+      }
+    }
+
+    this._post("commitStatus", { valid, backportCommit });
+  }
+
+  private _lookupBackportCommit(originalCommit: string): string {
+    const cfg = vscode.workspace.getConfiguration("omniport");
+    let csvPath = cfg.get<string>("datasetPath", "dataset/all_projects_final.csv");
+
+    if (!path.isAbsolute(csvPath)) {
+      const workspaceFolder = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
+      if (workspaceFolder) {
+        csvPath = path.join(workspaceFolder, csvPath);
+      }
+    }
+
+    if (!fs.existsSync(csvPath)) return "";
+
+    try {
+      const content = fs.readFileSync(csvPath, "utf8");
+      const lines = content.split("\n");
+      // Skip header
+      for (let i = 1; i < lines.length; i++) {
+        const parts = lines[i].split(",");
+        if (parts.length >= 5) {
+          const orig = parts[2].trim();
+          const bp   = parts[4].trim();
+          if (orig === originalCommit) {
+            return bp;
+          }
+        }
+      }
+    } catch { /* ignore */ }
+    return "";
   }
 
   private _patchShowDisposable?: vscode.Disposable;

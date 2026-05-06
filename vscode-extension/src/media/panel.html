@@ -90,6 +90,29 @@
           <input type="text" id="cfgMicroservicesUrl" placeholder="http://localhost:8080" />
         </div>
 
+        <div class="field">
+          <label>Dataset CSV Path</label>
+          <div class="path-row">
+            <input type="text" id="cfgDatasetPath" placeholder="dataset/all_projects_final.csv" />
+            <button type="button" class="icon-btn" data-pick-file="cfgDatasetPath" title="Browse">📁</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="toggle-row">
+            <label class="toggle-label" for="cfgTestApply">Test Apply (Evaluate)</label>
+            <label class="switch">
+              <input type="checkbox" id="cfgTestApply" />
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Backport Commit SHA <span class="hint">(optional)</span></label>
+          <input type="text" id="cfgBackportCommit" placeholder="abc1234f…" />
+        </div>
+
         <button type="button" class="apply-btn" id="applyConfigBtn">Apply</button>
       </div>
     </section>
@@ -153,21 +176,6 @@
             <div class="combobox-drop hidden" id="branchDrop"></div>
           </div>
           <span id="branchHint" class="branch-hint hidden"></span>
-        </div>
-
-        <div class="field">
-          <div class="toggle-row">
-            <label class="toggle-label" for="evaluateMode">Evaluate Mode</label>
-            <label class="switch">
-              <input type="checkbox" id="evaluateMode" />
-              <span class="slider"></span>
-            </label>
-          </div>
-        </div>
-
-        <div class="field hidden" id="backportCommitField">
-          <label>Backport Commit SHA</label>
-          <input type="text" id="backportCommit" placeholder="abc1234f…" />
         </div>
       </section>
 

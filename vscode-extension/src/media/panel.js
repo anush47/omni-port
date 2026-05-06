@@ -67,6 +67,9 @@ document.getElementById("applyConfigBtn").addEventListener("click", () => {
     balancedModel:    document.getElementById("cfgBalancedModel").value.trim(),
     reasoningModel:   document.getElementById("cfgReasoningModel").value.trim(),
     microservicesUrl: document.getElementById("cfgMicroservicesUrl").value.trim(),
+    datasetPath:      document.getElementById("cfgDatasetPath").value.trim(),
+    testApply:        document.getElementById("cfgTestApply").checked,
+    backportCommit:   document.getElementById("cfgBackportCommit").value.trim(),
   };
   vscode.postMessage({ command: "applyConfig", data });
   document.getElementById("applyConfigBtn").textContent = "Applying…";
@@ -247,16 +250,6 @@ function updateStatusDot(connected, data) {
 requestHealth();
 setInterval(requestHealth, 20_000);
 
-// ── Evaluate mode toggle ──────────────────────────────────────────────────────
-const evaluateModeChk       = document.getElementById("evaluateMode");
-const backportCommitField   = document.getElementById("backportCommitField");
-evaluateModeChk.addEventListener("change", () => {
-  backportCommitField.classList.toggle("hidden", !evaluateModeChk.checked);
-  if (!evaluateModeChk.checked) {
-    document.getElementById("backportCommit").value = "";
-  }
-});
-
 // ── Advanced collapsible ──────────────────────────────────────────────────────
 advancedToggle.addEventListener("click", () => {
   const open = advancedBody.classList.toggle("open");
@@ -267,6 +260,12 @@ advancedToggle.addEventListener("click", () => {
 document.querySelectorAll("[data-pick]").forEach((btn) => {
   btn.addEventListener("click", () => {
     vscode.postMessage({ command: "pickFolder", field: btn.dataset.pick });
+  });
+});
+
+document.querySelectorAll("[data-pick-file]").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    vscode.postMessage({ command: "pickFile", field: btn.dataset.pickFile });
   });
 });
 
@@ -315,8 +314,8 @@ form.addEventListener("submit", (e) => {
     patchText:      activeTab === "patch"  ? document.getElementById("patchText").value.trim() : "",
     targetRepo:     document.getElementById("targetRepo").value.trim(),
     targetBranch:   getTargetBranch(),
-    backportCommit: document.getElementById("backportCommit").value.trim(),
-    evaluateMode:   String(document.getElementById("evaluateMode").checked),
+    backportCommit: document.getElementById("cfgBackportCommit").value.trim(),
+    evaluateMode:   String(document.getElementById("cfgTestApply").checked),
     buildCmd:       document.getElementById("buildCmd").value.trim(),
     testCmd:        document.getElementById("testCmd").value.trim(),
     useOtherRepo:   String(useOtherRepo),
@@ -356,10 +355,12 @@ window.addEventListener("message", (e) => {
     case "commitStatus":
       commitCheckEl.classList.remove("hidden");
       if (msg.valid) {
-        commitCheckIcon.textContent = "✓";
-        commitCheckIcon.className = "commit-icon-ok";
         commitCheckMsg.textContent = "";
         viewCommitBtn.classList.remove("hidden");
+        // Auto-populate backport commit if provided and evaluate is on
+        if (msg.backportCommit && document.getElementById("cfgTestApply").checked) {
+          document.getElementById("cfgBackportCommit").value = msg.backportCommit;
+        }
       } else {
         commitCheckIcon.textContent = "✗";
         commitCheckIcon.className = "commit-icon-err";
@@ -409,6 +410,9 @@ function populateConfig(cfg) {
   document.getElementById("cfgBalancedModel").value   = cfg.balancedModel   || "";
   document.getElementById("cfgReasoningModel").value  = cfg.reasoningModel  || "";
   document.getElementById("cfgMicroservicesUrl").value= cfg.microservicesUrl|| "";
+  document.getElementById("cfgDatasetPath").value     = cfg.datasetPath      || "";
+  document.getElementById("cfgBackportCommit").value  = cfg.backportCommit   || "";
+  document.getElementById("cfgTestApply").checked     = cfg.testApply !== false; // default true
 
   activeProvider = cfg.provider || "openai";
   document.querySelectorAll("#providerTabs .tab").forEach((t) =>

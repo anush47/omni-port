@@ -101,6 +101,21 @@
           "type": "string",
           "default": "python3",
           "description": "Python executable used to start the backend server"
+        },
+        "omniport.testApply": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable 'Test Apply' (evaluate mode) by default"
+        },
+        "omniport.datasetPath": {
+          "type": "string",
+          "default": "dataset/all_projects_final.csv",
+          "description": "Path to the dataset CSV file (relative to workspace or absolute)"
+        },
+        "omniport.backportCommit": {
+          "type": "string",
+          "default": "",
+          "description": "Optional backport commit SHA"
         }
       }
     }
