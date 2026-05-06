@@ -355,11 +355,14 @@ window.addEventListener("message", (e) => {
     case "commitStatus":
       commitCheckEl.classList.remove("hidden");
       if (msg.valid) {
+        commitCheckIcon.textContent = "✓";
+        commitCheckIcon.className = "commit-icon-ok";
         commitCheckMsg.textContent = "";
         viewCommitBtn.classList.remove("hidden");
         // Auto-populate backport commit if provided and evaluate is on
         if (msg.backportCommit && document.getElementById("cfgTestApply").checked) {
-          document.getElementById("cfgBackportCommit").value = msg.backportCommit;
+          const bpInput = document.getElementById("cfgBackportCommit");
+          bpInput.value = msg.backportCommit;
         }
       } else {
         commitCheckIcon.textContent = "✗";
@@ -469,8 +472,11 @@ function handleLogEvent(event) {
 
   // Setup / housekeeping messages
   if (status === "setup") {
-    const msg = message || "";
-    const type = msg.toLowerCase().startsWith("loaded phase") ? "ok" : "info";
+    let msg = message || "";
+    if (msg.toLowerCase().startsWith("loaded phase 0 baseline")) {
+      msg = "Loaded baseline";
+    }
+    const type = (msg === "Loaded baseline" || msg.toLowerCase().startsWith("loaded phase")) ? "ok" : "info";
     appendLog(type, msg);
     return;
   }

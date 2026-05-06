@@ -119,7 +119,7 @@ export class BackportPanel implements vscode.WebviewViewProvider {
       balancedModel:    cfg.get<string>("balancedModel", "gpt-4o"),
       reasoningModel:   cfg.get<string>("reasoningModel", "o1-preview"),
       microservicesUrl: cfg.get<string>("microservicesUrl", "http://localhost:8080"),
-      datasetPath:      cfg.get<string>("datasetPath", "dataset/all_projects_final.csv"),
+      datasetPath:      cfg.get<string>("datasetPath", "/Users/anush/Projects/university/omni-port/dataset/all_projects_final.csv"),
       testApply:        cfg.get<boolean>("testApply", true),
       backportCommit:   cfg.get<string>("backportCommit", ""),
     });
@@ -353,7 +353,7 @@ export class BackportPanel implements vscode.WebviewViewProvider {
 
   private _lookupBackportCommit(originalCommit: string): string {
     const cfg = vscode.workspace.getConfiguration("omniport");
-    let csvPath = cfg.get<string>("datasetPath", "dataset/all_projects_final.csv");
+    let csvPath = cfg.get<string>("datasetPath", "/Users/anush/Projects/university/omni-port/dataset/all_projects_final.csv");
 
     if (!path.isAbsolute(csvPath)) {
       const workspaceFolder = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;

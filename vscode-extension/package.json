@@ -109,7 +109,7 @@
         },
         "omniport.datasetPath": {
           "type": "string",
-          "default": "dataset/all_projects_final.csv",
+          "default": "/Users/anush/Projects/university/omni-port/dataset/all_projects_final.csv",
           "description": "Path to the dataset CSV file (relative to workspace or absolute)"
         },
         "omniport.backportCommit": {
