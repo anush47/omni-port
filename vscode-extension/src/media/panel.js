@@ -2,36 +2,36 @@
 const vscode = acquireVsCodeApi();
 
 // ── State ────────────────────────────────────────────────────────────────────
-let activeTab      = "commit";
+let activeTab = "commit";
 let activeProvider = "openai";
-let useOtherRepo   = false;
-let running        = false;
-let currentJobId   = null;
+let useOtherRepo = false;
+let running = false;
+let currentJobId = null;
 let _activeSpinner = null;
-let _lastPatch     = null;
+let _lastPatch = null;
 
 // ── DOM refs ─────────────────────────────────────────────────────────────────
-const form               = document.getElementById("backportForm");
-const runBtn             = document.getElementById("runBtn");
-const stopBtn            = document.getElementById("stopBtn");
-const resetBtn           = document.getElementById("resetBtn");
-const logPanel           = document.getElementById("logPanel");
-const logBody            = document.getElementById("logBody");
-const resultBanner       = document.getElementById("resultBanner");
-const bannerText         = document.getElementById("bannerText");
-const targetRepoFld      = document.getElementById("targetRepoField");
-const advancedBody       = document.getElementById("advancedBody");
-const advancedToggle     = document.getElementById("advancedToggle");
-const chevron            = advancedToggle.querySelector(".chevron");
-const statusDot          = document.getElementById("statusDot");
+const form = document.getElementById("backportForm");
+const runBtn = document.getElementById("runBtn");
+const stopBtn = document.getElementById("stopBtn");
+const resetBtn = document.getElementById("resetBtn");
+const logPanel = document.getElementById("logPanel");
+const logBody = document.getElementById("logBody");
+const resultBanner = document.getElementById("resultBanner");
+const bannerText = document.getElementById("bannerText");
+const targetRepoFld = document.getElementById("targetRepoField");
+const advancedBody = document.getElementById("advancedBody");
+const advancedToggle = document.getElementById("advancedToggle");
+const chevron = advancedToggle.querySelector(".chevron");
+const statusDot = document.getElementById("statusDot");
 const targetBranchInput = document.getElementById("targetBranch");
-const branchDrop        = document.getElementById("branchDrop");
-const branchHint        = document.getElementById("branchHint");
+const branchDrop = document.getElementById("branchDrop");
+const branchHint = document.getElementById("branchHint");
 
 // ── Config section ────────────────────────────────────────────────────────────
-const configToggle   = document.getElementById("configToggle");
-const configBody     = document.getElementById("configBody");
-const configChevron  = configToggle.querySelector(".chevron");
+const configToggle = document.getElementById("configToggle");
+const configBody = document.getElementById("configBody");
+const configChevron = configToggle.querySelector(".chevron");
 
 configToggle.addEventListener("click", () => {
   const open = configBody.classList.toggle("open");
@@ -56,20 +56,20 @@ document.querySelectorAll("#providerTabs .tab").forEach((tab) => {
 
 document.getElementById("applyConfigBtn").addEventListener("click", () => {
   const data = {
-    backendUrl:       document.getElementById("cfgBackendUrl").value.trim(),
-    provider:         activeProvider,
-    openaiApiKey:     document.getElementById("cfgApiKey").value.trim(),
-    openaiBaseUrl:    document.getElementById("cfgBaseUrl").value.trim(),
-    azureApiKey:      document.getElementById("cfgAzureKey").value.trim(),
-    azureEndpoint:    document.getElementById("cfgAzureEndpoint").value.trim(),
-    azureApiVersion:  document.getElementById("cfgAzureVersion").value.trim(),
-    fastModel:        document.getElementById("cfgFastModel").value.trim(),
-    balancedModel:    document.getElementById("cfgBalancedModel").value.trim(),
-    reasoningModel:   document.getElementById("cfgReasoningModel").value.trim(),
+    backendUrl: document.getElementById("cfgBackendUrl").value.trim(),
+    provider: activeProvider,
+    openaiApiKey: document.getElementById("cfgApiKey").value.trim(),
+    openaiBaseUrl: document.getElementById("cfgBaseUrl").value.trim(),
+    azureApiKey: document.getElementById("cfgAzureKey").value.trim(),
+    azureEndpoint: document.getElementById("cfgAzureEndpoint").value.trim(),
+    azureApiVersion: document.getElementById("cfgAzureVersion").value.trim(),
+    fastModel: document.getElementById("cfgFastModel").value.trim(),
+    balancedModel: document.getElementById("cfgBalancedModel").value.trim(),
+    reasoningModel: document.getElementById("cfgReasoningModel").value.trim(),
     microservicesUrl: document.getElementById("cfgMicroservicesUrl").value.trim(),
-    datasetPath:      document.getElementById("cfgDatasetPath").value.trim(),
-    testApply:        document.getElementById("cfgTestApply").checked,
-    backportCommit:   document.getElementById("cfgBackportCommit").value.trim(),
+    datasetPath: document.getElementById("cfgDatasetPath").value.trim(),
+    testApply: document.getElementById("cfgTestApply").checked,
+    backportCommit: document.getElementById("cfgBackportCommit").value.trim(),
   };
   vscode.postMessage({ command: "applyConfig", data });
   document.getElementById("applyConfigBtn").textContent = "Applying…";
@@ -117,8 +117,8 @@ document.querySelectorAll("input[name='repoMode']").forEach((radio) => {
 });
 
 // ── Branch combobox ───────────────────────────────────────────────────────────
-let _allBranches  = [];
-let _branchTimer  = null;
+let _allBranches = [];
+let _branchTimer = null;
 
 function getTargetBranch() { return targetBranchInput.value.trim(); }
 
@@ -132,10 +132,10 @@ function _renderBranchDrop(filter) {
   const q = (filter || "").toLowerCase();
   const hits = q ? _allBranches.filter(b => b.toLowerCase().includes(q)) : _allBranches;
   if (!hits.length) { branchDrop.classList.add("hidden"); return; }
-  const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
-  const hi  = s => q
-    ? s.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")})`, "gi"),
-                m => `<mark>${esc(m)}</mark>`)
+  const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+  const hi = s => q
+    ? s.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi"),
+      m => `<mark>${esc(m)}</mark>`)
     : esc(s);
   branchDrop.innerHTML = hits.map(b =>
     `<div class="combobox-item" data-value="${esc(b)}">${hi(b)}</div>`
@@ -180,12 +180,12 @@ document.getElementById("targetRepo").addEventListener("input", () => {
 });
 
 // ── Commit validation ─────────────────────────────────────────────────────────
-const commitInput     = document.getElementById("commit");
-const commitCheckEl   = document.getElementById("commitCheck");
+const commitInput = document.getElementById("commit");
+const commitCheckEl = document.getElementById("commitCheck");
 const commitCheckIcon = document.getElementById("commitCheckIcon");
-const commitCheckMsg  = document.getElementById("commitCheckMsg");
-const viewCommitBtn   = document.getElementById("viewCommitBtn");
-let _commitTimer      = null;
+const commitCheckMsg = document.getElementById("commitCheckMsg");
+const viewCommitBtn = document.getElementById("viewCommitBtn");
+let _commitTimer = null;
 
 commitInput.addEventListener("input", () => {
   clearTimeout(_commitTimer);
@@ -201,7 +201,7 @@ commitInput.addEventListener("input", () => {
 
 viewCommitBtn.addEventListener("click", () => {
   const repo = document.getElementById("mainlineRepo").value.trim();
-  const sha  = commitInput.value.trim();
+  const sha = commitInput.value.trim();
   if (repo && sha) vscode.postMessage({ command: "viewCommit", repo, commit: sha });
 });
 
@@ -214,9 +214,9 @@ let _backendConnected = false;
 
 function _updateRunBtn() {
   if (running) return;
-  const hasRepo    = !!document.getElementById("mainlineRepo").value.trim();
-  const hasBranch  = !!getTargetBranch();
-  const hasSource  = activeTab === "commit"
+  const hasRepo = !!document.getElementById("mainlineRepo").value.trim();
+  const hasBranch = !!getTargetBranch();
+  const hasSource = activeTab === "commit"
     ? !!document.getElementById("commit").value.trim()
     : !!document.getElementById("patchText").value.trim();
   runBtn.disabled = !(_backendConnected && hasRepo && hasBranch && hasSource);
@@ -226,23 +226,23 @@ function updateStatusDot(connected, data) {
   _backendConnected = connected;
   _updateRunBtn();
   statusDot.className = "status-dot " + (
-    !connected              ? "status-error" :
-    !data.api_key_configured ? "status-warn"  :
-                               "status-ok"
+    !connected ? "status-error" :
+      !data.api_key_configured ? "status-warn" :
+        "status-ok"
   );
 
   const port = data.port ? `:${data.port}` : "";
-  document.getElementById("spBackend").textContent      = connected ? `online${port}` : "offline";
-  document.getElementById("spProvider").textContent     = data.provider || "—";
-  document.getElementById("spFast").textContent         = data.fast_model || "—";
-  document.getElementById("spBalanced").textContent     = data.balanced_model || "—";
-  document.getElementById("spReasoning").textContent    = data.reasoning_model || "—";
+  document.getElementById("spBackend").textContent = connected ? `online${port}` : "offline";
+  document.getElementById("spProvider").textContent = data.provider || "—";
+  document.getElementById("spFast").textContent = data.fast_model || "—";
+  document.getElementById("spBalanced").textContent = data.balanced_model || "—";
+  document.getElementById("spReasoning").textContent = data.reasoning_model || "—";
 
   const msOk = data.microservices_ok;
   const msUrl = data.microservices_url || "";
   document.getElementById("spMicroservices").textContent =
     msOk === undefined ? "—" :
-    msOk ? `ok  ${msUrl}` : `unreachable  ${msUrl}`;
+      msOk ? `ok  ${msUrl}` : `unreachable  ${msUrl}`;
   document.getElementById("spMicroservices").style.color =
     msOk === undefined ? "" : msOk ? "var(--accent)" : "var(--warn)";
 }
@@ -309,16 +309,16 @@ form.addEventListener("submit", (e) => {
   if (running) return;
 
   const data = {
-    mainlineRepo:   document.getElementById("mainlineRepo").value.trim(),
-    commit:         activeTab === "commit" ? document.getElementById("commit").value.trim() : "",
-    patchText:      activeTab === "patch"  ? document.getElementById("patchText").value.trim() : "",
-    targetRepo:     document.getElementById("targetRepo").value.trim(),
-    targetBranch:   getTargetBranch(),
+    mainlineRepo: document.getElementById("mainlineRepo").value.trim(),
+    commit: activeTab === "commit" ? document.getElementById("commit").value.trim() : "",
+    patchText: activeTab === "patch" ? document.getElementById("patchText").value.trim() : "",
+    targetRepo: document.getElementById("targetRepo").value.trim(),
+    targetBranch: getTargetBranch(),
     backportCommit: document.getElementById("cfgBackportCommit").value.trim(),
-    evaluateMode:   String(document.getElementById("cfgTestApply").checked),
-    buildCmd:       document.getElementById("buildCmd").value.trim(),
-    testCmd:        document.getElementById("testCmd").value.trim(),
-    useOtherRepo:   String(useOtherRepo),
+    evaluateMode: String(document.getElementById("cfgTestApply").checked),
+    buildCmd: document.getElementById("buildCmd").value.trim(),
+    testCmd: document.getElementById("testCmd").value.trim(),
+    useOtherRepo: String(useOtherRepo),
   };
 
   vscode.postMessage({ command: "startBackport", data });
@@ -336,7 +336,7 @@ window.addEventListener("message", (e) => {
     case "folderPicked":
       document.getElementById(msg.field).value = msg.path;
       if ((msg.field === "mainlineRepo" && !useOtherRepo) ||
-          (msg.field === "targetRepo"   &&  useOtherRepo)) scheduleBranchFetch();
+        (msg.field === "targetRepo" && useOtherRepo)) scheduleBranchFetch();
       break;
     case "branchList":
       branchHint.classList.add("hidden");
@@ -379,7 +379,7 @@ window.addEventListener("message", (e) => {
       break;
     case "jobStarted":
       currentJobId = msg.jobId;
-      appendLog("info", "Connected to backend…");
+      appendLog("info", `Connected to backend (Job ID: ${msg.jobId})`);
       break;
     case "log":
       handleLogEvent(msg);
@@ -400,19 +400,19 @@ window.addEventListener("message", (e) => {
 
 // ── Config population ─────────────────────────────────────────────────────────
 function populateConfig(cfg) {
-  document.getElementById("cfgBackendUrl").value      = cfg.backendUrl      || "";
-  document.getElementById("cfgApiKey").value          = cfg.openaiApiKey    || "";
-  document.getElementById("cfgBaseUrl").value         = cfg.openaiBaseUrl   || "";
-  document.getElementById("cfgAzureKey").value        = cfg.azureApiKey     || "";
-  document.getElementById("cfgAzureEndpoint").value   = cfg.azureEndpoint   || "";
-  document.getElementById("cfgAzureVersion").value    = cfg.azureApiVersion || "";
-  document.getElementById("cfgFastModel").value       = cfg.fastModel       || "";
-  document.getElementById("cfgBalancedModel").value   = cfg.balancedModel   || "";
-  document.getElementById("cfgReasoningModel").value  = cfg.reasoningModel  || "";
-  document.getElementById("cfgMicroservicesUrl").value= cfg.microservicesUrl|| "";
-  document.getElementById("cfgDatasetPath").value     = cfg.datasetPath      || "";
-  document.getElementById("cfgBackportCommit").value  = cfg.backportCommit   || "";
-  document.getElementById("cfgTestApply").checked     = cfg.testApply !== false; // default true
+  document.getElementById("cfgBackendUrl").value = cfg.backendUrl || "";
+  document.getElementById("cfgApiKey").value = cfg.openaiApiKey || "";
+  document.getElementById("cfgBaseUrl").value = cfg.openaiBaseUrl || "";
+  document.getElementById("cfgAzureKey").value = cfg.azureApiKey || "";
+  document.getElementById("cfgAzureEndpoint").value = cfg.azureEndpoint || "";
+  document.getElementById("cfgAzureVersion").value = cfg.azureApiVersion || "";
+  document.getElementById("cfgFastModel").value = cfg.fastModel || "";
+  document.getElementById("cfgBalancedModel").value = cfg.balancedModel || "";
+  document.getElementById("cfgReasoningModel").value = cfg.reasoningModel || "";
+  document.getElementById("cfgMicroservicesUrl").value = cfg.microservicesUrl || "";
+  document.getElementById("cfgDatasetPath").value = cfg.datasetPath || "";
+  document.getElementById("cfgBackportCommit").value = cfg.backportCommit || "";
+  document.getElementById("cfgTestApply").checked = cfg.testApply !== false; // default true
 
   activeProvider = cfg.provider || "openai";
   document.querySelectorAll("#providerTabs .tab").forEach((t) =>
@@ -429,7 +429,7 @@ function populateConfig(cfg) {
 // ── Log rendering ─────────────────────────────────────────────────────────────
 function handleLogEvent(event) {
   const { phase, status, agent, message, error, validation_passed,
-          repair_status, routing_decision, attempt, via, patch } = event;
+    repair_status, routing_decision, attempt, via, patch } = event;
 
   // Direct apply phase
   if (phase === "phase0") {
@@ -536,10 +536,10 @@ function handleLogEvent(event) {
     }
     if (agent === "syntax_repair") {
       const map2 = {
-        clean:    ["ok",   "Syntax check passed — no issues found"],
-        repaired: ["ok",   "Syntax errors detected and automatically repaired"],
-        failed:   ["warn", "Could not repair syntax errors — escalating"],
-        skipped:  ["info", "Syntax check skipped — changes already verified clean"],
+        clean: ["ok", "Syntax check passed — no issues found"],
+        repaired: ["ok", "Syntax errors detected and automatically repaired"],
+        failed: ["warn", "Could not repair syntax errors — escalating"],
+        skipped: ["info", "Syntax check skipped — changes already verified clean"],
       };
       const [t, txt] = map2[repair_status] || ["info", message];
       appendLog(t, txt);
@@ -551,13 +551,13 @@ function handleLogEvent(event) {
       return;
     }
     const agentMap = {
-      code_localizer:      ["step", "Locating changed code in target repository…"],
-      patch_classifier:    ["step", "Analysing patch complexity…"],
-      fast_apply:          ["step", "Applying directly matching changes…"],
-      namespace_adapter:   ["step", "Adapting namespaces and imports…"],
+      code_localizer: ["step", "Locating changed code in target repository…"],
+      patch_classifier: ["step", "Analysing patch complexity…"],
+      fast_apply: ["step", "Applying directly matching changes…"],
+      namespace_adapter: ["step", "Adapting namespaces and imports…"],
       structural_refactor: ["step", "Handling structural refactoring…"],
-      hunk_synthesizer:    ["spin", "Generating code changes with AI…"],
-      atomic_rollback:     ["step", "Rolling back partially applied changes…"],
+      hunk_synthesizer: ["spin", "Generating code changes with AI…"],
+      atomic_rollback: ["step", "Rolling back partially applied changes…"],
     };
     const [t2, txt2] = agentMap[agent] || ["step", message || agent];
     appendLog(t2, txt2);
@@ -569,9 +569,9 @@ function _resolveSpinner(type, text) {
   const entry = _activeSpinner;
   _activeSpinner = null;
   const iconWrap = entry.querySelector(".log-icon-wrap");
-  const msgEl    = entry.querySelector(".log-msg");
+  const msgEl = entry.querySelector(".log-msg");
   const cfg = {
-    ok:   { char: "✓", cls: "li-ok"   },
+    ok: { char: "✓", cls: "li-ok" },
     fail: { char: "✗", cls: "li-fail" },
     warn: { char: "!", cls: "li-warn" },
     step: { char: "·", cls: "li-step" },
@@ -600,7 +600,7 @@ function appendLog(type, text) {
     iconWrap.appendChild(s);
   } else {
     const cfg = {
-      ok:   { char: "✓", cls: "li-ok"   },
+      ok: { char: "✓", cls: "li-ok" },
       fail: { char: "✗", cls: "li-fail" },
       warn: { char: "!", cls: "li-warn" },
       step: { char: "·", cls: "li-step" },
