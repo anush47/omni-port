@@ -907,30 +907,6 @@ def namespace_adapter_agent(state: BackportState) -> BackportState:
         #   KEEP: old_content is itself an abstract declaration (e.g. changing
         #         protected abstract → public abstract).  The change targets the
         #         declaration itself and is valid in the abstract class.
-        #
-        # We first try the JavaParser microservice for precise modifier info; if it
-        # is unavailable we fall back to regex + body-detection heuristics.
-        abstract_methods_in_target: Set[str] = set()
-        if file_content and _is_abstract_class(file_content) and loc_result.file_path:
-            abstract_methods_in_target = _get_abstract_method_names(file_content)
-            method_name = _extract_method_name_from_old_content(hunk.get("old_content", ""))
-            if method_name:
-                # Query the microservice once per hunk (cheap — single file parse,
-                # cached by Spring on repeated calls to same file).
-                service_info = _query_method_modifiers_from_service(
-                    repo_path, loc_result.file_path, [method_name]
-                )
-                if _should_skip_abstract_hunk(
-                    method_name,
-                    hunk.get("old_content", ""),
-                    service_info,
-                    abstract_methods_in_target,
-                ):
-                    # Silently claim and skip — change does not belong in the
-                    # abstract base class on this branch.
-                    processed_indices.append(i)
-                    continue
-            continue
 
         # ── Abstract-class guard ──────────────────────────────────────────────
         # When the target file is an abstract class, some hunks from the mainline
@@ -1081,12 +1057,6 @@ def namespace_adapter_agent(state: BackportState) -> BackportState:
                 "imports_removed": output.imports_removed,
                 "adapted": True,
                 "loc_index": i,
-                # Preserve original mainline content for structural fallback in Agent 6.
-                # Once we overwrite old_content/new_content above, the original is gone.
-                "original_old_content": hunk.get("old_content", ""),
-                "original_new_content": hunk.get("new_content", ""),
-                # Preserve original mainline content for structural fallback in Agent 6.
-                # Once we overwrite old_content/new_content above, the original is gone.
                 "original_old_content": hunk.get("old_content", ""),
                 "original_new_content": hunk.get("new_content", ""),
             })
