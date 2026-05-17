@@ -1,0 +1,22 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/sun/security/provider/certpath/OCSP/OCSPReadTimeoutDefault.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "sun/security/provider/certpath/OCSP/OCSPReadTimeoutDefault.java#OCSPReadTimeoutDefault": "failed"
+    },
+    "classes": {
+      "sun/security/provider/certpath/OCSP/OCSPReadTimeoutDefault.java": "failed"
+    },
+    "summary": {
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "total": 1
+    }
+  },
+  "mode": "baseline-jdk21u-dev-helper",
+  "skipped": false
+}

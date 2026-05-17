@@ -1,0 +1,507 @@
+{
+  "run_timestamp": "2026-04-18T18:13:43.618843",
+  "repo": "jdk17u-dev",
+  "patch_type": "TYPE-I",
+  "original_commit": "f608e81ad8309a001b8a92563a93b8adee1ce2b8",
+  "backport_commit": "aea8e4a101e6910d7a3d07be021cba30fe5c6530",
+  "description": "main \u2192 jdk17u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 0.72,
+      "error": null,
+      "java_hunks": 22,
+      "aux_hunks": 3,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/builder/DefaultImageBuilder.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/builder/DefaultImageBuilder.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 86,
+          "end_line": 93,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/builder/DefaultImageBuilder.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 95,
+          "end_line": 100,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/builder/DefaultImageBuilder.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 127,
+          "end_line": 139,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/builder/DefaultImageBuilder.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 148,
+          "end_line": 153,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/builder/DefaultImageBuilder.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 158,
+          "end_line": 164,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/builder/DefaultImageBuilder.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 474,
+          "end_line": 480,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/builder/DefaultImageBuilder.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 509,
+          "end_line": 515,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 8,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/builder/DefaultImageBuilder.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 551,
+          "end_line": 557,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 9,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/builder/ImageBuilder.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 10,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/builder/ImageBuilder.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 28,
+          "end_line": 33,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 11,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/builder/ImageBuilder.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 74,
+          "end_line": 77,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 12,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/ExecutableImage.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 13,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/ExecutableImage.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 61,
+          "end_line": 64,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 14,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/ImagePluginStack.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 15,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/Platform.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 16,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/Platform.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 24,
+          "end_line": 71,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 17,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/plugins/CDSPlugin.java",
+          "method_used": "new_file",
+          "confidence": 1.0,
+          "start_line": 0,
+          "end_line": 0,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 18,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/plugins/ExcludeVMPlugin.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 19,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/plugins/ExcludeVMPlugin.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 245,
+          "end_line": 252,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 20,
+          "file_path": "src/jdk.jlink/share/classes/module-info.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 21,
+          "file_path": "src/jdk.jlink/share/classes/module-info.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 76,
+          "end_line": 81,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 12.9,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_IV",
+        "confidence": 0.95,
+        "reasoning": "The patch introduces a new plugin (CDSPlugin) with significant new functionality, including platform detection, process execution, and error handling. It modifies multiple existing classes to add platform awareness and extend interfaces, including adding new methods and fields. The Platform class is refactored from an enum to a record with nested enums and additional logic, indicating deep structural changes. The patch also adds a new test class and updates module-info and properties files. These changes represent deep structural refactoring and API divergence, consistent with TYPE_IV complexity. The localization evidence shows exact matches, indicating the patch applies cleanly, but the complexity of the changes is high due to the new functionality and structural modifications. Confidence is high but not absolute due to the complexity and size of the patch.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.03,
+      "error": null,
+      "applied_count": 21,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/builder/DefaultImageBuilder.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/builder/DefaultImageBuilder.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/builder/DefaultImageBuilder.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/builder/DefaultImageBuilder.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/builder/DefaultImageBuilder.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/builder/DefaultImageBuilder.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/builder/DefaultImageBuilder.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/builder/DefaultImageBuilder.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/builder/DefaultImageBuilder.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/builder/ImageBuilder.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/builder/ImageBuilder.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/builder/ImageBuilder.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/ExecutableImage.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/ExecutableImage.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/ImagePluginStack.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/Platform.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/Platform.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/plugins/ExcludeVMPlugin.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/plugins/ExcludeVMPlugin.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jlink/share/classes/module-info.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.jlink/share/classes/module-info.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "adapted_count": 0
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 34.26,
+      "error": null,
+      "synthesized_count": 1,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/plugins/CDSPlugin.java",
+          "old_string": "",
+          "new_string": "/*\n * Copyright (c) 2021, Oracle and/or its affiliates. All rights reserved.\n * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.\n *\n * This code is free software; you can redistribute it and/or modify it\n * under the terms of the GNU General Public License version 2 only, as\n * published by the Free Software Foundation.  Oracle designates this\n * particular file as subject to the \"Classpath\" exception as provided\n * by Oracle in the LICENSE file that accompanied this code.\n *\n * This code is distributed in the hope that it will be useful, but WITHOUT\n * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or\n * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License\n * version 2 for more details (a copy is included in the LICENSE file that\n * accompanied this code).\n *\n * You should have received a copy of the GNU General Public License version\n * 2 along with this work; if not, write to the Free Software Foundation,\n * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.\n *\n * Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA\n * or visit www.oracle.com if you need additional information or have any\n * questions.\n */\npackage jdk.tools.jlink.internal.plugins;\n\nimport java.io.IOException;\nimport java.nio.file.Files;\nimport java.nio.file.Path;\nimport java.util.*;\n\nimport jdk.tools.jlink.internal.ExecutableImage;\nimport jdk.tools.jlink.internal.Platform;\nimport jdk.tools.jlink.internal.PostProcessor;\nimport jdk.tools.jlink.plugin.PluginException;\nimport jdk.tools.jlink.plugin.ResourcePool;\nimport jdk.tools.jlink.plugin.ResourcePoolBuilder;\n\n/**\n *\n * CDS plugin\n */\npublic final class CDSPlugin extends AbstractPlugin implements PostProcessor {\n    private static final String NAME = \"generate-cds-archive\";\n    private Platform targetPlatform;\n    private Platform runtimePlatform;\n\n    public CDSPlugin() {\n        super(NAME);\n    }\n\n\n    private String javaExecutableName() {\n        if (targetPlatform.os() == Platform.OperatingSystem.WINDOWS) {\n            return \"java.exe\";\n        } else {\n            return \"java\";\n        }\n    }\n\n    private void generateCDSArchive(ExecutableImage image, boolean noCoops) {\n        List<String> javaCmd = new ArrayList<String>();\n        Path javaPath = image.getHome().resolve(\"bin\").resolve(javaExecutableName());\n        if (!Files.exists(javaPath)) {\n            throw new PluginException(\"Cannot find java executable at: \" + javaPath.toString());\n        }\n        javaCmd.add(javaPath.toString());\n        javaCmd.add(\"-Xshare:dump\");\n        String archiveMsg = \"CDS\";\n        if (noCoops) {\n            javaCmd.add(\"-XX:-UseCompressedOops\");\n            archiveMsg += \"-NOCOOPS\";\n        }\n        ProcessBuilder builder = new ProcessBuilder(javaCmd);\n        int status = -1;\n        try {\n            Process p = builder.inheritIO().start();\n            status = p.waitFor();\n        } catch (InterruptedException | IOException e) {\n            throw new PluginException(e);\n        }\n\n        if (status != 0) {\n            throw new PluginException(\"Failed creating \" + archiveMsg + \" archive!\");\n        }\n    }\n\n    @Override\n    public List<String> process(ExecutableImage image) {\n        targetPlatform = image.getTargetPlatform();\n        runtimePlatform = Platform.runtime();\n\n        if (!targetPlatform.equals(runtimePlatform)) {\n            throw new PluginException(\"Cannot generate CDS archives: target image platform \" +\n                    targetPlatform.toString() + \" is different from runtime platform \" +\n                    runtimePlatform.toString());\n        }\n\n        Path classListPath = image.getHome().resolve(\"lib\").resolve(\"classlist\");\n        if (Files.exists(classListPath)) {\n            generateCDSArchive(image,false);\n\n            if (targetPlatform.is64Bit()) {\n                generateCDSArchive(image,true);\n            }\n            System.out.println(\"Created CDS archive successfully\");\n        } else {\n            throw new PluginException(\"Cannot generate CDS archives: classlist not found: \" +\n                                      classListPath.toString());\n        }\n        return null;\n    }\n\n    @Override\n    public Category getType() {\n        return Category.PROCESSOR;\n    }\n\n    @Override\n    public ResourcePool transform(ResourcePool in, ResourcePoolBuilder out) {\n        return in;\n    }\n}",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.01,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/plugins/CDSPlugin.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 1
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk17u-dev-helper",
+      "test_success": true,
+      "test_mode": "jdk17u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/tools/jlink/plugins/CDSPluginTest.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "tools/jlink/plugins/CDSPluginTest.java#CDSPluginTest": "passed"
+        },
+        "classes": {
+          "tools/jlink/plugins/CDSPluginTest.java": "passed"
+        },
+        "summary": {
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [
+          "tools/jlink/plugins/CDSPluginTest.java#CDSPluginTest"
+        ],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 1,
+        "patched_total": 1,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 26,
+    "developer_aux_hunks_from_target": 3,
+    "phase0_baseline": {
+      "mode": "baseline-jdk17u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 1
+    },
+    "java_production_hunks": 22,
+    "developer_aux_hunks": 3,
+    "processed_hunk_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      18,
+      19,
+      20,
+      21
+    ],
+    "tokens_used": 4106,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 2665,
+        "output": 1441
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 21,
+    "synthesized_count": 1,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "clean",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 19279,
+    "target_patch_bytes": 25349,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": true,
+    "test_mode": "jdk17u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [
+        "tools/jlink/plugins/CDSPluginTest.java#CDSPluginTest"
+      ],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 1,
+      "patched_total": 1,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 1,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

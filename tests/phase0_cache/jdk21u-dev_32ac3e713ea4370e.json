@@ -1,0 +1,35 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/java/net/httpclient/GZIPInputStreamTest.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/java/net/httpclient/GZIPInputStreamTest.testng-results.xml",
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/java/net/httpclient/ProxySelectorTest.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/java/net/httpclient/ProxySelectorTest.testng-results.xml",
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/java/net/httpclient/http2/ConnectionFlowControlTest.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/java/net/httpclient/http2/ConnectionFlowControlTest.testng-results.xml",
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/java/net/httpclient/http2/StreamFlowControlTest.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/java/net/httpclient/http2/StreamFlowControlTest.testng-results.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "java/net/httpclient/GZIPInputStreamTest.java#GZIPInputStreamTest": "passed",
+      "java/net/httpclient/ProxySelectorTest.java#ProxySelectorTest": "passed",
+      "java/net/httpclient/http2/ConnectionFlowControlTest.java#ConnectionFlowControlTest": "failed",
+      "java/net/httpclient/http2/StreamFlowControlTest.java#StreamFlowControlTest": "failed"
+    },
+    "classes": {
+      "java/net/httpclient/GZIPInputStreamTest.java": "passed",
+      "java/net/httpclient/ProxySelectorTest.java": "passed",
+      "java/net/httpclient/http2/ConnectionFlowControlTest.java": "failed",
+      "java/net/httpclient/http2/StreamFlowControlTest.java": "failed"
+    },
+    "summary": {
+      "passed": 2,
+      "failed": 2,
+      "skipped": 0,
+      "total": 4
+    }
+  },
+  "mode": "baseline-jdk21u-dev-helper",
+  "skipped": false
+}

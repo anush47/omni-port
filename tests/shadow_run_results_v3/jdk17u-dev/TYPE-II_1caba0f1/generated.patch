@@ -1,0 +1,115 @@
+diff --git a/src/java.desktop/share/classes/javax/swing/text/html/StyleSheet.java b/src/java.desktop/share/classes/javax/swing/text/html/StyleSheet.java
+index 958b3a899a0..4ccfc4631ae 100644
+--- a/src/java.desktop/share/classes/javax/swing/text/html/StyleSheet.java
++++ b/src/java.desktop/share/classes/javax/swing/text/html/StyleSheet.java
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 1997, 2021, Oracle and/or its affiliates. All rights reserved.
++ * Copyright (c) 1997, 2022, Oracle and/or its affiliates. All rights reserved.
+  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+  *
+  * This code is free software; you can redistribute it and/or modify it
+@@ -1741,7 +1741,6 @@ public class StyleSheet extends StyleContext {
+         return fontSizeInherit;
+     }
+ 
+-
+     /**
+      * A temporary class used to hold a Vector, a StringBuffer and a
+      * Hashtable. This is used to avoid allocing a lot of garbage when
+@@ -1820,7 +1819,6 @@ public class StyleSheet extends StyleContext {
+         }
+     }
+ 
+-
+     /**
+      * Class to carry out some of the duties of
+      * CSS formatting.  Implementations of this
+@@ -2488,7 +2486,6 @@ public class StyleSheet extends StyleContext {
+             }
+         }
+ 
+-
+         /**
+          * Converts the item number into a roman numeral
+          *
+@@ -2527,7 +2524,6 @@ public class StyleSheet extends StyleContext {
+         private boolean isLeftToRight;
+     }
+ 
+-
+     /**
+      * Paints the background image.
+      */
+@@ -2694,7 +2690,6 @@ public class StyleSheet extends StyleContext {
+         }
+     }
+ 
+-
+     /**
+      * A subclass of MuxingAttributeSet that translates between
+      * CSS and HTML and StyleConstants. The AttributeSets used are
+@@ -2823,17 +2818,18 @@ public class StyleSheet extends StyleContext {
+         }
+ 
+         Object doGetAttribute(Object key) {
+-            if (key == CSS.Attribute.FONT_SIZE && !isDefined(key)) {
++            Object retValue = super.getAttribute(key);
++            if (retValue != null) {
++                return retValue;
++            }
++
++            if (key == CSS.Attribute.FONT_SIZE) {
+                 // CSS.FontSize represents a specified value and we need
+                 // to inherit a computed value so don't resolve percentage
+                 // value from parent.
+                 return fontSizeInherit();
+             }
+ 
+-            Object retValue = super.getAttribute(key);
+-            if (retValue != null) {
+-                return retValue;
+-            }
+             // didn't find it... try parent if it's a css attribute
+             // that is inherited.
+             if (key instanceof CSS.Attribute) {
+@@ -2866,7 +2862,6 @@ public class StyleSheet extends StyleContext {
+         View host;
+     }
+ 
+-
+     /**
+      * A subclass of MuxingAttributeSet that implements Style. Currently
+      * the MutableAttributeSet methods are unimplemented, that is they
+@@ -3109,7 +3104,6 @@ public class StyleSheet extends StyleContext {
+         private int extendedIndex;
+     }
+ 
+-
+     /**
+      * SelectorMapping contains a specifitiy, as an integer, and an associated
+      * Style. It can also reference children <code>SelectorMapping</code>s,
+@@ -3221,7 +3215,6 @@ public class StyleSheet extends StyleContext {
+         private HashMap<String, SelectorMapping> children;
+     }
+ 
+-
+     // ---- Variables ---------------------------------------------
+ 
+     private transient Object fontSizeInherit;
+@@ -3244,7 +3237,6 @@ public class StyleSheet extends StyleContext {
+     /** Where the style sheet was found. Used for relative imports. */
+     private URL base;
+ 
+-
+     /**
+      * Default parser for CSS specifications that get loaded into
+      * the StyleSheet.<p>
+@@ -3392,7 +3384,6 @@ public class StyleSheet extends StyleContext {
+             selectorTokens.removeAllElements();
+         }
+ 
+-
+         Vector<String[]> selectors = new Vector<String[]>();
+         Vector<String> selectorTokens = new Vector<String>();
+         /** Name of the current property. */

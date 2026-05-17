@@ -1,0 +1,23 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/java/util/zip/ZipFile/ZipFileDuplicateEntryTest.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/java/util/zip/ZipFile/ZipFileDuplicateEntryTest.testng-results.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "java/util/zip/ZipFile/ZipFileDuplicateEntryTest.java#ZipFileDuplicateEntryTest": "failed"
+    },
+    "classes": {
+      "java/util/zip/ZipFile/ZipFileDuplicateEntryTest.java": "failed"
+    },
+    "summary": {
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "total": 1
+    }
+  },
+  "mode": "baseline-jdk17u-dev-helper",
+  "skipped": false
+}

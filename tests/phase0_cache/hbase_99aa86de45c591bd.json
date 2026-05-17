@@ -1,0 +1,48 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.TestSplitMergeQuotaTable.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.TestHBackupFileSystem.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.TestIncrementalBackup.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.client.TestFlushFromClient.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.client.TestFlushFromClientWithDisabledFlushProcedure.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.compress.zstd.TestZstdByteBuffDecompressor.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.hfile.TestHFileBlockHeaderCorruption.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.hfile.TestRowIndexV1RoundTrip.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.mapreduce.TestWALInputFormat.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.master.region.TestMasterRegionWALSyncTimeoutIOException.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.regionserver.TestCompaction.xml",
+      "/home/cseroot/omni-port/repos/hbase/hbase-server/target/surefire-reports/TEST-org.apache.hadoop.hbase.client.TestFlushFromClient.xml",
+      "/home/cseroot/omni-port/repos/hbase/hbase-server/target/surefire-reports/TEST-org.apache.hadoop.hbase.client.TestFlushFromClientWithDisabledFlushProcedure.xml"
+    ],
+    "target_classes": [
+      "org.apache.hadoop.hbase.client.TestFlushFromClient",
+      "org.apache.hadoop.hbase.client.TestFlushFromClientWithDisabledFlushProcedure"
+    ],
+    "test_cases": {
+      "org.apache.hadoop.hbase.client.TestFlushFromClient#testAsyncFlushRegionWithNonExistingFamily": "failed",
+      "org.apache.hadoop.hbase.client.TestFlushFromClient#testFlushTable": "passed",
+      "org.apache.hadoop.hbase.client.TestFlushFromClient#testAsyncFlushRegionFamily": "passed",
+      "org.apache.hadoop.hbase.client.TestFlushFromClient#testFlushRegion": "passed",
+      "org.apache.hadoop.hbase.client.TestFlushFromClient#testFlushRegionFamily": "passed",
+      "org.apache.hadoop.hbase.client.TestFlushFromClient#testAsyncFlushRegionServer": "passed",
+      "org.apache.hadoop.hbase.client.TestFlushFromClient#testFlushRegionServer": "passed",
+      "org.apache.hadoop.hbase.client.TestFlushFromClient#testAsyncFlushRegion": "passed",
+      "org.apache.hadoop.hbase.client.TestFlushFromClient#testAsyncFlushTableFamily": "passed",
+      "org.apache.hadoop.hbase.client.TestFlushFromClientWithDisabledFlushProcedure#flushTableWithNonExistingFamily": "failed"
+    },
+    "classes": {
+      "org.apache.hadoop.hbase.client.TestFlushFromClient": "failed",
+      "org.apache.hadoop.hbase.client.TestFlushFromClientWithDisabledFlushProcedure": "failed"
+    },
+    "summary": {
+      "passed": 8,
+      "failed": 2,
+      "skipped": 0,
+      "total": 10
+    }
+  },
+  "mode": "baseline-hbase-helper",
+  "skipped": false
+}

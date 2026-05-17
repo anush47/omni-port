@@ -1,0 +1,54 @@
+diff --git a/src/java.desktop/share/classes/sun/font/ExtendedTextSourceLabel.java b/src/java.desktop/share/classes/sun/font/ExtendedTextSourceLabel.java
+index 433d1d5413f..11f24c5a3e9 100644
+--- a/src/java.desktop/share/classes/sun/font/ExtendedTextSourceLabel.java
++++ b/src/java.desktop/share/classes/sun/font/ExtendedTextSourceLabel.java
+@@ -116,7 +116,6 @@ private void finishInit() {
+     advTracking = font.getSize() * AttributeValues.getTracking(atts);
+   }
+ 
+-
+   // TextLabel API
+ 
+   public Rectangle2D getLogicalBounds() {
+@@ -577,6 +576,7 @@ private float[] getCharinfo() {
+ *   not all do, and it cannot be relied upon.
+ * - each glyph maps to a single character, when multiple glyphs exist for a character they all map to it, but
+ *   no two characters map to the same glyph
++*   This was only true for the old, ICU layout engine which inserted 0xffff glyphs for ligaturized characters!
+ * - multiple glyphs mapping to the same character need not be in sequence (thai, tamil have split characters)
+ * - glyphs may be arbitrarily reordered (Indic reorders glyphs)
+ * - all glyphs share the same bidi level
+@@ -712,8 +712,6 @@ protected float[] createCharinfo() {
+ 
+     while (gx != gxlimit) {
+         // start of new cluster
+-        int clusterExtraGlyphs = 0;
+-
+         minIndex = indices[gx];
+         maxIndex = minIndex;
+ 
+@@ -730,14 +728,11 @@ protected float[] createCharinfo() {
+ 
+         while (gx != gxlimit &&
+                ((glyphinfo[gp + advx] == 0) ||
+-               (indices[gx] <= maxIndex) ||
+-               (maxIndex - minIndex > clusterExtraGlyphs))) {
++               (indices[gx] <= maxIndex))) {
+ 
+-            ++clusterExtraGlyphs; // have an extra glyph in this cluster
+             if (DEBUG) {
+                 System.err.println("gp=" +gp +" adv=" + glyphinfo[gp + advx] +
+-                                   " gx="+ gx+ " i[gx]="+indices[gx] +
+-                                   " clusterExtraGlyphs="+clusterExtraGlyphs);
++                                   " gx="+ gx+ " i[gx]="+indices[gx]);
+             }
+ 
+             // adjust advance only if new glyph has non-zero advance
+@@ -924,7 +919,6 @@ public int getNumJustificationInfos() {
+     return getGV().getNumGlyphs();
+   }
+ 
+-
+   public void getJustificationInfos(GlyphJustificationInfo[] infos, int infoStart, int charStart, int charLimit) {
+     // This simple implementation only uses spaces for justification.
+     // Since regular characters aren't justified, we don't need to deal with

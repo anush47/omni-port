@@ -1,0 +1,22 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/tools/javac/recovery/CrashDueToUnreportedError.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "tools/javac/recovery/CrashDueToUnreportedError.java#CrashDueToUnreportedError": "failed"
+    },
+    "classes": {
+      "tools/javac/recovery/CrashDueToUnreportedError.java": "failed"
+    },
+    "summary": {
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "total": 1
+    }
+  },
+  "mode": "baseline-jdk21u-dev-helper",
+  "skipped": false
+}

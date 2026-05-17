@@ -1,0 +1,391 @@
+{
+  "run_timestamp": "2026-04-20T20:33:33.263771",
+  "repo": "hbase",
+  "patch_type": "TYPE-I",
+  "original_commit": "78b06cefdeb183970a008486ef3e30383e410d2f",
+  "backport_commit": "279702e3cc98eef3ee9eb46cfd9cc8d3195ea0ab",
+  "description": "master \u2192 branch-2.5",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 0.31,
+      "error": null,
+      "java_hunks": 4,
+      "aux_hunks": 3,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "hbase-client/src/main/java/org/apache/hadoop/hbase/ipc/CellBlockBuilder.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 34,
+          "end_line": 43,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/io/compress/CodecPool.java",
+          "method_used": "new_file",
+          "confidence": 1.0,
+          "start_line": 0,
+          "end_line": 0,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/io/compress/Compression.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 26,
+          "end_line": 32,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "hbase-diagnostics/src/main/java/org/apache/hadoop/hbase/HFilePerformanceEvaluation.java",
+          "method_used": "failed",
+          "confidence": 0.0,
+          "start_line": 0,
+          "end_line": 0,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 4.21,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_III",
+        "confidence": 0.95,
+        "reasoning": "The patch introduces a new file 'CodecPool.java' with a substantial amount of code, modifies existing files to import and use this new class, and adds a new test class 'TestCodecPool.java' with extensive test cases. The changes involve structural additions and modifications across multiple packages and files, including dependency additions in the pom.xml. The localization evidence shows exact matches for most hunks except one with low confidence, indicating some structural changes. This is beyond simple string replacements or whitespace changes, but not a complete redesign. Hence, it is classified as TYPE_III (structural changes). The confidence is high due to the clear structural nature and the presence of new files and tests. The token budget estimate is high due to the size and complexity of the patch.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.01,
+      "error": null,
+      "applied_count": 2,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "hbase-client/src/main/java/org/apache/hadoop/hbase/ipc/CellBlockBuilder.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/io/compress/Compression.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "adapted_count": 0
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 62.78,
+      "error": null,
+      "synthesized_count": 1,
+      "failed_count": 1,
+      "synthesis_status": "partial",
+      "synthesized_hunks": [
+        {
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/io/compress/CodecPool.java",
+          "old_string": "",
+          "new_string": "/*\n * Licensed to the Apache Software Foundation (ASF) under one\n * or more contributor license agreements.  See the NOTICE file\n * distributed with this work for additional information\n * regarding copyright ownership.  The ASF licenses this file\n * to you under the Apache License, Version 2.0 (the\n * \"License\"); you may not use this file except in compliance\n * with the License.  You may obtain a copy of the License at\n *\n *     http://www.apache.org/licenses/LICENSE-2.0\n *\n * Unless required by applicable law or agreed to in writing, software\n * distributed under the License is distributed on an \"AS IS\" BASIS,\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n * See the License for the specific language governing permissions and\n * limitations under the License.\n */\npackage org.apache.hadoop.hbase.io.compress;\n\nimport org.apache.hbase.thirdparty.com.github.benmanes.caffeine.cache.Caffeine;\nimport org.apache.hbase.thirdparty.com.github.benmanes.caffeine.cache.LoadingCache;\nimport edu.umd.cs.findbugs.annotations.Nullable;\nimport java.util.Comparator;\nimport java.util.NavigableSet;\nimport java.util.Set;\nimport java.util.concurrent.ConcurrentHashMap;\nimport java.util.concurrent.ConcurrentMap;\nimport java.util.concurrent.ConcurrentSkipListSet;\nimport java.util.concurrent.atomic.AtomicInteger;\nimport org.apache.hadoop.conf.Configuration;\nimport org.apache.hadoop.io.compress.CompressionCodec;\nimport org.apache.hadoop.io.compress.Compressor;\nimport org.apache.hadoop.io.compress.Decompressor;\nimport org.apache.hadoop.io.compress.DoNotPool;\nimport org.apache.hadoop.util.ReflectionUtils;\nimport org.apache.yetus.audience.InterfaceAudience;\nimport org.slf4j.Logger;\nimport org.slf4j.LoggerFactory;\n\n/**\n * A global compressor/decompressor pool used to save and reuse (possibly native)\n * compression/decompression codecs. Copied from the class of the same name in hadoop-common and\n * augmented to improve borrow/return performance.\n */\n@InterfaceAudience.Private\npublic class CodecPool {\n  private static final Logger LOG = LoggerFactory.getLogger(CodecPool.class);\n\n  private static final ConcurrentMap<Class<Compressor>, NavigableSet<Compressor>> COMPRESSOR_POOL =\n    new ConcurrentHashMap<>();\n\n  private static final ConcurrentMap<Class<Decompressor>,\n    NavigableSet<Decompressor>> DECOMPRESSOR_POOL = new ConcurrentHashMap<>();\n\n  private static <T> LoadingCache<Class<T>, AtomicInteger> createCache() {\n    return Caffeine.newBuilder().build(key -> new AtomicInteger());\n  }\n\n  /**\n   * Map to track the number of leased compressors. Only used in unit tests, kept null otherwise.\n   */\n  @Nullable\n  private static LoadingCache<Class<Compressor>, AtomicInteger> compressorCounts = null;\n\n  /**\n   * Map to tracks the number of leased decompressors. Only used in unit tests, kept null otherwise.\n   */\n  @Nullable\n  private static LoadingCache<Class<Decompressor>, AtomicInteger> decompressorCounts = null;\n\n  /**\n   * Call if you want lease counting to be enabled. Only used in unit tests.\n   */\n  static void initLeaseCounting() {\n    compressorCounts = createCache();\n    decompressorCounts = createCache();\n  }\n\n  private static <T> T borrow(ConcurrentMap<Class<T>, NavigableSet<T>> pool,\n    Class<? extends T> codecClass) {\n    if (codecClass == null) {\n      return null;\n    }\n\n    NavigableSet<T> codecSet = pool.get(codecClass);\n    if (codecSet != null) {\n      // If a copy of the codec is available, pollFirst() will grab one.\n      // If not, it will return null.\n      return codecSet.pollFirst();\n    } else {\n      return null;\n    }\n  }\n\n  private static <T> boolean payback(ConcurrentMap<Class<T>, NavigableSet<T>> pool, T codec) {\n    if (codec != null) {\n      Class<T> codecClass = ReflectionUtils.getClass(codec);\n      Set<T> codecSet = pool.computeIfAbsent(codecClass,\n        k -> new ConcurrentSkipListSet<>(Comparator.comparingInt(System::identityHashCode)));\n      return codecSet.add(codec);\n    }\n    return false;\n  }\n\n  /**\n   * Copied from hadoop-common without significant modification.\n   */\n  @SuppressWarnings(\"unchecked\")\n  @edu.umd.cs.findbugs.annotations.SuppressWarnings(\n      value = \"NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE\",\n      justification = \"LoadingCache will compute value if absent\")\n  private static <T> int getLeaseCount(LoadingCache<Class<T>, AtomicInteger> usageCounts,\n    Class<? extends T> codecClass) {\n    return usageCounts.get((Class<T>) codecClass).get();\n  }\n\n  /**\n   * Copied from hadoop-common without significant modification.\n   */\n  @edu.umd.cs.findbugs.annotations.SuppressWarnings(\n      value = \"NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE\",\n      justification = \"LoadingCache will compute value if absent\")\n  private static <T> void updateLeaseCount(LoadingCache<Class<T>, AtomicInteger> usageCounts,\n    T codec, int delta) {\n    if (codec != null && usageCounts != null) {\n      Class<T> codecClass = ReflectionUtils.getClass(codec);\n      usageCounts.get(codecClass).addAndGet(delta);\n    }\n  }\n\n  /**\n   * Get a {@link Compressor} for the given {@link CompressionCodec} from the pool, or get a new one\n   * if the pool is empty. Copied from hadoop-common without significant modification.\n   */\n  public static Compressor getCompressor(CompressionCodec codec, Configuration conf) {\n    Compressor compressor = borrow(COMPRESSOR_POOL, codec.getCompressorType());\n    if (compressor == null) {\n      compressor = codec.createCompressor();\n      LOG.info(\"Got brand-new compressor [\" + codec.getDefaultExtension() + \"]\");\n    } else {\n      compressor.reinit(conf);\n      if (LOG.isDebugEnabled()) {\n        LOG.debug(\"Got recycled compressor\");\n      }\n    }\n    if (compressor != null && !compressor.getClass().isAnnotationPresent(DoNotPool.class)) {\n      updateLeaseCount(compressorCounts, compressor, 1);\n    }\n    return compressor;\n  }\n\n  public static Compressor getCompressor(CompressionCodec codec) {\n    return getCompressor(codec, null);\n  }\n\n  /**\n   * Get a {@link Decompressor} for the given {@link CompressionCodec} from the pool, or get a new\n   * one if the pool is empty. Copied from hadoop-common without significant modification.\n   */\n  public static Decompressor getDecompressor(CompressionCodec codec) {\n    Decompressor decompressor = borrow(DECOMPRESSOR_POOL, codec.getDecompressorType());\n    if (decompressor == null) {\n      decompressor = codec.createDecompressor();\n      LOG.info(\"Got brand-new decompressor [\" + codec.getDefaultExtension() + \"]\");\n    } else {\n      if (LOG.isDebugEnabled()) {\n        LOG.debug(\"Got recycled decompressor\");\n      }\n    }\n    if (decompressor != null && !decompressor.getClass().isAnnotationPresent(DoNotPool.class)) {\n      updateLeaseCount(decompressorCounts, decompressor, 1);\n    }\n    return decompressor;\n  }\n\n  /**\n   * Return the {@link Compressor} to the pool. Copied from hadoop-common without significant\n   * modification.\n   */\n  public static void returnCompressor(Compressor compressor) {\n    if (compressor == null) {\n      return;\n    }\n    // if the compressor can't be reused, don't pool it.\n    if (compressor.getClass().isAnnotationPresent(DoNotPool.class)) {\n      compressor.end();\n      return;\n    }\n    compressor.reset();\n    if (payback(COMPRESSOR_POOL, compressor)) {\n      updateLeaseCount(compressorCounts, compressor, -1);\n    }\n  }\n\n  /**\n   * Return the {@link Decompressor} to the pool. Copied from hadoop-common without significant\n   * modification.\n   */\n  public static void returnDecompressor(Decompressor decompressor) {\n    if (decompressor == null) {\n      return;\n    }\n    // if the decompressor can't be reused, don't pool it.\n    if (decompressor.getClass().isAnnotationPresent(DoNotPool.class)) {\n      decompressor.end();\n      return;\n    }\n    decompressor.reset();\n    if (payback(DECOMPRESSOR_POOL, decompressor)) {\n      updateLeaseCount(decompressorCounts, decompressor, -1);\n    }\n  }\n\n  /**\n   * Returns the number of leased {@link Compressor}s for this {@link CompressionCodec}. Copied from\n   * hadoop-common without significant modification.\n   */\n  static int getLeasedCompressorsCount(@Nullable CompressionCodec codec) {\n    if (compressorCounts == null) {\n      throw new IllegalStateException(\"initLeaseCounting() not called to set up lease counting\");\n    }\n    return (codec == null) ? 0 : getLeaseCount(compressorCounts, codec.getCompressorType());\n  }\n\n  /**\n   * Returns the number of leased {@link Decompressor}s for this {@link CompressionCodec}. Copied\n   * from hadoop-common without significant modification.\n   */\n  static int getLeasedDecompressorsCount(@Nullable CompressionCodec codec) {\n    if (decompressorCounts == null) {\n      throw new IllegalStateException(\"initLeaseCounting() not called to set up lease counting\");\n    }\n    return (codec == null) ? 0 : getLeaseCount(decompressorCounts, codec.getDecompressorType());\n  }\n}",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.02,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/io/compress/CodecPool.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 1
+    },
+    "agent7_validator": {
+      "validation_passed": false,
+      "validation_failure_category": "api_mismatch",
+      "validation_error_context": "Build failed (hbase-helper): /hbase-common/src/main/java/org/apache/hadoop/hbase/io/compress/CodecPool.java:[56,12] cannot find symbol\n  symbol:   variable Caffeine\n[\u001b[1;34mINFO\u001b[m] \u001b[1;31mBUILD FAILURE\u001b[m\n[\u001b[1;31mERROR\u001b[m] Failed to execute goal \u001b[32morg.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile\u001b[m \u001b[1m(default-compile)\u001b[m on project \u001b[36mhbase-common\u001b[m: \u001b[1;31mCompilation failure\u001b[m: Compilation failure: \n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/main/java/org/apache/hadoop/hbas",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": false,
+      "build_mode": "hbase-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": []
+    },
+    "agent9_fallback_1": {
+      "fallback_status": "failed",
+      "fallback_attempts": 1,
+      "synthesized_count": 0,
+      "hunk_descriptions": [
+        {
+          "hunk_index": 0,
+          "file_path": "hbase-client/src/main/java/org/apache/hadoop/hbase/ipc/CellBlockBuilder.java",
+          "what_changed": "Reordered import statements to move the import of CodecPool from org.apache.hadoop.io.compress to org.apache.hadoop.hbase.io.compress, adjusting import grouping.",
+          "where_in_code": "Top-level imports in CellBlockBuilder.java",
+          "intent": "To align imports with the new or preferred CodecPool implementation location, possibly reflecting a refactor or modularization of compression-related utilities.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "CodecPool"
+          ]
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/io/compress/CodecPool.java",
+          "what_changed": "Added a new CodecPool class that manages global pools of Compressor and Decompressor instances, using concurrent data structures and caching to improve reuse and performance.",
+          "where_in_code": "Class org.apache.hadoop.hbase.io.compress.CodecPool",
+          "intent": "To provide an efficient, thread-safe pooling mechanism for compression codecs to reduce overhead of creating compressors and decompressors, improving resource management and performance.",
+          "change_type": "add_method",
+          "key_symbols": [
+            "CodecPool",
+            "getCompressor",
+            "returnCompressor",
+            "getDecompressor",
+            "returnDecompressor"
+          ]
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/io/compress/Compression.java",
+          "what_changed": "Removed the import of CodecPool from org.apache.hadoop.io.compress, reflecting that CodecPool is no longer imported or used from that package.",
+          "where_in_code": "Top-level imports in Compression.java",
+          "intent": "To update imports consistent with the introduction of the new CodecPool class in the hbase.io.compress package or to remove unused imports.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "CodecPool"
+          ]
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "hbase-diagnostics/src/main/java/org/apache/hadoop/hbase/HFilePerformanceEvaluation.java",
+          "what_changed": "Changed the logging configuration to suppress verbose INFO logs from org.apache.hadoop.hbase.io.compress.CodecPool instead of org.apache.hadoop.io.compress.CodecPool.",
+          "where_in_code": "Static initializer block in HFilePerformanceEvaluation.java",
+          "intent": "To reduce log noise by targeting the new CodecPool class in the hbase package for log level adjustment, reflecting the relocation or replacement of CodecPool.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "System.setProperty",
+            "CodecPool"
+          ]
+        }
+      ]
+    },
+    "agent8_syntax_repair_fallback_1": {
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": []
+    },
+    "agent7_validator_retry1": {
+      "validation_passed": false,
+      "validation_failure_category": "api_mismatch",
+      "validation_error_context": "Build failed (hbase-helper): ol:   variable CodecPool\n[\u001b[1;31mERROR\u001b[m]   location: class org.apache.hadoop.hbase.io.compress.TestCodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/test/java/org/apache/hadoop/hbase/io/compress/TestCodecPool.java:[172,9] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol: variable CodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/test/java/org/apache/hadoop/hbase/io/compress/TestCodecPool.java:[180,26] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol: variable CodecPool",
+      "validation_attempts": 2,
+      "retry_files": [],
+      "build_success": false,
+      "build_mode": "hbase-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": []
+    },
+    "agent9_fallback_2": {
+      "fallback_status": "failed",
+      "fallback_attempts": 2,
+      "synthesized_count": 0,
+      "hunk_descriptions": [
+        {
+          "hunk_index": 0,
+          "file_path": "hbase-client/src/main/java/org/apache/hadoop/hbase/ipc/CellBlockBuilder.java",
+          "what_changed": "Reordered import statements to move the import of CodecPool from 'org.apache.hadoop.io.compress' to 'org.apache.hadoop.hbase.io.compress'.",
+          "where_in_code": "Top-level imports in CellBlockBuilder.java",
+          "intent": "To update the import to use the HBase-specific CodecPool implementation instead of the Hadoop common one, likely to use the new or customized CodecPool class.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "CodecPool"
+          ]
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/io/compress/CodecPool.java",
+          "what_changed": "Added a new CodecPool class that manages global pools of Compressor and Decompressor instances with improved borrow/return performance, including lease counting support for unit tests.",
+          "where_in_code": "Class CodecPool",
+          "intent": "To provide an HBase-specific compressor/decompressor pooling mechanism to efficiently reuse compression resources and improve performance, while tracking usage counts for testing.",
+          "change_type": "add_method",
+          "key_symbols": [
+            "CodecPool",
+            "getCompressor",
+            "returnCompressor",
+            "getDecompressor",
+            "returnDecompressor",
+            "initLeaseCounting"
+          ]
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "hbase-common/src/main/java/org/apache/hadoop/hbase/io/compress/Compression.java",
+          "what_changed": "Removed import of CodecPool from 'org.apache.hadoop.io.compress' package.",
+          "where_in_code": "Top-level imports in Compression.java",
+          "intent": "To remove dependency on the Hadoop common CodecPool, possibly in preparation to use the new HBase-specific CodecPool or to clean up unused imports.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "CodecPool"
+          ]
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "hbase-diagnostics/src/main/java/org/apache/hadoop/hbase/HFilePerformanceEvaluation.java",
+          "what_changed": "Changed the logging configuration to suppress verbose INFO logs from 'org.apache.hadoop.hbase.io.compress.CodecPool' instead of 'org.apache.hadoop.io.compress.CodecPool'.",
+          "where_in_code": "Static initializer block",
+          "intent": "To adjust logging suppression to the new HBase-specific CodecPool class, reducing noise in logs related to compression pooling.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "System.setProperty",
+            "CodecPool"
+          ]
+        }
+      ]
+    },
+    "agent8_syntax_repair_fallback_2": {
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": []
+    },
+    "agent7_validator_retry2": {
+      "validation_passed": false,
+      "validation_failure_category": "api_mismatch",
+      "validation_error_context": "Build failed (hbase-helper): ol:   variable CodecPool\n[\u001b[1;31mERROR\u001b[m]   location: class org.apache.hadoop.hbase.io.compress.TestCodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/test/java/org/apache/hadoop/hbase/io/compress/TestCodecPool.java:[172,9] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol: variable CodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/test/java/org/apache/hadoop/hbase/io/compress/TestCodecPool.java:[180,26] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol: variable CodecPool",
+      "validation_attempts": 3,
+      "retry_files": [],
+      "build_success": false,
+      "build_mode": "hbase-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 6,
+    "developer_aux_hunks_from_target": 3,
+    "phase0_baseline": {
+      "mode": "baseline-build-failed",
+      "skipped": true,
+      "cached": false,
+      "test_cases_total": 0
+    },
+    "java_production_hunks": 4,
+    "developer_aux_hunks": 3,
+    "processed_hunk_indices": [
+      0,
+      2
+    ],
+    "tokens_used": 140799,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 3980,
+        "output": 2937
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      },
+      "agent9_fallback": {
+        "input": 128128,
+        "output": 5754
+      }
+    },
+    "synthesis_status": "partial",
+    "applied_on_disk_ag3": 2,
+    "synthesized_count": 0,
+    "failed_hunks_total": 1,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "failed",
+    "fallback_attempts": 2,
+    "retry_contexts": [
+      {
+        "error_type": "synthesis_skipped_no_localization",
+        "error_message": "Hunk unclaimed; localization failed entirely",
+        "attempt_count": 4,
+        "suggested_action": "manual_review"
+      },
+      {
+        "error_type": "synthesis_failed_no_match",
+        "error_message": "Could not verify exact string in target file",
+        "attempt_count": 4,
+        "suggested_action": "relocalize"
+      },
+      {
+        "error_type": "api_mismatch",
+        "error_message": "/hbase-common/src/main/java/org/apache/hadoop/hbase/io/compress/CodecPool.java:[56,12] cannot find symbol\n  symbol:   variable Caffeine\n[\u001b[1;34mINFO\u001b[m] \u001b[1;31mBUILD FAILURE\u001b[m\n[\u001b[1;31mERROR\u001b[m] Failed to execute goal \u001b[32morg.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile\u001b[m \u001b[1m(default-compile)\u001b[m on project \u001b[36mhbase-common\u001b[m: \u001b[1;31mCompilation failure\u001b[m: Compilation failure: \n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/main/java/org/apache/hadoop/hbase/io/compress/CodecPool.java:[20,70] package org.apache.hbase.thirdparty.com.github.benmanes.caffeine.cache does not exist\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/main/java/org/apache/hadoop/hbase/io/compress/CodecPool.java:[21,70] package org.apache.hbase.thirdparty.com.github.benmanes.caffeine.cache does not exist\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/main/java/org/apache/hadoop/hbase/io/compress/CodecPool.java:[55,22] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol:   class LoadingCache\n[\u001b[1;31mERROR\u001b[m]   location: class org.apache.hadoop.hbase.io.compress.CodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/main/java/org/apache/hadoop/hbase/io/compress/CodecPool.java:[63,18] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol:   class LoadingCache\n[\u001b[1;31mERROR\u001b[m]   location: class org.apache.hadoop.hbase.io.compress.CodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/main/java/org/apache/hadoop/hbase/io/compress/CodecPool.java:[69,18] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol:   class LoadingCache\n[\u001b[1;31mERROR\u001b[m]   location: class org.apache.hadoop.hbase.io.compress.CodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/main/java/org/apache/hadoop/hbase/io/compress/CodecPool.java:[112,40] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol:   class LoadingCache\n[\u001b[1;31mERROR\u001b[m]   location: class org.apache.hadoop.hbase.io.compress.CodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/main/java/org/apache/hadoop/hbase/io/compress/CodecPool.java:[123,44] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol:   class LoadingCache\n[\u001b[1;31mERROR\u001b[m]   location: class org.apache.hadoop.hbase.io.compress.CodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/main/java/org/apache/hadoop/hbase/io/compress/CodecPool.java:[56,12] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol:   variable Caffeine\n[\u001b[1;31mERROR\u001b[m]   location: class org.apache.hadoop.hbase.io.compress.CodecPool\n[\u001b[1;31mERROR\u001b[m] -> \u001b[1m[Help 1]\u001b[m\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] To see the full stack trace of the errors, re-run Maven with the \u001b[1m-e\u001b[m switch.\n[\u001b[1;31mERROR\u001b[m] Re-run Maven using the \u001b[1m-X\u001b[m switch to enable full debug logging.\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] For more information about the errors and possible solutions, please read the following articles:\n[\u001b[1;31mERROR\u001b[m] \u001b[1m[Help 1]\u001b[m http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] After correcting the problems, you can resume the build with the command\n[\u001b[1;31mERROR\u001b[m]   \u001b[1mmvn <args> -rf :hbase-common\u001b[m",
+        "attempt_count": 1,
+        "suggested_action": "route_to_namespace_or_structural"
+      },
+      {
+        "error_type": "api_mismatch",
+        "error_message": "ol:   variable CodecPool\n[\u001b[1;31mERROR\u001b[m]   location: class org.apache.hadoop.hbase.io.compress.TestCodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/test/java/org/apache/hadoop/hbase/io/compress/TestCodecPool.java:[172,9] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol: variable CodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/test/java/org/apache/hadoop/hbase/io/compress/TestCodecPool.java:[180,26] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol: variable CodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/test/java/org/apache/hadoop/hbase/io/compress/TestCodecPool.java:[195,38] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol:   variable CodecPool\n[\u001b[1;31mERROR\u001b[m]   location: class org.apache.hadoop.hbase.io.compress.TestCodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/test/java/org/apache/hadoop/hbase/io/compress/TestCodecPool.java:[200,27] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol:   variable CodecPool\n[\u001b[1;31mERROR\u001b[m]   location: class org.apache.hadoop.hbase.io.compress.TestCodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/test/java/org/apache/hadoop/hbase/io/compress/TestCodecPool.java:[201,5] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol:   variable CodecPool\n[\u001b[1;31mERROR\u001b[m]   location: class org.apache.hadoop.hbase.io.compress.TestCodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/test/java/org/apache/hadoop/hbase/io/compress/TestCodecPool.java:[202,5] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol:   variable CodecPool\n[\u001b[1;31mERROR\u001b[m]   location: class org.apache.hadoop.hbase.io.compress.TestCodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/test/java/org/apache/hadoop/hbase/io/compress/TestCodecPool.java:[205,25] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol:   variable CodecPool\n[\u001b[1;31mERROR\u001b[m]   location: class org.apache.hadoop.hbase.io.compress.TestCodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/test/java/org/apache/hadoop/hbase/io/compress/TestCodecPool.java:[209,7] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol:   variable CodecPool\n[\u001b[1;31mERROR\u001b[m]   location: class org.apache.hadoop.hbase.io.compress.TestCodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/test/java/org/apache/hadoop/hbase/io/compress/TestCodecPool.java:[234,5] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol:   variable CodecPool\n[\u001b[1;31mERROR\u001b[m]   location: class org.apache.hadoop.hbase.io.compress.TestCodecPool\n[\u001b[1;31mERROR\u001b[m] -> \u001b[1m[Help 1]\u001b[m\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] To see the full stack trace of the errors, re-run Maven with the \u001b[1m-e\u001b[m switch.\n[\u001b[1;31mERROR\u001b[m] Re-run Maven using the \u001b[1m-X\u001b[m switch to enable full debug logging.\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] For more information about the errors and possible solutions, please read the following articles:\n[\u001b[1;31mERROR\u001b[m] \u001b[1m[Help 1]\u001b[m http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] After correcting the problems, you can resume the build with the command\n[\u001b[1;31mERROR\u001b[m]   \u001b[1mmvn <args> -rf :hbase-common\u001b[m",
+        "attempt_count": 2,
+        "suggested_action": "route_to_namespace_or_structural"
+      },
+      {
+        "error_type": "api_mismatch",
+        "error_message": "ol:   variable CodecPool\n[\u001b[1;31mERROR\u001b[m]   location: class org.apache.hadoop.hbase.io.compress.TestCodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/test/java/org/apache/hadoop/hbase/io/compress/TestCodecPool.java:[172,9] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol: variable CodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/test/java/org/apache/hadoop/hbase/io/compress/TestCodecPool.java:[180,26] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol: variable CodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/test/java/org/apache/hadoop/hbase/io/compress/TestCodecPool.java:[195,38] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol:   variable CodecPool\n[\u001b[1;31mERROR\u001b[m]   location: class org.apache.hadoop.hbase.io.compress.TestCodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/test/java/org/apache/hadoop/hbase/io/compress/TestCodecPool.java:[200,27] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol:   variable CodecPool\n[\u001b[1;31mERROR\u001b[m]   location: class org.apache.hadoop.hbase.io.compress.TestCodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/test/java/org/apache/hadoop/hbase/io/compress/TestCodecPool.java:[201,5] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol:   variable CodecPool\n[\u001b[1;31mERROR\u001b[m]   location: class org.apache.hadoop.hbase.io.compress.TestCodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/test/java/org/apache/hadoop/hbase/io/compress/TestCodecPool.java:[202,5] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol:   variable CodecPool\n[\u001b[1;31mERROR\u001b[m]   location: class org.apache.hadoop.hbase.io.compress.TestCodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/test/java/org/apache/hadoop/hbase/io/compress/TestCodecPool.java:[205,25] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol:   variable CodecPool\n[\u001b[1;31mERROR\u001b[m]   location: class org.apache.hadoop.hbase.io.compress.TestCodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/test/java/org/apache/hadoop/hbase/io/compress/TestCodecPool.java:[209,7] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol:   variable CodecPool\n[\u001b[1;31mERROR\u001b[m]   location: class org.apache.hadoop.hbase.io.compress.TestCodecPool\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-common/src/test/java/org/apache/hadoop/hbase/io/compress/TestCodecPool.java:[234,5] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol:   variable CodecPool\n[\u001b[1;31mERROR\u001b[m]   location: class org.apache.hadoop.hbase.io.compress.TestCodecPool\n[\u001b[1;31mERROR\u001b[m] -> \u001b[1m[Help 1]\u001b[m\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] To see the full stack trace of the errors, re-run Maven with the \u001b[1m-e\u001b[m switch.\n[\u001b[1;31mERROR\u001b[m] Re-run Maven using the \u001b[1m-X\u001b[m switch to enable full debug logging.\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] For more information about the errors and possible solutions, please read the following articles:\n[\u001b[1;31mERROR\u001b[m] \u001b[1m[Help 1]\u001b[m http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] After correcting the problems, you can resume the build with the command\n[\u001b[1;31mERROR\u001b[m]   \u001b[1mmvn <args> -rf :hbase-common\u001b[m",
+        "attempt_count": 3,
+        "suggested_action": "route_to_namespace_or_structural"
+      }
+    ],
+    "failed_hunks": [
+      {
+        "file_path": "hbase-diagnostics/src/main/java/org/apache/hadoop/hbase/HFilePerformanceEvaluation.java",
+        "old_file_path": null,
+        "old_content": "  private static final int RFILE_BLOCKSIZE = 8 * 1024;\n  private static StringBuilder testSummary = new StringBuilder();\n\n  // Disable verbose INFO logging from org.apache.hadoop.io.compress.CodecPool\n  static {\n    System.setProperty(\"org.apache.commons.logging.Log\",\n      \"org.apache.commons.logging.impl.SimpleLog\");\n    System.setProperty(\n      \"org.apache.commons.logging.simplelog.log.org.apache.hadoop.io.compress.CodecPool\", \"WARN\");\n  }\n\n  private static final Logger LOG =\n",
+        "new_content": "  private static final int RFILE_BLOCKSIZE = 8 * 1024;\n  private static StringBuilder testSummary = new StringBuilder();\n\n  // Disable verbose INFO logging from org.apache.hadoop.hbase.io.compress.CodecPool\n  static {\n    System.setProperty(\"org.apache.commons.logging.Log\",\n      \"org.apache.commons.logging.impl.SimpleLog\");\n    System.setProperty(\n      \"org.apache.commons.logging.simplelog.log.org.apache.hadoop.hbase.io.compress.CodecPool\",\n      \"WARN\");\n  }\n\n  private static final Logger LOG =\n",
+        "is_new_file": false,
+        "is_del_file": false,
+        "is_rename": false,
+        "file_operation": "MODIFIED"
+      }
+    ],
+    "generated_patch_bytes": 11352,
+    "target_patch_bytes": 22671,
+    "patch_exact_match": false,
+    "validation_passed": false,
+    "validation_failure_category": "api_mismatch",
+    "build_success": false,
+    "test_success": null,
+    "test_mode": null,
+    "test_transition": {},
+    "fail_to_pass_count": 0,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": false
+  }
+}

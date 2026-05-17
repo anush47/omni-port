@@ -28,10 +28,10 @@ PROJECT_CONFIG = {
     "hibernate-orm": {"report_pattern": "**/target/test-results/**/*.xml"},
     "grpc-java": {"report_pattern": "**/build/test-results/**/*.xml"},
     "crate": {"report_pattern": "**/target/surefire-reports/*.xml"},
-    "jdk11u-dev": {"report_pattern": "**/JTwork/**/*.xml"},
-    "jdk17u-dev": {"report_pattern": "**/JTwork/**/*.xml"},
-    "jdk21u-dev": {"report_pattern": "**/JTwork/**/*.xml"},
-    "jdk25u-dev": {"report_pattern": "**/JTwork/**/*.xml"},
+    "jdk11u-dev": {"report_patterns": ["JTreport/**/*.xml", "JTwork/**/*.xml", "**/JTreport/**/*.xml"]},
+    "jdk17u-dev": {"report_patterns": ["JTreport/**/*.xml", "JTwork/**/*.xml", "**/JTreport/**/*.xml"]},
+    "jdk21u-dev": {"report_patterns": ["JTreport/**/*.xml", "JTwork/**/*.xml", "**/JTreport/**/*.xml"]},
+    "jdk25u-dev": {"report_patterns": ["JTreport/**/*.xml", "JTwork/**/*.xml", "**/JTreport/**/*.xml"]},
 }
 
 
@@ -42,9 +42,12 @@ def strip_ansi(text: str) -> str:
 def discover_xml_files(repo: str, project: str) -> list[str]:
     cfg = PROJECT_CONFIG.get(project, {})
     patterns = []
-    if "report_pattern" in cfg:
+    # Support both single pattern (legacy) and list of patterns (jdk-style)
+    if "report_patterns" in cfg:
+        patterns.extend(cfg["report_patterns"])
+    elif "report_pattern" in cfg:
         patterns.append(cfg["report_pattern"])
-    
+
     # Common fallback patterns
     patterns.extend([
         "**/build/test-results/**/*.xml",

@@ -1,0 +1,47 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.TestSplitMergeQuotaTable.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.TestBackupMerge.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.TestHBackupFileSystem.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.TestIncrementalBackup.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.TestIncrementalBackupWithDataLoss.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.mapreduce.TestMapReduceBackupCopyJob.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.master.TestBackupLogCleaner.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.client.TestAsyncAggregationClientWithCallbackThreadPool.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.client.TestFlushFromClient.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.client.TestFlushFromClientWithDisabledFlushProcedure.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.coprocessor.TestRegionCoprocessorQuotaUsage.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.compress.zstd.TestZstdByteBuffDecompressor.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.hfile.TestHFileBlockHeaderCorruption.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.hfile.TestRowIndexV1RoundTrip.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.mapreduce.TestRegionSizeCalculator.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.mapreduce.TestWALInputFormat.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.master.region.TestMasterRegionWALSyncTimeoutIOException.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.regionserver.TestCompaction.xml",
+      "/home/cseroot/omni-port/repos/hbase/hbase-mapreduce/target/surefire-reports/TEST-org.apache.hadoop.hbase.mapreduce.TestRegionSizeCalculator.xml"
+    ],
+    "target_classes": [
+      "org.apache.hadoop.hbase.mapreduce.TestRegionSizeCalculator"
+    ],
+    "test_cases": {
+      "org.apache.hadoop.hbase.mapreduce.TestRegionSizeCalculator#testSimpleTestCase": "passed",
+      "org.apache.hadoop.hbase.mapreduce.TestRegionSizeCalculator#testRegionWithNullServerName": "passed",
+      "org.apache.hadoop.hbase.mapreduce.TestRegionSizeCalculator#testDisabled": "passed",
+      "org.apache.hadoop.hbase.mapreduce.TestRegionSizeCalculator#testLargeRegion": "passed"
+    },
+    "classes": {
+      "org.apache.hadoop.hbase.mapreduce.TestRegionSizeCalculator": "passed"
+    },
+    "summary": {
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "total": 4
+    }
+  },
+  "mode": "baseline-hbase-helper",
+  "skipped": false
+}

@@ -1,0 +1,65 @@
+diff --git a/src/java.base/share/classes/java/util/Collections.java b/src/java.base/share/classes/java/util/Collections.java
+index f45d297f300..27bf76d827b 100644
+--- a/src/java.base/share/classes/java/util/Collections.java
++++ b/src/java.base/share/classes/java/util/Collections.java
+@@ -178,7 +178,6 @@ public class Collections {
+         list.sort(c);
+     }
+ 
+-
+     /**
+      * Searches the specified list for the specified object using the binary
+      * search algorithm.  The list must be sorted into ascending order
+@@ -816,15 +815,16 @@ public class Collections {
+         if (distance == 0)
+             return;
+ 
+-        for (int cycleStart = 0, nMoved = 0; nMoved != size; cycleStart++) {
++        int bound = size - distance;
++        for (int cycleStart = 0, nMoved = 0; nMoved < size; cycleStart++) {
+             T displaced = list.get(cycleStart);
+             int i = cycleStart;
+             do {
+-                i += distance;
+-                if (i >= size)
++                if (i >= bound)
+                     i -= size;
++                i += distance;
+                 displaced = list.set(i, displaced);
+-                nMoved ++;
++                nMoved++;
+             } while (i != cycleStart);
+         }
+     }
+@@ -1013,7 +1013,6 @@ public class Collections {
+         return -1;  // No candidate matched the target
+     }
+ 
+-
+     // Unmodifiable Wrappers
+ 
+     /**
+@@ -2185,7 +2184,6 @@ public class Collections {
+                 : null;
+         }
+ 
+-
+         @SuppressWarnings("unchecked")
+         public Entry<K, V> higherEntry(K key) {
+             Entry<K,V> higher = (Entry<K, V>) nm.higherEntry(key);
+@@ -3224,7 +3222,6 @@ public class Collections {
+             }
+         }
+ 
+-
+         public SortedMap<K,V> subMap(K fromKey, K toKey) {
+             synchronized (mutex) {
+                 return new SynchronizedNavigableMap<>(
+@@ -3890,7 +3887,6 @@ public class Collections {
+         return new CheckedMap<>(m, keyType, valueType);
+     }
+ 
+-
+     /**
+      * @serial include
+      */

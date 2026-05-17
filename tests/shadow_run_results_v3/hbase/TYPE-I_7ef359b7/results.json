@@ -1,0 +1,622 @@
+{
+  "run_timestamp": "2026-04-20T20:33:33.263771",
+  "repo": "hbase",
+  "patch_type": "TYPE-I",
+  "original_commit": "7ef359b7ffc8ca792c5bcfd70659cd01fd7e57c7",
+  "backport_commit": "eda1fc4455726a838902adf2ceca770b1e4516b2",
+  "description": "master \u2192 branch-2.6",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 2.4,
+      "error": null,
+      "java_hunks": 10,
+      "aux_hunks": 1,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 18,
+          "end_line": 23,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 32,
+          "end_line": 38,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "method_used": "git_pickaxe",
+          "confidence": 0.9,
+          "start_line": 41,
+          "end_line": 47,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 56,
+          "end_line": 61,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 86,
+          "end_line": 93,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 112,
+          "end_line": 138,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 153,
+          "end_line": 163,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 165,
+          "end_line": 171,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 8,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "method_used": "git_pickaxe",
+          "confidence": 0.9,
+          "start_line": 200,
+          "end_line": 253,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 9,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/util/BackupBoundaries.java",
+          "method_used": "new_file",
+          "confidence": 1.0,
+          "start_line": 0,
+          "end_line": 0,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 5.61,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_III",
+        "confidence": 0.95,
+        "reasoning": "The patch introduces a new utility class BackupBoundaries and refactors BackupLogCleaner to use this new abstraction for managing WAL cleanup boundaries. It changes method signatures, replaces direct map usage with a new class, and modifies logic to delegate deletability checks to the new class. These changes involve structural modifications to the codebase, including new class creation, method refactoring, and API usage changes, which are characteristic of TYPE_III complexity (structural changes). The localization evidence shows most hunks found via 'git_exact' with high confidence, but some via 'git_pickaxe' indicating non-trivial changes. The patch is not trivial string replacement or whitespace changes, nor is it a deep refactor or complete redesign. The target file is not auto-generated.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "applied_count": 7,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 84.76,
+      "error": null,
+      "adapted_count": 1
+    },
+    "agent5_structural": {
+      "elapsed_s": 90.03,
+      "error": null,
+      "refactored_count": 1
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 49.76,
+      "error": null,
+      "synthesized_count": 3,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/util/BackupBoundaries.java",
+          "old_string": "",
+          "new_string": "/*\n * Licensed to the Apache Software Foundation (ASF) under one\n * or more contributor license agreements.  See the NOTICE file\n * distributed with this work for additional information\n * regarding copyright ownership.  The ASF licenses this file\n * to you under the Apache License, Version 2.0 (the\n * \"License\"); you may not use this file except in compliance\n * with the License.  You may obtain a copy of the License at\n *\n *     http://www.apache.org/licenses/LICENSE-2.0\n *\n * Unless required by applicable law or agreed to in writing, software\n * distributed under the License is distributed on an \"AS IS\" BASIS,\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n * See the License for the specific language governing permissions and\n * limitations under the License.\n */\npackage org.apache.hadoop.hbase.backup.util;\n\nimport java.util.Collections;\nimport java.util.HashMap;\nimport java.util.Map;\nimport org.apache.hadoop.fs.Path;\nimport org.apache.hadoop.hbase.net.Address;\nimport org.apache.hadoop.hbase.wal.AbstractFSWALProvider;\nimport org.apache.yetus.audience.InterfaceAudience;\nimport org.slf4j.Logger;\nimport org.slf4j.LoggerFactory;\n\n/**\n * Tracks time boundaries for WAL file cleanup during backup operations. Maintains the oldest\n * timestamp per RegionServer included in any backup, enabling safe determination of which WAL files\n * can be deleted without compromising backup integrity.\n */\n@InterfaceAudience.Private\npublic class BackupBoundaries {\n  private static final Logger LOG = LoggerFactory.getLogger(BackupBoundaries.class);\n  private static final BackupBoundaries EMPTY_BOUNDARIES =\n    new BackupBoundaries(Collections.emptyMap(), Long.MAX_VALUE);\n\n  // This map tracks, for every RegionServer, the least recent (= oldest / lowest timestamp)\n  // inclusion in any backup. In other words, it is the timestamp boundary up to which all backup\n  // roots have included the WAL in their backup.\n  private final Map<Address, Long> boundaries;\n\n  // The minimum WAL roll timestamp from the most recent backup of each backup root, used as a\n  // fallback cleanup boundary for RegionServers without explicit backup boundaries (e.g., servers\n  // that joined after backups began)\n  private final long oldestStartCode;\n\n  private BackupBoundaries(Map<Address, Long> boundaries, long oldestStartCode) {\n    this.boundaries = boundaries;\n    this.oldestStartCode = oldestStartCode;\n  }\n\n  public boolean isDeletable(Path walLogPath) {\n    try {\n      String hostname = BackupUtils.parseHostNameFromLogFile(walLogPath);\n\n      if (hostname == null) {\n        LOG.warn(\n          \"Cannot parse hostname from RegionServer WAL file: {}. Ignoring cleanup of this log\",\n          walLogPath);\n        return false;\n      }\n\n      Address address = Address.fromString(hostname);\n      long pathTs = AbstractFSWALProvider.getTimestamp(walLogPath.getName());\n\n      if (!boundaries.containsKey(address)) {\n        boolean isDeletable = pathTs <= oldestStartCode;\n        if (LOG.isDebugEnabled()) {\n          LOG.debug(\n            \"Boundary for {} not found. isDeletable = {} based on oldestStartCode = {} and WAL ts of {}\",\n            walLogPath, isDeletable, oldestStartCode, pathTs);\n        }\n        return isDeletable;\n      }\n\n      long backupTs = boundaries.get(address);\n      if (pathTs <= backupTs) {\n        if (LOG.isDebugEnabled()) {\n          LOG.debug(\n            \"WAL cleanup time-boundary found for server {}: {}. Ok to delete older file: {}\",\n            address.getHostName(), pathTs, walLogPath);\n        }\n        return true;\n      }\n\n      if (LOG.isDebugEnabled()) {\n        LOG.debug(\"WAL cleanup time-boundary found for server {}: {}. Keeping younger file: {}\",\n          address.getHostName(), backupTs, walLogPath);\n      }\n\n      return false;\n    } catch (Exception e) {\n      LOG.warn(\"Error occurred while filtering file: {}. Ignoring cleanup of this log\", walLogPath,\n        e);\n      return false;\n    }\n  }\n\n  public Map<Address, Long> getBoundaries() {\n    return boundaries;\n  }\n\n  public long getOldestStartCode() {\n    return oldestStartCode;\n  }\n\n  public static BackupBoundariesBuilder builder(long tsCleanupBuffer) {\n    return new BackupBoundariesBuilder(tsCleanupBuffer);\n  }\n\n  public static class BackupBoundariesBuilder {\n    private final Map<Address, Long> boundaries = new HashMap<>();\n    private final long tsCleanupBuffer;\n\n    private long oldestStartCode = Long.MAX_VALUE;\n\n    private BackupBoundariesBuilder(long tsCleanupBuffer) {\n      this.tsCleanupBuffer = tsCleanupBuffer;\n    }\n\n    public BackupBoundariesBuilder addBackupTimestamps(String host, long hostLogRollTs,\n      long backupStartCode) {\n      Address address = Address.fromString(host);\n      Long storedTs = boundaries.get(address);\n      if (storedTs == null || hostLogRollTs < storedTs) {\n        boundaries.put(address, hostLogRollTs);\n      }\n\n      if (oldestStartCode > backupStartCode) {\n        oldestStartCode = backupStartCode;\n      }\n\n      return this;\n    }\n\n    public BackupBoundaries build() {\n      if (boundaries.isEmpty()) {\n        return EMPTY_BOUNDARIES;\n      }\n\n      oldestStartCode -= tsCleanupBuffer;\n      return new BackupBoundaries(boundaries, oldestStartCode);\n    }\n  }\n}",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        },
+        {
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "old_string": "import org.apache.hadoop.hbase.master.region.MasterRegionFactory;\nimport org.apache.hadoop.hbase.net.Address;\nimport org.apache.hadoop.hbase.procedure2.store.wal.WALProcedureStore;\nimport org.apache.hadoop.hbase.wal.WAL;\nimport org.apache.yetus.audience.InterfaceAudience;\nimport org.slf4j.Logger;\nimport org.slf4j.LoggerFactory;",
+          "new_string": "import org.apache.hadoop.hbase.master.region.MasterRegionFactory;\nimport org.apache.hadoop.hbase.net.Address;\nimport org.apache.hadoop.hbase.procedure2.store.wal.WALProcedureStore;\nimport org.apache.hadoop.hbase.wal.WAL;\nimport org.apache.yetus.audience.InterfaceAudience;\nimport org.slf4j.Logger;\nimport org.slf4j.LoggerFactory;",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        },
+        {
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "old_string": "  @Override\n  public boolean isStopped() {\n    return this.stopped;\n  }\n\n  protected static boolean canDeleteFile(Map<Address, Long> addressToBoundaryTs, Path path) {\n    if (isHMasterWAL(path)) {\n      return true;\n    }\n\n    try {\n      String hostname = BackupUtils.parseHostNameFromLogFile(path);\n      if (hostname == null) {\n        LOG.warn(\n          \"Cannot parse hostname from RegionServer WAL file: {}. Ignoring cleanup of this log\",\n          path);\n        return false;\n      }\n      Address walServerAddress = Address.fromString(hostname);\n      long walTimestamp = WAL.getTimestamp(path.getName());\n\n      if (!addressToBoundaryTs.containsKey(walServerAddress)) {\n        if (LOG.isDebugEnabled()) {\n          LOG.debug(\"No cleanup WAL time-boundary found for server: {}. Ok to delete file: {}\",\n            walServerAddress.getHostName(), path);\n        }\n        return true;\n      }\n\n      Long backupBoundary = addressToBoundaryTs.get(walServerAddress);\n      if (backupBoundary >= walTimestamp) {\n        if (LOG.isDebugEnabled()) {\n          LOG.debug(\n            \"WAL cleanup time-boundary found for server {}: {}. Ok to delete older file: {}\",\n            walServerAddress.getHostName(), backupBoundary, path);\n        }\n        return true;\n      }\n\n      if (LOG.isDebugEnabled()) {\n        LOG.debug(\"WAL cleanup time-boundary found for server {}: {}. Keeping younger file: {}\",\n          walServerAddress.getHostName(), backupBoundary, path);\n      }\n    } catch (Exception ex) {\n      LOG.warn(\"Error occurred while filtering file: {}. Ignoring cleanup of this log\", path, ex);\n      return false;\n    }\n    return false;\n  }\n\n  private static boolean isHMasterWAL(Path path) {\n    String fn = path.getName();\n    return fn.startsWith(WALProcedureStore.LOG_PREFIX)\n      || fn.endsWith(MasterRegionFactory.ARCHIVED_WAL_SUFFIX);",
+          "new_string": "  @Override\n  public boolean isStopped() {\n    return this.stopped;\n  }\n\n  protected static boolean canDeleteFile(BackupBoundaries boundaries, Path path) {\n    if (isHMasterWAL(path)) {\n      return true;\n    }\n    return boundaries.isDeletable(path);\n  }\n\n  private static boolean isHMasterWAL(Path path) {\n    String fn = path.getName();\n    return fn.startsWith(WALProcedureStore.LOG_PREFIX)\n      || fn.endsWith(MasterRegionFactory.ARCHIVED_WAL_SUFFIX)\n      || path.toString().contains(String.format(\"/%s/\", MasterRegionFactory.MASTER_STORE_DIR));",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.04,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/util/BackupBoundaries.java",
+          "outcome": "clean"
+        },
+        {
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 3
+    },
+    "agent7_validator": {
+      "validation_passed": false,
+      "validation_failure_category": "api_mismatch",
+      "validation_error_context": "Build failed (hbase-helper): [jar:file:/root/.m2/repository/com/sun/jersey/jersey-server/1.9/jersey-server-1.9.jar!/META-INF/taglib.tld] to a known, local entity.\njava.io.FileNotFoundException: Could not resolve XML resource [null] with public ID [-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN], system ID [http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd] and base URI [jar:file:/root/.m2/repository/com/sun/jersey/jersey-server/1.9/jersey-server-1.9.jar!/META-INF/taglib.tld] to a known, ",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": false,
+      "build_mode": "hbase-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": []
+    },
+    "agent9_fallback_1": {
+      "fallback_status": "failed",
+      "fallback_attempts": 1,
+      "synthesized_count": 0,
+      "hunk_descriptions": [
+        {
+          "hunk_index": 0,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "what_changed": "Added import of java.time.Duration",
+          "where_in_code": "package imports",
+          "intent": "To enable usage of Duration for time-related constants",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "Duration"
+          ]
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "what_changed": "Replaced imports of BackupManager and BackupUtils with imports of BackupSystemTable and BackupBoundaries",
+          "where_in_code": "package imports",
+          "intent": "To shift from using BackupManager and BackupUtils to using BackupSystemTable and BackupBoundaries for backup metadata handling",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "BackupSystemTable",
+            "BackupBoundaries"
+          ]
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "what_changed": "Removed import of AbstractFSWALProvider",
+          "where_in_code": "package imports",
+          "intent": "No longer directly using AbstractFSWALProvider in this class",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "AbstractFSWALProvider"
+          ]
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "what_changed": "Added two static fields: a default timestamp buffer constant and a configuration key string",
+          "where_in_code": "BackupLogCleaner class fields",
+          "intent": "To define a configurable buffer duration for timestamp boundaries used in WAL cleanup",
+          "change_type": "add_field",
+          "key_symbols": [
+            "TS_BUFFER_DEFAULT",
+            "TS_BUFFER_KEY"
+          ]
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "what_changed": "Changed method serverToPreservationBoundaryTs to accept BackupSystemTable and return BackupBoundaries instead of accepting List<BackupInfo> and returning Map<Address, Long>; moved retrieval of backup history inside method",
+          "where_in_code": "BackupLogCleaner.serverToPreservationBoundaryTs",
+          "intent": "To encapsulate backup history retrieval and boundary calculation within the method using BackupSystemTable and to return a richer BackupBoundaries object",
+          "change_type": "modify_signature",
+          "key_symbols": [
+            "serverToPreservationBoundaryTs",
+            "BackupSystemTable",
+            "BackupBoundaries"
+          ]
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "what_changed": "Replaced manual construction of a Map of server-to-timestamp boundaries with use of BackupBoundariesBuilder to build a BackupBoundaries object, including reading backup start codes from BackupSystemTable",
+          "where_in_code": "BackupLogCleaner.serverToPreservationBoundaryTs",
+          "intent": "To improve boundary calculation by incorporating backup start codes and buffering logic encapsulated in BackupBoundariesBuilder",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "BackupBoundariesBuilder",
+            "BackupSystemTable",
+            "serverToPreservationBoundaryTs"
+          ]
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "what_changed": "Changed usage from BackupManager to BackupSystemTable for obtaining backup boundaries; updated variable type from Map to BackupBoundaries",
+          "where_in_code": "BackupLogCleaner.cleanup method (or caller of serverToPreservationBoundaryTs)",
+          "intent": "To use the new BackupSystemTable-based boundary retrieval and richer BackupBoundaries abstraction for cleanup decisions",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "BackupSystemTable",
+            "BackupBoundaries"
+          ]
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "what_changed": "Updated call to canDeleteFile to pass BackupBoundaries object instead of Map",
+          "where_in_code": "BackupLogCleaner.cleanup method (file filtering loop)",
+          "intent": "To align with new canDeleteFile signature that uses BackupBoundaries abstraction",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "canDeleteFile",
+            "BackupBoundaries"
+          ]
+        },
+        {
+          "hunk_index": 8,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "what_changed": "Rewrote canDeleteFile method to accept BackupBoundaries and delegate deletion decision to it; simplified logic by removing manual timestamp checks; extended isHMasterWAL to include additional path pattern check",
+          "where_in_code": "BackupLogCleaner.canDeleteFile and isHMasterWAL methods",
+          "intent": "To centralize deletion logic in BackupBoundaries and improve detection of HMaster WAL files for exclusion from cleanup",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "canDeleteFile",
+            "BackupBoundaries",
+            "isHMasterWAL"
+          ]
+        },
+        {
+          "hunk_index": 9,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/util/BackupBoundaries.java",
+          "what_changed": "Added new BackupBoundaries class with builder to track and determine WAL cleanup boundaries per RegionServer, encapsulating logic to decide if a WAL file is deletable based on backup timestamps and a configurable buffer",
+          "where_in_code": "new class BackupBoundaries and nested BackupBoundariesBuilder",
+          "intent": "To provide a reusable, encapsulated abstraction for managing WAL cleanup boundaries and deletion decisions, improving modularity and maintainability",
+          "change_type": "add_method",
+          "key_symbols": [
+            "BackupBoundaries",
+            "BackupBoundariesBuilder",
+            "isDeletable"
+          ]
+        }
+      ]
+    },
+    "agent8_syntax_repair_fallback_1": {
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": []
+    },
+    "agent7_validator_retry1": {
+      "validation_passed": false,
+      "validation_failure_category": "api_mismatch",
+      "validation_error_context": "Build failed (hbase-helper): 1_2.dtd] and base URI [jar:file:/root/.m2/repository/com/sun/jersey/jersey-server/1.9/jersey-server-1.9.jar!/META-INF/taglib.tld] to a known, local entity.\njava.io.FileNotFoundException: Could not resolve XML resource [null] with public ID [-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN], system ID [http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd] and base URI [jar:file:/root/.m2/repository/com/sun/jersey/jersey-server/1.9/jersey-server-1.9.jar!/META-INF/ta",
+      "validation_attempts": 2,
+      "retry_files": [],
+      "build_success": false,
+      "build_mode": "hbase-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": []
+    },
+    "agent9_fallback_2": {
+      "fallback_status": "failed",
+      "fallback_attempts": 2,
+      "synthesized_count": 0,
+      "hunk_descriptions": [
+        {
+          "hunk_index": 0,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "what_changed": "Added import of java.time.Duration",
+          "where_in_code": "package and imports",
+          "intent": "To enable usage of Duration for time-related constants",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "Duration"
+          ]
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "what_changed": "Replaced import of BackupManager with imports of BackupSystemTable and BackupBoundaries",
+          "where_in_code": "imports",
+          "intent": "To shift from using BackupManager to BackupSystemTable and BackupBoundaries for backup metadata handling",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "BackupSystemTable",
+            "BackupBoundaries"
+          ]
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "what_changed": "Removed unused import of AbstractFSWALProvider",
+          "where_in_code": "imports",
+          "intent": "Cleanup of unused imports to reduce dependencies",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "AbstractFSWALProvider"
+          ]
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "what_changed": "Added two static fields: a default timestamp buffer constant and a configuration key string",
+          "where_in_code": "class BackupLogCleaner",
+          "intent": "To define a configurable time buffer for timestamp boundaries used in WAL cleanup",
+          "change_type": "add_field",
+          "key_symbols": [
+            "TS_BUFFER_DEFAULT",
+            "TS_BUFFER_KEY"
+          ]
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "what_changed": "Changed method serverToPreservationBoundaryTs to accept BackupSystemTable and return BackupBoundaries instead of Map<Address, Long>; moved retrieval of backup history inside method",
+          "where_in_code": "private method serverToPreservationBoundaryTs",
+          "intent": "To encapsulate backup boundary calculation logic within BackupBoundaries abstraction and use BackupSystemTable for backup metadata access",
+          "change_type": "modify_signature",
+          "key_symbols": [
+            "serverToPreservationBoundaryTs",
+            "BackupBoundaries",
+            "BackupSystemTable"
+          ]
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "what_changed": "Replaced manual Map<Address, Long> boundaries construction with use of BackupBoundariesBuilder to accumulate backup timestamps and build BackupBoundaries object",
+          "where_in_code": "method serverToPreservationBoundaryTs",
+          "intent": "To improve boundary calculation by using a dedicated builder that handles timestamp buffering and oldest start code tracking",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "BackupBoundariesBuilder",
+            "serverToPreservationBoundaryTs"
+          ]
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "what_changed": "Replaced usage of BackupManager and Map<Address, Long> with BackupSystemTable and BackupBoundaries for obtaining backup boundaries",
+          "where_in_code": "method that obtains serverToPreservationBoundaryTs",
+          "intent": "To switch to the new BackupBoundaries abstraction and BackupSystemTable for backup metadata retrieval and boundary calculation",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "BackupSystemTable",
+            "BackupBoundaries"
+          ]
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "what_changed": "Updated call to canDeleteFile to pass BackupBoundaries object instead of Map<Address, Long>",
+          "where_in_code": "method filtering files for deletion",
+          "intent": "To use the new BackupBoundaries abstraction for determining deletable WAL files",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "canDeleteFile",
+            "BackupBoundaries"
+          ]
+        },
+        {
+          "hunk_index": 8,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java",
+          "what_changed": "Refactored canDeleteFile method to accept BackupBoundaries and delegate deletion decision to it; simplified logic by removing manual timestamp checks; extended isHMasterWAL to include additional path pattern",
+          "where_in_code": "static method canDeleteFile and isHMasterWAL",
+          "intent": "To centralize deletion logic in BackupBoundaries and improve detection of HMaster WAL files for exclusion from cleanup",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "canDeleteFile",
+            "BackupBoundaries",
+            "isHMasterWAL"
+          ]
+        },
+        {
+          "hunk_index": 9,
+          "file_path": "hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/util/BackupBoundaries.java",
+          "what_changed": "Added new class BackupBoundaries with nested BackupBoundariesBuilder to encapsulate logic for tracking WAL cleanup timestamp boundaries per RegionServer and determining deletability of WAL files",
+          "where_in_code": "class BackupBoundaries and BackupBoundariesBuilder",
+          "intent": "To provide a reusable, centralized abstraction for managing backup timestamp boundaries and safely deciding WAL file cleanup eligibility",
+          "change_type": "add_class",
+          "key_symbols": [
+            "BackupBoundaries",
+            "BackupBoundariesBuilder",
+            "isDeletable"
+          ]
+        }
+      ]
+    },
+    "agent8_syntax_repair_fallback_2": {
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": []
+    },
+    "agent7_validator_retry2": {
+      "validation_passed": false,
+      "validation_failure_category": "api_mismatch",
+      "validation_error_context": "Build failed (hbase-helper): 1_2.dtd] and base URI [jar:file:/root/.m2/repository/com/sun/jersey/jersey-server/1.9/jersey-server-1.9.jar!/META-INF/taglib.tld] to a known, local entity.\njava.io.FileNotFoundException: Could not resolve XML resource [null] with public ID [-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN], system ID [http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd] and base URI [jar:file:/root/.m2/repository/com/sun/jersey/jersey-server/1.9/jersey-server-1.9.jar!/META-INF/ta",
+      "validation_attempts": 3,
+      "retry_files": [],
+      "build_success": false,
+      "build_mode": "hbase-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 14,
+    "developer_aux_hunks_from_target": 1,
+    "phase0_baseline": {
+      "mode": "baseline-build-failed",
+      "skipped": true,
+      "cached": false,
+      "test_cases_total": 0
+    },
+    "java_production_hunks": 10,
+    "developer_aux_hunks": 1,
+    "processed_hunk_indices": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      2,
+      8
+    ],
+    "tokens_used": 159132,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 8623,
+        "output": 3755
+      },
+      "agent5_structural": {
+        "input": 1548,
+        "output": 3453
+      },
+      "agent6_synthesizer": {
+        "input": 3089,
+        "output": 1745
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      },
+      "agent9_fallback": {
+        "input": 147995,
+        "output": 6303
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 7,
+    "synthesized_count": 0,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "failed",
+    "fallback_attempts": 2,
+    "retry_contexts": [
+      {
+        "error_type": "api_mismatch",
+        "error_message": "[jar:file:/root/.m2/repository/com/sun/jersey/jersey-server/1.9/jersey-server-1.9.jar!/META-INF/taglib.tld] to a known, local entity.\njava.io.FileNotFoundException: Could not resolve XML resource [null] with public ID [-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN], system ID [http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd] and base URI [jar:file:/root/.m2/repository/com/sun/jersey/jersey-server/1.9/jersey-server-1.9.jar!/META-INF/taglib.tld] to a known, local entity.\njava.io.FileNotFoundException: Could not resolve XML resource [null] with public ID [-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN], system ID [http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd] and base URI [jar:file:/root/.m2/repository/com/sun/jersey/jersey-server/1.9/jersey-server-1.9.jar!/META-INF/taglib.tld] to a known, local entity.\njava.io.FileNotFoundException: Could not resolve XML resource [null] with public ID [-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN], system ID [http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd] and base URI [jar:file:/root/.m2/repository/com/sun/jersey/jersey-server/1.9/jersey-server-1.9.jar!/META-INF/taglib.tld] to a known, local entity.\njava.io.FileNotFoundException: Could not resolve XML resource [null] with public ID [-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN], system ID [http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd] and base URI [jar:file:/root/.m2/repository/com/sun/jersey/jersey-server/1.9/jersey-server-1.9.jar!/META-INF/taglib.tld] to a known, local entity.\n[\u001b[1;31mERROR\u001b[m] COMPILATION ERROR : \n[\u001b[1;31mERROR\u001b[m] /repo/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/util/BackupBoundaries.java:[68,42] cannot find symbol\n  symbol:   method getTimestamp(java.lang.String)\n[\u001b[1;34mINFO\u001b[m] \u001b[1;31mBUILD FAILURE\u001b[m\n[\u001b[1;31mERROR\u001b[m] Failed to execute goal \u001b[32morg.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile\u001b[m \u001b[1m(default-compile)\u001b[m on project \u001b[36mhbase-backup\u001b[m: \u001b[1;31mCompilation failure\u001b[m\n[\u001b[1;31mERROR\u001b[m] \u001b[1;31m/repo/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/util/BackupBoundaries.java:[68,42] cannot find symbol\u001b[m\n[\u001b[1;31mERROR\u001b[m] \u001b[1;31m  symbol:   method getTimestamp(java.lang.String)\u001b[m\n[\u001b[1;31mERROR\u001b[m] \u001b[1;31m  location: class org.apache.hadoop.hbase.wal.AbstractFSWALProvider\u001b[m\n[\u001b[1;31mERROR\u001b[m] \u001b[1;31m\u001b[m\n[\u001b[1;31mERROR\u001b[m] -> \u001b[1m[Help 1]\u001b[m\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] To see the full stack trace of the errors, re-run Maven with the \u001b[1m-e\u001b[m switch.\n[\u001b[1;31mERROR\u001b[m] Re-run Maven using the \u001b[1m-X\u001b[m switch to enable full debug logging.\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] For more information about the errors and possible solutions, please read the following articles:\n[\u001b[1;31mERROR\u001b[m] \u001b[1m[Help 1]\u001b[m http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] After correcting the problems, you can resume the build with the command\n[\u001b[1;31mERROR\u001b[m]   \u001b[1mmvn <args> -rf :hbase-backup\u001b[m",
+        "attempt_count": 1,
+        "suggested_action": "route_to_namespace_or_structural"
+      },
+      {
+        "error_type": "api_mismatch",
+        "error_message": "1_2.dtd] and base URI [jar:file:/root/.m2/repository/com/sun/jersey/jersey-server/1.9/jersey-server-1.9.jar!/META-INF/taglib.tld] to a known, local entity.\njava.io.FileNotFoundException: Could not resolve XML resource [null] with public ID [-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN], system ID [http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd] and base URI [jar:file:/root/.m2/repository/com/sun/jersey/jersey-server/1.9/jersey-server-1.9.jar!/META-INF/taglib.tld] to a known, local entity.\njava.io.FileNotFoundException: Could not resolve XML resource [null] with public ID [-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN], system ID [http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd] and base URI [jar:file:/root/.m2/repository/com/sun/jersey/jersey-server/1.9/jersey-server-1.9.jar!/META-INF/taglib.tld] to a known, local entity.\njava.io.FileNotFoundException: Could not resolve XML resource [null] with public ID [-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN], system ID [http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd] and base URI [jar:file:/root/.m2/repository/com/sun/jersey/jersey-server/1.9/jersey-server-1.9.jar!/META-INF/taglib.tld] to a known, local entity.\njava.io.FileNotFoundException: Could not resolve XML resource [null] with public ID [-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN], system ID [http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd] and base URI [jar:file:/root/.m2/repository/com/sun/jersey/jersey-server/1.9/jersey-server-1.9.jar!/META-INF/taglib.tld] to a known, local entity.\n[\u001b[1;31mERROR\u001b[m] COMPILATION ERROR : \n[\u001b[1;31mERROR\u001b[m] /repo/hbase-backup/src/test/java/org/apache/hadoop/hbase/backup/master/TestBackupLogCleaner.java:[42,43] cannot find symbol\n  symbol:   class BackupBoundaries\n[\u001b[1;34mINFO\u001b[m] \u001b[1;31mBUILD FAILURE\u001b[m\n[\u001b[1;31mERROR\u001b[m] Failed to execute goal \u001b[32morg.apache.maven.plugins:maven-compiler-plugin:3.8.1:testCompile\u001b[m \u001b[1m(default-testCompile)\u001b[m on project \u001b[36mhbase-backup\u001b[m: \u001b[1;31mCompilation failure\u001b[m\n[\u001b[1;31mERROR\u001b[m] \u001b[1;31m/repo/hbase-backup/src/test/java/org/apache/hadoop/hbase/backup/master/TestBackupLogCleaner.java:[42,43] cannot find symbol\u001b[m\n[\u001b[1;31mERROR\u001b[m] \u001b[1;31m  symbol:   class BackupBoundaries\u001b[m\n[\u001b[1;31mERROR\u001b[m] \u001b[1;31m  location: package org.apache.hadoop.hbase.backup.util\u001b[m\n[\u001b[1;31mERROR\u001b[m] \u001b[1;31m\u001b[m\n[\u001b[1;31mERROR\u001b[m] -> \u001b[1m[Help 1]\u001b[m\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] To see the full stack trace of the errors, re-run Maven with the \u001b[1m-e\u001b[m switch.\n[\u001b[1;31mERROR\u001b[m] Re-run Maven using the \u001b[1m-X\u001b[m switch to enable full debug logging.\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] For more information about the errors and possible solutions, please read the following articles:\n[\u001b[1;31mERROR\u001b[m] \u001b[1m[Help 1]\u001b[m http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] After correcting the problems, you can resume the build with the command\n[\u001b[1;31mERROR\u001b[m]   \u001b[1mmvn <args> -rf :hbase-backup\u001b[m",
+        "attempt_count": 2,
+        "suggested_action": "route_to_namespace_or_structural"
+      },
+      {
+        "error_type": "api_mismatch",
+        "error_message": "1_2.dtd] and base URI [jar:file:/root/.m2/repository/com/sun/jersey/jersey-server/1.9/jersey-server-1.9.jar!/META-INF/taglib.tld] to a known, local entity.\njava.io.FileNotFoundException: Could not resolve XML resource [null] with public ID [-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN], system ID [http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd] and base URI [jar:file:/root/.m2/repository/com/sun/jersey/jersey-server/1.9/jersey-server-1.9.jar!/META-INF/taglib.tld] to a known, local entity.\njava.io.FileNotFoundException: Could not resolve XML resource [null] with public ID [-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN], system ID [http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd] and base URI [jar:file:/root/.m2/repository/com/sun/jersey/jersey-server/1.9/jersey-server-1.9.jar!/META-INF/taglib.tld] to a known, local entity.\njava.io.FileNotFoundException: Could not resolve XML resource [null] with public ID [-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN], system ID [http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd] and base URI [jar:file:/root/.m2/repository/com/sun/jersey/jersey-server/1.9/jersey-server-1.9.jar!/META-INF/taglib.tld] to a known, local entity.\njava.io.FileNotFoundException: Could not resolve XML resource [null] with public ID [-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN], system ID [http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd] and base URI [jar:file:/root/.m2/repository/com/sun/jersey/jersey-server/1.9/jersey-server-1.9.jar!/META-INF/taglib.tld] to a known, local entity.\n[\u001b[1;31mERROR\u001b[m] COMPILATION ERROR : \n[\u001b[1;31mERROR\u001b[m] /repo/hbase-backup/src/test/java/org/apache/hadoop/hbase/backup/master/TestBackupLogCleaner.java:[42,43] cannot find symbol\n  symbol:   class BackupBoundaries\n[\u001b[1;34mINFO\u001b[m] \u001b[1;31mBUILD FAILURE\u001b[m\n[\u001b[1;31mERROR\u001b[m] Failed to execute goal \u001b[32morg.apache.maven.plugins:maven-compiler-plugin:3.8.1:testCompile\u001b[m \u001b[1m(default-testCompile)\u001b[m on project \u001b[36mhbase-backup\u001b[m: \u001b[1;31mCompilation failure\u001b[m\n[\u001b[1;31mERROR\u001b[m] \u001b[1;31m/repo/hbase-backup/src/test/java/org/apache/hadoop/hbase/backup/master/TestBackupLogCleaner.java:[42,43] cannot find symbol\u001b[m\n[\u001b[1;31mERROR\u001b[m] \u001b[1;31m  symbol:   class BackupBoundaries\u001b[m\n[\u001b[1;31mERROR\u001b[m] \u001b[1;31m  location: package org.apache.hadoop.hbase.backup.util\u001b[m\n[\u001b[1;31mERROR\u001b[m] \u001b[1;31m\u001b[m\n[\u001b[1;31mERROR\u001b[m] -> \u001b[1m[Help 1]\u001b[m\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] To see the full stack trace of the errors, re-run Maven with the \u001b[1m-e\u001b[m switch.\n[\u001b[1;31mERROR\u001b[m] Re-run Maven using the \u001b[1m-X\u001b[m switch to enable full debug logging.\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] For more information about the errors and possible solutions, please read the following articles:\n[\u001b[1;31mERROR\u001b[m] \u001b[1m[Help 1]\u001b[m http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] After correcting the problems, you can resume the build with the command\n[\u001b[1;31mERROR\u001b[m]   \u001b[1mmvn <args> -rf :hbase-backup\u001b[m",
+        "attempt_count": 3,
+        "suggested_action": "route_to_namespace_or_structural"
+      }
+    ],
+    "failed_hunks": [],
+    "generated_patch_bytes": 13406,
+    "target_patch_bytes": 23762,
+    "patch_exact_match": false,
+    "validation_passed": false,
+    "validation_failure_category": "api_mismatch",
+    "build_success": false,
+    "test_success": null,
+    "test_mode": null,
+    "test_transition": {},
+    "fail_to_pass_count": 0,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": false
+  }
+}

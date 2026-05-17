@@ -1,0 +1,14 @@
+diff --git a/src/java.desktop/macosx/classes/com/apple/laf/AquaKeyBindings.java b/src/java.desktop/macosx/classes/com/apple/laf/AquaKeyBindings.java
+index f9779afdf47..a4c1d93883f 100644
+--- a/src/java.desktop/macosx/classes/com/apple/laf/AquaKeyBindings.java
++++ b/src/java.desktop/macosx/classes/com/apple/laf/AquaKeyBindings.java
+@@ -157,6 +157,9 @@ LateBoundInputMap getPasswordFieldInputMap() {
+                         "shift alt KP_LEFT", null,
+                         "shift alt RIGHT", null,
+                         "shift alt KP_RIGHT", null,
++                        "alt BACK_SPACE", null,
++                        "ctrl W", null,
++                        "alt DELETE", null,
+                 }));
+     }
+ 

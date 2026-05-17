@@ -1,0 +1,22 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/java/security/Provider/InvalidServiceTest.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "java/security/Provider/InvalidServiceTest.java#InvalidServiceTest": "failed"
+    },
+    "classes": {
+      "java/security/Provider/InvalidServiceTest.java": "failed"
+    },
+    "summary": {
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "total": 1
+    }
+  },
+  "mode": "baseline-jdk21u-dev-helper",
+  "skipped": false
+}

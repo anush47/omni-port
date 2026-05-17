@@ -45,6 +45,14 @@ ELASTICSEARCH_HARNESS_EXCLUDED_TEST_MODULES: frozenset[str] = frozenset(
     }
 )
 
+# JDK-family projects that use jtreg + Docker make-based builds.
+# For these projects: (a) extra env vars are injected into the Docker run,
+# (b) test result collection uses an empty target-class filter so all JTwork
+#     XML reports are gathered (jtreg XML classnames don't map to Java FQCNs).
+JDK_PROJECTS: frozenset[str] = frozenset(
+    {"jdk17u-dev", "jdk11u-dev", "jdk21u-dev", "jdk25u-dev"}
+)
+
 _TEST_SOURCE_DIRS = (
     "/src/test/java/",
     "/src/internalClusterTest/java/",
@@ -204,6 +212,9 @@ def _is_test_file(file_path: str) -> bool:
     p = (file_path or "").replace("\\", "/").lower()
     if any(d.lower() in p for d in _TEST_SOURCE_DIRS):
         return True
+    # JDK/OpenJDK: jtreg tests live under a top-level test/ directory
+    if p.startswith("test/") and p.endswith(".java"):
+        return True
     filename = os.path.basename(p)
     return (
         any(filename.endswith(s.lower()) for s in _TEST_SUFFIXES)
@@ -325,15 +336,25 @@ def restore_repo_state(repo_path: str) -> bool:
             check=True,
             timeout=30,
         )
+        # Preserve JDK build dirs (untracked but expensive to rebuild) and jtreg
+        # output dirs.  Other projects don't use these names so the excludes are safe.
         result = subprocess.run(
-            ["git", "clean", "-fd"],
+            ["git", "clean", "-fd",
+             "--exclude=build_shared",
+             "--exclude=JTwork",
+             "--exclude=JTreport",
+            ],
             cwd=repo_path,
             capture_output=True,
             timeout=30,
         )
         if result.returncode != 0:
             subprocess.run(
-                ["git", "clean", "-ffdX"],
+                ["git", "clean", "-ffdX",
+                 "--exclude=build_shared",
+                 "--exclude=JTwork",
+                 "--exclude=JTreport",
+                ],
                 cwd=repo_path,
                 capture_output=True,
                 timeout=30,
@@ -426,6 +447,11 @@ def classify_build_failure(output: str) -> str:
         or "daemon disappeared" in text_lower
         or "out of memory" in text_lower
         or "java.lang.outofmemoryerror" in text_lower
+        # Native linker errors — not fixable by changing Java source code.
+        # Caused by corrupted/stale native build objects or toolchain issues.
+        or "ld returned 1 exit status" in text_lower
+        or "collect2: error" in text_lower
+        or "linker command failed" in text_lower
     ):
         return "infrastructure"
 
@@ -496,6 +522,8 @@ def collect_test_results(
         os.path.join(repo_path, "build", "all-test-results", "TEST-*.xml"),
         os.path.join(repo_path, "**/target/surefire-reports/*.xml"),
         os.path.join(repo_path, "**/JTwork/**/*.xml"),
+        os.path.join(repo_path, "JTreport", "**", "*.xml"),
+        os.path.join(repo_path, "**/JTreport/**/*.xml"),
     ]
     xml_paths: set[str] = set()
     for pat in patterns:
@@ -731,7 +759,21 @@ def run_build(repo_path: str, project: str = "", changed_files: list[str] | None
                     "WORKTREE_MODE": "1",
                     "SOURCE_MODULES": source_modules_str,
                 })
+                if normalized in JDK_PROJECTS:
+                    _default_boot_jdk = (
+                        "/opt/java/jdk-24" if normalized == "jdk25u-dev"
+                        else "/opt/java/openjdk"
+                    )
+                    env.update({
+                        "BOOT_JDK": os.getenv("BOOT_JDK", _default_boot_jdk),
+                        "JTREG_HOME": os.getenv("JTREG_HOME", "/opt/jtreg"),
+                        "BUILD_DIR_NAME": "build_shared",
+                    })
                 res = _run_cmd(["bash", build_sh], cwd=abs_repo_path, env=env, timeout=3600)
+                if not res["success"]:
+                    # Print the last 3000 chars so the actual error is visible
+                    tail = res["output"][-3000:] if res["output"] else "(no output)"
+                    print(f"  [build_systems] Build FAILED — last output:\n{tail}")
                 print(f"  [build_systems] Build {'succeeded' if res['success'] else 'failed'} using {normalized}-helper")
                 return BuildResult(
                     success=res["success"],
@@ -823,6 +865,7 @@ def run_tests(
                 env.update({
                     "PROJECT_NAME": normalized,
                     "PROJECT_DIR": abs_repo_path,
+                    "TOOLKIT_DIR": hdir,
                     "BUILDER_IMAGE_TAG": image_tag,
                     "IMAGE_TAG": image_tag,
                     "COMMIT_SHA": _get_current_head(repo_path),
@@ -833,16 +876,26 @@ def run_tests(
                     ),
                     "TEST_MODULES": "" if test_targets else ",".join(sorted(set(source_modules))),
                 })
+                if normalized in JDK_PROJECTS:
+                    env.update({
+                        "JTREG_HOME": os.getenv("JTREG_HOME", "/opt/jtreg"),
+                        "BUILD_DIR_NAME": "build_shared",
+                    })
                 res = _run_cmd(["bash", test_sh], cwd=abs_repo_path, env=env, timeout=900)
                 output = res["output"]
                 is_compile_error = (not res["success"]) and "compilation error" in output.lower()
 
-                # Collect results — use bare class names so XML matching works.
-                # Module-level targets (no --tests filter) return "" — filter them
-                # out so collect_test_results uses an empty set (= collect all).
-                target_classes_for_collection = [
-                    c for c in (_extract_class_name_from_target(t) for t in test_targets) if c
-                ]
+                # For JDK projects, jtreg XML classnames don't map to Java FQCNs, so
+                # collect all JTwork XML results rather than filtering by class name.
+                if normalized in JDK_PROJECTS:
+                    target_classes_for_collection = []
+                else:
+                    # Collect results — use bare class names so XML matching works.
+                    # Module-level targets (no --tests filter) return "" — filter them
+                    # out so collect_test_results uses an empty set (= collect all).
+                    target_classes_for_collection = [
+                        c for c in (_extract_class_name_from_target(t) for t in test_targets) if c
+                    ]
                 print(f"  [build_systems] Collecting results for {len(target_classes_for_collection)} classes")
                 test_state = collect_test_results(
                     repo_path, normalized, target_classes_for_collection, output

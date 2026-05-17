@@ -1,0 +1,552 @@
+{
+  "run_timestamp": "2026-04-20T20:33:33.263771",
+  "repo": "hbase",
+  "patch_type": "TYPE-I",
+  "original_commit": "9f841d0ad0914bfa8d4d95f0e168eb42902552be",
+  "backport_commit": "cf4630b7f5394890f5d1c63eb291fe7f638ffe1f",
+  "description": "master \u2192 branch-2.6",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 0.94,
+      "error": null,
+      "java_hunks": 19,
+      "aux_hunks": 2,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "method_used": "git_pickaxe",
+          "confidence": 0.688,
+          "start_line": 27,
+          "end_line": 32,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 32,
+          "end_line": 37,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 82,
+          "end_line": 88,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 109,
+          "end_line": 120,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 142,
+          "end_line": 148,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 168,
+          "end_line": 179,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 201,
+          "end_line": 207,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 230,
+          "end_line": 241,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 8,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 262,
+          "end_line": 268,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 9,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 290,
+          "end_line": 299,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 10,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 337,
+          "end_line": 343,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 11,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 353,
+          "end_line": 366,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 12,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 402,
+          "end_line": 408,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 13,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 421,
+          "end_line": 436,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 14,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 471,
+          "end_line": 477,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 15,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 493,
+          "end_line": 506,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 16,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 558,
+          "end_line": 567,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 17,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 569,
+          "end_line": 577,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 18,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RegionScannerImpl.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 58,
+          "end_line": 64,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 5.85,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_III",
+        "confidence": 0.95,
+        "reasoning": "The patch involves multiple changes to the AggregateImplementation.java file, including modifying boolean flags, refactoring response building logic into new helper methods, and adding new imports. These changes affect the structure and flow of the code rather than simple string replacements or whitespace fixes. Additionally, a new test file with extensive test cases is added, which indicates significant additions to the codebase. The patch also modifies the visibility of a class in RegionScannerImpl.java. The localization evidence shows most hunks were found with high confidence via 'git_exact', indicating the patch applies well to the target branch, but the structural changes and refactoring classify it as TYPE_III. The patch is not auto-generated. The token budget estimate is high due to the size and complexity of the patch and the new test file addition.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.01,
+      "error": null,
+      "applied_count": 18,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RegionScannerImpl.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 21.0,
+      "error": null,
+      "adapted_count": 1
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 1,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "old_string": "\nimport java.io.IOException;",
+          "new_string": "\nimport edu.umd.cs.findbugs.annotations.Nullable;\nimport java.io.IOException;",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.08,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "hbase-endpoint/src/main/java/org/apache/hadoop/hbase/coprocessor/AggregateImplementation.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 1
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "hbase-helper",
+      "test_success": true,
+      "test_mode": "hbase-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.mapreduce.TestWALInputFormat.xml",
+          "/home/cseroot/omni-port/repos/hbase/hbase-endpoint/target/surefire-reports/TEST-org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation.xml"
+        ],
+        "target_classes": [
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation"
+        ],
+        "test_cases": {
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMaxWithNoResults": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testRowNumThrottleWithNoResults": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMedianWithNoResults": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testRowNumWithNoResults": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testStdDoesNotSupportPartialResults": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testAvgDoesNotSupportPartialResults": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testStdWithNoResults": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMinDoesNotSupportPartialResults": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMinWithThrottling": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMedianThrottleWithNoResults": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testStdThrottleWithNoResults": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testStdWithThrottling": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testSumThrottleWithNoResults": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testRowNumDoesNotSupportPartialResults": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testSumWithThrottling": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMaxThrottleWithNoResults": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMedianDoesNotSupportPartialResults": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testSumWithNoResults": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testAvgWithThrottling": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMinThrottleWithNoResults": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testRowNumWithThrottling": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testSumDoesNotSupportPartialResults": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testAvgWithNoResults": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMedianWithThrottling": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMaxWithThrottling": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testAvgThrottleWithNoResults": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMaxDoesNotSupportPartialResults": "passed",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMinWithNoResults": "passed"
+        },
+        "classes": {
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation": "passed"
+        },
+        "summary": {
+          "passed": 28,
+          "failed": 0,
+          "skipped": 0,
+          "total": 28
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [],
+        "pass_to_fail": [],
+        "newly_passing": [
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testAvgDoesNotSupportPartialResults",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testAvgThrottleWithNoResults",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testAvgWithNoResults",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testAvgWithThrottling",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMaxDoesNotSupportPartialResults",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMaxThrottleWithNoResults",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMaxWithNoResults",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMaxWithThrottling",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMedianDoesNotSupportPartialResults",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMedianThrottleWithNoResults",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMedianWithNoResults",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMedianWithThrottling",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMinDoesNotSupportPartialResults",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMinThrottleWithNoResults",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMinWithNoResults",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMinWithThrottling",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testRowNumDoesNotSupportPartialResults",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testRowNumThrottleWithNoResults",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testRowNumWithNoResults",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testRowNumWithThrottling",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testStdDoesNotSupportPartialResults",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testStdThrottleWithNoResults",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testStdWithNoResults",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testStdWithThrottling",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testSumDoesNotSupportPartialResults",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testSumThrottleWithNoResults",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testSumWithNoResults",
+          "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testSumWithThrottling"
+        ],
+        "baseline_total": 0,
+        "patched_total": 28,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 21,
+    "developer_aux_hunks_from_target": 2,
+    "phase0_baseline": {
+      "mode": "baseline-build-failed",
+      "skipped": true,
+      "cached": false,
+      "test_cases_total": 0
+    },
+    "java_production_hunks": 19,
+    "developer_aux_hunks": 2,
+    "processed_hunk_indices": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      0
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 6423,
+        "output": 590
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 18,
+    "synthesized_count": 1,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "clean",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 15215,
+    "target_patch_bytes": 58781,
+    "patch_exact_match": true,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": true,
+    "test_mode": "hbase-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [],
+      "pass_to_fail": [],
+      "newly_passing": [
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testAvgDoesNotSupportPartialResults",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testAvgThrottleWithNoResults",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testAvgWithNoResults",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testAvgWithThrottling",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMaxDoesNotSupportPartialResults",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMaxThrottleWithNoResults",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMaxWithNoResults",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMaxWithThrottling",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMedianDoesNotSupportPartialResults",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMedianThrottleWithNoResults",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMedianWithNoResults",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMedianWithThrottling",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMinDoesNotSupportPartialResults",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMinThrottleWithNoResults",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMinWithNoResults",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testMinWithThrottling",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testRowNumDoesNotSupportPartialResults",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testRowNumThrottleWithNoResults",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testRowNumWithNoResults",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testRowNumWithThrottling",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testStdDoesNotSupportPartialResults",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testStdThrottleWithNoResults",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testStdWithNoResults",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testStdWithThrottling",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testSumDoesNotSupportPartialResults",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testSumThrottleWithNoResults",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testSumWithNoResults",
+        "org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation#testSumWithThrottling"
+      ],
+      "baseline_total": 0,
+      "patched_total": 28,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 0,
+    "newly_passing_count": 28,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

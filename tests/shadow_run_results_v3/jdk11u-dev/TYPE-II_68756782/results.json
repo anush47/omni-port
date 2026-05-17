@@ -1,0 +1,272 @@
+{
+  "run_timestamp": "2026-04-19T06:26:23.339594",
+  "repo": "jdk11u-dev",
+  "patch_type": "TYPE-II",
+  "original_commit": "687567822a5380fb7d8c5b54ae548b2a5c848187",
+  "backport_commit": "4117953453635dbaea56add47a6fde5eb3f1258d",
+  "description": "main \u2192 jdk11u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 2.15,
+      "error": null,
+      "java_hunks": 6,
+      "aux_hunks": 1,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.desktop/unix/classes/sun/print/PrintServiceLookupProvider.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 26,
+          "end_line": 35,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.desktop/unix/classes/sun/print/PrintServiceLookupProvider.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 54,
+          "end_line": 59,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.desktop/unix/classes/sun/print/PrintServiceLookupProvider.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 207,
+          "end_line": 220,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.desktop/windows/classes/sun/print/PrintServiceLookupProvider.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 25,
+          "end_line": 30,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.desktop/windows/classes/sun/print/PrintServiceLookupProvider.java",
+          "method_used": "fuzzy",
+          "confidence": 0.941,
+          "start_line": 41,
+          "end_line": 46,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/java.desktop/windows/classes/sun/print/PrintServiceLookupProvider.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 78,
+          "end_line": 99,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 3.81,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_II",
+        "confidence": 0.95,
+        "reasoning": "The patch modifies thread creation in two platform-specific PrintServiceLookupProvider classes by wrapping thread instantiation inside AccessController.doPrivileged blocks and setting the thread context class loader to null. This involves some structural changes to the thread creation code but does not alter the overall logic or API usage significantly. The changes are localized and mostly involve adding security and thread group context handling. The test addition is a new file and does not affect existing code structure. Localization evidence shows most hunks found exactly, with one fuzzy match at 0.94 confidence, indicating minor formatting or context drift. Overall, this patch is more than trivial string replacement but does not involve deep structural refactoring or redesign, fitting TYPE_II complexity with high confidence.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.01,
+      "error": null,
+      "applied_count": 5,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/unix/classes/sun/print/PrintServiceLookupProvider.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/unix/classes/sun/print/PrintServiceLookupProvider.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/unix/classes/sun/print/PrintServiceLookupProvider.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/windows/classes/sun/print/PrintServiceLookupProvider.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/windows/classes/sun/print/PrintServiceLookupProvider.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 23.55,
+      "error": null,
+      "adapted_count": 1
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 1,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "src/java.desktop/windows/classes/sun/print/PrintServiceLookupProvider.java",
+          "old_string": "import javax.print.attribute.PrintServiceAttributeSet;\nimport javax.print.attribute.standard.PrinterName;\n\npublic class PrintServiceLookupProvider extends PrintServiceLookup {",
+          "new_string": "import javax.print.attribute.PrintServiceAttributeSet;\nimport javax.print.attribute.standard.PrinterName;\n\nimport sun.awt.util.ThreadGroupUtils;\n\npublic class PrintServiceLookupProvider extends PrintServiceLookup {",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.03,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/java.desktop/windows/classes/sun/print/PrintServiceLookupProvider.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 1
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk11u-dev-helper",
+      "test_success": true,
+      "test_mode": "jdk11u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk11u-dev/JTwork/javax/print/PrintServiceLookup/FlushCustomClassLoader.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "javax/print/PrintServiceLookup/FlushCustomClassLoader.java#FlushCustomClassLoader": "passed"
+        },
+        "classes": {
+          "javax/print/PrintServiceLookup/FlushCustomClassLoader.java": "passed"
+        },
+        "summary": {
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [
+          "javax/print/PrintServiceLookup/FlushCustomClassLoader.java#FlushCustomClassLoader"
+        ],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 1,
+        "patched_total": 1,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 7,
+    "developer_aux_hunks_from_target": 1,
+    "phase0_baseline": {
+      "mode": "baseline-jdk11u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 1
+    },
+    "java_production_hunks": 6,
+    "developer_aux_hunks": 1,
+    "processed_hunk_indices": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      4
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 3286,
+        "output": 645
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 5,
+    "synthesized_count": 1,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "clean",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 6562,
+    "target_patch_bytes": 8445,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": true,
+    "test_mode": "jdk11u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [
+        "javax/print/PrintServiceLookup/FlushCustomClassLoader.java#FlushCustomClassLoader"
+      ],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 1,
+      "patched_total": 1,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 1,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

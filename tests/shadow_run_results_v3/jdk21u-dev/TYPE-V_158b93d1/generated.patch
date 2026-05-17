@@ -1,0 +1,66 @@
+diff --git a/src/jdk.jartool/share/classes/sun/tools/jar/GNUStyleOptions.java b/src/jdk.jartool/share/classes/sun/tools/jar/GNUStyleOptions.java
+index b526f80cb35..37e1f58004e 100644
+--- a/src/jdk.jartool/share/classes/sun/tools/jar/GNUStyleOptions.java
++++ b/src/jdk.jartool/share/classes/sun/tools/jar/GNUStyleOptions.java
+@@ -212,6 +212,13 @@ class GNUStyleOptions {
+                 }
+             },
+ 
++            // Extract options
++            new Option(false, OptionType.EXTRACT, "--keep-old-files", "-k") {
++                void process(Main jartool, String opt, String arg) {
++                    jartool.kflag = true;
++                }
++            },
++
+             // Hidden options
+             new Option(false, OptionType.OTHER, "-P") {
+                 void process(Main jartool, String opt, String arg) {
+diff --git a/src/jdk.jartool/share/classes/sun/tools/jar/Main.java b/src/jdk.jartool/share/classes/sun/tools/jar/Main.java
+index 6163ef82647..852cb179284 100644
+--- a/src/jdk.jartool/share/classes/sun/tools/jar/Main.java
++++ b/src/jdk.jartool/share/classes/sun/tools/jar/Main.java
+@@ -155,8 +155,9 @@ public class Main {
+      * nflag: Perform jar normalization at the end
+      * pflag: preserve/don't strip leading slash and .. component from file name
+      * dflag: print module descriptor
++     * kflag: keep existing file
+      */
+-    boolean cflag, uflag, xflag, tflag, vflag, flag0, Mflag, iflag, pflag, dflag, validate;
++    boolean cflag, uflag, xflag, tflag, vflag, flag0, Mflag, iflag, pflag, dflag, kflag, validate;
+ 
+     boolean suppressDeprecateMsg = false;
+ 
+@@ -590,6 +591,9 @@ public class Main {
+                         case '0':
+                             flag0 = true;
+                             break;
++                        case 'k':
++                            kflag = true;
++                            break;
+                         case 'i':
+                             if (cflag || uflag || xflag || tflag) {
+                                 usageError(getMsg("error.multiple.main.operations"));
+@@ -620,6 +624,9 @@ public class Main {
+             usageError(getMsg("error.bad.option"));
+             return false;
+         }
++        if (kflag && !xflag) {
++            warn(formatMsg("warn.option.is.ignored", "--keep-old-files/-k/k"));
++        }
+ 
+         /* parse file arguments */
+         int n = args.length - count;
+@@ -1470,6 +1477,12 @@ public class Main {
+                 output(formatMsg("out.create", name));
+             }
+         } else {
++            if (f.exists() && kflag) {
++                if (vflag) {
++                    output(formatMsg("out.kept", name));
++                }
++                return rc;
++            }
+             if (f.getParent() != null) {
+                 File d = new File(f.getParent());
+                 if (!d.exists() && !d.mkdirs() || !d.isDirectory()) {

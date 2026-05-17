@@ -1,0 +1,22 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk11u-dev/JTwork/javax/swing/text/rtf/RTFReadFontCharsetTest.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "javax/swing/text/rtf/RTFReadFontCharsetTest.java#RTFReadFontCharsetTest": "failed"
+    },
+    "classes": {
+      "javax/swing/text/rtf/RTFReadFontCharsetTest.java": "failed"
+    },
+    "summary": {
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "total": 1
+    }
+  },
+  "mode": "baseline-jdk11u-dev-helper",
+  "skipped": false
+}

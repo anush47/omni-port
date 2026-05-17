@@ -1,0 +1,73 @@
+diff --git a/src/java.net.http/share/classes/jdk/internal/net/http/Http2ClientImpl.java b/src/java.net.http/share/classes/jdk/internal/net/http/Http2ClientImpl.java
+index 6bd9bad2da5..9f74a70d318 100644
+--- a/src/java.net.http/share/classes/jdk/internal/net/http/Http2ClientImpl.java
++++ b/src/java.net.http/share/classes/jdk/internal/net/http/Http2ClientImpl.java
+@@ -93,9 +93,7 @@ class Http2ClientImpl {
+      */
+     CompletableFuture<Http2Connection> getConnectionFor(HttpRequestImpl req,
+                                                         Exchange<?> exchange) {
+-        URI uri = req.uri();
+-        InetSocketAddress proxy = req.proxy();
+-        String key = Http2Connection.keyFor(uri, proxy);
++        String key = Http2Connection.keyFor(req);
+ 
+         synchronized (this) {
+             Http2Connection connection = connections.get(key);
+diff --git a/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java b/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java
+index 59c88e9f099..ad7d43fc83f 100644
+--- a/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java
++++ b/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java
+@@ -181,7 +181,6 @@ class Http2Connection  {
+      *  and SSLTube.recycler.
+      */
+ 
+-
+     // A small class that allows to control frames with respect to the state of
+     // the connection preface. Any data received before the connection
+     // preface is sent will be buffered.
+@@ -280,7 +279,6 @@ class Http2Connection  {
+ 
+     static final int DEFAULT_FRAME_SIZE = 16 * 1024;
+ 
+-
+     // TODO: need list of control frames from other threads
+     // that need to be sent
+ 
+@@ -402,7 +400,7 @@ class Http2Connection  {
+         this(connection,
+              h2client,
+              1,
+-             keyFor(request.uri(), request.proxy()));
++             keyFor(request));
+ 
+         Log.logTrace("Connection send window size {0} ", windowController.connectionWindowSize());
+ 
+@@ -534,15 +532,13 @@ class Http2Connection  {
+         return keyString(isSecure, proxyAddr, addr.getHostString(), addr.getPort());
+     }
+ 
+-    static String keyFor(URI uri, InetSocketAddress proxy) {
+-        boolean isSecure = uri.getScheme().equalsIgnoreCase("https");
+-
+-        String host = uri.getHost();
+-        int port = uri.getPort();
+-        return keyString(isSecure, proxy, host, port);
++    static String keyFor(final HttpRequestImpl request) {
++        final InetSocketAddress targetAddr = request.getAddress();
++        final InetSocketAddress proxy = request.proxy();
++        final boolean secure = request.secure();
++        return keyString(secure, proxy, targetAddr.getHostString(), targetAddr.getPort());
+     }
+ 
+-
+     // Compute the key for an HttpConnection in the Http2ClientImpl pool:
+     // The key string follows one of the three forms below:
+     //    {C,S}:H:host:port
+@@ -1181,7 +1177,6 @@ class Http2Connection  {
+         return buffers;
+     }
+ 
+-
+     private List<ByteBuffer> encodeHeaders(OutgoingHeaders<Stream<?>> oh, Stream<?> stream) {
+         oh.streamid(stream.streamid);
+         if (Log.headers()) {

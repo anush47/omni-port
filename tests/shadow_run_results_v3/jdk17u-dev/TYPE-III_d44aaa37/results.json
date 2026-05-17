@@ -1,0 +1,208 @@
+{
+  "run_timestamp": "2026-04-18T18:13:43.618843",
+  "repo": "jdk17u-dev",
+  "patch_type": "TYPE-III",
+  "original_commit": "d44aaa37f98dd383aebbec097427feb1f1c29b74",
+  "backport_commit": "cacc30b77cab0173ea14601094a5b5b3106ce2f5",
+  "description": "main \u2192 jdk17u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 2.05,
+      "error": null,
+      "java_hunks": 2,
+      "aux_hunks": 1,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.base/share/classes/sun/security/ssl/ServerHello.java",
+          "method_used": "fuzzy",
+          "confidence": 0.995,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.base/share/classes/sun/security/ssl/ServerHello.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 799,
+          "end_line": 804,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 4.28,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_II",
+        "confidence": 0.95,
+        "reasoning": "The patch modifies the ServerHello.java file by adding a new block of code related to TLS1.3 middlebox compatibility mode, specifically sending a dummy change_cipher_spec record after the first handshake message. The localization evidence shows that the first hunk was found via 'fuzzy' matching with high confidence, indicating some formatting or minor structural drift rather than an exact match. The second hunk (the test file addition) is new and does not affect the classification of the main patch. Overall, the patch involves a small structural addition but mostly localized and straightforward, fitting the TYPE_II classification (whitespace/formatting drift requiring fuzzy matching). The confidence is high due to the localization evidence and the nature of the changes. The token budget estimate is moderate due to the added test file and the new code block in ServerHello.java.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "applied_count": 1,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/sun/security/ssl/ServerHello.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 27.19,
+      "error": null,
+      "adapted_count": 1
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 1,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "src/java.base/share/classes/sun/security/ssl/ServerHello.java",
+          "old_string": "/*\n * Copyright (c) 2015, 2020, Oracle and/or its affiliates. All rights reserved.\n * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.\n *\n * This code is free software; you can redistribute it and/or modify it",
+          "new_string": "/*\n * Copyright (c) 2015, 2024, Oracle and/or its affiliates. All rights reserved.\n * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.\n *\n * This code is free software; you can redistribute it and/or modify it",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.18,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/java.base/share/classes/sun/security/ssl/ServerHello.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 1
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk17u-dev-helper",
+      "test_success": true,
+      "test_mode": "jdk17u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/javax/net/ssl/TLSv13/EngineOutOfSeqCCS.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "javax/net/ssl/TLSv13/EngineOutOfSeqCCS.java#EngineOutOfSeqCCS": "passed"
+        },
+        "classes": {
+          "javax/net/ssl/TLSv13/EngineOutOfSeqCCS.java": "passed"
+        },
+        "summary": {
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": false,
+        "fail_to_pass": [],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 1,
+        "patched_total": 1,
+        "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 3,
+    "developer_aux_hunks_from_target": 1,
+    "phase0_baseline": {
+      "mode": "baseline-jdk17u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 1
+    },
+    "java_production_hunks": 2,
+    "developer_aux_hunks": 1,
+    "processed_hunk_indices": [
+      1,
+      0
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 2553,
+        "output": 1004
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 1,
+    "synthesized_count": 1,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "clean",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 1460,
+    "target_patch_bytes": 13004,
+    "patch_exact_match": true,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": true,
+    "test_mode": "jdk17u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": false,
+      "fail_to_pass": [],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 1,
+      "patched_total": 1,
+      "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+    },
+    "fail_to_pass_count": 0,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

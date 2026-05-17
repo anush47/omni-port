@@ -1,0 +1,25 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/java/awt/TextField/SetEchoCharWordOpsTest.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/javax/swing/plaf/basic/BasicTextUI/PasswordSelectionWordTest.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "java/awt/TextField/SetEchoCharWordOpsTest.java#SetEchoCharWordOpsTest": "failed",
+      "javax/swing/plaf/basic/BasicTextUI/PasswordSelectionWordTest.java#PasswordSelectionWordTest": "passed"
+    },
+    "classes": {
+      "java/awt/TextField/SetEchoCharWordOpsTest.java": "failed",
+      "javax/swing/plaf/basic/BasicTextUI/PasswordSelectionWordTest.java": "passed"
+    },
+    "summary": {
+      "passed": 1,
+      "failed": 1,
+      "skipped": 0,
+      "total": 2
+    }
+  },
+  "mode": "baseline-jdk25u-dev-helper",
+  "skipped": false
+}

@@ -1,0 +1,25 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/com/sun/jndi/dns/ConfigTests/Timeout.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/com/sun/jndi/dns/ConfigTests/TimeoutWithEmptyDatagrams.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "com/sun/jndi/dns/ConfigTests/Timeout.java#Timeout": "passed",
+      "com/sun/jndi/dns/ConfigTests/TimeoutWithEmptyDatagrams.java#TimeoutWithEmptyDatagrams": "failed"
+    },
+    "classes": {
+      "com/sun/jndi/dns/ConfigTests/Timeout.java": "passed",
+      "com/sun/jndi/dns/ConfigTests/TimeoutWithEmptyDatagrams.java": "failed"
+    },
+    "summary": {
+      "passed": 1,
+      "failed": 1,
+      "skipped": 0,
+      "total": 2
+    }
+  },
+  "mode": "baseline-jdk21u-dev-helper",
+  "skipped": false
+}

@@ -1,0 +1,184 @@
+{
+  "run_timestamp": "2026-04-18T08:04:03.057040",
+  "repo": "jdk17u-dev",
+  "patch_type": "TYPE-II",
+  "original_commit": "169a5d48afbc6627f36a768c17c2a5e56219d9c7",
+  "backport_commit": "e336d04e8ce0fe303b2bef1f08b2e4647c113d42",
+  "description": "main \u2192 jdk17u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 0.01,
+      "error": null,
+      "java_hunks": 1,
+      "aux_hunks": 2,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.base/share/classes/java/nio/file/Files.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 806,
+          "end_line": 812,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 5.6,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_I",
+        "confidence": 0.95,
+        "reasoning": "The patch modifies a single line in Files.java by changing the condition in an if statement, which is an exact string replacement. The hunk was found in the target branch via 'git_exact' with confidence 1.00, indicating a trivial backport. The addition of a new test file and minor test modifications do not affect the classification as they are additions rather than structural changes. The patch does not involve whitespace changes, structural refactoring, or redesign, so TYPE_I is appropriate. The token budget estimate is moderate due to the small size of the patch and test additions.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.03,
+      "error": null,
+      "applied_count": 1,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/java/nio/file/Files.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "adapted_count": 0
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 0,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": []
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [],
+      "synthesized_count_after_repair": 0
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk17u-dev-helper",
+      "test_success": true,
+      "test_mode": "jdk17u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/java/nio/file/Files/CreateDirectories.jtr.xml",
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/java/nio/file/Files/CreateDirectories.testng-results.xml",
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/java/nio/file/Files/Misc.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "java/nio/file/Files/CreateDirectories.java#CreateDirectories": "passed",
+          "java/nio/file/Files/Misc.java#Misc": "passed"
+        },
+        "classes": {
+          "java/nio/file/Files/CreateDirectories.java": "passed",
+          "java/nio/file/Files/Misc.java": "passed"
+        },
+        "summary": {
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "total": 2
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [
+          "java/nio/file/Files/CreateDirectories.java#CreateDirectories"
+        ],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 2,
+        "patched_total": 2,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 5,
+    "developer_aux_hunks_from_target": 2,
+    "phase0_baseline": {
+      "mode": "baseline-jdk17u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 2
+    },
+    "java_production_hunks": 1,
+    "developer_aux_hunks": 2,
+    "processed_hunk_indices": [
+      0
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 1,
+    "synthesized_count": 0,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 1123,
+    "target_patch_bytes": 8335,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": true,
+    "test_mode": "jdk17u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [
+        "java/nio/file/Files/CreateDirectories.java#CreateDirectories"
+      ],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 2,
+      "patched_total": 2,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 1,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

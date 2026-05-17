@@ -1,0 +1,25 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/compiler/jvmci/jdk.vm.ci.code.test/src/jdk/vm/ci/code/test/CodeInvalidationReasonTest.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/compiler/jvmci/jdk.vm.ci.code.test/src/jdk/vm/ci/code/test/SimpleCodeInstallationTest.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "compiler/jvmci/jdk.vm.ci.code.test/src/jdk/vm/ci/code/test/CodeInvalidationReasonTest.java#CodeInvalidationReasonTest": "failed",
+      "compiler/jvmci/jdk.vm.ci.code.test/src/jdk/vm/ci/code/test/SimpleCodeInstallationTest.java#SimpleCodeInstallationTest": "failed"
+    },
+    "classes": {
+      "compiler/jvmci/jdk.vm.ci.code.test/src/jdk/vm/ci/code/test/CodeInvalidationReasonTest.java": "failed",
+      "compiler/jvmci/jdk.vm.ci.code.test/src/jdk/vm/ci/code/test/SimpleCodeInstallationTest.java": "failed"
+    },
+    "summary": {
+      "passed": 0,
+      "failed": 2,
+      "skipped": 0,
+      "total": 2
+    }
+  },
+  "mode": "baseline-jdk25u-dev-helper",
+  "skipped": false
+}

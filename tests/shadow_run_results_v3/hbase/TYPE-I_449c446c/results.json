@@ -1,0 +1,532 @@
+{
+  "run_timestamp": "2026-04-20T20:33:33.263771",
+  "repo": "hbase",
+  "patch_type": "TYPE-I",
+  "original_commit": "449c446c3c8389e4e81aed08ca9ac56a330a20bb",
+  "backport_commit": "99aa86de45c591bd1ee3e060937196098ea4d40f",
+  "description": "master \u2192 branch-2.6",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 1.24,
+      "error": null,
+      "java_hunks": 10,
+      "aux_hunks": 2,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "hbase-client/src/main/java/org/apache/hadoop/hbase/client/RawAsyncHBaseAdmin.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 83,
+          "end_line": 88,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "hbase-client/src/main/java/org/apache/hadoop/hbase/client/RawAsyncHBaseAdmin.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 965,
+          "end_line": 970,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "hbase-client/src/main/java/org/apache/hadoop/hbase/client/RawAsyncHBaseAdmin.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 974,
+          "end_line": 979,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "hbase-client/src/main/java/org/apache/hadoop/hbase/client/RawAsyncHBaseAdmin.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 984,
+          "end_line": 990,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/FlushTableProcedure.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 24,
+          "end_line": 33,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/FlushTableProcedure.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 111,
+          "end_line": 116,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/procedure/flush/MasterFlushTableProcedureManager.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 24,
+          "end_line": 35,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/procedure/flush/MasterFlushTableProcedureManager.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 40,
+          "end_line": 48,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 8,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/procedure/flush/MasterFlushTableProcedureManager.java",
+          "method_used": "fuzzy",
+          "confidence": 0.977,
+          "start_line": 152,
+          "end_line": 158,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 9,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RSRpcServices.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1776,
+          "end_line": 1783,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 5.28,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_I",
+        "confidence": 0.98,
+        "reasoning": "All hunks are found with exact or near-exact matches in the target branch, indicating the patch applies cleanly with minimal adjustments. The changes are mostly additions of null checks, exception handling for a new exception type, and some validation logic without structural or API redesign. The patch is straightforward and does not involve deep refactoring or redesign, so it fits the TYPE_I classification. The confidence is slightly reduced due to one hunk found via fuzzy matching at 0.98, but overall the patch is simple and direct.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.02,
+      "error": null,
+      "applied_count": 9,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "hbase-client/src/main/java/org/apache/hadoop/hbase/client/RawAsyncHBaseAdmin.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-client/src/main/java/org/apache/hadoop/hbase/client/RawAsyncHBaseAdmin.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-client/src/main/java/org/apache/hadoop/hbase/client/RawAsyncHBaseAdmin.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-client/src/main/java/org/apache/hadoop/hbase/client/RawAsyncHBaseAdmin.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/FlushTableProcedure.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/FlushTableProcedure.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/procedure/flush/MasterFlushTableProcedureManager.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/procedure/flush/MasterFlushTableProcedureManager.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RSRpcServices.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 37.38,
+      "error": null,
+      "adapted_count": 1
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 1,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/procedure/flush/MasterFlushTableProcedureManager.java",
+          "old_string": "    byte[] procArgs = family != null ? family.toByteArray() : new byte[0];",
+          "new_string": "    byte[] procArgs;\n    if (family != null) {\n      TableDescriptor tableDescriptor = master.getTableDescriptors().get(tableName);\n      List<String> noSuchFamilies =\n        StreamSupport.stream(Strings.SPLITTER.split(family.getValue()).spliterator(), false)\n          .filter(cf -> !tableDescriptor.hasColumnFamily(Bytes.toBytes(cf))).toList();\n      if (!noSuchFamilies.isEmpty()) {\n        throw new NoSuchColumnFamilyException(\"Column families \" + noSuchFamilies\n          + \" don't exist in table \" + tableName.getNameAsString());\n      }\n      procArgs = family.toByteArray();\n    } else {\n      procArgs = new byte[0];\n    }",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.03,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/procedure/flush/MasterFlushTableProcedureManager.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 1
+    },
+    "agent7_validator": {
+      "validation_passed": false,
+      "validation_failure_category": "api_mismatch",
+      "validation_error_context": "Build failed (hbase-helper): [\u001b[1;31mERROR\u001b[m] COMPILATION ERROR : \n[\u001b[1;31mERROR\u001b[m] /repo/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RSRpcServices.java:[1783,83] cannot find symbol\n  symbol:   method toList()\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/FlushTableProcedure.java:[127,81] cannot find symbol\n  symbol:   method toList()\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-server/src/main/java/org/apache/hadoop/hbase/procedure/flush/Mast",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": false,
+      "build_mode": "hbase-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": []
+    },
+    "agent9_fallback_1": {
+      "fallback_status": "failed",
+      "fallback_attempts": 1,
+      "synthesized_count": 0,
+      "hunk_descriptions": [
+        {
+          "hunk_index": 0,
+          "file_path": "hbase-client/src/main/java/org/apache/hadoop/hbase/client/RawAsyncHBaseAdmin.java",
+          "what_changed": "Replaced import of ReplicationPeerDescription and ReplicationPeerConfig with import of NoSuchColumnFamilyException.",
+          "where_in_code": "imports section of RawAsyncHBaseAdmin",
+          "intent": "To add handling for NoSuchColumnFamilyException in this class by importing the relevant exception type.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "NoSuchColumnFamilyException"
+          ]
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "hbase-client/src/main/java/org/apache/hadoop/hbase/client/RawAsyncHBaseAdmin.java",
+          "what_changed": "Added a null check on the columnFamily parameter in the flush method that takes a single column family byte array.",
+          "where_in_code": "RawAsyncHBaseAdmin.flush(TableName, byte[])",
+          "intent": "To ensure that the columnFamily argument is not null and provide a clear error message guiding users to use the flush(TableName) method if no column family is specified.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "flush",
+            "columnFamily"
+          ]
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "hbase-client/src/main/java/org/apache/hadoop/hbase/client/RawAsyncHBaseAdmin.java",
+          "what_changed": "Added a null check on the columnFamilyList parameter before processing it in the flush method that takes a list of column families.",
+          "where_in_code": "RawAsyncHBaseAdmin.flush(TableName, List<byte[]>)",
+          "intent": "To prevent null pointer exceptions and guide users to use the flush(TableName) method if no column families are specified.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "flush",
+            "columnFamilyList"
+          ]
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "hbase-client/src/main/java/org/apache/hadoop/hbase/client/RawAsyncHBaseAdmin.java",
+          "what_changed": "Extended error handling in a listener to also treat NoSuchColumnFamilyException as a non-retryable error that completes the future exceptionally.",
+          "where_in_code": "RawAsyncHBaseAdmin (anonymous listener attached to procFuture)",
+          "intent": "To properly propagate NoSuchColumnFamilyException errors to callers without retrying, improving error handling for flush operations involving invalid column families.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "NoSuchColumnFamilyException",
+            "flush"
+          ]
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/FlushTableProcedure.java",
+          "what_changed": "Added import statements for TableDescriptor, MasterServices, and NoSuchColumnFamilyException.",
+          "where_in_code": "imports section of FlushTableProcedure",
+          "intent": "To support new logic that validates column families before flushing by accessing table descriptors and throwing NoSuchColumnFamilyException if needed.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "TableDescriptor",
+            "MasterServices",
+            "NoSuchColumnFamilyException"
+          ]
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/FlushTableProcedure.java",
+          "what_changed": "Added a preflightChecks method override that validates whether specified column families exist in the target table before proceeding with the flush procedure.",
+          "where_in_code": "FlushTableProcedure.preflightChecks(MasterProcedureEnv, Boolean)",
+          "intent": "To fail early with a clear exception if any specified column family does not exist in the table, preventing invalid flush operations.",
+          "change_type": "add_method",
+          "key_symbols": [
+            "preflightChecks",
+            "NoSuchColumnFamilyException"
+          ]
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/procedure/flush/MasterFlushTableProcedureManager.java",
+          "what_changed": "Added imports for TableDescriptor and StreamSupport to enable stream processing and table descriptor access.",
+          "where_in_code": "imports section of MasterFlushTableProcedureManager",
+          "intent": "To support new logic that validates column families against the table descriptor before starting flush procedures.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "TableDescriptor",
+            "StreamSupport"
+          ]
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/procedure/flush/MasterFlushTableProcedureManager.java",
+          "what_changed": "Added imports for NoSuchColumnFamilyException, Bytes, and Strings utility classes.",
+          "where_in_code": "imports section of MasterFlushTableProcedureManager",
+          "intent": "To enable validation of column families and construction of error messages when invalid column families are specified.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "NoSuchColumnFamilyException",
+            "Bytes",
+            "Strings"
+          ]
+        },
+        {
+          "hunk_index": 8,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/procedure/flush/MasterFlushTableProcedureManager.java",
+          "what_changed": "Inserted logic to validate that all specified column families exist in the table descriptor before initiating the flush procedure; throws NoSuchColumnFamilyException if any are missing.",
+          "where_in_code": "MasterFlushTableProcedureManager (method initiating flush procedure with procArgs)",
+          "intent": "To prevent starting flush procedures with invalid column families, ensuring correctness and early failure with informative exceptions.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "NoSuchColumnFamilyException",
+            "TableDescriptor",
+            "procArgs"
+          ]
+        },
+        {
+          "hunk_index": 9,
+          "file_path": "hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RSRpcServices.java",
+          "what_changed": "Added validation before flushing a specific column family to check if the family exists in the table descriptor; throws NoSuchColumnFamilyException if not found.",
+          "where_in_code": "RSRpcServices (flush handling code for requests with a family specified)",
+          "intent": "To ensure flush requests specify valid column families and to fail fast with a clear exception if invalid families are requested.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "NoSuchColumnFamilyException",
+            "flushcache",
+            "TableDescriptor"
+          ]
+        }
+      ]
+    },
+    "agent8_syntax_repair_fallback_1": {
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": []
+    },
+    "agent7_validator_retry1": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 2,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "hbase-helper",
+      "test_success": false,
+      "test_mode": "hbase-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.TestSplitMergeQuotaTable.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.TestHBackupFileSystem.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.TestIncrementalBackup.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.client.TestFlushFromClient.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.client.TestFlushFromClientWithDisabledFlushProcedure.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.compress.zstd.TestZstdByteBuffDecompressor.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.hfile.TestHFileBlockHeaderCorruption.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.hfile.TestRowIndexV1RoundTrip.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.mapreduce.TestWALInputFormat.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.master.region.TestMasterRegionWALSyncTimeoutIOException.xml",
+          "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.regionserver.TestCompaction.xml",
+          "/home/cseroot/omni-port/repos/hbase/hbase-server/target/surefire-reports/TEST-org.apache.hadoop.hbase.client.TestFlushFromClient.xml",
+          "/home/cseroot/omni-port/repos/hbase/hbase-server/target/surefire-reports/TEST-org.apache.hadoop.hbase.client.TestFlushFromClientWithDisabledFlushProcedure.xml"
+        ],
+        "target_classes": [
+          "org.apache.hadoop.hbase.client.TestFlushFromClient",
+          "org.apache.hadoop.hbase.client.TestFlushFromClientWithDisabledFlushProcedure"
+        ],
+        "test_cases": {
+          "org.apache.hadoop.hbase.client.TestFlushFromClient#testAsyncFlushRegionWithNonExistingFamily": "failed",
+          "org.apache.hadoop.hbase.client.TestFlushFromClient#testFlushTable": "passed",
+          "org.apache.hadoop.hbase.client.TestFlushFromClient#testAsyncFlushRegionFamily": "passed",
+          "org.apache.hadoop.hbase.client.TestFlushFromClient#testFlushRegion": "passed",
+          "org.apache.hadoop.hbase.client.TestFlushFromClient#testFlushRegionFamily": "passed",
+          "org.apache.hadoop.hbase.client.TestFlushFromClient#testAsyncFlushRegionServer": "passed",
+          "org.apache.hadoop.hbase.client.TestFlushFromClient#testFlushRegionServer": "passed",
+          "org.apache.hadoop.hbase.client.TestFlushFromClient#testAsyncFlushRegion": "passed",
+          "org.apache.hadoop.hbase.client.TestFlushFromClient#testAsyncFlushTableFamily": "passed",
+          "org.apache.hadoop.hbase.client.TestFlushFromClientWithDisabledFlushProcedure#flushTableWithNonExistingFamily": "failed"
+        },
+        "classes": {
+          "org.apache.hadoop.hbase.client.TestFlushFromClient": "failed",
+          "org.apache.hadoop.hbase.client.TestFlushFromClientWithDisabledFlushProcedure": "failed"
+        },
+        "summary": {
+          "passed": 8,
+          "failed": 2,
+          "skipped": 0,
+          "total": 10
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [],
+        "pass_to_fail": [],
+        "newly_passing": [
+          "org.apache.hadoop.hbase.client.TestFlushFromClient#testAsyncFlushRegion",
+          "org.apache.hadoop.hbase.client.TestFlushFromClient#testAsyncFlushRegionFamily",
+          "org.apache.hadoop.hbase.client.TestFlushFromClient#testAsyncFlushRegionServer",
+          "org.apache.hadoop.hbase.client.TestFlushFromClient#testAsyncFlushTableFamily",
+          "org.apache.hadoop.hbase.client.TestFlushFromClient#testFlushRegion",
+          "org.apache.hadoop.hbase.client.TestFlushFromClient#testFlushRegionFamily",
+          "org.apache.hadoop.hbase.client.TestFlushFromClient#testFlushRegionServer",
+          "org.apache.hadoop.hbase.client.TestFlushFromClient#testFlushTable"
+        ],
+        "baseline_total": 0,
+        "patched_total": 10,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 14,
+    "developer_aux_hunks_from_target": 2,
+    "phase0_baseline": {
+      "mode": "baseline-hbase-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 10
+    },
+    "java_production_hunks": 10,
+    "developer_aux_hunks": 2,
+    "processed_hunk_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      9,
+      8
+    ],
+    "tokens_used": 59884,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 3087,
+        "output": 1661
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      },
+      "agent9_fallback": {
+        "input": 57138,
+        "output": 2746
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 9,
+    "synthesized_count": 0,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "failed",
+    "fallback_attempts": 1,
+    "retry_contexts": [
+      {
+        "error_type": "api_mismatch",
+        "error_message": "[\u001b[1;31mERROR\u001b[m] COMPILATION ERROR : \n[\u001b[1;31mERROR\u001b[m] /repo/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RSRpcServices.java:[1783,83] cannot find symbol\n  symbol:   method toList()\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/FlushTableProcedure.java:[127,81] cannot find symbol\n  symbol:   method toList()\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-server/src/main/java/org/apache/hadoop/hbase/procedure/flush/MasterFlushTableProcedureManager.java:[165,77] cannot find symbol\n  symbol:   method toList()\n[\u001b[1;34mINFO\u001b[m] \u001b[1;31mBUILD FAILURE\u001b[m\n[\u001b[1;31mERROR\u001b[m] Failed to execute goal \u001b[32morg.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile\u001b[m \u001b[1m(default-compile)\u001b[m on project \u001b[36mhbase-server\u001b[m: \u001b[1;31mCompilation failure\u001b[m: Compilation failure: \n[\u001b[1;31mERROR\u001b[m] /repo/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RSRpcServices.java:[1783,83] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol:   method toList()\n[\u001b[1;31mERROR\u001b[m]   location: interface java.util.stream.Stream<java.lang.String>\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/FlushTableProcedure.java:[127,81] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol:   method toList()\n[\u001b[1;31mERROR\u001b[m]   location: interface java.util.stream.Stream<java.lang.String>\n[\u001b[1;31mERROR\u001b[m] /repo/hbase-server/src/main/java/org/apache/hadoop/hbase/procedure/flush/MasterFlushTableProcedureManager.java:[165,77] cannot find symbol\n[\u001b[1;31mERROR\u001b[m]   symbol:   method toList()\n[\u001b[1;31mERROR\u001b[m]   location: interface java.util.stream.Stream<java.lang.String>\n[\u001b[1;31mERROR\u001b[m] -> \u001b[1m[Help 1]\u001b[m\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] To see the full stack trace of the errors, re-run Maven with the \u001b[1m-e\u001b[m switch.\n[\u001b[1;31mERROR\u001b[m] Re-run Maven using the \u001b[1m-X\u001b[m switch to enable full debug logging.\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] For more information about the errors and possible solutions, please read the following articles:\n[\u001b[1;31mERROR\u001b[m] \u001b[1m[Help 1]\u001b[m http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\n[\u001b[1;31mERROR\u001b[m] \n[\u001b[1;31mERROR\u001b[m] After correcting the problems, you can resume the build with the command\n[\u001b[1;31mERROR\u001b[m]   \u001b[1mmvn <args> -rf :hbase-server\u001b[m",
+        "attempt_count": 1,
+        "suggested_action": "route_to_namespace_or_structural"
+      }
+    ],
+    "failed_hunks": [],
+    "generated_patch_bytes": 9513,
+    "target_patch_bytes": 18877,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": false,
+    "test_mode": "hbase-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [],
+      "pass_to_fail": [],
+      "newly_passing": [
+        "org.apache.hadoop.hbase.client.TestFlushFromClient#testAsyncFlushRegion",
+        "org.apache.hadoop.hbase.client.TestFlushFromClient#testAsyncFlushRegionFamily",
+        "org.apache.hadoop.hbase.client.TestFlushFromClient#testAsyncFlushRegionServer",
+        "org.apache.hadoop.hbase.client.TestFlushFromClient#testAsyncFlushTableFamily",
+        "org.apache.hadoop.hbase.client.TestFlushFromClient#testFlushRegion",
+        "org.apache.hadoop.hbase.client.TestFlushFromClient#testFlushRegionFamily",
+        "org.apache.hadoop.hbase.client.TestFlushFromClient#testFlushRegionServer",
+        "org.apache.hadoop.hbase.client.TestFlushFromClient#testFlushTable"
+      ],
+      "baseline_total": 0,
+      "patched_total": 10,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 0,
+    "newly_passing_count": 8,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

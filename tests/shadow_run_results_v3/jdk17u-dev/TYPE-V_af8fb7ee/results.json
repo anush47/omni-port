@@ -1,0 +1,358 @@
+{
+  "run_timestamp": "2026-04-18T15:38:53.617225",
+  "repo": "jdk17u-dev",
+  "patch_type": "TYPE-V",
+  "original_commit": "af8fb7eef7188ef762399cfb3faf5c8afd49efa7",
+  "backport_commit": "604e92dac4ba1a68bc1e351be8b4f480a62172ef",
+  "description": "main \u2192 jdk17u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 2.21,
+      "error": null,
+      "java_hunks": 12,
+      "aux_hunks": 1,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftMainMixer.java",
+          "method_used": "fuzzy",
+          "confidence": 0.995,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftMainMixer.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 124,
+          "end_line": 225,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftMainMixer.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 228,
+          "end_line": 424,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftTuning.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 89,
+          "end_line": 98,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftTuning.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 100,
+          "end_line": 107,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftTuning.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 115,
+          "end_line": 122,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftTuning.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 132,
+          "end_line": 137,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftTuning.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 149,
+          "end_line": 154,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 8,
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftTuning.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 163,
+          "end_line": 168,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 9,
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftTuning.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 177,
+          "end_line": 183,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 10,
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftTuning.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 193,
+          "end_line": 198,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 11,
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftTuning.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 204,
+          "end_line": 209,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 4.7,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_II",
+        "confidence": 0.95,
+        "reasoning": "The patch primarily adds length checks and guards against out-of-bounds array accesses in existing methods, which is a form of defensive programming to prevent exceptions. The changes involve adding conditional checks and early returns without altering the overall structure or logic significantly. The patch also includes a new test file addition, which is straightforward. The localization evidence shows most hunks were found with high confidence and exact matches, except the first hunk found via fuzzy matching, indicating minor formatting or whitespace differences. Overall, the patch is more than trivial string replacements but does not involve structural or API changes, so it fits best as a TYPE_II patch requiring fuzzy matching and some careful application. The token budget estimate reflects the moderate size and complexity of the patch.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.03,
+      "error": null,
+      "applied_count": 11,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftMainMixer.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftMainMixer.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftTuning.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftTuning.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftTuning.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftTuning.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftTuning.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftTuning.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftTuning.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftTuning.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftTuning.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 27.39,
+      "error": null,
+      "adapted_count": 1
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 1,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftMainMixer.java",
+          "old_string": "/*\n * Copyright (c) 2007, 2020, Oracle and/or its affiliates. All rights reserved.\n * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.\n *\n * This code is free software; you can redistribute it and/or modify it",
+          "new_string": "/*\n * Copyright (c) 2007, 2022, Oracle and/or its affiliates. All rights reserved.\n * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.\n *\n * This code is free software; you can redistribute it and/or modify it",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.19,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/java.desktop/share/classes/com/sun/media/sound/SoftMainMixer.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 1
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk17u-dev-helper",
+      "test_success": false,
+      "test_mode": "jdk17u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/javax/sound/midi/SysexMessage/EmptySysExMessageTest.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "javax/sound/midi/SysexMessage/EmptySysExMessageTest.java#EmptySysExMessageTest": "failed"
+        },
+        "classes": {
+          "javax/sound/midi/SysexMessage/EmptySysExMessageTest.java": "failed"
+        },
+        "summary": {
+          "passed": 0,
+          "failed": 1,
+          "skipped": 0,
+          "total": 1
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": false,
+        "fail_to_pass": [],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 1,
+        "patched_total": 1,
+        "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 13,
+    "developer_aux_hunks_from_target": 1,
+    "phase0_baseline": {
+      "mode": "baseline-jdk17u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 1
+    },
+    "java_production_hunks": 12,
+    "developer_aux_hunks": 1,
+    "processed_hunk_indices": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      0
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 15041,
+        "output": 681
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 11,
+    "synthesized_count": 1,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "clean",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 40011,
+    "target_patch_bytes": 43654,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": false,
+    "test_mode": "jdk17u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": false,
+      "fail_to_pass": [],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 1,
+      "patched_total": 1,
+      "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+    },
+    "fail_to_pass_count": 0,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": false
+  }
+}

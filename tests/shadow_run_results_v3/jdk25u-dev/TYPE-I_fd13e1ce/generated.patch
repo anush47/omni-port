@@ -1,0 +1,38 @@
+diff --git a/src/jdk.compiler/share/classes/com/sun/tools/javac/jvm/Gen.java b/src/jdk.compiler/share/classes/com/sun/tools/javac/jvm/Gen.java
+index 725c7f8063b..2b825940575 100644
+--- a/src/jdk.compiler/share/classes/com/sun/tools/javac/jvm/Gen.java
++++ b/src/jdk.compiler/share/classes/com/sun/tools/javac/jvm/Gen.java
+@@ -756,6 +756,11 @@ public CondItem genCond(JCTree _tree, boolean markBranches) {
+             }
+             CondItem result = genCond(tree.expr, markBranches);
+             code.endScopes(limit);
++            //make sure variables defined in the let expression are not included
++            //in the defined variables for jumps that go outside of this let
++            //expression:
++            undefineVariablesInChain(result.falseJumps, limit);
++            undefineVariablesInChain(result.trueJumps, limit);
+             return result;
+         } else {
+             CondItem result = genExpr(_tree, syms.booleanType).mkCond();
+@@ -763,6 +768,13 @@ public CondItem genCond(JCTree _tree, boolean markBranches) {
+             return result;
+         }
+     }
++        //where:
++        private void undefineVariablesInChain(Chain toClear, int limit) {
++            while (toClear != null) {
++                toClear.state.defined.excludeFrom(limit);
++                toClear = toClear.next;
++            }
++        }
+ 
+     public Code getCode() {
+         return code;
+@@ -2238,7 +2250,6 @@ public void visitBinary(JCBinary tree) {
+         }
+     }
+ 
+-
+         /** Complete generating code for operation, with left operand
+          *  already on stack.
+          *  @param lhs       The tree representing the left operand.

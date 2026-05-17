@@ -1,0 +1,143 @@
+diff --git a/src/jdk.internal.vm.ci/share/classes/jdk/vm/ci/hotspot/CompilerToVM.java b/src/jdk.internal.vm.ci/share/classes/jdk/vm/ci/hotspot/CompilerToVM.java
+index 0cb56354498..a5b969497cf 100644
+--- a/src/jdk.internal.vm.ci/share/classes/jdk/vm/ci/hotspot/CompilerToVM.java
++++ b/src/jdk.internal.vm.ci/share/classes/jdk/vm/ci/hotspot/CompilerToVM.java
+@@ -654,6 +654,8 @@ native int installCode0(long compiledCodeBuffer,
+                     long failedSpeculationsAddress,
+                     byte[] speculations);
+ 
++    native String getInvalidationReasonDescription(int invalidationReason);
++
+     /**
+      * Gets flags specifying optional parts of code info. Only if a flag is set, will the
+      * corresponding code info being included in the {@linkplain HotSpotCompiledCodeStream
+@@ -842,7 +844,7 @@ void reprofile(HotSpotResolvedJavaMethodImpl method) {
+      * {@code nmethod} associated with {@code nmethodMirror} is also made non-entrant and if
+      * {@code deoptimize == true} any current activations of the {@code nmethod} are deoptimized.
+      */
+-    native void invalidateHotSpotNmethod(HotSpotNmethod nmethodMirror, boolean deoptimize);
++    native void invalidateHotSpotNmethod(HotSpotNmethod nmethodMirror, boolean deoptimize, int invalidationReason);
+ 
+     /**
+      * Collects the current values of all JVMCI benchmark counters, summed up over all threads.
+@@ -1044,7 +1046,6 @@ HotSpotResolvedObjectTypeImpl getResolvedJavaType(long address) {
+      */
+     native int methodDataProfileDataSize(long metaspaceMethodData, int position);
+ 
+-
+     native int methodDataExceptionSeen(long metaspaceMethodData, int bci);
+ 
+     /**
+diff --git a/src/jdk.internal.vm.ci/share/classes/jdk/vm/ci/hotspot/HotSpotCodeCacheProvider.java b/src/jdk.internal.vm.ci/share/classes/jdk/vm/ci/hotspot/HotSpotCodeCacheProvider.java
+index a0130d1bda9..9545c9aa9ec 100644
+--- a/src/jdk.internal.vm.ci/share/classes/jdk/vm/ci/hotspot/HotSpotCodeCacheProvider.java
++++ b/src/jdk.internal.vm.ci/share/classes/jdk/vm/ci/hotspot/HotSpotCodeCacheProvider.java
+@@ -154,16 +154,20 @@ public InstalledCode installCode(ResolvedJavaMethod method, CompiledCode compile
+         return logOrDump(resultInstalledCode, compiledCode);
+     }
+ 
+-    @Override
+-    public void invalidateInstalledCode(InstalledCode installedCode) {
++    public void invalidateInstalledCode(InstalledCode installedCode, int invalidationReason) {
+         if (installedCode instanceof HotSpotNmethod) {
+             HotSpotNmethod nmethod = (HotSpotNmethod) installedCode;
+-            nmethod.invalidate(true);
++            nmethod.invalidate(true, invalidationReason);
+         } else {
+             throw new IllegalArgumentException("Cannot invalidate a " + Objects.requireNonNull(installedCode).getClass().getName());
+         }
+     }
+ 
++    @Override
++    public void invalidateInstalledCode(InstalledCode installedCode) {
++        invalidateInstalledCode(installedCode, jvmciInvalidationReason());
++    }
++
+     @Override
+     public TargetDescription getTarget() {
+         return target;
+@@ -201,4 +205,8 @@ public int interpreterFrameSize(BytecodeFrame pos) {
+     public void resetCompilationStatistics() {
+         runtime.getCompilerToVM().resetCompilationStatistics();
+     }
++
++    private static int jvmciInvalidationReason() {
++        return HotSpotJVMCIRuntime.runtime().config.getConstant("nmethod::InvalidationReason::JVMCI_INVALIDATE", Integer.class);
++    }
+ }
+diff --git a/src/jdk.internal.vm.ci/share/classes/jdk/vm/ci/hotspot/HotSpotNmethod.java b/src/jdk.internal.vm.ci/share/classes/jdk/vm/ci/hotspot/HotSpotNmethod.java
+index 9ed03f9749e..5c7089da6cb 100644
+--- a/src/jdk.internal.vm.ci/share/classes/jdk/vm/ci/hotspot/HotSpotNmethod.java
++++ b/src/jdk.internal.vm.ci/share/classes/jdk/vm/ci/hotspot/HotSpotNmethod.java
+@@ -27,6 +27,7 @@
+ 
+ import jdk.vm.ci.code.InstalledCode;
+ import jdk.vm.ci.code.InvalidInstalledCodeException;
++import jdk.vm.ci.common.JVMCIError;
+ import jdk.vm.ci.meta.JavaKind;
+ import jdk.vm.ci.meta.JavaType;
+ import jdk.vm.ci.meta.ResolvedJavaMethod;
+@@ -76,12 +77,19 @@ boolean inOopsTable() {
+      */
+     private final long compileIdSnapshot;
+ 
++    /**
++     * Identify the reason that caused this nmethod to be invalidated.
++     * A value of -1 means that the nmethod was not invalidated.
++     */
++    private int invalidationReason;
++
+     HotSpotNmethod(HotSpotResolvedJavaMethodImpl method, String name, boolean isDefault, long compileId) {
+         super(name);
+         this.method = method;
+         this.isDefault = isDefault;
+         boolean inOopsTable = !IS_IN_NATIVE_IMAGE && !isDefault;
+         this.compileIdSnapshot = inOopsTable ? 0L : compileId;
++        this.invalidationReason = -1;
+         assert inOopsTable || compileId != 0L : this;
+     }
+ 
+@@ -122,9 +130,19 @@ public ResolvedJavaMethod getMethod() {
+         return method;
+     }
+ 
++    /**
++     * Invalidate this nmethod using the reason specified in {@code invalidationReason} and
++     * optionally deoptimize the method if {@code deoptimize} is set.
++     * @param deoptimize whether or not to deoptimize the method.
++     * @param invalidationReason invalidation reason code.
++     */
++    public void invalidate(boolean deoptimize, int invalidationReason) {
++        compilerToVM().invalidateHotSpotNmethod(this, deoptimize, invalidationReason);
++    }
++
+     @Override
+     public void invalidate(boolean deoptimize) {
+-        compilerToVM().invalidateHotSpotNmethod(this, deoptimize);
++        invalidate(deoptimize, jvmciInvalidationReason());
+     }
+ 
+     @Override
+@@ -188,4 +206,22 @@ public Object executeVarargs(Object... args) throws InvalidInstalledCodeExceptio
+     public long getStart() {
+         return isValid() ? super.getStart() : 0;
+     }
++
++    /**
++     * @return an integer representing the reason why this nmethod was invalidated.
++     */
++    public int getInvalidationReason() {
++        return invalidationReason;
++    }
++
++    /**
++     * @return a String describing the reason why this nmethod was invalidated.
++     */
++    public String getInvalidationReasonDescription() {
++        return compilerToVM().getInvalidationReasonDescription(this.getInvalidationReason());
++    }
++
++    private static int jvmciInvalidationReason() {
++        return HotSpotJVMCIRuntime.runtime().config.getConstant("nmethod::InvalidationReason::JVMCI_INVALIDATE", Integer.class);
++    }
+ }

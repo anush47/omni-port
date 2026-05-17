@@ -1,0 +1,830 @@
+{
+  "run_timestamp": "2026-04-18T15:38:53.617225",
+  "repo": "jdk17u-dev",
+  "patch_type": "TYPE-V",
+  "original_commit": "2836c34b64e4626e25c86a53e5bef2bf32f95d2e",
+  "backport_commit": "25c7a7bdc1470e2e8e8cc0844ce95fac7c501103",
+  "description": "main \u2192 jdk17u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 20.45,
+      "error": null,
+      "java_hunks": 15,
+      "aux_hunks": 4,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.base/share/classes/sun/security/action/GetPropertyAction.java",
+          "method_used": "git_pickaxe",
+          "confidence": 0.9,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.base/share/classes/sun/security/action/GetPropertyAction.java",
+          "method_used": "git_pickaxe",
+          "confidence": 0.761,
+          "start_line": 30,
+          "end_line": 35,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.base/share/classes/sun/security/action/GetPropertyAction.java",
+          "method_used": "git_pickaxe",
+          "confidence": 0.9,
+          "start_line": 159,
+          "end_line": 162,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/OCSP.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 26,
+          "end_line": 35,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/OCSP.java",
+          "method_used": "fuzzy",
+          "confidence": 0.886,
+          "start_line": 43,
+          "end_line": 49,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/OCSP.java",
+          "method_used": "embedding",
+          "confidence": 0.896,
+          "start_line": 99,
+          "end_line": 127,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/OCSP.java",
+          "method_used": "fuzzy",
+          "confidence": 0.777,
+          "start_line": 277,
+          "end_line": 285,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/OCSP.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 286,
+          "end_line": 292,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 8,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/OCSP.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 316,
+          "end_line": 321,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 9,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "method_used": "git_pickaxe",
+          "confidence": 0.9,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 10,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 50,
+          "end_line": 56,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 11,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 127,
+          "end_line": 134,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 12,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 137,
+          "end_line": 143,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 13,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 145,
+          "end_line": 166,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 14,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 276,
+          "end_line": 281,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 4.37,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_III",
+        "confidence": 0.95,
+        "reasoning": "The patch introduces new methods and modifies existing methods to enhance timeout handling for OCSP, CRL, and certificate fetching. It adds a new static method in GetPropertyAction.java for parsing timeout properties with units, modifies OCSP.java and URICertStore.java to use this new method and to add read timeout support, and adds new test files for these features. The changes involve structural modifications such as adding new methods, changing method calls, and adding new classes and tests, indicating structural changes rather than trivial string replacements or formatting changes. The localization evidence shows a mix of exact, fuzzy, and embedding matches, supporting the structural nature of the patch. The patch is not a deep refactoring or complete redesign but involves significant structural additions and modifications, fitting TYPE_III classification. The confidence is high due to the clear structural changes and the token budget estimate accounts for the size and complexity of the patch and tests.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.01,
+      "error": null,
+      "applied_count": 8,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/OCSP.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/OCSP.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/OCSP.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 262.24,
+      "error": null,
+      "adapted_count": 4
+    },
+    "agent5_structural": {
+      "elapsed_s": 101.83,
+      "error": null,
+      "refactored_count": 2
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 82.93,
+      "error": null,
+      "synthesized_count": 5,
+      "failed_count": 1,
+      "synthesis_status": "partial",
+      "synthesized_hunks": [
+        {
+          "file_path": "src/java.base/share/classes/sun/security/action/GetPropertyAction.java",
+          "old_string": "/*\n * Copyright (c) 1998, 2021, Oracle and/or its affiliates. All rights reserved.\n * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.\n *\n * This code is free software; you can redistribute it and/or modify it",
+          "new_string": "/*\n * Copyright (c) 1998, 2023, Oracle and/or its affiliates. All rights reserved.\n * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.\n *\n * This code is free software; you can redistribute it and/or modify it",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        },
+        {
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/OCSP.java",
+          "old_string": "import java.util.List;\nimport java.util.Map;\n\nimport sun.security.action.GetIntegerAction;\nimport sun.security.action.GetPropertyAction;\nimport sun.security.util.Debug;\nimport sun.security.util.Event;",
+          "new_string": "import java.util.List;\nimport java.util.Map;\n\nimport sun.security.action.GetPropertyAction;\nimport sun.security.util.Debug;\nimport sun.security.util.Event;",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        },
+        {
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/OCSP.java",
+          "old_string": "            if (USE_GET && encodedGetReq.length() <= 255) {\n                url = new URL(encodedGetReq.toString());\n                con = (HttpURLConnection)url.openConnection();\n                con.setDoOutput(true);\n                con.setDoInput(true);\n                con.setRequestMethod(\"GET\");\n            } else {",
+          "new_string": "            if (USE_GET && encodedGetReq.length() <= 255) {\n                url = new URI(encodedGetReq.toString()).toURL();\n                con = (HttpURLConnection)url.openConnection();\n                con.setConnectTimeout(CONNECT_TIMEOUT);\n                con.setReadTimeout(READ_TIMEOUT);\n                con.setDoOutput(true);\n                con.setDoInput(true);\n                con.setRequestMethod(\"GET\");\n            } else {",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        },
+        {
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "old_string": "/*\n * Copyright (c) 2006, 2020, Oracle and/or its affiliates. All rights reserved.\n * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.\n *\n * This code is free software; you can redistribute it and/or modify it",
+          "new_string": "/*\n * Copyright (c) 2006, 2023, Oracle and/or its affiliates. All rights reserved.\n * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.\n *\n * This code is free software; you can redistribute it and/or modify it",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        },
+        {
+          "file_path": "src/java.base/share/classes/sun/security/action/GetPropertyAction.java",
+          "old_string": "                        }\n                    }\n            );\n        }",
+          "new_string": "                        }\n                    }\n            );\n        }\n    }\n\n    /**\n     * Convenience method for fetching System property values that are timeouts.\n     * Accepted timeout values may be purely numeric, a numeric value\n     * followed by \"s\" (both interpreted as seconds), or a numeric value\n     * followed by \"ms\" (interpreted as milliseconds).\n     *\n     * @param prop the name of the System property\n     * @param def a default value (in milliseconds)\n     * @param dbg a Debug object, if null no debug messages will be sent\n     *\n     * @return an integer value corresponding to the timeout value in the System\n     *      property in milliseconds.  If the property value is empty, negative,\n     *      or contains non-numeric characters (besides a trailing \"s\" or \"ms\")\n     *      then the default value will be returned.  If a negative value for\n     *      the \"def\" parameter is supplied, zero will be returned if the\n     *      property's value does not conform to the allowed syntax.\n     */\n    public static int privilegedGetTimeoutProp(String prop, int def, Debug dbg) {\n        if (def < 0) {\n            def = 0;\n        }\n\n        String rawPropVal = privilegedGetProperty(prop, \"\").trim();\n        if (rawPropVal.length() == 0) {\n            return def;\n        }\n\n        // Determine if \"ms\" or just \"s\" is on the end of the string.\n        // We may do a little surgery on the value so we'll retain\n        // the original value in rawPropVal for debug messages.\n        boolean isMillis = false;\n        String propVal = rawPropVal;\n        if (rawPropVal.toLowerCase(Locale.ROOT).endsWith(\"ms\")) {\n            propVal = rawPropVal.substring(0, rawPropVal.length() - 2);\n            isMillis = true;\n        } else if (rawPropVal.toLowerCase(Locale.ROOT).endsWith(\"s\")) {\n            propVal = rawPropVal.substring(0, rawPropVal.length() - 1);\n        }\n\n        // Next check to make sure the string is built only from digits\n        if (propVal.matches(\"^\\\\d+$\")) {\n            try {\n                int timeout = Integer.parseInt(propVal);\n                return isMillis ? timeout : timeout * 1000;\n            } catch (NumberFormatException nfe) {\n                if (dbg != null) {\n                    dbg.println(\"Warning: Unexpected \" + nfe +\n                            \" for timeout value \" + rawPropVal +\n                            \". Using default value of \" + def + \" msec.\");\n                }\n                return def;\n            }\n        } else {\n            if (dbg != null) {\n                dbg.println(\"Warning: Incorrect syntax for timeout value \" +\n                        rawPropVal + \". Using default value of \" + def +\n                        \" msec.\");\n            }\n            return def;\n        }\n    }",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 151.6,
+      "error": null,
+      "syntax_repair_status": "failed",
+      "syntax_repair_attempts": 2,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/java.base/share/classes/sun/security/action/GetPropertyAction.java",
+          "outcome": "failed",
+          "attempts": 2,
+          "remaining_errors": [
+            {
+              "line": 259,
+              "column": 5,
+              "message": "Parse error. Found \"}\", expected one of  \";\" \"<\" \"@\" \"\\u001a\" \"_\" \"abstract\" \"assert\" \"boolean\" \"byte\" \"char\" \"class\" \"default\" \"double\" \"enum\" \"exports\" \"final\" \"float\" \"import\" \"int\" \"interface\" \"long\" \"module\" \"native\" \"non-sealed\" \"open\" \"opens\" \"permits\" \"private\" \"protected\" \"provides\" \"public\" \"record\" \"requires\" \"sealed\" \"short\" \"static\" \"strictfp\" \"synchronized\" \"to\" \"transient\" \"transitive\" \"uses\" \"void\" \"volatile\" \"when\" \"with\" \"yield\" <EOF> <IDENTIFIER>"
+            }
+          ]
+        },
+        {
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 3
+    },
+    "agent9_fallback_1": {
+      "fallback_status": "failed",
+      "fallback_attempts": 1,
+      "synthesized_count": 0,
+      "hunk_descriptions": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.base/share/classes/sun/security/action/GetPropertyAction.java",
+          "what_changed": "Updated the copyright year from 2022 to 2023 in the file header comment.",
+          "where_in_code": "File header comment",
+          "intent": "To keep the copyright notice current and accurate.",
+          "change_type": "other",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.base/share/classes/sun/security/action/GetPropertyAction.java",
+          "what_changed": "Added an import for sun.security.util.Debug.",
+          "where_in_code": "Import statements",
+          "intent": "To enable debugging support within the class.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "Debug"
+          ]
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.base/share/classes/sun/security/action/GetPropertyAction.java",
+          "what_changed": "Added a new static method privilegedGetTimeoutProp that retrieves and parses system properties representing timeout values, supporting numeric values with optional 's' or 'ms' suffixes, returning the timeout in milliseconds with fallback to a default value.",
+          "where_in_code": "GetPropertyAction class, new static method privilegedGetTimeoutProp",
+          "intent": "To provide a convenient and robust way to fetch and interpret timeout-related system properties with flexible syntax and debugging support.",
+          "change_type": "add_method",
+          "key_symbols": [
+            "privilegedGetTimeoutProp"
+          ]
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/OCSP.java",
+          "what_changed": "Replaced multiple specific imports from java.net with a single wildcard import.",
+          "where_in_code": "Import statements",
+          "intent": "To simplify and consolidate import declarations for networking classes.",
+          "change_type": "modify_import",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/OCSP.java",
+          "what_changed": "Removed import of GetIntegerAction and added import of GetPropertyAction; retained other imports.",
+          "where_in_code": "Import statements",
+          "intent": "To switch from using GetIntegerAction to GetPropertyAction for property retrieval, likely to leverage new timeout parsing logic.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "GetPropertyAction",
+            "GetIntegerAction"
+          ]
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/OCSP.java",
+          "what_changed": "Replaced the previous integer timeout initialization logic with new timeout fields for connect and read timeouts in milliseconds, using the new privilegedGetTimeoutProp method; added separate read timeout constant; modified initializeTimeout method to accept property name and default value and return timeout in milliseconds with debug logging.",
+          "where_in_code": "OCSP class, static fields and initializeTimeout method",
+          "intent": "To improve timeout configuration by supporting separate connect and read timeouts with millisecond precision and robust parsing of system properties.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "CONNECT_TIMEOUT",
+            "READ_TIMEOUT",
+            "initializeTimeout"
+          ]
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/OCSP.java",
+          "what_changed": "Modified the GET request construction to use URI to URL conversion instead of direct URL constructor; added setting of connect and read timeouts on the HttpURLConnection before setting request properties.",
+          "where_in_code": "OCSP class, method handling GET OCSP requests",
+          "intent": "To improve URL handling robustness and ensure connection and read timeouts are applied to HTTP connections.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "CONNECT_TIMEOUT",
+            "READ_TIMEOUT"
+          ]
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/OCSP.java",
+          "what_changed": "Changed the read timeout setting on the HttpURLConnection for POST requests from using CONNECT_TIMEOUT to using the new READ_TIMEOUT constant.",
+          "where_in_code": "OCSP class, method handling POST OCSP requests",
+          "intent": "To correctly apply separate read timeout configuration distinct from connect timeout.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "READ_TIMEOUT",
+            "CONNECT_TIMEOUT"
+          ]
+        },
+        {
+          "hunk_index": 8,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/OCSP.java",
+          "what_changed": "Added catch block for URISyntaxException wrapping it into IOException around code that converts URI to URL and opens connection.",
+          "where_in_code": "OCSP class, method performing OCSP request",
+          "intent": "To handle potential URI syntax errors gracefully and propagate them as IOExceptions.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "URISyntaxException",
+            "IOException"
+          ]
+        },
+        {
+          "hunk_index": 9,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "what_changed": "Updated the copyright year from 2022 to 2023 in the file header comment.",
+          "where_in_code": "File header comment",
+          "intent": "To keep the copyright notice current and accurate.",
+          "change_type": "other",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 10,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "what_changed": "Added import of sun.security.action.GetPropertyAction and removed import of GetIntegerAction.",
+          "where_in_code": "Import statements",
+          "intent": "To switch to using GetPropertyAction for property retrieval, likely to utilize enhanced timeout parsing.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "GetPropertyAction",
+            "GetIntegerAction"
+          ]
+        },
+        {
+          "hunk_index": 11,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "what_changed": "Added new default timeout constants for CA certificate connect and read timeouts with 15 seconds each.",
+          "where_in_code": "URICertStore class, static fields",
+          "intent": "To introduce separate default timeout values for CA certificate fetching operations.",
+          "change_type": "add_field",
+          "key_symbols": [
+            "DEFAULT_CACERT_CONNECT_TIMEOUT",
+            "DEFAULT_CACERT_READ_TIMEOUT"
+          ]
+        },
+        {
+          "hunk_index": 12,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "what_changed": "Updated Javadoc comments to indicate that connect and read timeouts for CRL download are now specified in milliseconds instead of seconds.",
+          "where_in_code": "URICertStore class, timeout-related fields and comments",
+          "intent": "To clarify the units of timeout values to match the new millisecond-based configuration.",
+          "change_type": "modify_logic",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 13,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "what_changed": "Added new static timeout fields for CA certificate connect and read timeouts initialized via the new initializeTimeout method using privilegedGetTimeoutProp; modified initializeTimeout method to use privilegedGetTimeoutProp for robust timeout parsing and debug logging.",
+          "where_in_code": "URICertStore class, static fields and initializeTimeout method",
+          "intent": "To support millisecond-precision timeout configuration for CA certificate fetching and unify timeout property parsing with debug support.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "CACERT_CONNECT_TIMEOUT",
+            "CACERT_READ_TIMEOUT",
+            "initializeTimeout"
+          ]
+        },
+        {
+          "hunk_index": 14,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "what_changed": "Set connect and read timeouts on the URLConnection used for CA certificate fetching before opening the input stream.",
+          "where_in_code": "URICertStore class, method handling CA certificate download",
+          "intent": "To apply configured timeout values to network connections for CA certificate retrieval, improving robustness and responsiveness.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "CACERT_CONNECT_TIMEOUT",
+            "CACERT_READ_TIMEOUT"
+          ]
+        }
+      ]
+    },
+    "agent8_syntax_repair_fallback_1": {
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": []
+    },
+    "agent7_validator": {
+      "validation_passed": false,
+      "validation_failure_category": "api_mismatch",
+      "validation_error_context": "Build failed (jdk17u-dev-helper) \u2014 compile errors:\nsrc/java.base/share/classes/sun/security/provider/certpath/URICertStore.java:178: error: cannot find symbol",
+      "validation_attempts": 1,
+      "retry_files": [
+        "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java"
+      ],
+      "build_success": false,
+      "build_mode": "jdk17u-dev-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": [
+        {
+          "file": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "line": 178,
+          "message": "error: cannot find symbol"
+        }
+      ]
+    },
+    "agent9_fallback_2": {
+      "fallback_status": "failed",
+      "fallback_attempts": 2,
+      "synthesized_count": 0,
+      "hunk_descriptions": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.base/share/classes/sun/security/action/GetPropertyAction.java",
+          "what_changed": "Updated the copyright year from 2022 to 2023 in the file header comment.",
+          "where_in_code": "File header comment",
+          "intent": "To keep the copyright notice current and accurate.",
+          "change_type": "other",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.base/share/classes/sun/security/action/GetPropertyAction.java",
+          "what_changed": "Added an import for sun.security.util.Debug.",
+          "where_in_code": "Import statements",
+          "intent": "To enable debugging support within the class.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "Debug"
+          ]
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.base/share/classes/sun/security/action/GetPropertyAction.java",
+          "what_changed": "Added a new static method privilegedGetTimeoutProp that retrieves and parses system properties representing timeout values, supporting numeric values with optional 's' or 'ms' suffixes, returning the timeout in milliseconds with validation and optional debug logging.",
+          "where_in_code": "GetPropertyAction class, new static method privilegedGetTimeoutProp",
+          "intent": "To provide a convenient and robust way to fetch and interpret timeout-related system properties with flexible syntax and debugging support.",
+          "change_type": "add_method",
+          "key_symbols": [
+            "privilegedGetTimeoutProp"
+          ]
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/OCSP.java",
+          "what_changed": "Replaced multiple specific imports from java.net with a single wildcard import.",
+          "where_in_code": "Import statements",
+          "intent": "To simplify import declarations and possibly accommodate additional java.net classes without further import changes.",
+          "change_type": "modify_import",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/OCSP.java",
+          "what_changed": "Removed import of GetIntegerAction and added import of GetPropertyAction; removed unused import of GetIntegerAction.",
+          "where_in_code": "Import statements",
+          "intent": "To switch from using GetIntegerAction to GetPropertyAction for property retrieval, aligning with new timeout handling approach.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "GetPropertyAction"
+          ]
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/OCSP.java",
+          "what_changed": "Replaced the previous OCSP timeout initialization that used GetIntegerAction and interpreted timeout in seconds with a new approach using GetPropertyAction. Added separate constants for connect and read timeouts with default values, both expressed in milliseconds. Updated initializeTimeout method to accept property name and default value, returning timeout in milliseconds and logging debug info.",
+          "where_in_code": "OCSP class, static fields CONNECT_TIMEOUT, READ_TIMEOUT and method initializeTimeout",
+          "intent": "To improve timeout configuration by supporting separate connect and read timeouts in milliseconds, using the new timeout property parsing method for consistency and better control.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "CONNECT_TIMEOUT",
+            "READ_TIMEOUT",
+            "initializeTimeout"
+          ]
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/OCSP.java",
+          "what_changed": "Modified the code that opens an HTTP connection for a GET request to create the URL via URI conversion, added setting of connect and read timeouts on the HttpURLConnection before configuring request properties.",
+          "where_in_code": "OCSP class, method handling OCSP GET requests",
+          "intent": "To ensure proper URI handling and to apply configured connection and read timeouts to the HTTP connection for robustness.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "CONNECT_TIMEOUT",
+            "READ_TIMEOUT"
+          ]
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/OCSP.java",
+          "what_changed": "Changed the read timeout setting on the HTTP connection for POST requests from using CONNECT_TIMEOUT to using the separate READ_TIMEOUT constant.",
+          "where_in_code": "OCSP class, method handling OCSP POST requests",
+          "intent": "To correctly apply distinct timeout values for connection establishment and data reading phases, improving timeout management.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "READ_TIMEOUT"
+          ]
+        },
+        {
+          "hunk_index": 8,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/OCSP.java",
+          "what_changed": "Added a catch block for URISyntaxException around the code that processes the OCSP response bytes, converting it into an IOException to propagate errors properly.",
+          "where_in_code": "OCSP class, method reading OCSP response",
+          "intent": "To handle potential URI syntax errors gracefully by wrapping them as IOExceptions, ensuring proper exception handling flow.",
+          "change_type": "modify_logic",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 9,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "what_changed": "Updated the copyright year in the file header comment from 2022 to 2023.",
+          "where_in_code": "File header comment",
+          "intent": "To keep the copyright notice current and accurate.",
+          "change_type": "other",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 10,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "what_changed": "Added import of sun.security.action.GetPropertyAction and removed import of GetIntegerAction.",
+          "where_in_code": "Import statements",
+          "intent": "To switch to using GetPropertyAction for property retrieval, consistent with other changes in timeout handling.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "GetPropertyAction"
+          ]
+        },
+        {
+          "hunk_index": 11,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "what_changed": "Added default connect and read timeout constants for CA certificate fetching, both set to 15000 milliseconds.",
+          "where_in_code": "URICertStore class, static fields",
+          "intent": "To define default timeout values for CA certificate downloads, improving network operation robustness.",
+          "change_type": "add_field",
+          "key_symbols": [
+            "DEFAULT_CACERT_CONNECT_TIMEOUT",
+            "DEFAULT_CACERT_READ_TIMEOUT"
+          ]
+        },
+        {
+          "hunk_index": 12,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "what_changed": "Updated Javadoc comments to indicate that connect and read timeouts for CRL downloads are now expressed in milliseconds instead of seconds.",
+          "where_in_code": "URICertStore class, timeout-related static fields",
+          "intent": "To clarify the units of timeout values to match the new millisecond-based configuration.",
+          "change_type": "modify_logic",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 13,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "what_changed": "Replaced the previous initializeTimeout method that used GetIntegerAction and returned seconds with a new version that uses GetPropertyAction. Added new static fields for CA certificate connect and read timeouts initialized via the new method. The new initializeTimeout method returns timeout values in milliseconds and logs debug info.",
+          "where_in_code": "URICertStore class, static fields CACERT_CONNECT_TIMEOUT, CACERT_READ_TIMEOUT and method initializeTimeout",
+          "intent": "To unify timeout property retrieval and parsing with millisecond precision and support separate timeouts for CA certificate fetching.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "CACERT_CONNECT_TIMEOUT",
+            "CACERT_READ_TIMEOUT",
+            "initializeTimeout"
+          ]
+        },
+        {
+          "hunk_index": 14,
+          "file_path": "src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java",
+          "what_changed": "Added setting of connect and read timeouts on the URLConnection used for CA certificate fetching before opening the input stream.",
+          "where_in_code": "URICertStore class, method handling CA certificate download",
+          "intent": "To apply configured timeout values to the connection, improving reliability and preventing indefinite blocking during certificate retrieval.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "CACERT_CONNECT_TIMEOUT",
+            "CACERT_READ_TIMEOUT"
+          ]
+        }
+      ]
+    },
+    "agent8_syntax_repair_fallback_2": {
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": []
+    },
+    "agent7_validator_retry1": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 2,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk17u-dev-helper",
+      "test_success": false,
+      "test_mode": "jdk17u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/java/security/cert/CertPathValidator/OCSP/OCSPTimeout.jtr.xml",
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/sun/security/x509/URICertStore/AIACertTimeout.jtr.xml",
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/sun/security/x509/URICertStore/CRLReadTimeout.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "java/security/cert/CertPathValidator/OCSP/OCSPTimeout.java#OCSPTimeout": "failed",
+          "sun/security/x509/URICertStore/AIACertTimeout.java#AIACertTimeout": "failed",
+          "sun/security/x509/URICertStore/CRLReadTimeout.java#CRLReadTimeout": "failed"
+        },
+        "classes": {
+          "java/security/cert/CertPathValidator/OCSP/OCSPTimeout.java": "failed",
+          "sun/security/x509/URICertStore/AIACertTimeout.java": "failed",
+          "sun/security/x509/URICertStore/CRLReadTimeout.java": "failed"
+        },
+        "summary": {
+          "passed": 0,
+          "failed": 3,
+          "skipped": 0,
+          "total": 3
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": false,
+        "fail_to_pass": [],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 0,
+        "patched_total": 3,
+        "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 46,
+    "developer_aux_hunks_from_target": 4,
+    "phase0_baseline": {
+      "mode": "baseline-jdk17u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 3
+    },
+    "java_production_hunks": 15,
+    "developer_aux_hunks": 4,
+    "processed_hunk_indices": [
+      3,
+      7,
+      8,
+      10,
+      11,
+      12,
+      13,
+      14,
+      0,
+      1,
+      4,
+      6,
+      9,
+      2,
+      5
+    ],
+    "tokens_used": 181112,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 18942,
+        "output": 10305
+      },
+      "agent5_structural": {
+        "input": 3358,
+        "output": 3689
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 5242,
+        "output": 5969
+      },
+      "agent9_fallback": {
+        "input": 159372,
+        "output": 10529
+      }
+    },
+    "synthesis_status": "partial",
+    "applied_on_disk_ag3": 8,
+    "synthesized_count": 0,
+    "failed_hunks_total": 1,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "failed",
+    "fallback_attempts": 2,
+    "retry_contexts": [
+      {
+        "error_type": "synthesis_failed_no_match",
+        "error_message": "Could not verify exact string in target file",
+        "attempt_count": 4,
+        "suggested_action": "relocalize"
+      },
+      {
+        "error_type": "api_mismatch",
+        "error_message": "/repo/src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java:178: error: cannot find symbol\n  symbol:   method privilegedGetTimeoutProp(String,int,Debug)\nERROR: Build failed for target 'images' in configuration '/repo/build_shared' (exit code 2) \n/repo/src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java:178: error: cannot find symbol\n  symbol:   method privilegedGetTimeoutProp(String,int,Debug)\n/repo/src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java:178: error: cannot find symbol\n  symbol:   method privilegedGetTimeoutProp(String,int,Debug)\nERROR: Build failed for target 'images' in configuration '/repo/build_shared' (exit code 2) \n/repo/src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java:178: error: cannot find symbol\n  symbol:   method privilegedGetTimeoutProp(String,int,Debug)\n/repo/src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java:178: error: cannot find symbol\n  symbol:   method privilegedGetTimeoutProp(String,int,Debug)\nERROR: Build failed for target 'images' in configuration '/repo/build_shared' (exit code 2) \n/repo/src/java.base/share/classes/sun/security/provider/certpath/URICertStore.java:178: error: cannot find symbol\n  symbol:   method privilegedGetTimeoutProp(String,int,Debug)\n=== Build FAILED for df6014e ===",
+        "attempt_count": 1,
+        "suggested_action": "route_to_namespace_or_structural"
+      }
+    ],
+    "failed_hunks": [
+      {
+        "file_path": "src/java.base/share/classes/sun/security/provider/certpath/OCSP.java",
+        "old_file_path": null,
+        "old_content": "    private static final boolean USE_GET = initializeBoolean(\n            \"com.sun.security.ocsp.useget\", true);\n\n    /**\n     * Initialize the timeout length by getting the OCSP timeout\n     * system property. If the property has not been set, or if its\n     * value is negative, set the timeout length to the default.\n     */\n    private static int initializeTimeout() {\n        @SuppressWarnings(\"removal\")\n        Integer tmp = java.security.AccessController.doPrivileged(\n                new GetIntegerAction(\"com.sun.security.ocsp.timeout\"));\n        if (tmp == null || tmp < 0) {\n            return DEFAULT_CONNECT_TIMEOUT;\n        }\n        // Convert to milliseconds, as the system property will be\n        // specified in seconds\n        return tmp * 1000;\n    }\n\n    private static boolean initializeBoolean(String prop, boolean def) {\n        boolean value =\n                GetPropertyAction.privilegedGetBooleanProp(prop, def, debug);\n        if (debug != null) {\n            debug.println(prop + \" set to \" + value);\n        }\n        return value;\n    }\n\n",
+        "new_content": "    private static final int DEFAULT_READ_TIMEOUT = 15000;\n\n    /**\n     * Integer value indicating the timeout length, in milliseconds, to be\n     * used for establishing a connection to an OCSP responder. A timeout of\n     * zero is interpreted as an infinite timeout.\n     */\n    private static final int CONNECT_TIMEOUT = initializeTimeout(\n            \"com.sun.security.ocsp.timeout\", DEFAULT_CONNECT_TIMEOUT);\n\n    /**\n     * Integer value indicating the timeout length, in milliseconds, to be\n     * used for reading an OCSP response from the responder.  A timeout of\n     * zero is interpreted as an infinite timeout.\n     */\n    private static final int READ_TIMEOUT = initializeTimeout(\n            \"com.sun.security.ocsp.readtimeout\", DEFAULT_READ_TIMEOUT);\n\n    /**\n     * Initialize the timeout length by getting the OCSP timeout\n     * system property. If the property has not been set, or if its\n     * value is negative, set the timeout length to the default.\n     */\n    private static int initializeTimeout(String prop, int def) {\n        int timeoutVal =\n                GetPropertyAction.privilegedGetTimeoutProp(prop, def, debug);\n        if (debug != null) {\n            debug.println(prop + \" set to \" + timeoutVal + \" milliseconds\");\n        }\n        return timeoutVal;\n    }",
+        "is_new_file": false,
+        "is_del_file": false,
+        "is_rename": false,
+        "file_operation": "MODIFIED",
+        "refactored": true,
+        "semantic_confidence": 0.78,
+        "loc_index": 5
+      }
+    ],
+    "generated_patch_bytes": 4101,
+    "target_patch_bytes": 59987,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": false,
+    "test_mode": "jdk17u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": false,
+      "fail_to_pass": [],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 0,
+      "patched_total": 3,
+      "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+    },
+    "fail_to_pass_count": 0,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": false
+  }
+}

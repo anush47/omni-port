@@ -1,0 +1,57 @@
+diff --git a/src/java.base/share/classes/sun/nio/cs/StreamEncoder.java b/src/java.base/share/classes/sun/nio/cs/StreamEncoder.java
+index 65cb25bb06d..88b2befa0cc 100644
+--- a/src/java.base/share/classes/sun/nio/cs/StreamEncoder.java
++++ b/src/java.base/share/classes/sun/nio/cs/StreamEncoder.java
+@@ -82,7 +82,6 @@ public class StreamEncoder extends Writer
+         return new StreamEncoder(out, lock, enc);
+     }
+ 
+-
+     // Factory for java.nio.channels.Channels.newWriter
+ 
+     public static StreamEncoder forEncoder(WritableByteChannel ch,
+@@ -92,7 +91,6 @@ public class StreamEncoder extends Writer
+         return new StreamEncoder(ch, enc, minBufferCap);
+     }
+ 
+-
+     // -- Public methods corresponding to those in OutputStreamWriter --
+ 
+     // All synchronization and state/argument checking is done in these public
+@@ -177,7 +175,6 @@ public class StreamEncoder extends Writer
+         return !closed;
+     }
+ 
+-
+     // -- Charset-based stream encoder impl --
+ 
+     private final Charset cs;
+@@ -322,8 +319,8 @@ public class StreamEncoder extends Writer
+     }
+ 
+     void implClose() throws IOException {
+-        flushLeftoverChar(null, true);
+-        try {
++        try (ch; out) {
++            flushLeftoverChar(null, true);
+             for (;;) {
+                 CoderResult cr = encoder.flush(bb);
+                 if (cr.isUnderflow())
+@@ -338,15 +335,8 @@ public class StreamEncoder extends Writer
+ 
+             if (bb.position() > 0)
+                 writeBytes();
+-            if (ch != null)
+-                ch.close();
+-            else {
+-                try {
+-                    out.flush();
+-                } finally {
+-                    out.close();
+-                }
+-            }
++            if (out != null)
++                out.flush();
+         } catch (IOException x) {
+             encoder.reset();
+             throw x;

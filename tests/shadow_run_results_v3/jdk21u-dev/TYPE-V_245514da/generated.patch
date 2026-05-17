@@ -1,0 +1,155 @@
+diff --git a/src/java.desktop/share/classes/javax/swing/JEditorPane.java b/src/java.desktop/share/classes/javax/swing/JEditorPane.java
+index ee2f174206c..522a27e60ac 100644
+--- a/src/java.desktop/share/classes/javax/swing/JEditorPane.java
++++ b/src/java.desktop/share/classes/javax/swing/JEditorPane.java
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 1997, 2022, Oracle and/or its affiliates. All rights reserved.
++ * Copyright (c) 1997, 2024, Oracle and/or its affiliates. All rights reserved.
+  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+  *
+  * This code is free software; you can redistribute it and/or modify it
+@@ -404,7 +404,6 @@ public class JEditorPane extends JTextComponent {
+         }
+     }
+ 
+-
+     /**
+      * Sets the current URL being displayed.  The content type of the
+      * pane is set, and if the editor kit for the pane is
+@@ -474,7 +473,6 @@ public class JEditorPane extends JTextComponent {
+         }
+         URL loaded = getPage();
+ 
+-
+         // reset scrollbar
+         if (!page.equals(loaded) && page.getRef() == null) {
+             scrollRectToVisible(new Rectangle(0,0,1,1));
+@@ -598,7 +596,6 @@ public class JEditorPane extends JTextComponent {
+         }
+     }
+ 
+-
+     /**
+      * This method invokes the <code>EditorKit</code> to initiate a
+      * read.  In the case where a <code>ChangedCharSetException</code>
+@@ -619,39 +616,40 @@ public class JEditorPane extends JTextComponent {
+         String charset = (String) getClientProperty("charset");
+         try(Reader r = (charset != null) ? new InputStreamReader(in, charset) :
+                 new InputStreamReader(in)) {
+-            kit.read(r, doc, 0);
+-        } catch (BadLocationException e) {
+-            throw new IOException(e.getMessage());
+-        } catch (ChangedCharSetException changedCharSetException) {
+-            String charSetSpec = changedCharSetException.getCharSetSpec();
+-            if (changedCharSetException.keyEqualsCharSet()) {
+-                putClientProperty("charset", charSetSpec);
+-            } else {
+-                setCharsetFromContentTypeParameters(charSetSpec);
+-            }
+             try {
+-                in.reset();
+-            } catch (IOException exception) {
+-                //mark was invalidated
+-                in.close();
+-                URL url = (URL)doc.getProperty(Document.StreamDescriptionProperty);
+-                if (url != null) {
+-                    URLConnection conn = url.openConnection();
+-                    in = conn.getInputStream();
++                kit.read(r, doc, 0);
++            } catch (BadLocationException e) {
++                throw new IOException(e.getMessage());
++            } catch (ChangedCharSetException changedCharSetException) {
++                String charSetSpec = changedCharSetException.getCharSetSpec();
++                if (changedCharSetException.keyEqualsCharSet()) {
++                    putClientProperty("charset", charSetSpec);
+                 } else {
+-                    //there is nothing we can do to recover stream
+-                    throw changedCharSetException;
++                    setCharsetFromContentTypeParameters(charSetSpec);
++                }
++                try {
++                    in.reset();
++                } catch (IOException exception) {
++                    //mark was invalidated
++                    in.close();
++                    URL url = (URL)doc.getProperty(Document.StreamDescriptionProperty);
++                    if (url != null) {
++                        URLConnection conn = url.openConnection();
++                        in = conn.getInputStream();
++                    } else {
++                        //there is nothing we can do to recover stream
++                        throw changedCharSetException;
++                    }
+                 }
++                try {
++                    doc.remove(0, doc.getLength());
++                } catch (BadLocationException e) {}
++                doc.putProperty("IgnoreCharsetDirective", Boolean.valueOf(true));
++                read(in, doc);
+             }
+-            try {
+-                doc.remove(0, doc.getLength());
+-            } catch (BadLocationException e) {}
+-            doc.putProperty("IgnoreCharsetDirective", Boolean.valueOf(true));
+-            read(in, doc);
+         }
+     }
+ 
+-
+     /**
+      * Loads a stream into the text document model.
+      */
+@@ -858,7 +856,6 @@ public class JEditorPane extends JTextComponent {
+         }
+     }
+ 
+-
+     /**
+      * Scrolls the view to the given reference location
+      * (that is, the value returned by the <code>URL.getRef</code>
+@@ -1067,7 +1064,6 @@ public class JEditorPane extends JTextComponent {
+         }
+     }
+ 
+-
+     /**
+      * Sets the currently installed kit for handling
+      * content.  This is the bound property that
+@@ -1605,7 +1601,6 @@ public class JEditorPane extends JTextComponent {
+      */
+     private static final String uiClassID = "EditorPaneUI";
+ 
+-
+     /**
+      * Key for a client property used to indicate whether
+      * <a href="https://www.w3.org/TR/CSS22/syndata.html#length-units">
+@@ -1656,12 +1651,10 @@ public class JEditorPane extends JTextComponent {
+         ",typeHandlers=" + typeHandlersString;
+     }
+ 
+-
+ /////////////////
+ // Accessibility support
+ ////////////////
+ 
+-
+     /**
+      * Gets the AccessibleContext associated with this JEditorPane.
+      * For editor panes, the AccessibleContext takes the form of an
+@@ -1983,7 +1976,6 @@ public class JEditorPane extends JTextComponent {
+                 return getAccessibleActionDescription(i);
+             }
+ 
+-
+             /**
+              * Get the index with the hypertext document at which this
+              * link begins
+@@ -2365,7 +2357,6 @@ public class JEditorPane extends JTextComponent {
+  * author Dave Brown
+  */
+ 
+-
+ static class HeaderParser {
+ 
+     /* table of key/val pairs - maxes out at 10!!!!*/

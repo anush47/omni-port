@@ -1,0 +1,151 @@
+commit 2848cfa42c85cf7dea751113cadb22733a0c11b1
+Author: Ray Mattingly <rmdmattingly@gmail.com>
+Date:   Fri Jun 21 09:17:54 2024 -0400
+
+    HBASE-28680 BackupLogCleaner causes HMaster WALs to pile up indefinitely (#6006)
+    
+    We have been trying to setup daily incremental backups for hundreds of clusters at my day
+    job. Recently we discovered that old WALs were piling up across many clusters inline with when we
+    began running incremental backups.
+    
+    This led to the realization that the BackupLogCleaner will always skip archived HMaster WALs. This
+    is a problem because, if a cleaner is skipping a given file, then the CleanerChore will never
+    delete it.
+    
+    This seems like a misunderstanding of what it means to "skip" a WAL in a BaseLogCleanerDelegate,
+    and, instead, we should always return these HMaster WALs as deletable from the perspective of the
+    BackupLogCleaner. We could subject them to the same scrutiny as RegionServer WALs: are they older
+    than the most recent successful backup? But, if I understand correctly, HMaster WALs do not
+    contain any data relevant to table backups, so that would be unnecessary.
+    
+    Co-authored-by: Ray Mattingly <rmattingly@hubspot.com>
+    Signed-off-by: Nick Dimiduk <ndimiduk@apache.org>
+
+diff --git a/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java b/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java
+index f3ddda499b..1b53aa1d67 100644
+--- a/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java
++++ b/hbase-backup/src/main/java/org/apache/hadoop/hbase/backup/master/BackupLogCleaner.java
+@@ -25,6 +25,7 @@ import java.util.List;
+ import java.util.Map;
+ import org.apache.hadoop.conf.Configuration;
+ import org.apache.hadoop.fs.FileStatus;
++import org.apache.hadoop.fs.Path;
+ import org.apache.hadoop.hbase.HBaseInterfaceAudience;
+ import org.apache.hadoop.hbase.TableName;
+ import org.apache.hadoop.hbase.backup.BackupInfo;
+@@ -36,6 +37,7 @@ import org.apache.hadoop.hbase.client.ConnectionFactory;
+ import org.apache.hadoop.hbase.master.HMaster;
+ import org.apache.hadoop.hbase.master.MasterServices;
+ import org.apache.hadoop.hbase.master.cleaner.BaseLogCleanerDelegate;
++import org.apache.hadoop.hbase.master.region.MasterRegionFactory;
+ import org.apache.hadoop.hbase.net.Address;
+ import org.apache.hadoop.hbase.procedure2.store.wal.WALProcedureStore;
+ import org.apache.hadoop.hbase.wal.AbstractFSWALProvider;
+@@ -123,27 +125,8 @@ public class BackupLogCleaner extends BaseLogCleanerDelegate {
+       return Collections.emptyList();
+     }
+     for (FileStatus file : files) {
+-      String fn = file.getPath().getName();
+-      if (fn.startsWith(WALProcedureStore.LOG_PREFIX)) {
++      if (canDeleteFile(addressToLastBackupMap, file.getPath())) {
+         filteredFiles.add(file);
+-        continue;
+-      }
+-
+-      try {
+-        Address walServerAddress =
+-          Address.fromString(BackupUtils.parseHostNameFromLogFile(file.getPath()));
+-        long walTimestamp = AbstractFSWALProvider.getTimestamp(file.getPath().getName());
+-
+-        if (
+-          !addressToLastBackupMap.containsKey(walServerAddress)
+-            || addressToLastBackupMap.get(walServerAddress) >= walTimestamp
+-        ) {
+-          filteredFiles.add(file);
+-        }
+-      } catch (Exception ex) {
+-        LOG.warn(
+-          "Error occurred while filtering file: {} with error: {}. Ignoring cleanup of this log",
+-          file.getPath(), ex.getMessage());
+       }
+     }
+ 
+@@ -176,4 +159,39 @@ public class BackupLogCleaner extends BaseLogCleanerDelegate {
+   public boolean isStopped() {
+     return this.stopped;
+   }
++
++  protected static boolean canDeleteFile(Map<Address, Long> addressToLastBackupMap, Path path) {
++    if (isHMasterWAL(path)) {
++      return true;
++    }
++
++    try {
++      String hostname = BackupUtils.parseHostNameFromLogFile(path);
++      if (hostname == null) {
++        LOG.warn(
++          "Cannot parse hostname from RegionServer WAL file: {}. Ignoring cleanup of this log",
++          path);
++        return false;
++      }
++      Address walServerAddress = Address.fromString(hostname);
++      long walTimestamp = AbstractFSWALProvider.getTimestamp(path.getName());
++
++      if (
++        !addressToLastBackupMap.containsKey(walServerAddress)
++          || addressToLastBackupMap.get(walServerAddress) >= walTimestamp
++      ) {
++        return true;
++      }
++    } catch (Exception ex) {
++      LOG.warn("Error occurred while filtering file: {}. Ignoring cleanup of this log", path, ex);
++      return false;
++    }
++    return false;
++  }
++
++  private static boolean isHMasterWAL(Path path) {
++    String fn = path.getName();
++    return fn.startsWith(WALProcedureStore.LOG_PREFIX)
++      || fn.endsWith(MasterRegionFactory.ARCHIVED_WAL_SUFFIX);
++  }
+ }
+diff --git a/hbase-backup/src/test/java/org/apache/hadoop/hbase/backup/master/TestBackupLogCleaner.java b/hbase-backup/src/test/java/org/apache/hadoop/hbase/backup/master/TestBackupLogCleaner.java
+index 2b0f9c0cba..e372c6ad15 100644
+--- a/hbase-backup/src/test/java/org/apache/hadoop/hbase/backup/master/TestBackupLogCleaner.java
++++ b/hbase-backup/src/test/java/org/apache/hadoop/hbase/backup/master/TestBackupLogCleaner.java
+@@ -20,10 +20,12 @@ package org.apache.hadoop.hbase.backup.master;
+ import static org.junit.Assert.assertFalse;
+ import static org.junit.Assert.assertTrue;
+ 
++import java.util.Collections;
+ import java.util.HashMap;
+ import java.util.List;
+ import java.util.Map;
+ import org.apache.hadoop.fs.FileStatus;
++import org.apache.hadoop.fs.Path;
+ import org.apache.hadoop.hbase.HBaseClassTestRule;
+ import org.apache.hadoop.hbase.TableName;
+ import org.apache.hadoop.hbase.backup.BackupType;
+@@ -132,4 +134,21 @@ public class TestBackupLogCleaner extends TestBackupBase {
+       conn.close();
+     }
+   }
++
++  @Test
++  public void testCleansUpHMasterWal() {
++    Path path = new Path("/hbase/MasterData/WALs/hmaster,60000,1718808578163");
++    assertTrue(BackupLogCleaner.canDeleteFile(Collections.emptyMap(), path));
++  }
++
++  @Test
++  public void testCleansUpArchivedHMasterWal() {
++    Path normalPath =
++      new Path("/hbase/oldWALs/hmaster%2C60000%2C1716224062663.1716247552189$masterlocalwal$");
++    assertTrue(BackupLogCleaner.canDeleteFile(Collections.emptyMap(), normalPath));
++
++    Path masterPath = new Path(
++      "/hbase/MasterData/oldWALs/hmaster%2C60000%2C1716224062663.1716247552189$masterlocalwal$");
++    assertTrue(BackupLogCleaner.canDeleteFile(Collections.emptyMap(), masterPath));
++  }
+ }

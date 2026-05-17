@@ -1,0 +1,23 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk11u-dev/JTwork/java/net/httpclient/http2/TrailingHeadersTest.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk11u-dev/JTwork/java/net/httpclient/http2/TrailingHeadersTest.testng-results.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "java/net/httpclient/http2/TrailingHeadersTest.java#TrailingHeadersTest": "failed"
+    },
+    "classes": {
+      "java/net/httpclient/http2/TrailingHeadersTest.java": "failed"
+    },
+    "summary": {
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "total": 1
+    }
+  },
+  "mode": "baseline-jdk11u-dev-helper",
+  "skipped": false
+}

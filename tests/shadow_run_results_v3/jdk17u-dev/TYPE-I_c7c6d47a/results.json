@@ -1,0 +1,176 @@
+{
+  "run_timestamp": "2026-04-18T15:38:53.617225",
+  "repo": "jdk17u-dev",
+  "patch_type": "TYPE-I",
+  "original_commit": "c7c6d47a07100f6c81af6cfad301ec1bda77adf7",
+  "backport_commit": "86d5a0e37a622950d55cb95876a805da5c572793",
+  "description": "main \u2192 jdk17u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "java_hunks": 1,
+      "aux_hunks": 1,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.desktop/share/classes/com/sun/imageio/plugins/jpeg/AdobeMarkerSegment.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 55,
+          "end_line": 69,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 4.76,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_II",
+        "confidence": 0.95,
+        "reasoning": "The patch modifies the AdobeMarkerSegment constructor by changing the way the buffer pointer is advanced. Instead of incrementing buffer.bufPtr directly, it uses a local variable markPtr to read bytes and then increments buffer.bufPtr by length at the end. This is a subtle change to pointer management and buffer state synchronization, likely to fix a bug related to buffer pointer and available bytes tracking. The patch also adds a new test file and a binary test image to verify the fix. The main source code change is a small, localized adjustment to pointer arithmetic, found via exact matching, indicating minimal structural changes. The addition of test files increases the patch size but does not affect the complexity of the backporting process significantly. Overall, the patch involves minor code changes and additions, with no structural or API changes, so it is best classified as TYPE_II (whitespace/formatting drift or minor pointer management fix requiring fuzzy matching). Confidence is high due to exact match localization and the nature of the change. Token budget is moderate due to the need to apply the code change and add new test files and binary data.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "applied_count": 1,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/com/sun/imageio/plugins/jpeg/AdobeMarkerSegment.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "adapted_count": 0
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.08,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 0,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": []
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [],
+      "synthesized_count_after_repair": 0
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk17u-dev-helper",
+      "test_success": false,
+      "test_mode": "jdk17u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/javax/imageio/plugins/jpeg/LargeAdobeMarkerSegmentTest.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "javax/imageio/plugins/jpeg/LargeAdobeMarkerSegmentTest.java#LargeAdobeMarkerSegmentTest": "failed"
+        },
+        "classes": {
+          "javax/imageio/plugins/jpeg/LargeAdobeMarkerSegmentTest.java": "failed"
+        },
+        "summary": {
+          "passed": 0,
+          "failed": 1,
+          "skipped": 0,
+          "total": 1
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": false,
+        "fail_to_pass": [],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 1,
+        "patched_total": 1,
+        "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 2,
+    "developer_aux_hunks_from_target": 1,
+    "phase0_baseline": {
+      "mode": "baseline-jdk17u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 1
+    },
+    "java_production_hunks": 1,
+    "developer_aux_hunks": 1,
+    "processed_hunk_indices": [
+      0
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 1,
+    "synthesized_count": 0,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 1611,
+    "target_patch_bytes": 4744,
+    "patch_exact_match": true,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": false,
+    "test_mode": "jdk17u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": false,
+      "fail_to_pass": [],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 1,
+      "patched_total": 1,
+      "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+    },
+    "fail_to_pass_count": 0,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

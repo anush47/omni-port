@@ -1,0 +1,386 @@
+{
+  "run_timestamp": "2026-04-18T17:33:14.833082",
+  "repo": "jdk11u-dev",
+  "patch_type": "TYPE-V",
+  "original_commit": "4d2cd26ab5092ad0a169e4239164a869a4255bd3",
+  "backport_commit": "445e79ea99250a77ca38223710ca7e7fef0b6309",
+  "description": "main \u2192 jdk11u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 2.24,
+      "error": null,
+      "java_hunks": 5,
+      "aux_hunks": 3,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 263,
+          "end_line": 268,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 769,
+          "end_line": 776,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "method_used": "fuzzy",
+          "confidence": 0.95,
+          "start_line": 787,
+          "end_line": 812,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 836,
+          "end_line": 846,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 851,
+          "end_line": 857,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 3.62,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_III",
+        "confidence": 0.95,
+        "reasoning": "The patch introduces a new record type and a new volatile field, modifies the processFrame method with pattern matching and new logic for handling PushPromise and Continuation frames, and adds multiple new private methods to handle push continuation frames. It also adds a substantial new test file and modifies several test server files. The changes involve structural modifications to the Http2Connection class and related test infrastructure, indicating structural changes rather than simple string replacements or formatting changes. The localization evidence shows high confidence for most hunks, with one hunk found via fuzzy matching, supporting a TYPE_III classification. The patch is non-trivial but does not represent a deep refactoring or complete redesign, so TYPE_III is appropriate.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.01,
+      "error": null,
+      "applied_count": 4,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 38.91,
+      "error": null,
+      "adapted_count": 0
+    },
+    "agent5_structural": {
+      "elapsed_s": 29.5,
+      "error": null,
+      "refactored_count": 1
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 1,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "old_string": "                }\n                return;\n            }\n            if (frame instanceof PushPromiseFrame) {\n                PushPromiseFrame pp = (PushPromiseFrame)frame;\n                try {\n                    handlePushPromise(stream, pp);\n                } catch (UncheckedIOException e) {\n                    protocolError(ResetFrame.PROTOCOL_ERROR, e.getMessage());\n                    return;\n                }\n            } else if (frame instanceof HeaderFrame) {\n                // decode headers (or continuation)\n                try {\n                    decodeHeaders((HeaderFrame) frame, stream.rspHeadersConsumer());\n                } catch (UncheckedIOException e) {\n                    protocolError(ResetFrame.PROTOCOL_ERROR, e.getMessage());\n                    return;\n                }\n                stream.incoming(frame);\n            } else {\n                stream.incoming(frame);\n            }\n        }\n    }",
+          "new_string": "                }\n                return;\n            }\n\n            // While a push continuation is in progress, the only acceptable frame\n            // on this stream is a Continuation frame.\n            if (pushContinuationState != null) {\n                if (frame instanceof ContinuationFrame cf) {\n                    try {\n                        handlePushContinuation(stream, cf);\n                    } catch (UncheckedIOException e) {\n                        debug.log(\"Error handling Push Promise with Continuation: \" + e.getMessage(), e);\n                        protocolError(ResetFrame.PROTOCOL_ERROR, e.getMessage());\n                        return;\n                    }\n                } else {\n                    // Mulligan: continuation was expected but something else arrived.\n                    pushContinuationState = null;\n                    protocolError(ResetFrame.PROTOCOL_ERROR,\n                            \"Expected a Continuation frame but received \" + frame);\n                    return;\n                }\n            } else {\n                if (frame instanceof PushPromiseFrame pp) {\n                    try {\n                        handlePushPromise(stream, pp);\n                    } catch (UncheckedIOException e) {\n                        protocolError(ResetFrame.PROTOCOL_ERROR, e.getMessage());\n                        return;\n                    }\n                } else if (frame instanceof HeaderFrame hf) {\n                    // decode headers\n                    try {\n                        decodeHeaders(hf, stream.rspHeadersConsumer());\n                    } catch (UncheckedIOException e) {\n                        debug.log(\"Error decoding headers: \" + e.getMessage(), e);\n                        protocolError(ResetFrame.PROTOCOL_ERROR, e.getMessage());\n                        return;\n                    }\n                    stream.incoming(frame);\n                } else {\n                    stream.incoming(frame);\n                }\n            }\n        }\n    }",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.2,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 1
+    },
+    "agent7_validator": {
+      "validation_passed": false,
+      "validation_failure_category": "context_mismatch",
+      "validation_error_context": "Build failed (jdk11u-dev-helper) \u2014 compile errors:\nsrc/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:771: error: ')' expected\nsrc/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:793: error: ')' expected\nsrc/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:801: error: 'else' without 'if'\nsrc/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:809: error: ')' expected\nsrc/java.net.http/share/classes/jdk/intern",
+      "validation_attempts": 1,
+      "retry_files": [
+        "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java"
+      ],
+      "build_success": false,
+      "build_mode": "jdk11u-dev-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": [
+        {
+          "file": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "line": 771,
+          "message": "error: ')' expected"
+        },
+        {
+          "file": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "line": 793,
+          "message": "error: ')' expected"
+        },
+        {
+          "file": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "line": 801,
+          "message": "error: 'else' without 'if'"
+        },
+        {
+          "file": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "line": 809,
+          "message": "error: ')' expected"
+        },
+        {
+          "file": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "line": 816,
+          "message": "error: ')' expected"
+        },
+        {
+          "file": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "line": 826,
+          "message": "error: 'else' without 'if'"
+        }
+      ]
+    },
+    "agent9_fallback_1": {
+      "fallback_status": "failed",
+      "fallback_attempts": 1,
+      "synthesized_count": 0,
+      "hunk_descriptions": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "what_changed": "Introduced a new record type to encapsulate push continuation state and added a volatile field to hold this state within the Http2Connection class.",
+          "where_in_code": "Http2Connection class fields",
+          "intent": "To manage and track the state of HTTP/2 push promise continuations in a structured way, enabling handling of multi-frame push promises.",
+          "change_type": "add_field",
+          "key_symbols": [
+            "PushContinuationState",
+            "pushContinuationState"
+          ]
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "what_changed": "Refactored the type check and cast of DataFrame to use pattern matching for instanceof, simplifying the code.",
+          "where_in_code": "method handling incoming frames (exact method not specified, likely frame processing method)",
+          "intent": "To modernize and simplify the code by using Java's pattern matching for instanceof, improving readability.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "DataFrame"
+          ]
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "what_changed": "Added handling for push continuation frames by checking if a push continuation state exists and processing ContinuationFrame accordingly; introduced error handling for unexpected frames during push continuation; refactored existing PushPromiseFrame and HeaderFrame handling to use pattern matching and integrated them into the new conditional structure.",
+          "where_in_code": "method processing incoming frames (likely frame dispatch or frame handler method)",
+          "intent": "To correctly handle multi-frame push promises by enforcing that only Continuation frames are accepted while a push continuation is in progress, improving protocol compliance and robustness.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "pushContinuationState",
+            "ContinuationFrame",
+            "PushPromiseFrame",
+            "HeaderFrame"
+          ]
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "what_changed": "Refactored the push promise handling method to assert no ongoing push continuation, decode headers, and either complete the push promise immediately if headers end or store the push continuation state for further continuation frames; added new methods to handle push continuation frames and to complete the push promise processing with appropriate checks and stream resets.",
+          "where_in_code": "handlePushPromise method and related new methods handlePushContinuation and completePushPromise in Http2Connection class",
+          "intent": "To support multi-frame push promises by splitting the processing into initial push promise handling and continuation handling, ensuring proper header decoding and stream state management.",
+          "change_type": "add_method",
+          "key_symbols": [
+            "handlePushPromise",
+            "handlePushContinuation",
+            "completePushPromise",
+            "pushContinuationState"
+          ]
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "what_changed": "Removed an unused local variable holding decoded headers in the push promise completion method, relying instead on the headers passed as a parameter.",
+          "where_in_code": "completePushPromise method in Http2Connection class",
+          "intent": "To clean up redundant code by eliminating an unnecessary variable, improving code clarity and maintainability.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "headers"
+          ]
+        }
+      ]
+    },
+    "agent8_syntax_repair_fallback_1": {
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": []
+    },
+    "agent7_validator_retry1": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 2,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk11u-dev-helper",
+      "test_success": false,
+      "test_mode": "jdk11u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk11u-dev/JTwork/java/net/httpclient/http2/PushPromiseContinuation.jtr.xml",
+          "/home/cseroot/omni-port/repos/jdk11u-dev/JTwork/java/net/httpclient/http2/PushPromiseContinuation.testng-results.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "java/net/httpclient/http2/PushPromiseContinuation.java#PushPromiseContinuation": "failed"
+        },
+        "classes": {
+          "java/net/httpclient/http2/PushPromiseContinuation.java": "failed"
+        },
+        "summary": {
+          "passed": 0,
+          "failed": 1,
+          "skipped": 0,
+          "total": 1
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": false,
+        "fail_to_pass": [],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 0,
+        "patched_total": 1,
+        "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 12,
+    "developer_aux_hunks_from_target": 3,
+    "phase0_baseline": {
+      "mode": "baseline-jdk11u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 1
+    },
+    "java_production_hunks": 5,
+    "developer_aux_hunks": 3,
+    "processed_hunk_indices": [
+      0,
+      1,
+      3,
+      4,
+      2
+    ],
+    "tokens_used": 80340,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 4188,
+        "output": 1608
+      },
+      "agent5_structural": {
+        "input": 1472,
+        "output": 1676
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      },
+      "agent9_fallback": {
+        "input": 79080,
+        "output": 1260
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 4,
+    "synthesized_count": 0,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "failed",
+    "fallback_attempts": 1,
+    "retry_contexts": [
+      {
+        "error_type": "context_mismatch",
+        "error_message": "';' expected\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:793: error: ')' expected\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:793: error: not a statement\n/repo/src/hotspot/share/adlc/output_c.cpp:529:36: warning: '%*d' directive writing between 1 and 2147483647 bytes into a region of size between 0 and 2147483637 [-Wformat-overflow=]\n/repo/src/hotspot/share/adlc/output_c.cpp:1173:42: warning: '_idx' directive writing 4 bytes into a region of size between 2 and 12 [-Wformat-overflow=]\n/repo/src/hotspot/share/adlc/output_c.cpp:1186:45: warning: '_idx' directive writing 4 bytes into a region of size between 2 and 12 [-Wformat-overflow=]\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:771: error: ')' expected\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:771: error: not a statement\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:771: error: ';' expected\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:793: error: ')' expected\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:793: error: not a statement\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:793: error: ';' expected\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:801: error: 'else' without 'if'\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:809: error: ')' expected\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:809: error: not a statement\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:809: error: ';' expected\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:816: error: ')' expected\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:816: error: not a statement\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:816: error: ';' expected\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:816: error: 'else' without 'if'\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:826: error: 'else' without 'if'\nERROR: Build failed for target 'images' in configuration '/repo/build_shared' (exit code 2) \n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:771: error: ')' expected\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:771: error: not a statement\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:771: error: ';' expected\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:793: error: ')' expected\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:793: error: not a statement\n=== Build FAILED for 240b296 ===",
+        "attempt_count": 1,
+        "suggested_action": "re-localize"
+      }
+    ],
+    "failed_hunks": [],
+    "generated_patch_bytes": 7038,
+    "target_patch_bytes": 25583,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": false,
+    "test_mode": "jdk11u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": false,
+      "fail_to_pass": [],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 0,
+      "patched_total": 1,
+      "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+    },
+    "fail_to_pass_count": 0,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": false
+  }
+}

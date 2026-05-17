@@ -1,0 +1,52 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.TestSplitMergeQuotaTable.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.TestHBackupFileSystem.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.TestIncrementalBackup.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.mapreduce.TestMapReduceBackupCopyJob.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.client.TestAsyncAggregationClientWithCallbackThreadPool.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.client.TestFlushFromClient.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.client.TestFlushFromClientWithDisabledFlushProcedure.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.coprocessor.TestRegionCoprocessorQuotaUsage.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.compress.zstd.TestZstdByteBuffDecompressor.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.hfile.TestHFileBlockHeaderCorruption.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.hfile.TestRowIndexV1RoundTrip.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.mapreduce.TestWALInputFormat.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.master.region.TestMasterRegionWALSyncTimeoutIOException.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.regionserver.TestCompaction.xml",
+      "/home/cseroot/omni-port/repos/hbase/hbase-server/target/surefire-reports/TEST-org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota.xml"
+    ],
+    "target_classes": [
+      "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota"
+    ],
+    "test_cases": {
+      "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testScanEstimateNewScanner": "passed",
+      "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testTooLargeReadBatchIsNotBlocked": "error",
+      "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testTooLargeWriteSizeIsNotBlocked": "error",
+      "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testTooLargeReadSizeIsNotBlocked": "error",
+      "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testScanEstimateShrinkingWorkload": "passed",
+      "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testTooLargeRequestSizeIsNotBlocked": "error",
+      "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testLargeBatchSaturatesReadNumLimit": "passed",
+      "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testScanEstimateGrowingWorkload": "passed",
+      "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testLargeBatchSaturatesReadWriteLimit": "passed",
+      "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testScanEstimateSecondNextCall": "passed",
+      "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testScanEstimateVariableFlatWorkload": "passed",
+      "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testTooLargeWriteBatchIsNotBlocked": "error",
+      "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota#testScanEstimateFlatWorkload": "passed"
+    },
+    "classes": {
+      "org.apache.hadoop.hbase.quotas.TestDefaultOperationQuota": "failed"
+    },
+    "summary": {
+      "passed": 8,
+      "failed": 5,
+      "skipped": 0,
+      "total": 13
+    }
+  },
+  "mode": "baseline-hbase-helper",
+  "skipped": false
+}

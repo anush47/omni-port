@@ -1,0 +1,1068 @@
+{
+  "run_timestamp": "2026-04-18T20:35:00.021911",
+  "repo": "jdk21u-dev",
+  "patch_type": "TYPE-III",
+  "original_commit": "b0ac633b2d0076d64b463b2a6ce19abf6b12c50f",
+  "backport_commit": "32ac3e713ea4370e496717967fff7de9450d2f69",
+  "description": "main \u2192 jdk21u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 66.19,
+      "error": null,
+      "java_hunks": 29,
+      "aux_hunks": 6,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2ClientImpl.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 40,
+          "end_line": 45,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2ClientImpl.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 289,
+          "end_line": 297,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "method_used": "failed",
+          "confidence": 0.0,
+          "start_line": 0,
+          "end_line": 0,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1068,
+          "end_line": 1073,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1453,
+          "end_line": 1463,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1911,
+          "end_line": 1916,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "method_used": "fuzzy",
+          "confidence": 0.893,
+          "start_line": 159,
+          "end_line": 172,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "method_used": "fuzzy",
+          "confidence": 0.901,
+          "start_line": 206,
+          "end_line": 212,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 8,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 222,
+          "end_line": 228,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 9,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 274,
+          "end_line": 281,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 10,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 301,
+          "end_line": 312,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 11,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 376,
+          "end_line": 383,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 12,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 461,
+          "end_line": 467,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 13,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 495,
+          "end_line": 500,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 14,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1397,
+          "end_line": 1408,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 15,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1699,
+          "end_line": 1704,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 16,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowUpdateSender.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 17,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowUpdateSender.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 31,
+          "end_line": 46,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 18,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowUpdateSender.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 53,
+          "end_line": 58,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 19,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowUpdateSender.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 66,
+          "end_line": 81,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 20,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowUpdateSender.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 87,
+          "end_line": 92,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 21,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowUpdateSender.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 104,
+          "end_line": 107,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 22,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/frame/FramesDecoder.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 23,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/frame/FramesDecoder.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 463,
+          "end_line": 468,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 24,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/frame/FramesDecoder.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 530,
+          "end_line": 536,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 25,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/frame/SettingsFrame.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 26,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/frame/SettingsFrame.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 166,
+          "end_line": 171,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 27,
+          "file_path": "src/java.net.http/share/classes/module-info.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 57,
+          "end_line": 65,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 28,
+          "file_path": "src/java.net.http/share/classes/module-info.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 150,
+          "end_line": 156,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 5.41,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_III",
+        "confidence": 0.95,
+        "reasoning": "The patch involves multiple changes across several classes related to HTTP/2 flow control in the Java HTTP client implementation. It introduces new methods, modifies existing logic for flow control window management, and adds new fields and synchronization mechanisms. The changes include structural modifications such as renaming variables, adding new classes and methods, and altering control flow, which go beyond simple string replacements or formatting changes. The patch also adds new test classes to verify the flow control behavior, indicating a significant extension of functionality. The localization evidence shows mostly exact matches but some fuzzy matches, supporting the assessment of moderate complexity. Overall, the patch represents structural changes but not a complete redesign or deep refactoring, fitting the TYPE_III classification. The confidence is high but not absolute due to some fuzzy localization and the complexity of the changes. The token budget estimate is set to 3500 to accommodate the multiple files and substantial code additions and modifications.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "applied_count": 26,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2ClientImpl.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2ClientImpl.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowUpdateSender.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowUpdateSender.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowUpdateSender.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowUpdateSender.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowUpdateSender.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowUpdateSender.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/frame/FramesDecoder.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/frame/FramesDecoder.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/frame/FramesDecoder.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/frame/SettingsFrame.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/frame/SettingsFrame.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/module-info.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/module-info.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 53.71,
+      "error": null,
+      "adapted_count": 2
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 39.3,
+      "error": null,
+      "synthesized_count": 2,
+      "failed_count": 1,
+      "synthesis_status": "partial",
+      "synthesized_hunks": [
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "old_string": "    // send lock: prevent sending DataFrames after reset occurred.\n    private final Lock sendLock = new ReentrantLock();\n    private final Lock stateLock = new ReentrantLock();\n\n    /**\n     * A reference to this Stream's connection Send Window controller. The\n     * stream MUST acquire the appropriate amount of Send Window before\n     * sending any data. Will be null for PushStreams, as they cannot send data.\n     */\n    private final WindowController windowController;\n    private final WindowUpdateSender windowUpdater;\n\n    @Override",
+          "new_string": "    // send lock: prevent sending DataFrames after reset occurred.\n    private final Lock sendLock = new ReentrantLock();\n    private final Lock stateLock = new ReentrantLock();\n    /**\n     * A reference to this Stream's connection Send Window controller. The\n     * stream MUST acquire the appropriate amount of Send Window before\n     * sending any data. Will be null for PushStreams, as they cannot send data.\n     */\n    private final WindowController windowController;\n    private final WindowUpdateSender streamWindowUpdater;\n\n    @Override",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        },
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "old_string": "                int size = Utils.remaining(dsts, Integer.MAX_VALUE);\n                if (size == 0 && finished) {\n                    inputQ.remove();\n                    connection.ensureWindowUpdated(df); // must update connection window\n                    Log.logTrace(\"responseSubscriber.onComplete\");\n                    if (debug.on()) debug.log(\"incoming: onComplete\");\n                    sched.stop();",
+          "new_string": "                int size = Utils.remaining(dsts, Integer.MAX_VALUE);\n                if (size == 0 && finished) {\n                    inputQ.remove();\n                    // consumed will not be called\n                    connection.releaseUnconsumed(df); // must update connection window\n                    Log.logTrace(\"responseSubscriber.onComplete\");\n                    if (debug.on()) debug.log(\"incoming: onComplete\");\n                    sched.stop();",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.13,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 2
+    },
+    "agent7_validator": {
+      "validation_passed": false,
+      "validation_failure_category": "api_mismatch",
+      "validation_error_context": "Build failed (jdk21u-dev-helper) \u2014 compile errors:\nsrc/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:1898: error: ConnectionWindowUpdateSender is not abstract and does not override abstract method windowSizeExceeded(long) in WindowUpdateSender\nsrc/java.net.http/share/classes/jdk/internal/net/http/Stream.java:209: error: cannot find symbol\nsrc/java.net.http/share/classes/jdk/internal/net/http/Stream.java:229: error: cannot find symbol\nsrc/java.net.http/share/classes/jdk/i",
+      "validation_attempts": 1,
+      "retry_files": [
+        "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+        "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java"
+      ],
+      "build_success": false,
+      "build_mode": "jdk21u-dev-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": [
+        {
+          "file": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "line": 1898,
+          "message": "error: ConnectionWindowUpdateSender is not abstract and does not override abstract method windowSizeExceeded(long) in WindowUpdateSender"
+        },
+        {
+          "file": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "line": 209,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "line": 229,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "line": 286,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "line": 395,
+          "message": "error: cannot find symbol"
+        }
+      ]
+    },
+    "agent9_fallback_1": {
+      "fallback_status": "failed",
+      "fallback_attempts": 1,
+      "synthesized_count": 0,
+      "hunk_descriptions": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2ClientImpl.java",
+          "what_changed": "Added import for INITIAL_CONNECTION_WINDOW_SIZE and reordered static imports.",
+          "where_in_code": "imports section",
+          "intent": "To include the new constant INITIAL_CONNECTION_WINDOW_SIZE for use in connection window size calculations.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "INITIAL_CONNECTION_WINDOW_SIZE"
+          ]
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2ClientImpl.java",
+          "what_changed": "Introduced a minimum value for the connection window size parameter, computed as the maximum of stream window and INITIAL_CONNECTION_WINDOW_SIZE, and used it as the lower bound in getParameter call.",
+          "where_in_code": "Http2ClientImpl - method returning connection window size parameter",
+          "intent": "To ensure the connection window size is never configured smaller than the initial connection window size or the stream window size, maintaining protocol correctness.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "INITIAL_CONNECTION_WINDOW_SIZE",
+            "getParameter"
+          ]
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "what_changed": "Added import for INITIAL_CONNECTION_WINDOW_SIZE among other static imports.",
+          "where_in_code": "imports section",
+          "intent": "To enable usage of INITIAL_CONNECTION_WINDOW_SIZE constant in Http2Connection class.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "INITIAL_CONNECTION_WINDOW_SIZE"
+          ]
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "what_changed": "Added a new method releaseUnconsumed to handle releasing unprocessed bytes for DataFrames dropped after being queued, and updated dropDataFrame method with detailed comments clarifying usage scenarios.",
+          "where_in_code": "Http2Connection - methods dropDataFrame(DataFrame), releaseUnconsumed(DataFrame)",
+          "intent": "To correctly manage flow control accounting by tracking unprocessed bytes when DataFrames are dropped without consumption, preventing window leaks or protocol errors.",
+          "change_type": "add_method",
+          "key_symbols": [
+            "releaseUnconsumed",
+            "dropDataFrame",
+            "windowUpdater"
+          ]
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "what_changed": "Changed the baseline for initial window size difference calculation from DEFAULT_INITIAL_WINDOW_SIZE to INITIAL_CONNECTION_WINDOW_SIZE, added an assertion that the difference is non-negative, and changed condition to only send window update if difference is positive.",
+          "where_in_code": "Http2Connection - method sending initial connection window update",
+          "intent": "To align window update logic with the new INITIAL_CONNECTION_WINDOW_SIZE constant and ensure correctness and safety via assertion.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "INITIAL_CONNECTION_WINDOW_SIZE",
+            "windowUpdater",
+            "sendWindowUpdate"
+          ]
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "what_changed": "Added an override of windowSizeExceeded method that triggers a protocol error and shuts down the connection if the connection window is exceeded.",
+          "where_in_code": "Http2Connection - inner class or method related to flow control window handling",
+          "intent": "To enforce flow control by detecting and responding to connection-level window size violations with appropriate error handling.",
+          "change_type": "add_method",
+          "key_symbols": [
+            "windowSizeExceeded",
+            "protocolError",
+            "shutdown"
+          ]
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "what_changed": "Renamed the field windowUpdater to streamWindowUpdater to distinguish it from the connection-level window updater.",
+          "where_in_code": "Stream class - field declarations",
+          "intent": "To clarify the role of the window updater as specific to the stream rather than the connection, improving code readability and maintainability.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "streamWindowUpdater",
+            "windowUpdater"
+          ]
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "what_changed": "Replaced call to connection.ensureWindowUpdated with connection.releaseUnconsumed when removing a fully consumed DataFrame from input queue upon completion.",
+          "where_in_code": "Stream - method handling completion of data consumption",
+          "intent": "To correctly update flow control accounting by releasing unconsumed bytes when the DataFrame is removed without further consumption callbacks.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "releaseUnconsumed",
+            "inputQ",
+            "DataFrame"
+          ]
+        },
+        {
+          "hunk_index": 8,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "what_changed": "In catch block for subscriber.onNext, replaced connection.dropDataFrame call with connection.releaseUnconsumed to properly account for unprocessed bytes of DataFrames already queued.",
+          "where_in_code": "Stream - method processing incoming DataFrames",
+          "intent": "To ensure flow control accounting is accurate when exceptions occur during data consumption, by releasing unprocessed bytes correctly.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "releaseUnconsumed",
+            "dropDataFrame",
+            "subscriber.onNext"
+          ]
+        },
+        {
+          "hunk_index": 9,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "what_changed": "Changed drainInputQueue method to use connection.releaseUnconsumed instead of dropDataFrame for DataFrames polled from input queue.",
+          "where_in_code": "Stream - drainInputQueue method",
+          "intent": "To properly release unprocessed bytes and maintain flow control correctness when clearing the input queue.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "releaseUnconsumed",
+            "drainInputQueue"
+          ]
+        },
+        {
+          "hunk_index": 10,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "what_changed": "Replaced calls to connection.windowUpdater.update with connection.windowUpdater.processed and streamWindowUpdater.processed or released depending on whether the DataFrame signals end of stream.",
+          "where_in_code": "Stream - method handling DataFrame processing and window updates",
+          "intent": "To differentiate between processed and released bytes for flow control accounting, ensuring correct window updates for both connection and stream levels.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "processed",
+            "released",
+            "windowUpdater",
+            "streamWindowUpdater"
+          ]
+        },
+        {
+          "hunk_index": 11,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "what_changed": "Enhanced receiveDataFrame method to check if buffering the DataFrame payload length is allowed by connection and stream window updaters before adding to input queue; if not allowed, release unconsumed bytes and skip adding.",
+          "where_in_code": "Stream - receiveDataFrame method",
+          "intent": "To prevent exceeding flow control windows by pre-checking buffer capacity and releasing unconsumed bytes if buffering is disallowed, thus maintaining protocol compliance.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "canBufferUnprocessedBytes",
+            "releaseUnconsumed",
+            "inputQ"
+          ]
+        },
+        {
+          "hunk_index": 12,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "what_changed": "Renamed field windowUpdater to streamWindowUpdater in Stream constructor and field declarations.",
+          "where_in_code": "Stream - constructor and field declarations",
+          "intent": "To clarify that the window updater is specific to the stream, avoiding confusion with connection-level window updater.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "streamWindowUpdater"
+          ]
+        },
+        {
+          "hunk_index": 13,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "what_changed": "Added comment clarifying that DataFrames not added to input queue can be released using dropDataFrame.",
+          "where_in_code": "Stream - code handling dropping of DataFrames when request is cancelled or stream closed",
+          "intent": "To document correct usage of dropDataFrame for DataFrames that were never queued, aiding maintainability and correctness.",
+          "change_type": "other",
+          "key_symbols": [
+            "dropDataFrame",
+            "DataFrame"
+          ]
+        },
+        {
+          "hunk_index": 14,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "what_changed": "Refactored onProtocolError method to delegate to a new overloaded onProtocolError method that accepts an error code, enabling more flexible error handling and logging.",
+          "where_in_code": "Stream - onProtocolError method",
+          "intent": "To improve error handling by allowing specification of error codes alongside exceptions, enhancing protocol error reporting.",
+          "change_type": "modify_method",
+          "key_symbols": [
+            "onProtocolError",
+            "cancelImpl",
+            "ResetFrame.PROTOCOL_ERROR"
+          ]
+        },
+        {
+          "hunk_index": 15,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "what_changed": "Added override of windowSizeExceeded method that triggers a protocol error with FLOW_CONTROL_ERROR code when the stream flow control window is exceeded.",
+          "where_in_code": "Stream - inner class or flow control window handler",
+          "intent": "To enforce stream-level flow control by detecting window size violations and cancelling the stream with appropriate error signaling.",
+          "change_type": "add_method",
+          "key_symbols": [
+            "windowSizeExceeded",
+            "onProtocolError",
+            "FLOW_CONTROL_ERROR"
+          ]
+        },
+        {
+          "hunk_index": 16,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowUpdateSender.java",
+          "what_changed": "Updated copyright year from 2023 to 2024.",
+          "where_in_code": "file header",
+          "intent": "Routine update of copyright year.",
+          "change_type": "other",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 17,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowUpdateSender.java",
+          "what_changed": "Refactored WindowUpdateSender to use AtomicLong for received and unprocessed byte counters, added windowSize field, and enhanced class-level documentation describing flow control tracking.",
+          "where_in_code": "WindowUpdateSender class - fields and class-level comments",
+          "intent": "To improve precision and thread-safety in tracking flow control window usage and clarify the class's role in flow control management.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "received",
+            "unprocessed",
+            "windowSize",
+            "WindowUpdateSender"
+          ]
+        },
+        {
+          "hunk_index": 18,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowUpdateSender.java",
+          "what_changed": "Initialized windowSize field in constructor with initWindowSize parameter.",
+          "where_in_code": "WindowUpdateSender constructor",
+          "intent": "To store the initial flow control window size for use in window management logic.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "windowSize",
+            "initWindowSize"
+          ]
+        },
+        {
+          "hunk_index": 19,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowUpdateSender.java",
+          "what_changed": "Rewrote update method and added new methods canBufferUnprocessedBytes, checkWindowSizeExceeded, processed, released with detailed flow control logic managing received and unprocessed byte counts, window size checks, and window update sending; also added abstract windowSizeExceeded method and clarified getStreamId usage.",
+          "where_in_code": "WindowUpdateSender class - methods managing flow control window updates",
+          "intent": "To implement precise flow control accounting by tracking both processed and unprocessed bytes, enforcing window limits, and sending window updates appropriately, while allowing subclasses to handle window size violations.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "canBufferUnprocessedBytes",
+            "processed",
+            "released",
+            "update",
+            "windowSizeExceeded"
+          ]
+        },
+        {
+          "hunk_index": 20,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowUpdateSender.java",
+          "what_changed": "Added assertion to ensure window update delta is positive before sending WindowUpdateFrame.",
+          "where_in_code": "WindowUpdateSender - sendWindowUpdate method",
+          "intent": "To enforce correctness by preventing invalid window update frames with non-positive delta values.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "sendWindowUpdate",
+            "assert"
+          ]
+        },
+        {
+          "hunk_index": 21,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowUpdateSender.java",
+          "what_changed": "Added abstract method windowSizeExceeded with documentation describing its purpose and expected behavior when flow control window is exceeded.",
+          "where_in_code": "WindowUpdateSender class - abstract method declarations",
+          "intent": "To require subclasses to implement handling of flow control window violations, enabling protocol error reporting or disabling flow control as needed.",
+          "change_type": "add_method",
+          "key_symbols": [
+            "windowSizeExceeded"
+          ]
+        },
+        {
+          "hunk_index": 22,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/frame/FramesDecoder.java",
+          "what_changed": "Updated copyright year from 2018 to 2024.",
+          "where_in_code": "file header",
+          "intent": "Routine update of copyright year.",
+          "change_type": "other",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 23,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/frame/FramesDecoder.java",
+          "what_changed": "Added validation in SettingsFrame parameter parsing to reject negative INITIAL_WINDOW_SIZE values and out-of-range MAX_FRAME_SIZE values, returning appropriate MalformedFrame errors.",
+          "where_in_code": "FramesDecoder - parsing SettingsFrame parameters",
+          "intent": "To enforce protocol compliance by validating SETTINGS frame parameters and rejecting invalid values early.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "INITIAL_WINDOW_SIZE",
+            "MAX_FRAME_SIZE",
+            "MalformedFrame"
+          ]
+        },
+        {
+          "hunk_index": 24,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/frame/FramesDecoder.java",
+          "what_changed": "Added validation in WindowUpdateFrame parsing to reject negative window update values, returning a MalformedFrame with FLOW_CONTROL_ERROR if invalid.",
+          "where_in_code": "FramesDecoder - parseWindowUpdateFrame method",
+          "intent": "To ensure window update values conform to protocol limits and prevent flow control errors due to invalid frame values.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "WindowUpdateFrame",
+            "MalformedFrame",
+            "FLOW_CONTROL_ERROR"
+          ]
+        },
+        {
+          "hunk_index": 25,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/frame/SettingsFrame.java",
+          "what_changed": "Updated copyright year from 2021 to 2024.",
+          "where_in_code": "file header",
+          "intent": "Routine update of copyright year.",
+          "change_type": "other",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 26,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/frame/SettingsFrame.java",
+          "what_changed": "Added new constant INITIAL_CONNECTION_WINDOW_SIZE equal to DEFAULT_INITIAL_WINDOW_SIZE, with comment that it cannot be updated via SETTINGS frame.",
+          "where_in_code": "SettingsFrame class - constants",
+          "intent": "To define a constant representing the initial connection-level flow control window size, distinct from stream-level window size, and document its immutability via SETTINGS frames.",
+          "change_type": "add_field",
+          "key_symbols": [
+            "INITIAL_CONNECTION_WINDOW_SIZE",
+            "DEFAULT_INITIAL_WINDOW_SIZE"
+          ]
+        },
+        {
+          "hunk_index": 27,
+          "file_path": "src/java.net.http/share/classes/module-info.java",
+          "what_changed": "Refined documentation for jdk.httpclient.connectionWindowSize system property to specify valid range [2^16-1, 2^31-1], behavior on invalid values, and guarantee that actual value is no smaller than stream window size.",
+          "where_in_code": "module-info.java - system property documentation",
+          "intent": "To clarify configuration constraints and behavior for connection window size property, improving user understanding and preventing misconfiguration.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "jdk.httpclient.connectionWindowSize"
+          ]
+        },
+        {
+          "hunk_index": 28,
+          "file_path": "src/java.net.http/share/classes/module-info.java",
+          "what_changed": "Refined documentation for jdk.httpclient.windowsize system property to specify valid range [2^14, 2^31-1] and behavior on invalid values.",
+          "where_in_code": "module-info.java - system property documentation",
+          "intent": "To clarify configuration constraints and behavior for stream window size property, improving user understanding and preventing misconfiguration.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "jdk.httpclient.windowsize"
+          ]
+        }
+      ]
+    },
+    "agent8_syntax_repair_fallback_1": {
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": []
+    },
+    "agent7_validator_retry1": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 2,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk21u-dev-helper",
+      "test_success": false,
+      "test_mode": "jdk21u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/java/net/httpclient/GZIPInputStreamTest.jtr.xml",
+          "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/java/net/httpclient/GZIPInputStreamTest.testng-results.xml",
+          "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/java/net/httpclient/ProxySelectorTest.jtr.xml",
+          "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/java/net/httpclient/ProxySelectorTest.testng-results.xml",
+          "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/java/net/httpclient/http2/ConnectionFlowControlTest.jtr.xml",
+          "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/java/net/httpclient/http2/ConnectionFlowControlTest.testng-results.xml",
+          "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/java/net/httpclient/http2/StreamFlowControlTest.jtr.xml",
+          "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/java/net/httpclient/http2/StreamFlowControlTest.testng-results.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "java/net/httpclient/GZIPInputStreamTest.java#GZIPInputStreamTest": "passed",
+          "java/net/httpclient/ProxySelectorTest.java#ProxySelectorTest": "passed",
+          "java/net/httpclient/http2/ConnectionFlowControlTest.java#ConnectionFlowControlTest": "failed",
+          "java/net/httpclient/http2/StreamFlowControlTest.java#StreamFlowControlTest": "failed"
+        },
+        "classes": {
+          "java/net/httpclient/GZIPInputStreamTest.java": "passed",
+          "java/net/httpclient/ProxySelectorTest.java": "passed",
+          "java/net/httpclient/http2/ConnectionFlowControlTest.java": "failed",
+          "java/net/httpclient/http2/StreamFlowControlTest.java": "failed"
+        },
+        "summary": {
+          "passed": 2,
+          "failed": 2,
+          "skipped": 0,
+          "total": 4
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [],
+        "pass_to_fail": [],
+        "newly_passing": [
+          "java/net/httpclient/GZIPInputStreamTest.java#GZIPInputStreamTest",
+          "java/net/httpclient/ProxySelectorTest.java#ProxySelectorTest"
+        ],
+        "baseline_total": 0,
+        "patched_total": 4,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 40,
+    "developer_aux_hunks_from_target": 6,
+    "phase0_baseline": {
+      "mode": "baseline-jdk21u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 4
+    },
+    "java_production_hunks": 29,
+    "developer_aux_hunks": 6,
+    "processed_hunk_indices": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      6,
+      7
+    ],
+    "tokens_used": 104842,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 8126,
+        "output": 1645
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      },
+      "agent9_fallback": {
+        "input": 100599,
+        "output": 4243
+      }
+    },
+    "synthesis_status": "partial",
+    "applied_on_disk_ag3": 26,
+    "synthesized_count": 0,
+    "failed_hunks_total": 1,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "failed",
+    "fallback_attempts": 1,
+    "retry_contexts": [
+      {
+        "error_type": "synthesis_skipped_no_localization",
+        "error_message": "Hunk unclaimed; localization failed entirely",
+        "attempt_count": 4,
+        "suggested_action": "manual_review"
+      },
+      {
+        "error_type": "synthesis_failed_no_match",
+        "error_message": "Could not verify exact string in target file",
+        "attempt_count": 4,
+        "suggested_action": "relocalize"
+      },
+      {
+        "error_type": "api_mismatch",
+        "error_message": "stract and does not override abstract method windowSizeExceeded(long) in WindowUpdateSender\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Stream.java:209: error: cannot find symbol\n  symbol:   method releaseUnconsumed(DataFrame)\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Stream.java:229: error: cannot find symbol\n  symbol:   method releaseUnconsumed(DataFrame)\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Stream.java:286: error: cannot find symbol\n  symbol:   method releaseUnconsumed(DataFrame)\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Stream.java:395: error: cannot find symbol\n  symbol:   method releaseUnconsumed(DataFrame)\nERROR: Build failed for target 'images' in configuration '/repo/build_shared' (exit code 2) \n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:1898: error: ConnectionWindowUpdateSender is not abstract and does not override abstract method windowSizeExceeded(long) in WindowUpdateSender\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Stream.java:209: error: cannot find symbol\n  symbol:   method releaseUnconsumed(DataFrame)\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Stream.java:229: error: cannot find symbol\n  symbol:   method releaseUnconsumed(DataFrame)\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Stream.java:286: error: cannot find symbol\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:1898: error: ConnectionWindowUpdateSender is not abstract and does not override abstract method windowSizeExceeded(long) in WindowUpdateSender\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Stream.java:209: error: cannot find symbol\n  symbol:   method releaseUnconsumed(DataFrame)\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Stream.java:229: error: cannot find symbol\n  symbol:   method releaseUnconsumed(DataFrame)\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Stream.java:286: error: cannot find symbol\n  symbol:   method releaseUnconsumed(DataFrame)\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Stream.java:395: error: cannot find symbol\n  symbol:   method releaseUnconsumed(DataFrame)\nERROR: Build failed for target 'images' in configuration '/repo/build_shared' (exit code 2) \n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java:1898: error: ConnectionWindowUpdateSender is not abstract and does not override abstract method windowSizeExceeded(long) in WindowUpdateSender\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Stream.java:209: error: cannot find symbol\n  symbol:   method releaseUnconsumed(DataFrame)\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Stream.java:229: error: cannot find symbol\n  symbol:   method releaseUnconsumed(DataFrame)\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Stream.java:286: error: cannot find symbol\n=== Build FAILED for 8ed020e ===",
+        "attempt_count": 1,
+        "suggested_action": "route_to_namespace_or_structural"
+      }
+    ],
+    "failed_hunks": [
+      {
+        "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+        "old_file_path": null,
+        "old_content": "import static jdk.internal.net.http.frame.SettingsFrame.DEFAULT_INITIAL_WINDOW_SIZE;\nimport static jdk.internal.net.http.frame.SettingsFrame.ENABLE_PUSH;\nimport static jdk.internal.net.http.frame.SettingsFrame.HEADER_TABLE_SIZE;\nimport static jdk.internal.net.http.frame.SettingsFrame.INITIAL_WINDOW_SIZE;\nimport static jdk.internal.net.http.frame.SettingsFrame.MAX_CONCURRENT_STREAMS;\nimport static jdk.internal.net.http.frame.SettingsFrame.MAX_FRAME_SIZE;\n",
+        "new_content": "import static jdk.internal.net.http.frame.SettingsFrame.DEFAULT_INITIAL_WINDOW_SIZE;\nimport static jdk.internal.net.http.frame.SettingsFrame.ENABLE_PUSH;\nimport static jdk.internal.net.http.frame.SettingsFrame.HEADER_TABLE_SIZE;\nimport static jdk.internal.net.http.frame.SettingsFrame.INITIAL_CONNECTION_WINDOW_SIZE;\nimport static jdk.internal.net.http.frame.SettingsFrame.INITIAL_WINDOW_SIZE;\nimport static jdk.internal.net.http.frame.SettingsFrame.MAX_CONCURRENT_STREAMS;\nimport static jdk.internal.net.http.frame.SettingsFrame.MAX_FRAME_SIZE;\n",
+        "is_new_file": false,
+        "is_del_file": false,
+        "is_rename": false,
+        "file_operation": "MODIFIED"
+      }
+    ],
+    "generated_patch_bytes": 22187,
+    "target_patch_bytes": 64699,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": false,
+    "test_mode": "jdk21u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [],
+      "pass_to_fail": [],
+      "newly_passing": [
+        "java/net/httpclient/GZIPInputStreamTest.java#GZIPInputStreamTest",
+        "java/net/httpclient/ProxySelectorTest.java#ProxySelectorTest"
+      ],
+      "baseline_total": 0,
+      "patched_total": 4,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 0,
+    "newly_passing_count": 2,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

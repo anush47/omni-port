@@ -1,0 +1,192 @@
+{
+  "run_timestamp": "2026-04-19T06:26:23.339594",
+  "repo": "jdk11u-dev",
+  "patch_type": "TYPE-II",
+  "original_commit": "2fcb816858406f33cefef3164b2c85f9f996c7da",
+  "backport_commit": "be6c6212ffb542d517513784ce10eda68cbb0fe9",
+  "description": "main \u2192 jdk11u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "java_hunks": 2,
+      "aux_hunks": 1,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.desktop/windows/classes/sun/awt/shell/Win32ShellFolderManager2.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.desktop/windows/classes/sun/awt/shell/Win32ShellFolderManager2.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 515,
+          "end_line": 521,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 2.82,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_I",
+        "confidence": 0.95,
+        "reasoning": "The patch consists of two hunks in the same source file that are found via 'git_exact' with confidence 1.00, indicating exact matches. The first hunk updates a copyright year, which is trivial. The second hunk changes a conditional from 'if (special1 || special2)' to 'if (special1 && special2)', which is a straightforward logical fix without structural changes. Additionally, a new test file is added, but this does not affect the classification of the backport complexity. Overall, the patch is a simple, exact string replacement and minor logic fix, fitting TYPE_I classification with high confidence. The token budget estimate accounts for the small code changes and the added test file.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "applied_count": 2,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/windows/classes/sun/awt/shell/Win32ShellFolderManager2.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/windows/classes/sun/awt/shell/Win32ShellFolderManager2.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "adapted_count": 0
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 0,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": []
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [],
+      "synthesized_count_after_repair": 0
+    },
+    "agent7_validator": {
+      "validation_passed": false,
+      "validation_failure_category": "infrastructure",
+      "validation_error_context": "Test runner produced no results (infrastructure failure).",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk11u-dev-helper",
+      "test_success": false,
+      "test_mode": "jdk11u-dev-helper",
+      "test_state": {
+        "xml_reports": [],
+        "target_classes": [],
+        "test_cases": {},
+        "classes": {},
+        "summary": {
+          "passed": 0,
+          "failed": 0,
+          "skipped": 0,
+          "total": 0
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": false,
+        "fail_to_pass": [],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 0,
+        "patched_total": 0,
+        "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 3,
+    "developer_aux_hunks_from_target": 1,
+    "phase0_baseline": {
+      "mode": "baseline-jdk11u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 0
+    },
+    "java_production_hunks": 2,
+    "developer_aux_hunks": 1,
+    "processed_hunk_indices": [
+      0,
+      1
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 2,
+    "synthesized_count": 0,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [
+      {
+        "error_type": "infrastructure",
+        "error_message": "Target test/jdk/javax/swing/JFileChooser/FileSystemView/Win32FolderSort.java FAILED\n=== SOME TESTS FAILED ===",
+        "attempt_count": 1,
+        "suggested_action": "abort_transient_failure"
+      }
+    ],
+    "failed_hunks": [],
+    "generated_patch_bytes": 1321,
+    "target_patch_bytes": 7996,
+    "patch_exact_match": false,
+    "validation_passed": false,
+    "validation_failure_category": "infrastructure",
+    "build_success": true,
+    "test_success": false,
+    "test_mode": "jdk11u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": false,
+      "fail_to_pass": [],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 0,
+      "patched_total": 0,
+      "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+    },
+    "fail_to_pass_count": 0,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": false
+  }
+}

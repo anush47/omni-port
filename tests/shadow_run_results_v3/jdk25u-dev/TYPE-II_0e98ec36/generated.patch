@@ -1,0 +1,115 @@
+diff --git a/src/java.desktop/share/classes/java/awt/color/ICC_Profile.java b/src/java.desktop/share/classes/java/awt/color/ICC_Profile.java
+index c641e469972..b3f931be0b3 100644
+--- a/src/java.desktop/share/classes/java/awt/color/ICC_Profile.java
++++ b/src/java.desktop/share/classes/java/awt/color/ICC_Profile.java
+@@ -41,6 +41,7 @@
+ import java.io.FileOutputStream;
+ import java.io.IOException;
+ import java.io.InputStream;
++import java.io.InvalidObjectException;
+ import java.io.ObjectInputStream;
+ import java.io.ObjectOutputStream;
+ import java.io.ObjectStreamException;
+@@ -109,7 +110,6 @@ public sealed class ICC_Profile implements Serializable
+      */
+     private transient volatile ProfileDeferralInfo deferralInfo;
+ 
+-
+     /**
+      * Set to {@code true} for {@code BuiltInProfile}, {@code false} otherwise.
+      * This flag is used in {@link #setData(int, byte[])} to prevent modifying
+@@ -182,7 +182,6 @@ private interface BuiltInProfile {
+      */
+     public static final int CLASS_NAMEDCOLOR = 6;
+ 
+-
+     /**
+      * ICC Profile Color Space Type Signature: 'XYZ '.
+      */
+@@ -308,7 +307,6 @@ private interface BuiltInProfile {
+      */
+     public static final int icSigSpaceFCLR = 0x46434C52;
+ 
+-
+     /**
+      * ICC Profile Class Signature: 'scnr'.
+      */
+@@ -344,7 +342,6 @@ private interface BuiltInProfile {
+      */
+     public static final int icSigNamedColorClass = 0x6e6d636c;
+ 
+-
+     /**
+      * ICC Profile Rendering Intent: Perceptual.
+      */
+@@ -379,7 +376,6 @@ private interface BuiltInProfile {
+      */
+     public static final int icICCAbsoluteColorimetric = 3;
+ 
+-
+     /**
+      * ICC Profile Tag Signature: 'head' - special.
+      */
+@@ -652,7 +648,6 @@ private interface BuiltInProfile {
+      */
+     public static final int icSigColorantTableTag = 0x636C7274;
+ 
+-
+     /**
+      * ICC Profile Header Location: profile size in bytes.
+      */
+@@ -740,7 +735,6 @@ private interface BuiltInProfile {
+      */
+     public static final int icHdrProfileID = 84;
+ 
+-
+     /**
+      * ICC Profile Constant: tag type signature.
+      */
+@@ -1567,33 +1561,19 @@ private void writeObject(ObjectOutputStream s) throws IOException {
+     private void readObject(ObjectInputStream s)
+             throws IOException, ClassNotFoundException {
+         s.defaultReadObject();
+-
+-        String csName = (String) s.readObject();
+-        byte[] data = (byte[]) s.readObject();
+-
+-        int cspace = 0;         // ColorSpace.CS_* constant if known
+-        boolean isKnownPredefinedCS = false;
+-        if (csName != null) {
+-            isKnownPredefinedCS = true;
+-            if (csName.equals("CS_sRGB")) {
+-                cspace = ColorSpace.CS_sRGB;
+-            } else if (csName.equals("CS_CIEXYZ")) {
+-                cspace = ColorSpace.CS_CIEXYZ;
+-            } else if (csName.equals("CS_PYCC")) {
+-                cspace = ColorSpace.CS_PYCC;
+-            } else if (csName.equals("CS_GRAY")) {
+-                cspace = ColorSpace.CS_GRAY;
+-            } else if (csName.equals("CS_LINEAR_RGB")) {
+-                cspace = ColorSpace.CS_LINEAR_RGB;
+-            } else {
+-                isKnownPredefinedCS = false;
+-            }
+-        }
+-
+-        if (isKnownPredefinedCS) {
+-            resolvedDeserializedProfile = getInstance(cspace);
+-        } else {
+-            resolvedDeserializedProfile = getInstance(data);
++        try {
++            String csName = (String) s.readObject();
++            byte[] data = (byte[]) s.readObject();
++            resolvedDeserializedProfile = switch (csName) {
++                case "CS_sRGB" -> getInstance(ColorSpace.CS_sRGB);
++                case "CS_CIEXYZ" -> getInstance(ColorSpace.CS_CIEXYZ);
++                case "CS_PYCC" -> getInstance(ColorSpace.CS_PYCC);
++                case "CS_GRAY" -> getInstance(ColorSpace.CS_GRAY);
++                case "CS_LINEAR_RGB" -> getInstance(ColorSpace.CS_LINEAR_RGB);
++                case null, default -> getInstance(data);
++            };
++        } catch (ClassCastException | IllegalArgumentException e) {
++            throw new InvalidObjectException("Invalid ICC Profile Data", e);
+         }
+     }
+ 

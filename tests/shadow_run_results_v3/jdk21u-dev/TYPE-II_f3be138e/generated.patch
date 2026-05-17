@@ -1,0 +1,87 @@
+diff --git a/src/jdk.jlink/share/classes/jdk/tools/jlink/internal/plugins/SystemModulesPlugin.java b/src/jdk.jlink/share/classes/jdk/tools/jlink/internal/plugins/SystemModulesPlugin.java
+index 320188f4c9b..13c8825399c 100644
+--- a/src/jdk.jlink/share/classes/jdk/tools/jlink/internal/plugins/SystemModulesPlugin.java
++++ b/src/jdk.jlink/share/classes/jdk/tools/jlink/internal/plugins/SystemModulesPlugin.java
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 2015, 2023, Oracle and/or its affiliates. All rights reserved.
++ * Copyright (c) 2015, 2024, Oracle and/or its affiliates. All rights reserved.
+  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+  *
+  * This code is free software; you can redistribute it and/or modify it
+@@ -703,7 +703,6 @@ public final class SystemModulesPlugin extends AbstractPlugin {
+                 return;
+             }
+ 
+-
+             // Split the module descriptors be created by multiple helper methods.
+             // Each helper method "subi" creates the maximum N number of module descriptors
+             //     mi, m{i+1} ...
+@@ -1303,7 +1302,6 @@ public final class SystemModulesPlugin extends AbstractPlugin {
+                 }
+             }
+ 
+-
+             /**
+              * Call Builder::newOpens to create Opens instances and
+              * then pass it to the builder by calling:
+@@ -1510,7 +1508,6 @@ public final class SystemModulesPlugin extends AbstractPlugin {
+                 pushModuleHashes();
+             }
+ 
+-
+             /*
+              * Create ModuleHashes.Builder instance
+              */
+@@ -1526,7 +1523,6 @@ public final class SystemModulesPlugin extends AbstractPlugin {
+                    .aload(BUILDER_VAR);
+             }
+ 
+-
+             /*
+              * Invoke ModuleHashes.Builder::build and put the returned
+              * ModuleHashes to the hashes array
+@@ -1659,7 +1655,6 @@ public final class SystemModulesPlugin extends AbstractPlugin {
+                 return opensModifiersSets.get(mods).build(cob);
+             }
+ 
+-
+             /*
+              * Retrieve the index to the given set of Requires.Modifier.
+              * Emit code to generate it when EnumSetBuilder::build is called.
+@@ -1811,6 +1806,9 @@ public final class SystemModulesPlugin extends AbstractPlugin {
+ 
+         // write the class file to the pool as a resource
+         String rn = "/java.base/" + SYSTEM_MODULES_MAP_CLASSNAME + ".class";
++        // sort the map of module name to the class name of the generated SystemModules class
++        List<Map.Entry<String, String>> systemModulesMap = map.entrySet()
++                .stream().sorted(Map.Entry.comparingByKey()).toList();
+         ResourcePoolEntry e = ResourcePoolEntry.create(rn, Classfile.build(
+                 CD_SYSTEM_MODULES_MAP,
+                 clb -> clb.withFlags(ACC_FINAL + ACC_SUPER)
+@@ -1861,10 +1859,10 @@ public final class SystemModulesPlugin extends AbstractPlugin {
+                                       cob.anewarray(CD_String);
+ 
+                                       int index = 0;
+-                                      for (String moduleName : sorted(map.keySet())) {
++                                      for (Map.Entry<String,String> entry : systemModulesMap) {
+                                           cob.dup() // arrayref
+                                              .constantInstruction(index)
+-                                             .constantInstruction(moduleName)
++                                             .constantInstruction(entry.getKey())
+                                              .aastore();
+                                           index++;
+                                       }
+@@ -1882,10 +1880,10 @@ public final class SystemModulesPlugin extends AbstractPlugin {
+                                          .anewarray(CD_String);
+ 
+                                       int index = 0;
+-                                      for (String className : sorted(map.values())) {
++                                      for (Map.Entry<String,String> entry : systemModulesMap) {
+                                           cob.dup() // arrayref
+                                              .constantInstruction(index)
+-                                             .constantInstruction(className.replace('/', '.'))
++                                             .constantInstruction(entry.getValue().replace('/', '.'))
+                                              .aastore();
+                                           index++;
+                                       }

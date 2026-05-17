@@ -1,0 +1,255 @@
+{
+  "run_timestamp": "2026-04-19T08:38:09.725343",
+  "repo": "jdk25u-dev",
+  "patch_type": "TYPE-I",
+  "original_commit": "12e6a0b6d0086caf156cf5513a604320c619b856",
+  "backport_commit": "81bf87878330a704a313886e3f273b581064d2cb",
+  "description": "main \u2192 jdk25u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "java_hunks": 6,
+      "aux_hunks": 1,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.desktop/share/classes/sun/java2d/cmm/lcms/LCMSImageLayout.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.desktop/share/classes/sun/java2d/cmm/lcms/LCMSImageLayout.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 125,
+          "end_line": 131,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.desktop/share/classes/sun/java2d/cmm/lcms/LCMSImageLayout.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 164,
+          "end_line": 170,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.desktop/share/classes/sun/java2d/cmm/lcms/LCMSImageLayout.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 172,
+          "end_line": 182,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.desktop/share/classes/sun/java2d/cmm/lcms/LCMSImageLayout.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 188,
+          "end_line": 194,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/java.desktop/share/classes/sun/java2d/cmm/lcms/LCMSImageLayout.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 198,
+          "end_line": 204,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 2.49,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_I",
+        "confidence": 0.95,
+        "reasoning": "All hunks in the patch are found via 'git_exact' with confidence 1.00, indicating the patch applies as exact matches to the target branch. The changes are straightforward code updates and additions without structural or API changes, consistent with a TYPE_I classification. The addition of a new test file does not increase complexity beyond trivial backporting. The patch is not auto-generated.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "applied_count": 6,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/sun/java2d/cmm/lcms/LCMSImageLayout.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/sun/java2d/cmm/lcms/LCMSImageLayout.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/sun/java2d/cmm/lcms/LCMSImageLayout.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/sun/java2d/cmm/lcms/LCMSImageLayout.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/sun/java2d/cmm/lcms/LCMSImageLayout.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/sun/java2d/cmm/lcms/LCMSImageLayout.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "adapted_count": 0
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 0,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": []
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [],
+      "synthesized_count_after_repair": 0
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk25u-dev-helper",
+      "test_success": true,
+      "test_mode": "jdk25u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/sun/java2d/cmm/ColorConvertOp/FilterSemiCustomImages.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "sun/java2d/cmm/ColorConvertOp/FilterSemiCustomImages.java#FilterSemiCustomImages": "passed"
+        },
+        "classes": {
+          "sun/java2d/cmm/ColorConvertOp/FilterSemiCustomImages.java": "passed"
+        },
+        "summary": {
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [
+          "sun/java2d/cmm/ColorConvertOp/FilterSemiCustomImages.java#FilterSemiCustomImages"
+        ],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 1,
+        "patched_total": 1,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 7,
+    "developer_aux_hunks_from_target": 1,
+    "phase0_baseline": {
+      "mode": "baseline-jdk25u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 1
+    },
+    "java_production_hunks": 6,
+    "developer_aux_hunks": 1,
+    "processed_hunk_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 6,
+    "synthesized_count": 0,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 3593,
+    "target_patch_bytes": 10262,
+    "patch_exact_match": true,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": true,
+    "test_mode": "jdk25u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [
+        "sun/java2d/cmm/ColorConvertOp/FilterSemiCustomImages.java#FilterSemiCustomImages"
+      ],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 1,
+      "patched_total": 1,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 1,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

@@ -1,0 +1,46 @@
+diff --git a/src/jdk.compiler/share/classes/com/sun/tools/javac/comp/LambdaToMethod.java b/src/jdk.compiler/share/classes/com/sun/tools/javac/comp/LambdaToMethod.java
+index 1968d182fe0..69b97ad67e4 100644
+--- a/src/jdk.compiler/share/classes/com/sun/tools/javac/comp/LambdaToMethod.java
++++ b/src/jdk.compiler/share/classes/com/sun/tools/javac/comp/LambdaToMethod.java
+@@ -190,7 +190,6 @@ public class LambdaToMethod extends TreeTranslator {
+             this.tree = tree;
+         }
+ 
+-
+         @Override
+         public int hashCode() {
+             int hashCode = this.hashCode;
+@@ -351,7 +350,6 @@ public class LambdaToMethod extends TreeTranslator {
+                     owner::setTypeAttributes,
+                     sym::setTypeAttributes);
+ 
+-
+             boolean init;
+             if ((init = (owner.name == names.init)) || owner.name == names.clinit) {
+                 owner = owner.owner;
+@@ -520,7 +518,6 @@ public class LambdaToMethod extends TreeTranslator {
+ 
+         List<JCExpression> indy_args = init==null? List.nil() : translate(List.of(init), localContext.prev);
+ 
+-
+         //build a sam instance using an indy call to the meta-factory
+         result = makeMetafactoryIndyCall(localContext, refSym.asHandle(), indy_args);
+     }
+@@ -1561,8 +1558,15 @@ public class LambdaToMethod extends TreeTranslator {
+         public void visitVarDef(JCVariableDecl tree) {
+             TranslationContext<?> context = context();
+             if (context != null && context instanceof LambdaTranslationContext lambdaContext) {
+-                if (frameStack.head.tree.hasTag(LAMBDA)) {
+-                    lambdaContext.addSymbol(tree.sym, LOCAL_VAR);
++                for (Frame frame : frameStack) {
++                    if (frame.tree.hasTag(VARDEF)) {
++                        //skip variable frames inside a lambda:
++                        continue;
++                    } else if (frame.tree.hasTag(LAMBDA)) {
++                        lambdaContext.addSymbol(tree.sym, LOCAL_VAR);
++                    } else {
++                        break;
++                    }
+                 }
+                 // Check for type variables (including as type arguments).
+                 // If they occur within class nested in a lambda, mark for erasure

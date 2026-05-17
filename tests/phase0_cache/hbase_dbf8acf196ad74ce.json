@@ -1,0 +1,42 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.TestSplitMergeQuotaTable.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.TestHBackupFileSystem.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.backup.TestIncrementalBackup.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.client.TestAsyncAggregationClientWithCallbackThreadPool.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.client.TestFlushFromClient.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.client.TestFlushFromClientWithDisabledFlushProcedure.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.coprocessor.TestAggregateImplementation.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.compress.zstd.TestZstdByteBuffDecompressor.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.hfile.TestHFileBlockHeaderCorruption.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.io.hfile.TestRowIndexV1RoundTrip.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.mapreduce.TestWALInputFormat.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.master.region.TestMasterRegionWALSyncTimeoutIOException.xml",
+      "/home/cseroot/omni-port/repos/hbase/build/all-test-results/TEST-org.apache.hadoop.hbase.regionserver.TestCompaction.xml",
+      "/home/cseroot/omni-port/repos/hbase/hbase-endpoint/target/surefire-reports/TEST-org.apache.hadoop.hbase.client.TestAsyncAggregationClientWithCallbackThreadPool.xml"
+    ],
+    "target_classes": [
+      "org.apache.hadoop.hbase.client.TestAsyncAggregationClientWithCallbackThreadPool"
+    ],
+    "test_cases": {
+      "org.apache.hadoop.hbase.client.TestAsyncAggregationClientWithCallbackThreadPool#testAvg": "passed",
+      "org.apache.hadoop.hbase.client.TestAsyncAggregationClientWithCallbackThreadPool#testMax": "passed",
+      "org.apache.hadoop.hbase.client.TestAsyncAggregationClientWithCallbackThreadPool#testMin": "passed",
+      "org.apache.hadoop.hbase.client.TestAsyncAggregationClientWithCallbackThreadPool#testStd": "passed",
+      "org.apache.hadoop.hbase.client.TestAsyncAggregationClientWithCallbackThreadPool#testSum": "passed",
+      "org.apache.hadoop.hbase.client.TestAsyncAggregationClientWithCallbackThreadPool#testRowCount": "passed"
+    },
+    "classes": {
+      "org.apache.hadoop.hbase.client.TestAsyncAggregationClientWithCallbackThreadPool": "passed"
+    },
+    "summary": {
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "total": 6
+    }
+  },
+  "mode": "baseline-hbase-helper",
+  "skipped": false
+}

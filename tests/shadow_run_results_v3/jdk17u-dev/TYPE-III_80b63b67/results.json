@@ -1,0 +1,242 @@
+{
+  "run_timestamp": "2026-04-18T18:13:43.618843",
+  "repo": "jdk17u-dev",
+  "patch_type": "TYPE-III",
+  "original_commit": "80b63b67293970936d57ae4375ad76cd2b11a333",
+  "backport_commit": "2db15017683a4b72798439c39e96038d0ca9c4fe",
+  "description": "main \u2192 jdk17u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 1.82,
+      "error": null,
+      "java_hunks": 4,
+      "aux_hunks": 1,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/html/HTMLDocument.java",
+          "method_used": "git_pickaxe",
+          "confidence": 0.9,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/html/HTMLDocument.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 25,
+          "end_line": 39,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/html/HTMLDocument.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 2475,
+          "end_line": 2481,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/html/HTMLDocument.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 3449,
+          "end_line": 3455,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 3.58,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_II",
+        "confidence": 0.95,
+        "reasoning": "The patch modifies the HTMLDocument.java file primarily by changing a mapping for the <s> tag to use the 'conv' converter instead of 'ca', and extends the handling of the <s> tag in the text decoration logic to include 'line-through' alongside <strike>. These changes are localized and involve minor structural adjustments but no deep refactoring or redesign. The patch also adds a new test file, which is a straightforward addition. The localization evidence shows that most hunks are found exactly, except one found via 'git_pickaxe' with high confidence, indicating minor code drift or formatting changes. Overall, the patch requires fuzzy matching due to slight code context changes but no major structural changes, fitting TYPE_II classification.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.04,
+      "error": null,
+      "applied_count": 3,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/html/HTMLDocument.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/html/HTMLDocument.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/html/HTMLDocument.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 27.88,
+      "error": null,
+      "adapted_count": 1
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 1,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/html/HTMLDocument.java",
+          "old_string": "/*\n * Copyright (c) 1997, 2019, Oracle and/or its affiliates. All rights reserved.\n * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.\n *\n * This code is free software; you can redistribute it and/or modify it",
+          "new_string": "/*\n * Copyright (c) 1997, 2024, Oracle and/or its affiliates. All rights reserved.\n * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.\n *\n * This code is free software; you can redistribute it and/or modify it",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.24,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/html/HTMLDocument.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 1
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk17u-dev-helper",
+      "test_success": true,
+      "test_mode": "jdk17u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/javax/swing/text/html/HTMLDocument/HTMLUnderlineStrike.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "javax/swing/text/html/HTMLDocument/HTMLUnderlineStrike.java#HTMLUnderlineStrike": "passed"
+        },
+        "classes": {
+          "javax/swing/text/html/HTMLDocument/HTMLUnderlineStrike.java": "passed"
+        },
+        "summary": {
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [
+          "javax/swing/text/html/HTMLDocument/HTMLUnderlineStrike.java#HTMLUnderlineStrike"
+        ],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 1,
+        "patched_total": 1,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 5,
+    "developer_aux_hunks_from_target": 1,
+    "phase0_baseline": {
+      "mode": "baseline-jdk17u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 1
+    },
+    "java_production_hunks": 4,
+    "developer_aux_hunks": 1,
+    "processed_hunk_indices": [
+      1,
+      2,
+      3,
+      0
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 3113,
+        "output": 1195
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 3,
+    "synthesized_count": 1,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "clean",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 7926,
+    "target_patch_bytes": 7387,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": true,
+    "test_mode": "jdk17u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [
+        "javax/swing/text/html/HTMLDocument/HTMLUnderlineStrike.java#HTMLUnderlineStrike"
+      ],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 1,
+      "patched_total": 1,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 1,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

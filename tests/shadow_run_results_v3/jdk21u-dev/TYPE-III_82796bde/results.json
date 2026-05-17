@@ -1,0 +1,260 @@
+{
+  "run_timestamp": "2026-04-18T20:35:00.021911",
+  "repo": "jdk21u-dev",
+  "patch_type": "TYPE-III",
+  "original_commit": "82796bdebbf56b98ec97a6d572ed68c2842f60c6",
+  "backport_commit": "779204c941225f76aa85299bacfae59deccef082",
+  "description": "main \u2192 jdk21u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 4.2,
+      "error": null,
+      "java_hunks": 5,
+      "aux_hunks": 1,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.base/share/classes/java/lang/String.java",
+          "method_used": "fuzzy",
+          "confidence": 0.76,
+          "start_line": 574,
+          "end_line": 580,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.base/share/classes/java/lang/String.java",
+          "method_used": "fuzzy",
+          "confidence": 0.974,
+          "start_line": 584,
+          "end_line": 590,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.base/share/classes/java/lang/String.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 605,
+          "end_line": 611,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.base/share/classes/java/lang/String.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 750,
+          "end_line": 764,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.base/share/classes/java/lang/String.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1304,
+          "end_line": 1310,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 3.5,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_II",
+        "confidence": 0.85,
+        "reasoning": "The patch modifies the String.java file by replacing direct byte array allocations with calls to StringUTF16.newBytesFor(length). The changes are consistent and localized to byte array allocations related to UTF-16 encoding. The localization evidence shows that most hunks were found via 'git_exact' with high confidence, but some hunks were found via 'fuzzy' matching with slightly lower confidence, indicating minor formatting or context differences. The patch also adds a new test file, which is straightforward. Overall, the patch involves whitespace/formatting drift and minor code adjustments without structural or API changes, fitting TYPE_II classification.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.01,
+      "error": null,
+      "applied_count": 3,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/java/lang/String.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/java/lang/String.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/java/lang/String.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 52.51,
+      "error": null,
+      "adapted_count": 2
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 2,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "src/java.base/share/classes/java/lang/String.java",
+          "old_string": "                byte[] buf = new byte[length << 1];\n                StringLatin1.inflate(dst, 0, buf, 0, dp);\n                dst = buf;\n                dp = decodeUTF8_UTF16(bytes, offset, sl, dst, dp, true);",
+          "new_string": "                byte[] buf = StringUTF16.newBytesFor(length);\n                StringLatin1.inflate(dst, 0, buf, 0, dp);\n                dst = buf;\n                dp = decodeUTF8_UTF16(bytes, offset, sl, dst, dp, true);",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        },
+        {
+          "file_path": "src/java.base/share/classes/java/lang/String.java",
+          "old_string": "                this.value = dst;\n                this.coder = UTF16;\n            } else { // !COMPACT_STRINGS\n                byte[] dst = new byte[length << 1];\n                int dp = decodeUTF8_UTF16(bytes, offset, offset + length, dst, 0, true);\n                if (dp != length) {\n                    dst = Arrays.copyOf(dst, dp << 1);",
+          "new_string": "                this.value = dst;\n                this.coder = UTF16;\n            } else { // !COMPACT_STRINGS\n                byte[] dst = StringUTF16.newBytesFor(length);\n                int dp = decodeUTF8_UTF16(bytes, offset, offset + length, dst, 0, true);\n                if (dp != length) {\n                    dst = Arrays.copyOf(dst, dp << 1);",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.25,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/java.base/share/classes/java/lang/String.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 2
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk21u-dev-helper",
+      "test_success": true,
+      "test_mode": "jdk21u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/java/lang/String/CompactString/NegativeSize.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "java/lang/String/CompactString/NegativeSize.java#NegativeSize": "passed"
+        },
+        "classes": {
+          "java/lang/String/CompactString/NegativeSize.java": "passed"
+        },
+        "summary": {
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [
+          "java/lang/String/CompactString/NegativeSize.java#NegativeSize"
+        ],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 1,
+        "patched_total": 1,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 6,
+    "developer_aux_hunks_from_target": 1,
+    "phase0_baseline": {
+      "mode": "baseline-jdk21u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 1
+    },
+    "java_production_hunks": 5,
+    "developer_aux_hunks": 1,
+    "processed_hunk_indices": [
+      2,
+      3,
+      4,
+      0,
+      1
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 6033,
+        "output": 2491
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 3,
+    "synthesized_count": 2,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "clean",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 2919,
+    "target_patch_bytes": 6109,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": true,
+    "test_mode": "jdk21u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [
+        "java/lang/String/CompactString/NegativeSize.java#NegativeSize"
+      ],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 1,
+      "patched_total": 1,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 1,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

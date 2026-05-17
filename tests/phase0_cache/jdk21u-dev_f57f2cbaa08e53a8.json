@@ -1,0 +1,22 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/tools/javac/annotations/ReadingMethodWithTypeAnno.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "tools/javac/annotations/ReadingMethodWithTypeAnno.java#ReadingMethodWithTypeAnno": "failed"
+    },
+    "classes": {
+      "tools/javac/annotations/ReadingMethodWithTypeAnno.java": "failed"
+    },
+    "summary": {
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "total": 1
+    }
+  },
+  "mode": "baseline-jdk21u-dev-helper",
+  "skipped": false
+}

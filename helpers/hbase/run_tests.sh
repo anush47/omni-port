@@ -95,23 +95,25 @@ if docker run --rm \
     -v "maven-cache-hbase:/root/.m2" \
     -w /repo \
     "${BUILDER_IMAGE_TAG}" \
-    bash -c "set -e; \
-             echo 'Maven version:'; mvn --version; \
-             export MAVEN_OPTS=\"\${MAVEN_OPTS:-} -XX:ActiveProcessorCount=${MAX_CPU}\"; \
-             echo 'Running: mvn test -T ${MAVEN_THREADS} -DforkCount=${SUREFIRE_FORKS} ${MAVEN_ARGS}'; \
+    bash -c "
+             echo 'Maven version:'; mvn --version;
+             export MAVEN_OPTS=\"\${MAVEN_OPTS:-} -XX:ActiveProcessorCount=${MAX_CPU}\";
+             echo 'Running: mvn test -T ${MAVEN_THREADS} -DforkCount=${SUREFIRE_FORKS} ${MAVEN_ARGS}';
+             set +e
              mvn test -T ${MAVEN_THREADS} -DforkCount=${SUREFIRE_FORKS} -DreuseForks=true ${MAVEN_ARGS} \
                   -DfailIfNoTests=false \
                   -Dsurefire.failIfNoSpecifiedTests=false \
                   -Dmaven.javadoc.skip=true \
                   -Dcheckstyle.skip=true \
                   -Dfindbugs.skip=true \
-                 -Dspotbugs.skip=true \
-                 -Denforcer.skip=true; \
-             MVN_EXIT_CODE=\$?; \
-             echo 'Collecting test results...'; \
-             mkdir -p /repo/build/all-test-results; \
-             find . -path '*/target/surefire-reports/*.xml' -exec cp {} /repo/build/all-test-results/ \; 2>/dev/null || true; \
-             echo \"Found \$(ls /repo/build/all-test-results/*.xml 2>/dev/null | wc -l) test result files\"; \
+                  -Dspotbugs.skip=true \
+                  -Denforcer.skip=true
+             MVN_EXIT_CODE=\$?
+             set -e
+             echo 'Collecting test results...'
+             mkdir -p /repo/build/all-test-results
+             find . -path '*/target/surefire-reports/*.xml' -exec cp {} /repo/build/all-test-results/ \; 2>/dev/null || true
+             echo \"Found \$(ls /repo/build/all-test-results/*.xml 2>/dev/null | wc -l) test result files\"
              exit \$MVN_EXIT_CODE"; then
     
     echo "✅ Tests Passed"

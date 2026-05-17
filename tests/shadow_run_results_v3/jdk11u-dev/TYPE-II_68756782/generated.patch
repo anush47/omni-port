@@ -1,0 +1,166 @@
+diff --git a/src/java.desktop/unix/classes/sun/print/PrintServiceLookupProvider.java b/src/java.desktop/unix/classes/sun/print/PrintServiceLookupProvider.java
+index 93f65327e0..52315c06ac 100644
+--- a/src/java.desktop/unix/classes/sun/print/PrintServiceLookupProvider.java
++++ b/src/java.desktop/unix/classes/sun/print/PrintServiceLookupProvider.java
+@@ -26,10 +26,8 @@
+ package sun.print;
+ 
+ import java.io.BufferedReader;
+-import java.io.FileInputStream;
+-import java.io.InputStream;
+-import java.io.InputStreamReader;
+ import java.io.IOException;
++import java.security.PrivilegedAction;
+ import java.util.ArrayList;
+ import java.util.Vector;
+ import java.security.AccessController;
+@@ -54,6 +52,8 @@ import java.io.FileReader;
+ import java.net.URL;
+ import java.nio.file.Files;
+ 
++import sun.awt.util.ThreadGroupUtils;
++
+ /*
+  * Remind: This class uses solaris commands. We also need a linux
+  * version
+@@ -75,7 +75,6 @@ public class PrintServiceLookupProvider extends PrintServiceLookup
+     private static final int DEFAULT_MINREFRESH = 120;  // 2 minutes
+     private static int minRefreshTime = DEFAULT_MINREFRESH;
+ 
+-
+     static String osname;
+ 
+     // List of commands used to deal with the printer queues on AIX
+@@ -189,7 +188,6 @@ public class PrintServiceLookupProvider extends PrintServiceLookup
+         "| grep -E '^[ 0-9a-zA-Z_-]*@' | awk -F'@' '{print $1}'"
+     };
+ 
+-
+     static int getBSDCommandIndex() {
+         String command  = "/usr/sbin/lpc status all";
+         String[] names = execCmd(command);
+@@ -207,14 +205,18 @@ public class PrintServiceLookupProvider extends PrintServiceLookup
+         return BSD_LPD;
+     }
+ 
+-
++    @SuppressWarnings("removal")
+     public PrintServiceLookupProvider() {
+         // start the printer listener thread
+         if (pollServices) {
+-            Thread thr = new Thread(null, new PrinterChangeListener(),
+-                                    "PrinterListener", 0, false);
+-            thr.setDaemon(true);
+-            thr.start();
++            AccessController.doPrivileged((PrivilegedAction<Thread>) () -> {
++                Thread thr = new Thread(ThreadGroupUtils.getRootThreadGroup(),
++                                        new PrinterChangeListener(),
++                                        "PrinterListener", 0, false);
++                thr.setContextClassLoader(null);
++                thr.setDaemon(true);
++                return thr;
++            }).start();
+             IPPPrintService.debug_println(debugPrefix+"polling turned on");
+         }
+     }
+@@ -267,7 +269,6 @@ public class PrintServiceLookupProvider extends PrintServiceLookup
+         return (printerList.size() - 1);
+     }
+ 
+-
+     // refreshes "printServices"
+     public synchronized void refreshServices() {
+         /* excludes the default printer */
+@@ -633,7 +634,6 @@ public class PrintServiceLookupProvider extends PrintServiceLookup
+         return new MultiDocPrintService[0];
+     }
+ 
+-
+     public synchronized PrintService getDefaultPrintService() {
+         SecurityManager security = System.getSecurityManager();
+         if (security != null) {
+diff --git a/src/java.desktop/windows/classes/sun/print/PrintServiceLookupProvider.java b/src/java.desktop/windows/classes/sun/print/PrintServiceLookupProvider.java
+index f82ca60532..fb4efbbd35 100644
+--- a/src/java.desktop/windows/classes/sun/print/PrintServiceLookupProvider.java
++++ b/src/java.desktop/windows/classes/sun/print/PrintServiceLookupProvider.java
+@@ -25,6 +25,8 @@
+ 
+ package sun.print;
+ 
++import java.security.AccessController;
++import java.security.PrivilegedAction;
+ import java.util.ArrayList;
+ 
+ import javax.print.DocFlavor;
+@@ -41,6 +43,8 @@ import javax.print.attribute.PrintServiceAttribute;
+ import javax.print.attribute.PrintServiceAttributeSet;
+ import javax.print.attribute.standard.PrinterName;
+ 
++import sun.awt.util.ThreadGroupUtils;
++
+ public class PrintServiceLookupProvider extends PrintServiceLookup {
+ 
+     private String defaultPrinter;
+@@ -78,22 +82,31 @@ public class PrintServiceLookupProvider extends PrintServiceLookup {
+         return win32PrintLUS;
+     }
+ 
++    @SuppressWarnings("removal")
+     public PrintServiceLookupProvider() {
+ 
+         if (win32PrintLUS == null) {
+             win32PrintLUS = this;
+ 
+             // start the local printer listener thread
+-            Thread thr = new Thread(null, new PrinterChangeListener(),
+-                                    "PrinterListener", 0, false);
+-            thr.setDaemon(true);
+-            thr.start();
++            AccessController.doPrivileged((PrivilegedAction<Thread>) () -> {
++                Thread thr = new Thread(ThreadGroupUtils.getRootThreadGroup(),
++                                        new PrinterChangeListener(),
++                                        "PrinterListener", 0, false);
++                thr.setContextClassLoader(null);
++                thr.setDaemon(true);
++                return thr;
++            }).start();
+ 
+             // start the remote printer listener thread
+-            Thread remThr = new Thread(null, new RemotePrinterChangeListener(),
+-                                       "RemotePrinterListener", 0, false);
+-            remThr.setDaemon(true);
+-            remThr.start();
++            AccessController.doPrivileged((PrivilegedAction<Thread>) () -> {
++                Thread thr = new Thread(ThreadGroupUtils.getRootThreadGroup(),
++                                        new RemotePrinterChangeListener(),
++                                        "RemotePrinterListener", 0, false);
++                thr.setContextClassLoader(null);
++                thr.setDaemon(true);
++                return thr;
++            }).start();
+         } /* else condition ought to never happen! */
+     }
+ 
+@@ -160,7 +173,6 @@ public class PrintServiceLookupProvider extends PrintServiceLookup {
+         printServices = newServices;
+     }
+ 
+-
+     public synchronized PrintService getPrintServiceByName(String name) {
+ 
+         if (name == null || name.equals("")) {
+@@ -269,14 +281,12 @@ public class PrintServiceLookupProvider extends PrintServiceLookup {
+         return new MultiDocPrintService[0];
+     }
+ 
+-
+     public synchronized PrintService getDefaultPrintService() {
+         SecurityManager security = System.getSecurityManager();
+         if (security != null) {
+           security.checkPrintJobAccess();
+         }
+ 
+-
+         // Windows does not have notification for a change in default
+         // so we always get the latest.
+         defaultPrinter = getDefaultPrinterName();

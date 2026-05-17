@@ -1,0 +1,388 @@
+{
+  "run_timestamp": "2026-04-18T20:35:00.021911",
+  "repo": "jdk21u-dev",
+  "patch_type": "TYPE-V",
+  "original_commit": "fdfe503d016086cf78b5a8c27dbe45f0261c68ab",
+  "backport_commit": "85e5a5c6e160a92cf599e649413e08fe03df6de5",
+  "description": "main \u2192 jdk21u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 38.71,
+      "error": null,
+      "java_hunks": 6,
+      "aux_hunks": 2,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 27,
+          "end_line": 33,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java",
+          "method_used": "embedding",
+          "confidence": 0.82,
+          "start_line": 1236,
+          "end_line": 1245,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1244,
+          "end_line": 1253,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1281,
+          "end_line": 1293,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1300,
+          "end_line": 1306,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1324,
+          "end_line": 1330,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 3.99,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_III",
+        "confidence": 0.95,
+        "reasoning": "The patch modifies the SunPKCS11.java file with structural changes including adding new imports, changing loops from index-based to enhanced for-loops, introducing new collections (HashSet), and adding logic to check for required mechanisms before enabling certain features. These changes are more than simple string replacements or whitespace adjustments, involving structural code changes and logic additions. The patch also adds new test files, which increases complexity. The localization evidence shows most hunks were found with high confidence via 'git_exact', but one hunk was found via 'embedding' with lower confidence, indicating some structural differences. Overall, the patch complexity aligns with TYPE_III classification (structural changes).",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.01,
+      "error": null,
+      "applied_count": 5,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 19.84,
+      "error": null,
+      "adapted_count": 1
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 1,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java",
+          "old_string": "        long[] supportedMechanisms = p11.C_GetMechanismList(slotID);",
+          "new_string": "        long[] supportedMechanisms = p11.C_GetMechanismList(slotID);\n        Set<Long> supportedMechSet =\n                Arrays.stream(supportedMechanisms).boxed().collect\n                (Collectors.toCollection(HashSet::new));",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.16,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 1
+    },
+    "agent7_validator": {
+      "validation_passed": false,
+      "validation_failure_category": "api_mismatch",
+      "validation_error_context": "Build failed (jdk21u-dev-helper) \u2014 compile errors:\nsrc/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java:1291: error: cannot find symbol",
+      "validation_attempts": 1,
+      "retry_files": [
+        "src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java"
+      ],
+      "build_success": false,
+      "build_mode": "jdk21u-dev-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": [
+        {
+          "file": "src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java",
+          "line": 1291,
+          "message": "error: cannot find symbol"
+        }
+      ]
+    },
+    "agent9_fallback_1": {
+      "fallback_status": "failed",
+      "fallback_attempts": 1,
+      "synthesized_count": 0,
+      "hunk_descriptions": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java",
+          "what_changed": "Added import of java.util.stream.Collectors to support stream operations.",
+          "where_in_code": "sun.security.pkcs11.SunPKCS11 (imports section)",
+          "intent": "To enable usage of stream-based collection utilities for improved code clarity and functionality.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "Collectors"
+          ]
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java",
+          "what_changed": "Introduced a Set<Long> named supportedMechSet by converting the supportedMechanisms array into a HashSet using streams.",
+          "where_in_code": "sun.security.pkcs11.SunPKCS11 (within method processing mechanisms for a slot)",
+          "intent": "To facilitate efficient membership checks for supported mechanisms during subsequent processing.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "supportedMechSet",
+            "supportedMechanisms"
+          ]
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java",
+          "what_changed": "Replaced traditional for-loop over supportedMechanisms array with enhanced for-each loop iterating over long values.",
+          "where_in_code": "sun.security.pkcs11.SunPKCS11 (mechanism processing loop)",
+          "intent": "To improve code readability and modernize iteration style.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "supportedMechanisms"
+          ]
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java",
+          "what_changed": "Enhanced the check for required mechanisms by verifying that each required mechanism is enabled in configuration, present in supportedMechSet, and not in brokenMechanisms before accepting a descriptor.",
+          "where_in_code": "sun.security.pkcs11.SunPKCS11 (descriptor validation loop)",
+          "intent": "To ensure that only fully supported and enabled mechanisms are considered valid, improving robustness and correctness.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "requiredMechs",
+            "config",
+            "supportedMechSet",
+            "brokenMechanisms"
+          ]
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java",
+          "what_changed": "Removed an extra space in the debug print statement prefixing the type and algorithm when indicating partial support is disabled.",
+          "where_in_code": "sun.security.pkcs11.SunPKCS11 (mechanism support validation)",
+          "intent": "To clean up formatting of debug output messages.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "showInfo",
+            "d.type",
+            "d.algorithm"
+          ]
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java",
+          "what_changed": "Removed an extra blank line inside nested blocks before registering algorithms.",
+          "where_in_code": "sun.security.pkcs11.SunPKCS11 (end of mechanism processing block)",
+          "intent": "To improve code formatting and consistency.",
+          "change_type": "modify_logic",
+          "key_symbols": []
+        }
+      ]
+    },
+    "agent8_syntax_repair_fallback_1": {
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": []
+    },
+    "agent7_validator_retry1": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 2,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk21u-dev-helper",
+      "test_success": true,
+      "test_mode": "jdk21u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/sun/security/pkcs11/Provider/RequiredMechCheck.jtr.xml",
+          "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/sun/security/pkcs11/Provider/RequiredMechCheck.testng-results.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "sun/security/pkcs11/Provider/RequiredMechCheck.java#RequiredMechCheck": "passed"
+        },
+        "classes": {
+          "sun/security/pkcs11/Provider/RequiredMechCheck.java": "passed"
+        },
+        "summary": {
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [],
+        "pass_to_fail": [],
+        "newly_passing": [
+          "sun/security/pkcs11/Provider/RequiredMechCheck.java#RequiredMechCheck"
+        ],
+        "baseline_total": 0,
+        "patched_total": 1,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 8,
+    "developer_aux_hunks_from_target": 2,
+    "phase0_baseline": {
+      "mode": "baseline-jdk21u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 1
+    },
+    "java_production_hunks": 6,
+    "developer_aux_hunks": 2,
+    "processed_hunk_indices": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      1
+    ],
+    "tokens_used": 84634,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 3570,
+        "output": 846
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      },
+      "agent9_fallback": {
+        "input": 81253,
+        "output": 3381
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 5,
+    "synthesized_count": 0,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "failed",
+    "fallback_attempts": 1,
+    "retry_contexts": [
+      {
+        "error_type": "api_mismatch",
+        "error_message": "/repo/src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java:1291: error: cannot find symbol\n  symbol:   variable brokenMechanisms\nERROR: Build failed for target 'images' in configuration '/repo/build_shared' (exit code 2) \n/repo/src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java:1291: error: cannot find symbol\n  symbol:   variable brokenMechanisms\n/repo/src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java:1291: error: cannot find symbol\n  symbol:   variable brokenMechanisms\nERROR: Build failed for target 'images' in configuration '/repo/build_shared' (exit code 2) \n/repo/src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java:1291: error: cannot find symbol\n  symbol:   variable brokenMechanisms\n/repo/src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java:1291: error: cannot find symbol\n  symbol:   variable brokenMechanisms\nERROR: Build failed for target 'images' in configuration '/repo/build_shared' (exit code 2) \n/repo/src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/SunPKCS11.java:1291: error: cannot find symbol\n  symbol:   variable brokenMechanisms\n=== Build FAILED for bf86b34 ===",
+        "attempt_count": 1,
+        "suggested_action": "route_to_namespace_or_structural"
+      }
+    ],
+    "failed_hunks": [],
+    "generated_patch_bytes": 4364,
+    "target_patch_bytes": 9859,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": true,
+    "test_mode": "jdk21u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [],
+      "pass_to_fail": [],
+      "newly_passing": [
+        "sun/security/pkcs11/Provider/RequiredMechCheck.java#RequiredMechCheck"
+      ],
+      "baseline_total": 0,
+      "patched_total": 1,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 0,
+    "newly_passing_count": 1,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

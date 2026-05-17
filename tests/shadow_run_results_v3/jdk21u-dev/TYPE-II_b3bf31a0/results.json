@@ -1,0 +1,230 @@
+{
+  "run_timestamp": "2026-04-18T20:35:00.021911",
+  "repo": "jdk21u-dev",
+  "patch_type": "TYPE-II",
+  "original_commit": "b3bf31a0a08da679ec2fd21613243fb17b1135a9",
+  "backport_commit": "69aab6aee1594aba1b6d7fe9d1b2e4562b64d495",
+  "description": "main \u2192 jdk21u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 0.11,
+      "error": null,
+      "java_hunks": 4,
+      "aux_hunks": 14,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/InstanceKlass.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 57,
+          "end_line": 63,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/InstanceKlass.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 98,
+          "end_line": 104,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/InstanceKlass.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 152,
+          "end_line": 158,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/InstanceKlass.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 176,
+          "end_line": 183,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 6.83,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_IV",
+        "confidence": 0.95,
+        "reasoning": "The patch introduces a new locking mechanism for class initialization in the JVM hotspot code, replacing a Monitor-based lock with a Java object-based lock (init_lock). This involves adding new fields, methods, and synchronization logic in multiple core files such as javaClasses.cpp/hpp, instanceKlass.cpp/hpp, synchronizer.cpp/hpp, and related runtime files. It also removes the old _init_monitor and related code, refactors initialization state handling, and changes synchronization primitives from MonitorLocker to ObjectLocker with new wait_uninterruptibly semantics. The patch touches deep structural aspects of class initialization, synchronization, and JVM internal locking mechanisms, indicating significant API and implementation divergence. The patch is not a trivial string or whitespace change, nor a simple structural rename; it is a deep structural refactoring affecting core JVM synchronization and class initialization logic. The localization evidence shows exact matches in the target branch, supporting confidence in the classification. The token budget estimate is high due to the complexity and breadth of changes across multiple core components.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "applied_count": 4,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/InstanceKlass.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/InstanceKlass.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/InstanceKlass.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/InstanceKlass.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "adapted_count": 0
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 0,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": []
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [],
+      "synthesized_count_after_repair": 0
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk21u-dev-helper",
+      "test_success": true,
+      "test_mode": "jdk21u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/com/sun/jdi/BreakpointOnClassPrepare.jtr.xml",
+          "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/runtime/Thread/TestThreadDumpClassInitMonitor.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "com/sun/jdi/BreakpointOnClassPrepare.java#BreakpointOnClassPrepare": "passed",
+          "runtime/Thread/TestThreadDumpClassInitMonitor.java#TestThreadDumpClassInitMonitor": "passed"
+        },
+        "classes": {
+          "com/sun/jdi/BreakpointOnClassPrepare.java": "passed",
+          "runtime/Thread/TestThreadDumpClassInitMonitor.java": "passed"
+        },
+        "summary": {
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "total": 2
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [
+          "com/sun/jdi/BreakpointOnClassPrepare.java#BreakpointOnClassPrepare",
+          "runtime/Thread/TestThreadDumpClassInitMonitor.java#TestThreadDumpClassInitMonitor"
+        ],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 2,
+        "patched_total": 2,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 63,
+    "developer_aux_hunks_from_target": 14,
+    "phase0_baseline": {
+      "mode": "baseline-jdk21u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 2
+    },
+    "java_production_hunks": 4,
+    "developer_aux_hunks": 14,
+    "processed_hunk_indices": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 4,
+    "synthesized_count": 0,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 4080,
+    "target_patch_bytes": 48991,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": true,
+    "test_mode": "jdk21u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [
+        "com/sun/jdi/BreakpointOnClassPrepare.java#BreakpointOnClassPrepare",
+        "runtime/Thread/TestThreadDumpClassInitMonitor.java#TestThreadDumpClassInitMonitor"
+      ],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 2,
+      "patched_total": 2,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 2,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

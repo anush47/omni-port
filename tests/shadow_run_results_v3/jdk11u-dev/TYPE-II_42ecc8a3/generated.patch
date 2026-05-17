@@ -1,0 +1,13 @@
+diff --git a/src/jdk.compiler/share/classes/com/sun/tools/javac/main/Option.java b/src/jdk.compiler/share/classes/com/sun/tools/javac/main/Option.java
+index 5e1edf499f..c450497462 100644
+--- a/src/jdk.compiler/share/classes/com/sun/tools/javac/main/Option.java
++++ b/src/jdk.compiler/share/classes/com/sun/tools/javac/main/Option.java
+@@ -266,7 +266,7 @@ public enum Option {
+         }
+     },
+ 
+-    PROC("-proc:", "opt.proc.none.only", STANDARD, BASIC,  ONEOF, "none", "only"),
++    PROC("-proc:", "opt.proc.none.only", STANDARD, BASIC, ONEOF, "none", "only", "full"),
+ 
+     PROCESSOR("-processor", "opt.arg.class.list", "opt.processor", STANDARD, BASIC),
+ 

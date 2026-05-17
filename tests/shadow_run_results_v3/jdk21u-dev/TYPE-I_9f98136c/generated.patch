@@ -1,0 +1,46 @@
+diff --git a/src/java.base/share/classes/sun/net/www/protocol/file/FileURLConnection.java b/src/java.base/share/classes/sun/net/www/protocol/file/FileURLConnection.java
+index a9ce7cee9a1..545dc4b69e5 100644
+--- a/src/java.base/share/classes/sun/net/www/protocol/file/FileURLConnection.java
++++ b/src/java.base/share/classes/sun/net/www/protocol/file/FileURLConnection.java
+@@ -90,6 +90,12 @@ public class FileURLConnection extends URLConnection {
+         }
+     }
+ 
++    public synchronized void closeInputStream() throws IOException {
++        if (is != null) {
++            is.close();
++        }
++    }
++
+     private boolean initializedHeaders = false;
+ 
+     private void initializeHeaders() {
+diff --git a/src/java.base/share/classes/sun/net/www/protocol/jar/JarURLConnection.java b/src/java.base/share/classes/sun/net/www/protocol/jar/JarURLConnection.java
+index 163924f7bb7..85d36fe2320 100644
+--- a/src/java.base/share/classes/sun/net/www/protocol/jar/JarURLConnection.java
++++ b/src/java.base/share/classes/sun/net/www/protocol/jar/JarURLConnection.java
+@@ -25,6 +25,7 @@
+ 
+ package sun.net.www.protocol.jar;
+ 
++import sun.net.www.protocol.file.FileURLConnection;
+ import java.io.BufferedInputStream;
+ import java.io.FileNotFoundException;
+ import java.io.IOException;
+@@ -88,8 +89,14 @@ public class JarURLConnection extends java.net.JarURLConnection {
+             try {
+                 super.close();
+             } finally {
+-                if (!getUseCaches()) {
+-                    jarFile.close();
++                try {
++                    if (!getUseCaches()) {
++                        jarFile.close();
++                    }
++                } finally {
++                    if (jarFileURLConnection instanceof FileURLConnection fileURLConnection) {
++                        fileURLConnection.closeInputStream();
++                    }
+                 }
+             }
+         }

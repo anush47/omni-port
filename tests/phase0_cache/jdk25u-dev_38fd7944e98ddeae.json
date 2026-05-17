@@ -1,0 +1,25 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/jdk/jfr/jmx/streaming/TestEnableDisable.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/jdk/jfr/jmx/streaming/TestWithers.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "jdk/jfr/jmx/streaming/TestEnableDisable.java#TestEnableDisable": "passed",
+      "jdk/jfr/jmx/streaming/TestWithers.java#TestWithers": "failed"
+    },
+    "classes": {
+      "jdk/jfr/jmx/streaming/TestEnableDisable.java": "passed",
+      "jdk/jfr/jmx/streaming/TestWithers.java": "failed"
+    },
+    "summary": {
+      "passed": 1,
+      "failed": 1,
+      "skipped": 0,
+      "total": 2
+    }
+  },
+  "mode": "baseline-jdk25u-dev-helper",
+  "skipped": false
+}

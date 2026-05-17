@@ -1,0 +1,143 @@
+diff --git a/src/java.desktop/share/classes/javax/swing/DefaultListCellRenderer.java b/src/java.desktop/share/classes/javax/swing/DefaultListCellRenderer.java
+index 64b24c8b9f5..a0750a13bfa 100644
+--- a/src/java.desktop/share/classes/javax/swing/DefaultListCellRenderer.java
++++ b/src/java.desktop/share/classes/javax/swing/DefaultListCellRenderer.java
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 1998, 2021, Oracle and/or its affiliates. All rights reserved.
++ * Copyright (c) 1998, 2023, Oracle and/or its affiliates. All rights reserved.
+  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+  *
+  * This code is free software; you can redistribute it and/or modify it
+@@ -25,15 +25,15 @@
+ 
+ package javax.swing;
+ 
+-import javax.swing.*;
+-import javax.swing.event.*;
+-import javax.swing.border.*;
+-
+-import java.awt.Component;
+ import java.awt.Color;
++import java.awt.Component;
+ import java.awt.Rectangle;
+-
+ import java.io.Serializable;
++
++import javax.swing.border.Border;
++import javax.swing.border.EmptyBorder;
++import javax.swing.plaf.synth.SynthListUI;
++
+ import sun.swing.DefaultLookup;
+ import sun.swing.SwingUtilities2;
+ 
+@@ -157,7 +157,11 @@ public class DefaultListCellRenderer extends JLabel
+             setText((value == null) ? "" : value.toString());
+         }
+ 
+-        setEnabled(list.isEnabled());
++        if (list.getName() == null || !list.getName().equals("ComboBox.list")
++                || !(list.getUI() instanceof SynthListUI)) {
++            setEnabled(list.isEnabled());
++        }
++
+         setFont(list.getFont());
+ 
+         Border border = null;
+diff --git a/src/java.desktop/share/classes/javax/swing/plaf/synth/SynthComboBoxUI.java b/src/java.desktop/share/classes/javax/swing/plaf/synth/SynthComboBoxUI.java
+index 452707fd126..4bd9ad1be1e 100644
+--- a/src/java.desktop/share/classes/javax/swing/plaf/synth/SynthComboBoxUI.java
++++ b/src/java.desktop/share/classes/javax/swing/plaf/synth/SynthComboBoxUI.java
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 2002, 2020, Oracle and/or its affiliates. All rights reserved.
++ * Copyright (c) 2002, 2023, Oracle and/or its affiliates. All rights reserved.
+  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+  *
+  * This code is free software; you can redistribute it and/or modify it
+@@ -39,6 +39,7 @@ import java.beans.PropertyChangeListener;
+ 
+ import javax.swing.ComboBoxEditor;
+ import javax.swing.DefaultButtonModel;
++import javax.swing.DefaultListCellRenderer;
+ import javax.swing.Icon;
+ import javax.swing.JButton;
+ import javax.swing.JComboBox;
+@@ -108,6 +109,8 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
+      */
+     private EditorFocusHandler editorFocusHandler;
+ 
++    private DlcrEnabledHandler dlcrEnabledHandler;
++
+     /**
+      * If true, then the cell renderer will be forced to be non-opaque when
+      * used for rendering the selected item in the combo box (not in the list),
+@@ -187,6 +190,7 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
+         comboBox.addPropertyChangeListener(this);
+         comboBox.addMouseListener(buttonHandler);
+         editorFocusHandler = new EditorFocusHandler(comboBox);
++        dlcrEnabledHandler = new DlcrEnabledHandler(comboBox);
+         super.installListeners();
+     }
+ 
+@@ -219,6 +223,7 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
+     @Override
+     protected void uninstallListeners() {
+         editorFocusHandler.unregister();
++        dlcrEnabledHandler.unregister();
+         comboBox.removePropertyChangeListener(this);
+         comboBox.removeMouseListener(buttonHandler);
+         buttonHandler.pressed = false;
+@@ -541,7 +546,6 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
+         }
+     }
+ 
+-
+     private static class SynthComboBoxEditor
+             extends BasicComboBoxEditor.UIResource {
+ 
+@@ -552,7 +556,6 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
+         }
+     }
+ 
+-
+     /**
+      * Handles all the logic for treating the combo as a button when it is
+      * not editable, and when shouldActLikeButton() is true. This class is a
+@@ -794,4 +797,36 @@ public class SynthComboBoxUI extends BasicComboBoxUI implements
+             }
+         }
+     }
++
++    /**
++     * Handler for updating combobox enabled status when renderer enabled
++     * status changes
++     */
++    private static class DlcrEnabledHandler implements PropertyChangeListener {
++        private JComboBox<?> comboBox;
++
++        private DlcrEnabledHandler(JComboBox<?> comboBox) {
++            this.comboBox = comboBox;
++            comboBox.addPropertyChangeListener("enabled",this);
++        }
++
++        public void unregister() {
++            comboBox.removePropertyChangeListener("enabled", this);
++        }
++
++        /**
++         * Called when the combos enabled status changes
++         *
++         * @param evt A PropertyChangeEvent object describing the event source
++         *            and the property that has changed.
++         */
++        public void propertyChange(PropertyChangeEvent evt) {
++            if (evt.getPropertyName().equals("enabled")) {
++                if (comboBox.getRenderer() instanceof DefaultListCellRenderer) {
++                    ((DefaultListCellRenderer) comboBox.getRenderer())
++                            .setEnabled((boolean) evt.getNewValue());
++                }
++            }
++        }
++    }
+ }

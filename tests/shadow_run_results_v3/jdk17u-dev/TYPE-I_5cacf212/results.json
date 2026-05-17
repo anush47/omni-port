@@ -1,0 +1,214 @@
+{
+  "run_timestamp": "2026-04-18T08:04:03.057040",
+  "repo": "jdk17u-dev",
+  "patch_type": "TYPE-I",
+  "original_commit": "5cacf212f066f5694d01f0891adfbe8b38660175",
+  "backport_commit": "9bad4b45f08f369d6a55cbd2bafda10438dc93ed",
+  "description": "main \u2192 jdk17u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 2.06,
+      "error": null,
+      "java_hunks": 2,
+      "aux_hunks": 1,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.base/share/classes/java/io/ByteArrayInputStream.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 44,
+          "end_line": 49,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.base/share/classes/java/io/ByteArrayInputStream.java",
+          "method_used": "fuzzy",
+          "confidence": 0.968,
+          "start_line": 205,
+          "end_line": 212,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 2.85,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_II",
+        "confidence": 0.95,
+        "reasoning": "The patch modifies the transferTo method in ByteArrayInputStream by changing a single write call into a loop that writes in chunks of a maximum size. The first hunk is an exact match addition of a constant, but the main change in the method requires fuzzy matching due to added control flow and loop structure. The test file addition is new and does not affect classification. Overall, the patch is a whitespace/formatting and minor structural change that requires fuzzy matching but no deep structural refactoring or redesign, fitting TYPE_II complexity. Confidence is high due to exact and fuzzy localization evidence, but not perfect due to the loop addition.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "applied_count": 1,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/java/io/ByteArrayInputStream.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 39.21,
+      "error": null,
+      "adapted_count": 0
+    },
+    "agent5_structural": {
+      "elapsed_s": 51.34,
+      "error": null,
+      "refactored_count": 1
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 1,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "src/java.base/share/classes/java/io/ByteArrayInputStream.java",
+          "old_string": "    }\n\n    public synchronized long transferTo(OutputStream out) throws IOException {\n        int len = count - pos;\n        out.write(buf, pos, len);\n        pos = count;\n        return len;\n    }",
+          "new_string": "    @Override\n    public synchronized long transferTo(OutputStream out) throws IOException {\n        int len = count - pos;\n        if (len > 0) {\n            int nwritten = 0;\n            while (nwritten < len) {\n                int nbyte = Integer.min(len - nwritten, MAX_TRANSFER_SIZE);\n                out.write(buf, pos, nbyte);\n                pos += nbyte;\n                nwritten += nbyte;\n            }\n            assert pos == count;\n        }\n        return len;\n    }",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 30.1,
+      "error": null,
+      "syntax_repair_status": "repaired",
+      "syntax_repair_attempts": 1,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/java.base/share/classes/java/io/ByteArrayInputStream.java",
+          "outcome": "repaired",
+          "attempts": 1,
+          "diagnosis": "The synthesized hunk removed the closing '}' of the previous method (readNBytes), leaving the @Override annotation starting inside the method and causing a parse error."
+        }
+      ],
+      "synthesized_count_after_repair": 1
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk17u-dev-helper",
+      "test_success": true,
+      "test_mode": "jdk17u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/java/io/ByteArrayInputStream/ChunkedTransferTo.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "java/io/ByteArrayInputStream/ChunkedTransferTo.java#ChunkedTransferTo": "passed"
+        },
+        "classes": {
+          "java/io/ByteArrayInputStream/ChunkedTransferTo.java": "passed"
+        },
+        "summary": {
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [
+          "java/io/ByteArrayInputStream/ChunkedTransferTo.java#ChunkedTransferTo"
+        ],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 1,
+        "patched_total": 1,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 3,
+    "developer_aux_hunks_from_target": 1,
+    "phase0_baseline": {
+      "mode": "baseline-jdk17u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 1
+    },
+    "java_production_hunks": 2,
+    "developer_aux_hunks": 1,
+    "processed_hunk_indices": [
+      0,
+      1
+    ],
+    "tokens_used": 2428,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 2642,
+        "output": 993
+      },
+      "agent5_structural": {
+        "input": 1050,
+        "output": 1519
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 1515,
+        "output": 913
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 1,
+    "synthesized_count": 1,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "repaired",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 1381,
+    "target_patch_bytes": 4637,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": true,
+    "test_mode": "jdk17u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [
+        "java/io/ByteArrayInputStream/ChunkedTransferTo.java#ChunkedTransferTo"
+      ],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 1,
+      "patched_total": 1,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 1,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "run_timestamp": "2026-04-19T08:38:09.725343",
+  "repo": "jdk25u-dev",
+  "patch_type": "TYPE-II",
+  "original_commit": "bdf6853cfdd24176bdddb59b6d7bb85036b94c57",
+  "backport_commit": "96dc209747e695784f75c6de0cb4039df3b9208a",
+  "description": "main \u2192 jdk25u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 0.39,
+      "error": null,
+      "java_hunks": 4,
+      "aux_hunks": 1,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.base/share/classes/java/text/CompactNumberFormat.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 247,
+          "end_line": 284,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.base/share/classes/java/text/CompactNumberFormat.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 371,
+          "end_line": 377,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.base/share/classes/java/text/CompactNumberFormat.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1512,
+          "end_line": 1518,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.base/share/classes/java/text/CompactNumberFormat.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 2504,
+          "end_line": 2511,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 2.94,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_I",
+        "confidence": 0.95,
+        "reasoning": "The patch consists of exact string replacements and additions that are found exactly in the target branch with high confidence (1.00) via 'git_exact'. The changes are mostly adding comments and modifying the clone method to clone certain fields properly. There is no structural or API change, just a fix to cloning behavior and addition of a new test file. This fits the TYPE_I classification of exact match string replacement and trivial backport. The confidence is high but not absolute due to the presence of a new test file addition which is straightforward but slightly increases complexity. The token budget estimate is moderate due to the size of the patch and the new test code added.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.01,
+      "error": null,
+      "applied_count": 4,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/java/text/CompactNumberFormat.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/java/text/CompactNumberFormat.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/java/text/CompactNumberFormat.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/java/text/CompactNumberFormat.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "adapted_count": 0
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 0,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": []
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [],
+      "synthesized_count_after_repair": 0
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk25u-dev-helper",
+      "test_success": true,
+      "test_mode": "jdk25u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/java/text/Format/CompactNumberFormat/TestClone.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "java/text/Format/CompactNumberFormat/TestClone.java#TestClone": "passed"
+        },
+        "classes": {
+          "java/text/Format/CompactNumberFormat/TestClone.java": "passed"
+        },
+        "summary": {
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [
+          "java/text/Format/CompactNumberFormat/TestClone.java#TestClone"
+        ],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 1,
+        "patched_total": 1,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 5,
+    "developer_aux_hunks_from_target": 1,
+    "phase0_baseline": {
+      "mode": "baseline-jdk25u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 1
+    },
+    "java_production_hunks": 4,
+    "developer_aux_hunks": 1,
+    "processed_hunk_indices": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 4,
+    "synthesized_count": 0,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 3698,
+    "target_patch_bytes": 8269,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": true,
+    "test_mode": "jdk25u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [
+        "java/text/Format/CompactNumberFormat/TestClone.java#TestClone"
+      ],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 1,
+      "patched_total": 1,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 1,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

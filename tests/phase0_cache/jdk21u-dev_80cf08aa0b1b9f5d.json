@@ -1,0 +1,25 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/sun/security/ssl/SSLEngineImpl/TestBadDNForPeerCA.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/sun/security/ssl/SSLEngineImpl/TestBadDNForPeerCA12.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "sun/security/ssl/SSLEngineImpl/TestBadDNForPeerCA.java#TestBadDNForPeerCA": "failed",
+      "sun/security/ssl/SSLEngineImpl/TestBadDNForPeerCA12.java#TestBadDNForPeerCA12": "failed"
+    },
+    "classes": {
+      "sun/security/ssl/SSLEngineImpl/TestBadDNForPeerCA.java": "failed",
+      "sun/security/ssl/SSLEngineImpl/TestBadDNForPeerCA12.java": "failed"
+    },
+    "summary": {
+      "passed": 0,
+      "failed": 2,
+      "skipped": 0,
+      "total": 2
+    }
+  },
+  "mode": "baseline-jdk21u-dev-helper",
+  "skipped": false
+}

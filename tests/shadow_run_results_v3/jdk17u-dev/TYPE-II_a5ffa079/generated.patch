@@ -1,0 +1,228 @@
+diff --git a/src/jdk.httpserver/share/classes/sun/net/httpserver/ChunkedOutputStream.java b/src/jdk.httpserver/share/classes/sun/net/httpserver/ChunkedOutputStream.java
+index b79dc75bb09..9b7e0328dd5 100644
+--- a/src/jdk.httpserver/share/classes/sun/net/httpserver/ChunkedOutputStream.java
++++ b/src/jdk.httpserver/share/classes/sun/net/httpserver/ChunkedOutputStream.java
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 2005, 2008, Oracle and/or its affiliates. All rights reserved.
++ * Copyright (c) 2005, 2023, Oracle and/or its affiliates. All rights reserved.
+  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+  *
+  * This code is free software; you can redistribute it and/or modify it
+@@ -27,6 +27,8 @@ package sun.net.httpserver;
+ 
+ import java.io.*;
+ import java.net.*;
++import java.util.Objects;
++
+ import com.sun.net.httpserver.*;
+ import com.sun.net.httpserver.spi.*;
+ 
+@@ -77,6 +79,10 @@ class ChunkedOutputStream extends FilterOutputStream
+     }
+ 
+     public void write (byte[]b, int off, int len) throws IOException {
++        Objects.checkFromIndexSize(off, len, b.length);
++        if (len == 0) {
++            return;
++        }
+         if (closed) {
+             throw new StreamClosedException ();
+         }
+diff --git a/src/jdk.httpserver/share/classes/sun/net/httpserver/ExchangeImpl.java b/src/jdk.httpserver/share/classes/sun/net/httpserver/ExchangeImpl.java
+index 454b6cd435c..d18f6bc80b4 100644
+--- a/src/jdk.httpserver/share/classes/sun/net/httpserver/ExchangeImpl.java
++++ b/src/jdk.httpserver/share/classes/sun/net/httpserver/ExchangeImpl.java
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 2005, 2021, Oracle and/or its affiliates. All rights reserved.
++ * Copyright (c) 2005, 2023, Oracle and/or its affiliates. All rights reserved.
+  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+  *
+  * This code is free software; you can redistribute it and/or modify it
+@@ -188,7 +188,6 @@ class ExchangeImpl {
+         return uos;
+     }
+ 
+-
+     /* returns the place holder stream, which is the stream
+      * returned from the 1st call to getResponseBody()
+      * The "real" ouputstream is then placed inside this
+@@ -282,9 +281,7 @@ class ExchangeImpl {
+         sentHeaders = true;
+         logger.log(Level.TRACE, "Sent headers: noContentToSend=" + noContentToSend);
+         if (noContentToSend) {
+-            WriteFinishedEvent e = new WriteFinishedEvent (this);
+-            server.addEvent (e);
+-            closed = true;
++            close();
+         }
+         server.logReply (rCode, req.requestLine(), null);
+     }
+diff --git a/src/jdk.httpserver/share/classes/sun/net/httpserver/FixedLengthOutputStream.java b/src/jdk.httpserver/share/classes/sun/net/httpserver/FixedLengthOutputStream.java
+index 4935214c2e1..277e6bb4228 100644
+--- a/src/jdk.httpserver/share/classes/sun/net/httpserver/FixedLengthOutputStream.java
++++ b/src/jdk.httpserver/share/classes/sun/net/httpserver/FixedLengthOutputStream.java
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 2005, 2006, Oracle and/or its affiliates. All rights reserved.
++ * Copyright (c) 2005, 2023, Oracle and/or its affiliates. All rights reserved.
+  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+  *
+  * This code is free software; you can redistribute it and/or modify it
+@@ -27,6 +27,8 @@ package sun.net.httpserver;
+ 
+ import java.io.*;
+ import java.net.*;
++import java.util.Objects;
++
+ import com.sun.net.httpserver.*;
+ import com.sun.net.httpserver.spi.*;
+ 
+@@ -41,7 +43,6 @@ import com.sun.net.httpserver.spi.*;
+ class FixedLengthOutputStream extends FilterOutputStream
+ {
+     private long remaining;
+-    private boolean eof = false;
+     private boolean closed = false;
+     ExchangeImpl t;
+ 
+@@ -58,8 +59,7 @@ class FixedLengthOutputStream extends FilterOutputStream
+         if (closed) {
+             throw new IOException ("stream closed");
+         }
+-        eof = (remaining == 0);
+-        if (eof) {
++        if (remaining == 0) {
+             throw new StreamClosedException();
+         }
+         out.write(b);
+@@ -67,13 +67,13 @@ class FixedLengthOutputStream extends FilterOutputStream
+     }
+ 
+     public void write (byte[]b, int off, int len) throws IOException {
++        Objects.checkFromIndexSize(off, len, b.length);
++        if (len == 0) {
++            return;
++        }
+         if (closed) {
+             throw new IOException ("stream closed");
+         }
+-        eof = (remaining == 0);
+-        if (eof) {
+-            throw new StreamClosedException();
+-        }
+         if (len > remaining) {
+             // stream is still open, caller can retry
+             throw new IOException ("too many bytes to write to stream");
+@@ -92,7 +92,6 @@ class FixedLengthOutputStream extends FilterOutputStream
+             throw new IOException ("insufficient bytes written to stream");
+         }
+         flush();
+-        eof = true;
+         LeftOverInputStream is = t.getOriginalInputStream();
+         if (!is.isClosed()) {
+             try {
+diff --git a/src/jdk.httpserver/share/classes/sun/net/httpserver/ServerImpl.java b/src/jdk.httpserver/share/classes/sun/net/httpserver/ServerImpl.java
+index da666adbf64..4043fdd880d 100644
+--- a/src/jdk.httpserver/share/classes/sun/net/httpserver/ServerImpl.java
++++ b/src/jdk.httpserver/share/classes/sun/net/httpserver/ServerImpl.java
+@@ -696,7 +696,14 @@ class ServerImpl {
+                     return;
+                 }
+                 String uriStr = requestLine.substring (start, space);
+-                URI uri = new URI (uriStr);
++                URI uri;
++                try {
++                    uri = new URI (uriStr);
++                } catch (URISyntaxException e3) {
++                    reject(Code.HTTP_BAD_REQUEST,
++                            requestLine, "URISyntaxException thrown");
++                    return;
++                }
+                 start = space+1;
+                 String version = requestLine.substring (start);
+                 Headers headers = req.headers();
+@@ -732,7 +739,13 @@ class ServerImpl {
+                 } else {
+                     headerValue = headers.getFirst("Content-Length");
+                     if (headerValue != null) {
+-                        clen = Long.parseLong(headerValue);
++                        try {
++                            clen = Long.parseLong(headerValue);
++                        } catch (NumberFormatException e2) {
++                            reject(Code.HTTP_BAD_REQUEST,
++                                    requestLine, "NumberFormatException thrown");
++                            return;
++                        }
+                         if (clen < 0) {
+                             reject(Code.HTTP_BAD_REQUEST, requestLine,
+                                     "Illegal Content-Length value");
+@@ -818,20 +831,11 @@ class ServerImpl {
+                     uc.doFilter (new HttpExchangeImpl (tx));
+                 }
+ 
+-            } catch (IOException e1) {
+-                logger.log (Level.TRACE, "ServerImpl.Exchange (1)", e1);
+-                closeConnection(connection);
+-            } catch (NumberFormatException e2) {
+-                logger.log (Level.TRACE, "ServerImpl.Exchange (2)", e2);
+-                reject (Code.HTTP_BAD_REQUEST,
+-                        requestLine, "NumberFormatException thrown");
+-            } catch (URISyntaxException e3) {
+-                logger.log (Level.TRACE, "ServerImpl.Exchange (3)", e3);
+-                reject (Code.HTTP_BAD_REQUEST,
+-                        requestLine, "URISyntaxException thrown");
+-            } catch (Exception e4) {
+-                logger.log (Level.TRACE, "ServerImpl.Exchange (4)", e4);
+-                closeConnection(connection);
++            } catch (Exception e) {
++                logger.log (Level.TRACE, "ServerImpl.Exchange", e);
++                if (tx == null || !tx.writefinished) {
++                    closeConnection(connection);
++                }
+             } catch (Throwable t) {
+                 logger.log(Level.TRACE, "ServerImpl.Exchange (5)", t);
+                 throw t;
+@@ -856,9 +860,8 @@ class ServerImpl {
+             rejected = true;
+             logReply (code, requestStr, message);
+             sendReply (
+-                code, false, "<h1>"+code+Code.msg(code)+"</h1>"+message
++                code, true, "<h1>"+code+Code.msg(code)+"</h1>"+message
+             );
+-            closeConnection(connection);
+         }
+ 
+         void sendReply (
+diff --git a/src/jdk.httpserver/share/classes/sun/net/httpserver/UndefLengthOutputStream.java b/src/jdk.httpserver/share/classes/sun/net/httpserver/UndefLengthOutputStream.java
+index 2918e42a05f..76a1be6ec5f 100644
+--- a/src/jdk.httpserver/share/classes/sun/net/httpserver/UndefLengthOutputStream.java
++++ b/src/jdk.httpserver/share/classes/sun/net/httpserver/UndefLengthOutputStream.java
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 2007, Oracle and/or its affiliates. All rights reserved.
++ * Copyright (c) 2007, 2023, Oracle and/or its affiliates. All rights reserved.
+  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+  *
+  * This code is free software; you can redistribute it and/or modify it
+@@ -27,6 +27,8 @@ package sun.net.httpserver;
+ 
+ import java.io.*;
+ import java.net.*;
++import java.util.Objects;
++
+ import com.sun.net.httpserver.*;
+ import com.sun.net.httpserver.spi.*;
+ 
+@@ -55,6 +57,10 @@ class UndefLengthOutputStream extends FilterOutputStream
+     }
+ 
+     public void write (byte[]b, int off, int len) throws IOException {
++        Objects.checkFromIndexSize(off, len, b.length);
++        if (len == 0) {
++            return;
++        }
+         if (closed) {
+             throw new IOException ("stream closed");
+         }

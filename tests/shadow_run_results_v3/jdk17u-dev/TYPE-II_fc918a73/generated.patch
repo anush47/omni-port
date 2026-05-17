@@ -1,0 +1,73 @@
+diff --git a/src/java.base/share/classes/sun/security/tools/keytool/Main.java b/src/java.base/share/classes/sun/security/tools/keytool/Main.java
+index 215b4a24c09..c6e47d93da3 100644
+--- a/src/java.base/share/classes/sun/security/tools/keytool/Main.java
++++ b/src/java.base/share/classes/sun/security/tools/keytool/Main.java
+@@ -41,7 +41,6 @@ import java.security.cert.CertificateParsingException;
+ import java.security.cert.TrustAnchor;
+ import java.security.cert.URICertStoreParameters;
+ 
+-
+ import java.security.interfaces.ECKey;
+ import java.security.interfaces.EdECKey;
+ import java.security.spec.ECParameterSpec;
+@@ -1081,7 +1080,6 @@ public final class Main {
+                         count++;
+                     } while ((storePass == null) && count < 3);
+ 
+-
+                     if (storePass == null) {
+                         System.err.println
+                                 (rb.getString("Too.many.failures.try.later"));
+@@ -1287,6 +1285,7 @@ public final class Main {
+             kssave = true;
+         } else if (command == LIST) {
+             if (storePass == null
++                    && !protectedPath
+                     && !KeyStoreUtil.isWindowsKeyStore(storetype)
+                     && !isPasswordlessKeyStore) {
+                 printNoIntegrityWarning();
+@@ -1444,7 +1443,6 @@ public final class Main {
+     private void doGenCert(String alias, String sigAlgName, InputStream in, PrintStream out)
+             throws Exception {
+ 
+-
+         if (keyStore.containsAlias(alias) == false) {
+             MessageFormat form = new MessageFormat
+                     (rb.getString("Alias.alias.does.not.exist"));
+@@ -1686,6 +1684,7 @@ public final class Main {
+         throws Exception
+     {
+         if (storePass == null
++                && !protectedPath
+                 && !KeyStoreUtil.isWindowsKeyStore(storetype)
+                 && !isPasswordlessKeyStore) {
+             printNoIntegrityWarning();
+diff --git a/src/jdk.jartool/share/classes/sun/security/tools/jarsigner/Main.java b/src/jdk.jartool/share/classes/sun/security/tools/jarsigner/Main.java
+index df75739188f..459fe282a9e 100644
+--- a/src/jdk.jartool/share/classes/sun/security/tools/jarsigner/Main.java
++++ b/src/jdk.jartool/share/classes/sun/security/tools/jarsigner/Main.java
+@@ -64,7 +64,6 @@ import sun.security.validator.ValidatorException;
+ import sun.security.x509.*;
+ import sun.security.util.*;
+ 
+-
+ /**
+  * <p>The jarsigner utility.
+  *
+@@ -2151,7 +2150,7 @@ public class Main {
+                     && !KeyStoreUtil.isWindowsKeyStore(storetype)) {
+                 storepass = getPass
+                         (rb.getString("Enter.Passphrase.for.keystore."));
+-            } else if (!token && storepass == null && prompt) {
++            } else if (!token && storepass == null && prompt && !protectedPath) {
+                 storepass = getPass
+                         (rb.getString("Enter.Passphrase.for.keystore."));
+             }
+@@ -2407,7 +2406,6 @@ public class Main {
+         System.exit(1);
+     }
+ 
+-
+     void error(String message, Throwable e) {
+         System.out.println(rb.getString("jarsigner.")+message);
+         if (debug) {

@@ -1,0 +1,22 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/java/lang/Class/ProtectionDomainRace.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "java/lang/Class/ProtectionDomainRace.java#ProtectionDomainRace": "passed"
+    },
+    "classes": {
+      "java/lang/Class/ProtectionDomainRace.java": "passed"
+    },
+    "summary": {
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "total": 1
+    }
+  },
+  "mode": "baseline-jdk17u-dev-helper",
+  "skipped": false
+}

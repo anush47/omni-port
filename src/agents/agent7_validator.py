@@ -837,6 +837,18 @@ def run_phase0_baseline(
     # are identical regardless of current worktree state.
     changed_files = [path for _, path in file_entries]
     target_info = detect_test_targets(repo_path, project, file_entries=file_entries)
+
+    # Build the JDK from backport_commit~1 (no production fix) before running tests.
+    # Without this, tests run against build_shared left by the previous validation run
+    # (which was built WITH a fix), causing the test to pass in baseline too — killing
+    # the fail→pass signal for every subsequent patch.
+    print(f"  [agent7] phase0: building from pre-fix state (backport_commit~1)...")
+    build_res = run_build(repo_path, project)
+    if not build_res.success:
+        print(f"  [agent7] phase0: baseline build failed — skipping baseline")
+        restore_repo_state(repo_path)
+        return {"test_state": {}, "mode": "baseline-build-failed", "skipped": True}
+
     print(f"  [agent7] phase0: running baseline tests ({len(target_info.test_targets)} targets) directly...")
     test_res = run_tests(repo_path, project, target_info=target_info, changed_files=changed_files)
 
@@ -1187,6 +1199,28 @@ def run_validation(state: BackportState) -> BackportState:
             state["validation_results"] = validation_results
             state["retry_contexts"] = list(state.get("retry_contexts", [])) + [ctx]
             return state
+
+        # Test runner exited non-zero but no infra error and no regression.
+        # For jtreg this is common — it exits 1 for warnings even when test cases
+        # passed. If XML results exist, treat as a non-fatal runner exit and fall
+        # through. If no XML results at all, the runner itself failed (missing
+        # jtreg binary, JDK image not built, etc.) — classify as infrastructure.
+        patched_cases = (test_res.test_state or {}).get("test_cases") or {}
+        patched_classes = (test_res.test_state or {}).get("classes") or {}
+        if not patched_cases and not patched_classes:
+            print("  agent7: test runner exited non-zero with no XML results — infrastructure failure.")
+            restore_repo_state(repo_path)
+            ctx = _build_retry_context("infrastructure", test_res.output, attempts + 1)
+            state["validation_passed"] = False
+            state["validation_error_context"] = "Test runner produced no results (infrastructure failure)."
+            state["validation_failure_category"] = "infrastructure"
+            state["validation_retry_files"] = []
+            state["validation_attempts"] = attempts + 1
+            state["validation_results"] = validation_results
+            state["retry_contexts"] = list(state.get("retry_contexts", [])) + [ctx]
+            return state
+
+        print("  agent7: test runner exited non-zero but XML results present — non-fatal runner exit.")
 
     # ── Success ────────────────────────────────────────────────────────────────
     print(f"  agent7: validation PASSED (attempt {attempts + 1}).")

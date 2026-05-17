@@ -1,0 +1,106 @@
+diff --git a/src/java.base/share/classes/sun/net/www/protocol/http/HttpURLConnection.java b/src/java.base/share/classes/sun/net/www/protocol/http/HttpURLConnection.java
+index e3e72723428..dd6168a8126 100644
+--- a/src/java.base/share/classes/sun/net/www/protocol/http/HttpURLConnection.java
++++ b/src/java.base/share/classes/sun/net/www/protocol/http/HttpURLConnection.java
+@@ -96,7 +96,6 @@ import sun.security.action.GetPropertyAction;
+  * A class to represent an HTTP connection to a remote object.
+  */
+ 
+-
+ public class HttpURLConnection extends java.net.HttpURLConnection {
+ 
+     static final String HTTP_CONNECT = "CONNECT";
+@@ -159,7 +158,6 @@ public class HttpURLConnection extends java.net.HttpURLConnection {
+      *     default is 4k
+      */
+ 
+-
+     /* Should we enable buffering of error streams? */
+     private static boolean enableESBuffer = false;
+ 
+@@ -420,6 +418,10 @@ public class HttpURLConnection extends java.net.HttpURLConnection {
+        calls getInputStream after disconnect */
+     private Exception rememberedException = null;
+ 
++    /* Remembered Exception, we will throw it again if somebody
++       calls getOutputStream after disconnect  or error */
++    private Exception rememberedExceptionOut = null;
++
+     /* If we decide we want to reuse a client, we put it here */
+     private HttpClient reuseClient = null;
+ 
+@@ -465,7 +467,6 @@ public class HttpURLConnection extends java.net.HttpURLConnection {
+         return connectionLock.isHeldByCurrentThread();
+     }
+ 
+-
+     /*
+      * privileged request password authentication
+      *
+@@ -847,7 +848,6 @@ public class HttpURLConnection extends java.net.HttpURLConnection {
+         http.setReadTimeout(readTimeout);
+     }
+ 
+-
+     /**
+      * Create a new HttpClient object, set up so that it uses
+      * per-instance proxying to the given HTTP proxy.  This
+@@ -1024,7 +1024,6 @@ public class HttpURLConnection extends java.net.HttpURLConnection {
+         return in;
+     }
+ 
+-
+     //
+     // Same as java.net.URL.hostsEqual
+     //
+@@ -1449,6 +1448,14 @@ public class HttpURLConnection extends java.net.HttpURLConnection {
+                                + " if doOutput=false - call setDoOutput(true)");
+             }
+ 
++            if (rememberedExceptionOut != null) {
++                if (rememberedExceptionOut instanceof RuntimeException) {
++                    throw new RuntimeException(rememberedExceptionOut);
++                } else {
++                    throw getChainedException((IOException) rememberedExceptionOut);
++                }
++            }
++
+             if (method.equals("GET")) {
+                 method = "POST"; // Backward compatibility
+             }
+@@ -1511,9 +1518,11 @@ public class HttpURLConnection extends java.net.HttpURLConnection {
+             int i = responseCode;
+             disconnectInternal();
+             responseCode = i;
++            rememberedExceptionOut = e;
+             throw e;
+         } catch (IOException e) {
+             disconnectInternal();
++            rememberedExceptionOut = e;
+             throw e;
+         }
+     }
+@@ -3171,7 +3180,6 @@ public class HttpURLConnection extends java.net.HttpURLConnection {
+                     hc.closeIdleConnection();
+                 }
+ 
+-
+             } else {
+                 // We are deliberatly being disconnected so HttpClient
+                 // should not try to resend the request no matter what stage
+@@ -3505,7 +3513,6 @@ public class HttpURLConnection extends java.net.HttpURLConnection {
+         connectTimeout = timeout;
+     }
+ 
+-
+     /**
+      * Returns setting for connect timeout.
+      * <p>
+@@ -3920,7 +3927,6 @@ public class HttpURLConnection extends java.net.HttpURLConnection {
+         }
+     }
+ 
+-
+     static class ErrorStream extends InputStream {
+         ByteBuffer buffer;
+         InputStream is;

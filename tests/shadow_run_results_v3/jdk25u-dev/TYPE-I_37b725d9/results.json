@@ -1,0 +1,210 @@
+{
+  "run_timestamp": "2026-04-19T08:38:09.725343",
+  "repo": "jdk25u-dev",
+  "patch_type": "TYPE-I",
+  "original_commit": "37b725d9c12834358a562e6c03fb7f566d639ca5",
+  "backport_commit": "28eaab4297169d71e672a87c08444ec2aa244195",
+  "description": "main \u2192 jdk25u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "java_hunks": 3,
+      "aux_hunks": 1,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.base/share/classes/java/util/SimpleTimeZone.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.base/share/classes/java/util/SimpleTimeZone.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 112,
+          "end_line": 126,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.base/share/classes/java/util/SimpleTimeZone.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 863,
+          "end_line": 875,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 4.13,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_II",
+        "confidence": 0.95,
+        "reasoning": "The patch modifies the SimpleTimeZone.java file with changes including copyright year update, comments correction, and a significant change in the hashCode() method implementation. The changes are not just trivial string replacements but involve updating the hashCode calculation logic to include more fields and conditional logic based on useDaylight. Additionally, a new test file is added to verify the correctness of equals() and hashCode() methods. The localization evidence shows all hunks were found via 'git_exact' with high confidence, indicating the patch applies cleanly to the target branch. The complexity is beyond simple string replacement (TYPE_I) due to the logic changes but does not involve structural or API redesign (TYPE_III or higher). Therefore, TYPE_II classification is appropriate, reflecting whitespace/formatting drift and minor logic changes requiring fuzzy matching. The confidence is high given the exact localization and the token budget estimate accounts for the code changes and new test addition.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.01,
+      "error": null,
+      "applied_count": 3,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/java/util/SimpleTimeZone.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/java/util/SimpleTimeZone.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/java/util/SimpleTimeZone.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "adapted_count": 0
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 0,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": []
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [],
+      "synthesized_count_after_repair": 0
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk25u-dev-helper",
+      "test_success": true,
+      "test_mode": "jdk25u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk25u-dev/JTwork/java/util/TimeZone/SimpleTimeZoneEqualsHashCodeTest.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "java/util/TimeZone/SimpleTimeZoneEqualsHashCodeTest.java#SimpleTimeZoneEqualsHashCodeTest": "passed"
+        },
+        "classes": {
+          "java/util/TimeZone/SimpleTimeZoneEqualsHashCodeTest.java": "passed"
+        },
+        "summary": {
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [
+          "java/util/TimeZone/SimpleTimeZoneEqualsHashCodeTest.java#SimpleTimeZoneEqualsHashCodeTest"
+        ],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 1,
+        "patched_total": 1,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 4,
+    "developer_aux_hunks_from_target": 1,
+    "phase0_baseline": {
+      "mode": "baseline-jdk25u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 1
+    },
+    "java_production_hunks": 3,
+    "developer_aux_hunks": 1,
+    "processed_hunk_indices": [
+      0,
+      1,
+      2
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 3,
+    "synthesized_count": 0,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 2472,
+    "target_patch_bytes": 6497,
+    "patch_exact_match": true,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": true,
+    "test_mode": "jdk25u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [
+        "java/util/TimeZone/SimpleTimeZoneEqualsHashCodeTest.java#SimpleTimeZoneEqualsHashCodeTest"
+      ],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 1,
+      "patched_total": 1,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 1,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

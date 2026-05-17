@@ -1,0 +1,27 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk11u-dev/JTwork/java/net/httpclient/HttpRedirectTest.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk11u-dev/JTwork/java/net/httpclient/HttpRedirectTest.testng-results.xml",
+      "/home/cseroot/omni-port/repos/jdk11u-dev/JTwork/java/net/httpclient/http2/RedirectTest.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk11u-dev/JTwork/java/net/httpclient/http2/RedirectTest.testng-results.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "java/net/httpclient/HttpRedirectTest.java#HttpRedirectTest": "failed",
+      "java/net/httpclient/http2/RedirectTest.java#RedirectTest": "passed"
+    },
+    "classes": {
+      "java/net/httpclient/HttpRedirectTest.java": "failed",
+      "java/net/httpclient/http2/RedirectTest.java": "passed"
+    },
+    "summary": {
+      "passed": 1,
+      "failed": 1,
+      "skipped": 0,
+      "total": 2
+    }
+  },
+  "mode": "baseline-jdk11u-dev-helper",
+  "skipped": false
+}

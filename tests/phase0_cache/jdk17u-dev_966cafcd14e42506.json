@@ -1,0 +1,31 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/com/sun/net/httpserver/bugs/ExceptionKeepAlive.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/com/sun/net/httpserver/bugs/ZeroLengthOutputStream.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/sun/net/www/http/KeepAliveCache/B5045306.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/sun/net/www/http/KeepAliveCache/B8293562.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "com/sun/net/httpserver/bugs/ExceptionKeepAlive.java#ExceptionKeepAlive": "failed",
+      "com/sun/net/httpserver/bugs/ZeroLengthOutputStream.java#ZeroLengthOutputStream": "failed",
+      "sun/net/www/http/KeepAliveCache/B5045306.java#B5045306": "passed",
+      "sun/net/www/http/KeepAliveCache/B8293562.java#B8293562": "passed"
+    },
+    "classes": {
+      "com/sun/net/httpserver/bugs/ExceptionKeepAlive.java": "failed",
+      "com/sun/net/httpserver/bugs/ZeroLengthOutputStream.java": "failed",
+      "sun/net/www/http/KeepAliveCache/B5045306.java": "passed",
+      "sun/net/www/http/KeepAliveCache/B8293562.java": "passed"
+    },
+    "summary": {
+      "passed": 2,
+      "failed": 2,
+      "skipped": 0,
+      "total": 4
+    }
+  },
+  "mode": "baseline-jdk17u-dev-helper",
+  "skipped": false
+}

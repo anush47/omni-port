@@ -1,0 +1,385 @@
+{
+  "run_timestamp": "2026-04-18T15:38:53.617225",
+  "repo": "jdk17u-dev",
+  "patch_type": "TYPE-II",
+  "original_commit": "800e68d6906734242119e4ea033422f037a79857",
+  "backport_commit": "10000286390ac9b0288cee25a4f3551d09475fdc",
+  "description": "main \u2192 jdk17u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 6.56,
+      "error": null,
+      "java_hunks": 13,
+      "aux_hunks": 1,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Exchange.java",
+          "method_used": "fuzzy",
+          "confidence": 0.888,
+          "start_line": 28,
+          "end_line": 33,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Exchange.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 447,
+          "end_line": 456,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Exchange.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 481,
+          "end_line": 487,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/ExchangeImpl.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 199,
+          "end_line": 204,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http1Exchange.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 427,
+          "end_line": 432,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 344,
+          "end_line": 350,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/HttpClientImpl.java",
+          "method_used": "fuzzy",
+          "confidence": 0.901,
+          "start_line": 37,
+          "end_line": 42,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/HttpClientImpl.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 582,
+          "end_line": 587,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 8,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 414,
+          "end_line": 420,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 9,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1203,
+          "end_line": 1208,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 10,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1214,
+          "end_line": 1219,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 11,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1245,
+          "end_line": 1258,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 12,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1260,
+          "end_line": 1269,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 4.23,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_III",
+        "confidence": 0.95,
+        "reasoning": "The patch introduces new methods and modifies existing methods across multiple classes related to HTTP client handling, including Exchange.java, ExchangeImpl.java, Http1Exchange.java, Http2Connection.java, HttpClientImpl.java, and Stream.java. It adds logic to handle HTTP 1xx informational responses properly, including ignoring certain 1xx responses and handling unexpected 101 responses as protocol errors. The patch also adds a substantial new test class Response1xxTest.java with comprehensive tests for these behaviors. The changes involve structural additions (new methods, new abstract methods, overrides) and modifications to existing control flow, indicating structural changes rather than simple string replacements or formatting. The localization evidence shows mostly exact matches, but the complexity of the changes and the addition of new classes and methods suggest a TYPE_III classification (structural changes). The confidence is high due to exact matches and clear structural modifications. The token budget estimate is relatively high due to the size and complexity of the patch and the new test code added.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.03,
+      "error": null,
+      "applied_count": 11,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Exchange.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Exchange.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/ExchangeImpl.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http1Exchange.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/HttpClientImpl.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 51.03,
+      "error": null,
+      "adapted_count": 2
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.11,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 2,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Exchange.java",
+          "old_string": "\nimport java.net.InetSocketAddress;\nimport java.net.ProxySelector;",
+          "new_string": "\nimport java.net.InetSocketAddress;\nimport java.net.ProtocolException;\nimport java.net.ProxySelector;",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        },
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/HttpClientImpl.java",
+          "old_string": "import java.net.ConnectException;\nimport java.net.CookieHandler;\nimport java.net.ProxySelector;\nimport java.net.http.HttpConnectTimeoutException;\nimport java.net.http.HttpTimeoutException;\nimport java.nio.ByteBuffer;",
+          "new_string": "import java.net.ConnectException;\nimport java.net.CookieHandler;\nimport java.net.ProtocolException;\nimport java.net.ProxySelector;\nimport java.net.http.HttpConnectTimeoutException;\nimport java.net.http.HttpTimeoutException;\nimport java.nio.ByteBuffer;",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.91,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Exchange.java",
+          "outcome": "clean"
+        },
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/HttpClientImpl.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 2
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk17u-dev-helper",
+      "test_success": true,
+      "test_mode": "jdk17u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/java/net/httpclient/Response1xxTest.jtr.xml",
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/java/net/httpclient/Response1xxTest.testng-results.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "java/net/httpclient/Response1xxTest.java#Response1xxTest": "passed"
+        },
+        "classes": {
+          "java/net/httpclient/Response1xxTest.java": "passed"
+        },
+        "summary": {
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [
+          "java/net/httpclient/Response1xxTest.java#Response1xxTest"
+        ],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 1,
+        "patched_total": 1,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 14,
+    "developer_aux_hunks_from_target": 1,
+    "phase0_baseline": {
+      "mode": "baseline-jdk17u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 1
+    },
+    "java_production_hunks": 13,
+    "developer_aux_hunks": 1,
+    "processed_hunk_indices": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      0,
+      6
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 7595,
+        "output": 1891
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 11,
+    "synthesized_count": 2,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "clean",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 14920,
+    "target_patch_bytes": 37421,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": true,
+    "test_mode": "jdk17u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [
+        "java/net/httpclient/Response1xxTest.java#Response1xxTest"
+      ],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 1,
+      "patched_total": 1,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 1,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

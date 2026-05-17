@@ -1,0 +1,17 @@
+diff --git a/src/java.base/share/classes/java/util/concurrent/ForkJoinWorkerThread.java b/src/java.base/share/classes/java/util/concurrent/ForkJoinWorkerThread.java
+index b942d3ecd09..566fc417952 100644
+--- a/src/java.base/share/classes/java/util/concurrent/ForkJoinWorkerThread.java
++++ b/src/java.base/share/classes/java/util/concurrent/ForkJoinWorkerThread.java
+@@ -267,10 +267,8 @@ public void setUncaughtExceptionHandler(UncaughtExceptionHandler x) { }
+ 
+         @Override // to record changes
+         public void setContextClassLoader(ClassLoader cl) {
+-            if (ClassLoader.getSystemClassLoader() != cl) {
+-                resetCCL = true;
+-                super.setContextClassLoader(cl);
+-            }
++            resetCCL = ClassLoader.getSystemClassLoader() != cl;
++            super.setContextClassLoader(cl);
+         }
+ 
+         @Override // to re-establish CCL if necessary

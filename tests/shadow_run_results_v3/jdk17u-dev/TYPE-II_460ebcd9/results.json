@@ -1,0 +1,227 @@
+{
+  "run_timestamp": "2026-04-18T08:04:03.057040",
+  "repo": "jdk17u-dev",
+  "patch_type": "TYPE-II",
+  "original_commit": "460ebcd9cb94867608e22e07092bd1cf33228700",
+  "backport_commit": "183b9a0ab4d6d37d120ea239cac61d6bbd6a7d43",
+  "description": "main \u2192 jdk17u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 2.08,
+      "error": null,
+      "java_hunks": 3,
+      "aux_hunks": 1,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.base/share/classes/sun/net/www/protocol/http/HttpURLConnection.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 420,
+          "end_line": 425,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.base/share/classes/sun/net/www/protocol/http/HttpURLConnection.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1449,
+          "end_line": 1454,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.base/share/classes/sun/net/www/protocol/http/HttpURLConnection.java",
+          "method_used": "fuzzy",
+          "confidence": 0.918,
+          "start_line": 1511,
+          "end_line": 1519,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 4.04,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.MIXED",
+        "confidence": 0.95,
+        "reasoning": "The patch modifies the HttpURLConnection.java file by adding new exception handling fields and logic. The first two hunks are exact matches with high confidence (1.00), indicating straightforward additions to the existing code, which aligns with TYPE_I complexity. The third hunk, adding exception handling in getOutputStream0(), was found via fuzzy matching with slightly lower confidence (0.92), indicating minor structural changes but no deep refactoring, suggesting TYPE_II complexity. Additionally, a new comprehensive test file is added, which does not affect classification but increases token budget. Overall, the patch combines exact string additions and minor structural changes, so the classification is MIXED with high confidence. The token budget is estimated at 700 due to the size of the patch and test code.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.01,
+      "error": null,
+      "applied_count": 2,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/sun/net/www/protocol/http/HttpURLConnection.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.base/share/classes/sun/net/www/protocol/http/HttpURLConnection.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 20.2,
+      "error": null,
+      "adapted_count": 1
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.07,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 1,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "src/java.base/share/classes/sun/net/www/protocol/http/HttpURLConnection.java",
+          "old_string": "            int i = responseCode;\n            disconnectInternal();\n            responseCode = i;\n            throw e;\n        } catch (IOException e) {\n            disconnectInternal();\n            throw e;\n        }\n    }",
+          "new_string": "            int i = responseCode;\n            disconnectInternal();\n            responseCode = i;\n            rememberedExceptionOut = e;\n            throw e;\n        } catch (IOException e) {\n            disconnectInternal();\n            rememberedExceptionOut = e;\n            throw e;\n        }\n    }",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.32,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/java.base/share/classes/sun/net/www/protocol/http/HttpURLConnection.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 1
+    },
+    "agent7_validator": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 1,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk17u-dev-helper",
+      "test_success": true,
+      "test_mode": "jdk17u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/java/net/HttpURLConnection/HttpURLConnectionExpect100Test.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "java/net/HttpURLConnection/HttpURLConnectionExpect100Test.java#HttpURLConnectionExpect100Test": "passed"
+        },
+        "classes": {
+          "java/net/HttpURLConnection/HttpURLConnectionExpect100Test.java": "passed"
+        },
+        "summary": {
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "total": 1
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": true,
+        "fail_to_pass": [
+          "java/net/HttpURLConnection/HttpURLConnectionExpect100Test.java#HttpURLConnectionExpect100Test"
+        ],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 1,
+        "patched_total": 1,
+        "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 4,
+    "developer_aux_hunks_from_target": 1,
+    "phase0_baseline": {
+      "mode": "baseline-jdk17u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 1
+    },
+    "java_production_hunks": 3,
+    "developer_aux_hunks": 1,
+    "processed_hunk_indices": [
+      0,
+      1,
+      2
+    ],
+    "tokens_used": 0,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 2898,
+        "output": 675
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 2,
+    "synthesized_count": 1,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "clean",
+    "fallback_status": "not_run",
+    "fallback_attempts": 0,
+    "retry_contexts": [],
+    "failed_hunks": [],
+    "generated_patch_bytes": 3837,
+    "target_patch_bytes": 11202,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": true,
+    "test_mode": "jdk17u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": true,
+      "fail_to_pass": [
+        "java/net/HttpURLConnection/HttpURLConnectionExpect100Test.java#HttpURLConnectionExpect100Test"
+      ],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 1,
+      "patched_total": 1,
+      "reason": "Valid: Observed fail-to-pass and/or newly passing tests with no regressions."
+    },
+    "fail_to_pass_count": 1,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": true
+  }
+}

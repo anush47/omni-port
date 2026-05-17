@@ -1,0 +1,1092 @@
+{
+  "run_timestamp": "2026-04-18T20:35:00.021911",
+  "repo": "jdk21u-dev",
+  "patch_type": "TYPE-V",
+  "original_commit": "720b44648bcff997278af92746f942b2425298a5",
+  "backport_commit": "209939a90e9b804da4c37ebd978b088cb8f41ead",
+  "description": "main \u2192 jdk21u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 10.81,
+      "error": null,
+      "java_hunks": 21,
+      "aux_hunks": 6,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/ExchangeImpl.java",
+          "method_used": "fuzzy",
+          "confidence": 0.995,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/ExchangeImpl.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 58,
+          "end_line": 63,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/ExchangeImpl.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 264,
+          "end_line": 267,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "method_used": "fuzzy",
+          "confidence": 0.995,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "method_used": "fuzzy",
+          "confidence": 0.873,
+          "start_line": 48,
+          "end_line": 53,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 396,
+          "end_line": 401,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 802,
+          "end_line": 808,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1354,
+          "end_line": 1366,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 8,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1911,
+          "end_line": 1917,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 9,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 10,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 90,
+          "end_line": 96,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 11,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 459,
+          "end_line": 465,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 12,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 472,
+          "end_line": 478,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 13,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "method_used": "fuzzy",
+          "confidence": 0.99,
+          "start_line": 542,
+          "end_line": 577,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 14,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 582,
+          "end_line": 588,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 15,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 673,
+          "end_line": 692,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 16,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "method_used": "fuzzy",
+          "confidence": 0.916,
+          "start_line": 1699,
+          "end_line": 1705,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 17,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowController.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 18,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowController.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 100,
+          "end_line": 112,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 19,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/frame/GoAwayFrame.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 20,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/frame/GoAwayFrame.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 57,
+          "end_line": 63,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 4.25,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_IV",
+        "confidence": 0.95,
+        "reasoning": "The patch introduces significant new logic to handle HTTP/2 GOAWAY frames and the retrying of unprocessed requests in the HttpClient implementation. It adds new fields, methods, and synchronization mechanisms across multiple classes, including ExchangeImpl, Http2Connection, MultiExchange, Stream, and server-side test infrastructure. The changes involve concurrency control, atomic variables, and complex state management to track processed streams and handle connection shutdowns gracefully. The patch also adds a comprehensive new test class to verify the behavior. These modifications represent deep structural refactoring and API divergence rather than simple string replacements or minor formatting changes, justifying a TYPE_IV classification with high confidence. The token budget estimate is high due to the extensive code additions and complexity of the patch.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.05,
+      "error": null,
+      "applied_count": 16,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/ExchangeImpl.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/ExchangeImpl.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowController.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowController.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/frame/GoAwayFrame.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/frame/GoAwayFrame.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 131.53,
+      "error": null,
+      "adapted_count": 2
+    },
+    "agent5_structural": {
+      "elapsed_s": 130.99,
+      "error": null,
+      "refactored_count": 2
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 5,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "old_string": "/*\n * Copyright (c) 2015, 2024, Oracle and/or its affiliates. All rights reserved.\n * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.\n *\n * This code is free software; you can redistribute it and/or modify it",
+          "new_string": "/*\n * Copyright (c) 2015, 2024, Oracle and/or its affiliates. All rights reserved.\n * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.\n *\n * This code is free software; you can redistribute it and/or modify it",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        },
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "old_string": "import java.util.concurrent.ConcurrentHashMap;\nimport java.util.concurrent.ConcurrentLinkedQueue;\nimport java.util.concurrent.Flow;\nimport java.util.concurrent.atomic.AtomicInteger;\nimport java.util.concurrent.atomic.AtomicReference;\nimport java.util.concurrent.locks.Lock;",
+          "new_string": "import java.util.concurrent.ConcurrentHashMap;\nimport java.util.concurrent.ConcurrentLinkedQueue;\nimport java.util.concurrent.Flow;\nimport java.util.concurrent.atomic.AtomicInteger;\nimport java.util.concurrent.atomic.AtomicLong;\nimport java.util.concurrent.atomic.AtomicReference;\nimport java.util.concurrent.locks.Lock;",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        },
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "old_string": "\n    /**\n     * Takes a Throwable and returns a suitable CompletableFuture that is\n     * completed exceptionally, or null.\n     */\n    private CompletableFuture<Response> getExceptionalCF(Throwable t) {\n        if ((t instanceof CompletionException) || (t instanceof ExecutionException)) {\n            if (t.getCause() != null) {\n                t = t.getCause();\n            }\n        }\n        if (cancelled && !requestCancelled() && t instanceof IOException) {\n            if (!(t instanceof HttpTimeoutException)) {\n                t = toTimeoutException((IOException)t);\n            }\n        } else if (retryOnFailure(t)) {\n            Throwable cause = retryCause(t);\n\n            if (!(t instanceof ConnectException)) {\n                // we may need to start a new connection, and if so\n                // we want to start with a fresh connect timeout again.\n                if (connectTimeout != null) connectTimeout.reset();\n                if (!canRetryRequest(currentreq)) {\n                    return failedFuture(cause); // fails with original cause\n                }\n            } // ConnectException: retry, but don't reset the connectTimeout.\n\n            // allow the retry mechanism to do its work\n            retryCause = cause;\n            if (!expiredOnce) {\n                if (debug.on())\n                    debug.log(t.getClass().getSimpleName() + \" (async): retrying...\", t);\n                expiredOnce = true;\n                // The connection was abruptly closed.\n                // We return null to retry the same request a second time.\n                // The request filters have already been applied to the",
+          "new_string": "    /**\n     * Takes a Throwable and returns a suitable CompletableFuture that is\n     * completed exceptionally, or null.\n     */\n    private CompletableFuture<Response> getExceptionalCF(Throwable t) {\n        if ((t instanceof CompletionException) || (t instanceof ExecutionException)) {\n            if (t.getCause() != null) {\n                t = t.getCause();\n            }\n        }\n\n        // Determine if the exchange was unprocessed by the peer; if so,\n        // allow retry even for non-idempotent requests.\n        Exchange<?> exchange = getExchange();\n        ExchangeImpl<?> exchImpl = (exchange == null) ? null : exchange.exchImpl;\n        final boolean retryAsUnprocessed = exchImpl != null && exchImpl.isUnprocessedByPeer();\n\n        if (cancelled && !requestCancelled() && t instanceof IOException) {\n            if (!(t instanceof HttpTimeoutException)) {\n                t = toTimeoutException((IOException)t);\n            }\n        } else if (retryAsUnprocessed || retryOnFailure(t)) {\n            Throwable cause = retryCause(t);\n\n            if (!(t instanceof ConnectException)) {\n                // we may need to start a new connection, and if so\n                // we want to start with a fresh connect timeout again.\n                if (connectTimeout != null) connectTimeout.reset();\n                if (!retryAsUnprocessed && !canRetryRequest(currentreq)) {\n                    // a (peer) processed request which cannot be retried, fail with\n                    // the original cause\n                    return failedFuture(cause);\n                }\n            } // ConnectException: retry, but don't reset the connectTimeout.\n\n            // allow the retry mechanism to do its work\n            retryCause = cause;\n            if (!retriedOnce) {\n                if (debug.on()) {\n                    debug.log(t.getClass().getSimpleName()\n                            + \" (async): retrying \" + currentreq + \" due to: \", t);\n                }\n                retriedOnce = true;\n                // The connection was abruptly closed.\n                // We return null to retry the same request a second time.\n                // The request filters have already been applied to the",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        },
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "old_string": "                return dbgString = dbg;\n            }\n        }\n    }\n\n    /**\n     * Returns true if this exchange was canceled.",
+          "new_string": "                return dbgString = dbg;\n            }\n        }\n    }\n\n    /**\n     * An unprocessed exchange is one that hasn't been processed by a peer. The local end of the\n     * connection would be notified about such exchanges when it receives a GOAWAY frame with\n     * a stream id that tells which exchanges have been unprocessed.\n     * This method is called on such unprocessed exchanges and the implementation of this method\n     * will arrange for the request, corresponding to this exchange, to be retried afresh on a\n     * new connection.\n     */\n    void closeAsUnprocessed() {\n        try {\n            // Arrange for the request to be retried on a new connection as allowed by the RFC.\n            markUnprocessedByPeer();\n            this.errorRef.compareAndSet(null, new IOException(\"request not processed by peer\"));\n            if (debug.on()) {\n                debug.log(\"closing \" + this.request + \" as unprocessed by peer\");\n            }\n            // close the exchange and complete the response exceptionally\n            close();\n            completeResponseExceptionally(this.errorRef.get());\n        } finally {\n            // decrementStreamsCount isn't strictly necessary but keeps accounting/log messages accurate\n            connection.decrementStreamsCount(streamid);\n        }\n    }\n\n    /**\n     * Returns true if this exchange was canceled.",
+          "confidence": 1.0,
+          "context_lines_included": 0,
+          "verified": true
+        },
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/ExchangeImpl.java",
+          "old_string": "/*\n * Copyright (c) 2015, 2022, Oracle and/or its affiliates. All rights reserved.\n * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.\n *\n * This code is free software; you can redistribute it and/or modify it\n * under the terms of the GNU General Public License version 2 only, as\n * published by the Free Software Foundation.  Oracle designates this\n * particular file as subject to the \"Classpath\" exception as provided\n",
+          "new_string": "/*\n * Copyright (c) 2015, 2024, Oracle and/or its affiliates. All rights reserved.\n * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.\n *\n * This code is free software; you can redistribute it and/or modify it\n * under the terms of the GNU General Public License version 2 only, as\n * published by the Free Software Foundation.  Oracle designates this\n * particular file as subject to the \"Classpath\" exception as provided\n",
+          "confidence": 1.0,
+          "context_lines_included": 3,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.33,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "outcome": "clean"
+        },
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "outcome": "clean"
+        },
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "outcome": "clean"
+        },
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/ExchangeImpl.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 5
+    },
+    "agent7_validator": {
+      "validation_passed": false,
+      "validation_failure_category": "api_mismatch",
+      "validation_error_context": "Build failed (jdk21u-dev-helper) \u2014 compile errors:\nsrc/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java:475: error: method getExceptionalCF in class MultiExchange<T> cannot be applied to given types;",
+      "validation_attempts": 1,
+      "retry_files": [
+        "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java"
+      ],
+      "build_success": false,
+      "build_mode": "jdk21u-dev-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": [
+        {
+          "file": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "line": 475,
+          "message": "error: method getExceptionalCF in class MultiExchange<T> cannot be applied to given types;"
+        }
+      ]
+    },
+    "agent9_fallback_1": {
+      "fallback_status": "failed",
+      "fallback_attempts": 1,
+      "synthesized_count": 4,
+      "hunk_descriptions": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/ExchangeImpl.java",
+          "what_changed": "Updated the copyright year from 2023 to 2024 in the file header comment.",
+          "where_in_code": "File header comment",
+          "intent": "Keep the copyright year current and accurate.",
+          "change_type": "other",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/ExchangeImpl.java",
+          "what_changed": "Added a new volatile boolean field named 'unprocessedByPeer' to the ExchangeImpl class.",
+          "where_in_code": "ExchangeImpl class, field declarations",
+          "intent": "Track whether the peer explicitly indicated that the corresponding stream was not processed, e.g., via GOAWAY or reset frames.",
+          "change_type": "add_field",
+          "key_symbols": [
+            "unprocessedByPeer"
+          ]
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/ExchangeImpl.java",
+          "what_changed": "Added two new methods: 'isUnprocessedByPeer' to query the unprocessed state, and 'markUnprocessedByPeer' to set the unprocessed flag to true.",
+          "where_in_code": "ExchangeImpl class, after expectContinueFailed method",
+          "intent": "Provide API to mark and check if an exchange was not processed by the peer, enabling retry logic or special handling.",
+          "change_type": "add_method",
+          "key_symbols": [
+            "isUnprocessedByPeer",
+            "markUnprocessedByPeer"
+          ]
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "what_changed": "Updated the copyright year from 2023 to 2024 in the file header comment.",
+          "where_in_code": "File header comment",
+          "intent": "Keep the copyright year current and accurate.",
+          "change_type": "other",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "what_changed": "Added imports for AtomicInteger and AtomicLong, and reordered imports to include atomic classes.",
+          "where_in_code": "Import statements at the top of Http2Connection.java",
+          "intent": "Support new atomic fields and concurrency control introduced in the class.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "AtomicInteger",
+            "AtomicLong"
+          ]
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "what_changed": "Added a new AtomicLong field 'lastProcessedStreamInGoAway' initialized to -1.",
+          "where_in_code": "Http2Connection class, field declarations",
+          "intent": "Track the last stream ID processed by the peer as indicated in GOAWAY frames, to manage unprocessed streams.",
+          "change_type": "add_field",
+          "key_symbols": [
+            "lastProcessedStreamInGoAway"
+          ]
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "what_changed": "Modified the close() method to send a GOAWAY frame only if the remote side has not already sent one (checked by HALF_CLOSED_REMOTE state).",
+          "where_in_code": "Http2Connection class, close() method",
+          "intent": "Avoid sending redundant GOAWAY frames if the peer has already indicated connection closure.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "close",
+            "HALF_CLOSED_REMOTE"
+          ]
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "what_changed": "Rewrote handleGoAway method to update lastProcessedStreamInGoAway atomically, mark the connection as half-closed remotely, prevent new streams, and close streams with IDs greater than last processed as unprocessed to allow retries.",
+          "where_in_code": "Http2Connection class, handleGoAway(GoAwayFrame) method and added handlePeerUnprocessedStreams method",
+          "intent": "Properly handle incoming GOAWAY frames by tracking last processed stream, marking connection state, and closing unprocessed streams to enable request retries.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "handleGoAway",
+            "lastProcessedStreamInGoAway",
+            "handlePeerUnprocessedStreams"
+          ]
+        },
+        {
+          "hunk_index": 8,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "what_changed": "Renamed private method markHalfClosedLRemote() to markHalfClosedRemote() for naming consistency.",
+          "where_in_code": "Http2Connection class, private method",
+          "intent": "Improve method naming clarity and consistency.",
+          "change_type": "modify_signature",
+          "key_symbols": [
+            "markHalfClosedRemote"
+          ]
+        },
+        {
+          "hunk_index": 9,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "what_changed": "Updated copyright year from 2023 to 2024 in the file header comment.",
+          "where_in_code": "File header comment",
+          "intent": "Keep the copyright year current and accurate.",
+          "change_type": "other",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 10,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "what_changed": "Replaced the boolean field 'expiredOnce' with 'retriedOnce' to better reflect retry state.",
+          "where_in_code": "MultiExchange class, field declarations",
+          "intent": "Clarify the semantics of the retry tracking flag to indicate if a retry has occurred.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "retriedOnce"
+          ]
+        },
+        {
+          "hunk_index": 11,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "what_changed": "Reset 'retriedOnce' to false instead of 'expiredOnce' when preparing for a new retry attempt.",
+          "where_in_code": "MultiExchange class, inside lambda handling exchange retry",
+          "intent": "Align retry state reset with the renamed field to correctly track retry attempts.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "retriedOnce"
+          ]
+        },
+        {
+          "hunk_index": 12,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "what_changed": "Modified call to getExceptionalCF to pass the ExchangeImpl instance as an additional parameter.",
+          "where_in_code": "MultiExchange class, in exception handling logic",
+          "intent": "Provide context about the exchange to the exception handling method to enable enhanced retry decisions.",
+          "change_type": "modify_method",
+          "key_symbols": [
+            "getExceptionalCF",
+            "exchImpl"
+          ]
+        },
+        {
+          "hunk_index": 13,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "what_changed": "Enhanced getExceptionalCF method to accept an ExchangeImpl parameter and incorporate its unprocessedByPeer state into retry logic; adjusted retry conditions and connect timeout reset accordingly.",
+          "where_in_code": "MultiExchange class, getExceptionalCF(Throwable, ExchangeImpl<?>) method",
+          "intent": "Enable retries for requests that were unprocessed by the peer, improving robustness and correctness of retry behavior.",
+          "change_type": "modify_method",
+          "key_symbols": [
+            "getExceptionalCF",
+            "unprocessedByPeer",
+            "retriedOnce"
+          ]
+        },
+        {
+          "hunk_index": 14,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "what_changed": "Updated debug log message in getExceptionalCF to include the current request information when already retried once.",
+          "where_in_code": "MultiExchange class, getExceptionalCF method",
+          "intent": "Improve debugging output to provide more context about the request being retried.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "getExceptionalCF"
+          ]
+        },
+        {
+          "hunk_index": 15,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "what_changed": "Enhanced handling of RST_STREAM frames to detect REFUSED_STREAM error code, mark the stream as unprocessed by the peer, and arrange for request retry; otherwise, handle other errors normally.",
+          "where_in_code": "Stream class, in method handling RST_STREAM frame",
+          "intent": "Support HTTP/2 semantics where REFUSED_STREAM indicates the request was not processed and can be retried safely.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "closeAsUnprocessed",
+            "markUnprocessedByPeer",
+            "REFUSED_STREAM"
+          ]
+        },
+        {
+          "hunk_index": 16,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "what_changed": "Modified dbgString method to handle stream id 0 by displaying '?' instead of 0; added closeAsUnprocessed method to mark the exchange as unprocessed and close it to enable retry; added documentation for closeAsUnprocessed; changed HeadersConsumer to extend ValidatingHeadersConsumer.",
+          "where_in_code": "Stream class, dbgString method and new closeAsUnprocessed method; HeadersConsumer inner class",
+          "intent": "Improve debugging output clarity; provide a method to close streams as unprocessed for retry logic; document the behavior; update HeadersConsumer inheritance.",
+          "change_type": "add_method|modify_logic",
+          "key_symbols": [
+            "dbgString",
+            "closeAsUnprocessed",
+            "HeadersConsumer"
+          ]
+        },
+        {
+          "hunk_index": 17,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowController.java",
+          "what_changed": "Updated copyright year from 2018 to 2024 in the file header comment.",
+          "where_in_code": "File header comment",
+          "intent": "Keep the copyright year current and accurate.",
+          "change_type": "other",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 18,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowController.java",
+          "what_changed": "Modified stream removal logic to allow client-initiated streams to be absent from the streams map without throwing an error, acknowledging that such streams may be closed as unprocessed before registration; retained error for unexpected server streams.",
+          "where_in_code": "WindowController class, method removing streams",
+          "intent": "Prevent erroneous errors when client streams are closed early due to GOAWAY and unprocessed state, improving robustness.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "streams",
+            "streamid"
+          ]
+        },
+        {
+          "hunk_index": 19,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/frame/GoAwayFrame.java",
+          "what_changed": "Updated copyright year from 2018 to 2024 in the file header comment.",
+          "where_in_code": "File header comment",
+          "intent": "Keep the copyright year current and accurate.",
+          "change_type": "other",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 20,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/frame/GoAwayFrame.java",
+          "what_changed": "Enhanced toString method to include the lastStreamId field value in the string representation.",
+          "where_in_code": "GoAwayFrame class, toString method",
+          "intent": "Provide more detailed debug information about the GOAWAY frame's last processed stream ID.",
+          "change_type": "modify_method",
+          "key_symbols": [
+            "toString",
+            "lastStreamId"
+          ]
+        }
+      ]
+    },
+    "agent8_syntax_repair_fallback_1": {
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "outcome": "clean"
+        },
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "outcome": "clean"
+        },
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/ExchangeImpl.java",
+          "outcome": "clean"
+        }
+      ]
+    },
+    "agent7_validator_retry1": {
+      "validation_passed": false,
+      "validation_failure_category": "api_mismatch",
+      "validation_error_context": "Build failed (jdk21u-dev-helper) \u2014 compile errors:\nsrc/java.net.http/share/classes/jdk/internal/net/http/Stream.java:1696: error: cannot find symbol",
+      "validation_attempts": 2,
+      "retry_files": [
+        "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java"
+      ],
+      "build_success": false,
+      "build_mode": "jdk21u-dev-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": [
+        {
+          "file": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "line": 1696,
+          "message": "error: cannot find symbol"
+        }
+      ]
+    },
+    "agent9_fallback_2": {
+      "fallback_status": "failed",
+      "fallback_attempts": 2,
+      "synthesized_count": 3,
+      "hunk_descriptions": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/ExchangeImpl.java",
+          "what_changed": "Updated the copyright year from 2023 to 2024 in the file header comment.",
+          "where_in_code": "File header comment",
+          "intent": "Keep copyright year current and accurate.",
+          "change_type": "other",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/ExchangeImpl.java",
+          "what_changed": "Added a new volatile boolean field named 'unprocessedByPeer' to the ExchangeImpl class.",
+          "where_in_code": "ExchangeImpl class, field declarations",
+          "intent": "Track whether the peer explicitly indicated that the corresponding stream was not processed, e.g., via GOAWAY or reset frames.",
+          "change_type": "add_field",
+          "key_symbols": [
+            "unprocessedByPeer"
+          ]
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/ExchangeImpl.java",
+          "what_changed": "Added two methods: 'isUnprocessedByPeer' to query the unprocessed state, and 'markUnprocessedByPeer' to set this state to true.",
+          "where_in_code": "ExchangeImpl class, after expectContinueFailed method",
+          "intent": "Provide API to mark and check if an exchange was not processed by the peer, enabling retry logic or special handling.",
+          "change_type": "add_method",
+          "key_symbols": [
+            "isUnprocessedByPeer",
+            "markUnprocessedByPeer"
+          ]
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "what_changed": "Updated the copyright year from 2023 to 2024 in the file header comment.",
+          "where_in_code": "File header comment",
+          "intent": "Keep copyright year current and accurate.",
+          "change_type": "other",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "what_changed": "Added imports for AtomicInteger and AtomicLong; removed unused import of Function.",
+          "where_in_code": "Import statements at the top of Http2Connection.java",
+          "intent": "Introduce atomic classes for thread-safe counters and state tracking, likely for new concurrency control features.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "AtomicInteger",
+            "AtomicLong"
+          ]
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "what_changed": "Added a new AtomicLong field 'lastProcessedStreamInGoAway' initialized to -1.",
+          "where_in_code": "Http2Connection class, field declarations",
+          "intent": "Track the last stream ID processed by the peer as indicated in GOAWAY frames, to manage unprocessed streams.",
+          "change_type": "add_field",
+          "key_symbols": [
+            "lastProcessedStreamInGoAway"
+          ]
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "what_changed": "Modified the close() method to send a GOAWAY frame only if the remote side has not already sent a GOAWAY (checked via HALF_CLOSED_REMOTE state).",
+          "where_in_code": "Http2Connection class, close() method",
+          "intent": "Avoid sending redundant GOAWAY frames if the remote peer has already indicated connection closure, preventing protocol errors or unnecessary traffic.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "close",
+            "HALF_CLOSED_REMOTE"
+          ]
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "what_changed": "Rewrote handleGoAway method to update lastProcessedStreamInGoAway atomically, mark connection as half-closed remotely, prevent new streams, and close streams with IDs greater than last processed as unprocessed to enable retry.",
+          "where_in_code": "Http2Connection class, handleGoAway(GoAwayFrame) method and new helper handlePeerUnprocessedStreams",
+          "intent": "Properly handle incoming GOAWAY frames by tracking the last processed stream, preventing new streams, and marking unprocessed streams for retry, improving connection and stream lifecycle management.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "handleGoAway",
+            "lastProcessedStreamInGoAway",
+            "handlePeerUnprocessedStreams"
+          ]
+        },
+        {
+          "hunk_index": 8,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "what_changed": "Renamed private method markHalfClosedLRemote() to markHalfClosedRemote() for naming consistency.",
+          "where_in_code": "Http2Connection class, private method",
+          "intent": "Improve code clarity and naming consistency for marking remote half-closed state.",
+          "change_type": "modify_signature",
+          "key_symbols": [
+            "markHalfClosedRemote"
+          ]
+        },
+        {
+          "hunk_index": 9,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "what_changed": "Updated copyright year from 2023 to 2024 in the file header comment.",
+          "where_in_code": "File header comment",
+          "intent": "Keep copyright year current and accurate.",
+          "change_type": "other",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 10,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "what_changed": "Replaced boolean field 'expiredOnce' with 'retriedOnce' to better reflect retry semantics.",
+          "where_in_code": "MultiExchange class, field declarations",
+          "intent": "Clarify and correct the state tracking of whether a request has been retried once.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "retriedOnce"
+          ]
+        },
+        {
+          "hunk_index": 11,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "what_changed": "In retry logic, reset 'retriedOnce' to false instead of 'expiredOnce' when preparing a new request.",
+          "where_in_code": "MultiExchange class, retry handling code",
+          "intent": "Align retry state variable with new naming and semantics to correctly track retry attempts.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "retriedOnce"
+          ]
+        },
+        {
+          "hunk_index": 12,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "what_changed": "Modified call to getExceptionalCF to pass the ExchangeImpl instance as an additional parameter.",
+          "where_in_code": "MultiExchange class, error handling in responseAsyncImpl method",
+          "intent": "Enable getExceptionalCF to consider exchange-specific state (e.g., unprocessed status) when deciding retry behavior.",
+          "change_type": "modify_method",
+          "key_symbols": [
+            "getExceptionalCF",
+            "ExchangeImpl"
+          ]
+        },
+        {
+          "hunk_index": 13,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "what_changed": "Enhanced getExceptionalCF method to accept ExchangeImpl parameter and incorporate its unprocessedByPeer state into retry decision logic; replaced 'expiredOnce' with 'retriedOnce' and adjusted retry conditions accordingly.",
+          "where_in_code": "MultiExchange class, getExceptionalCF method",
+          "intent": "Improve retry logic to handle cases where the peer did not process the request, allowing retries even if normally disallowed, and better track retry attempts.",
+          "change_type": "modify_method",
+          "key_symbols": [
+            "getExceptionalCF",
+            "retriedOnce",
+            "unprocessedByPeer"
+          ]
+        },
+        {
+          "hunk_index": 14,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java",
+          "what_changed": "Updated debug log message in getExceptionalCF to include current request information when already retried once.",
+          "where_in_code": "MultiExchange class, getExceptionalCF method",
+          "intent": "Enhance debugging output for better traceability of retry attempts and associated requests.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "getExceptionalCF"
+          ]
+        },
+        {
+          "hunk_index": 15,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "what_changed": "Modified handling of RST_STREAM frames to detect REFUSED_STREAM error code and mark the stream as unprocessed by the peer, enabling retry; added logging and adjusted error reporting accordingly.",
+          "where_in_code": "Stream class, RST_STREAM frame handling code",
+          "intent": "Support HTTP/2 stream refusal semantics by marking streams as unprocessed when refused, allowing clients to retry requests safely.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "closeAsUnprocessed",
+            "markUnprocessedByPeer",
+            "REFUSED_STREAM"
+          ]
+        },
+        {
+          "hunk_index": 16,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Stream.java",
+          "what_changed": "Enhanced dbgString method to handle stream ID zero by displaying '?' instead of 0; added closeAsUnprocessed method to mark an exchange as unprocessed and close it accordingly; added explanatory comments about unprocessed exchanges and retry logic.",
+          "where_in_code": "Stream class, dbgString method and new closeAsUnprocessed method",
+          "intent": "Improve debugging output clarity and provide a mechanism to close streams as unprocessed to support retrying requests after GOAWAY frames.",
+          "change_type": "add_method",
+          "key_symbols": [
+            "dbgString",
+            "closeAsUnprocessed"
+          ]
+        },
+        {
+          "hunk_index": 17,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowController.java",
+          "what_changed": "Updated copyright year from 2018 to 2024 in the file header comment.",
+          "where_in_code": "File header comment",
+          "intent": "Keep copyright year current and accurate.",
+          "change_type": "other",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 18,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/WindowController.java",
+          "what_changed": "Modified stream removal logic to allow client-initiated streams to be absent from the streams map without throwing an error, acknowledging that such streams may be closed as unprocessed before registration; retained error for unexpected server-initiated streams.",
+          "where_in_code": "WindowController class, stream removal method",
+          "intent": "Prevent erroneous exceptions when client streams are closed early due to GOAWAY, improving robustness of stream tracking.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "streams",
+            "streamid"
+          ]
+        },
+        {
+          "hunk_index": 19,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/frame/GoAwayFrame.java",
+          "what_changed": "Updated copyright year from 2018 to 2024 in the file header comment.",
+          "where_in_code": "File header comment",
+          "intent": "Keep copyright year current and accurate.",
+          "change_type": "other",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 20,
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/frame/GoAwayFrame.java",
+          "what_changed": "Enhanced toString method to include the lastStreamId field value in the string representation.",
+          "where_in_code": "GoAwayFrame class, toString method",
+          "intent": "Provide more detailed debug information about GOAWAY frames by including the last processed stream ID.",
+          "change_type": "modify_method",
+          "key_symbols": [
+            "toString",
+            "lastStreamId"
+          ]
+        }
+      ]
+    },
+    "agent8_syntax_repair_fallback_2": {
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/Http2Connection.java",
+          "outcome": "clean"
+        },
+        {
+          "file_path": "src/java.net.http/share/classes/jdk/internal/net/http/ExchangeImpl.java",
+          "outcome": "clean"
+        }
+      ]
+    },
+    "agent7_validator_retry2": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 3,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk21u-dev-helper",
+      "test_success": false,
+      "test_mode": "jdk21u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/java/net/httpclient/http2/H2GoAwayTest.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "java/net/httpclient/http2/H2GoAwayTest.java#H2GoAwayTest": "failed"
+        },
+        "classes": {
+          "java/net/httpclient/http2/H2GoAwayTest.java": "failed"
+        },
+        "summary": {
+          "passed": 0,
+          "failed": 1,
+          "skipped": 0,
+          "total": 1
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": false,
+        "fail_to_pass": [],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 0,
+        "patched_total": 1,
+        "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 48,
+    "developer_aux_hunks_from_target": 6,
+    "phase0_baseline": {
+      "mode": "baseline-jdk21u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 1
+    },
+    "java_production_hunks": 21,
+    "developer_aux_hunks": 6,
+    "processed_hunk_indices": [
+      1,
+      2,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      14,
+      15,
+      17,
+      18,
+      19,
+      20,
+      3,
+      4,
+      13,
+      16
+    ],
+    "tokens_used": 151814,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent4_namespace": {
+        "input": 15914,
+        "output": 6088
+      },
+      "agent5_structural": {
+        "input": 3084,
+        "output": 5515
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      },
+      "agent9_fallback": {
+        "input": 145484,
+        "output": 6330
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 16,
+    "synthesized_count": 3,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "clean",
+    "fallback_status": "failed",
+    "fallback_attempts": 2,
+    "retry_contexts": [
+      {
+        "error_type": "api_mismatch",
+        "error_message": "/repo/src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java:475: error: method getExceptionalCF in class MultiExchange<T> cannot be applied to given types;\n                        CompletableFuture<Response> errorCF = getExceptionalCF(ex, exch.exchImpl);\nERROR: Build failed for target 'images' in configuration '/repo/build_shared' (exit code 2) \n/repo/src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java:475: error: method getExceptionalCF in class MultiExchange<T> cannot be applied to given types;\n                        CompletableFuture<Response> errorCF = getExceptionalCF(ex, exch.exchImpl);\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java:475: error: method getExceptionalCF in class MultiExchange<T> cannot be applied to given types;\n                        CompletableFuture<Response> errorCF = getExceptionalCF(ex, exch.exchImpl);\nERROR: Build failed for target 'images' in configuration '/repo/build_shared' (exit code 2) \n/repo/src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java:475: error: method getExceptionalCF in class MultiExchange<T> cannot be applied to given types;\n                        CompletableFuture<Response> errorCF = getExceptionalCF(ex, exch.exchImpl);\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java:475: error: method getExceptionalCF in class MultiExchange<T> cannot be applied to given types;\n                        CompletableFuture<Response> errorCF = getExceptionalCF(ex, exch.exchImpl);\nERROR: Build failed for target 'images' in configuration '/repo/build_shared' (exit code 2) \n/repo/src/java.net.http/share/classes/jdk/internal/net/http/MultiExchange.java:475: error: method getExceptionalCF in class MultiExchange<T> cannot be applied to given types;\n                        CompletableFuture<Response> errorCF = getExceptionalCF(ex, exch.exchImpl);\n=== Build FAILED for a5678d3 ===",
+        "attempt_count": 1,
+        "suggested_action": "route_to_namespace_or_structural"
+      },
+      {
+        "error_type": "api_mismatch",
+        "error_message": "/repo/src/java.net.http/share/classes/jdk/internal/net/http/Stream.java:1696: error: cannot find symbol\n  symbol:   method markUnprocessedByPeer()\nERROR: Build failed for target 'images' in configuration '/repo/build_shared' (exit code 2) \n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Stream.java:1696: error: cannot find symbol\n  symbol:   method markUnprocessedByPeer()\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Stream.java:1696: error: cannot find symbol\n  symbol:   method markUnprocessedByPeer()\nERROR: Build failed for target 'images' in configuration '/repo/build_shared' (exit code 2) \n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Stream.java:1696: error: cannot find symbol\n  symbol:   method markUnprocessedByPeer()\n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Stream.java:1696: error: cannot find symbol\n  symbol:   method markUnprocessedByPeer()\nERROR: Build failed for target 'images' in configuration '/repo/build_shared' (exit code 2) \n/repo/src/java.net.http/share/classes/jdk/internal/net/http/Stream.java:1696: error: cannot find symbol\n  symbol:   method markUnprocessedByPeer()\n=== Build FAILED for a5678d3 ===",
+        "attempt_count": 2,
+        "suggested_action": "route_to_namespace_or_structural"
+      }
+    ],
+    "failed_hunks": [],
+    "generated_patch_bytes": 20163,
+    "target_patch_bytes": 53945,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": false,
+    "test_mode": "jdk21u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": false,
+      "fail_to_pass": [],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 0,
+      "patched_total": 1,
+      "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+    },
+    "fail_to_pass_count": 0,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": false
+  }
+}

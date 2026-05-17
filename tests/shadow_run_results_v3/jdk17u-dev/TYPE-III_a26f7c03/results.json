@@ -1,0 +1,697 @@
+{
+  "run_timestamp": "2026-04-18T18:13:43.618843",
+  "repo": "jdk17u-dev",
+  "patch_type": "TYPE-III",
+  "original_commit": "a26f7c03c72e4efe6d3219d294294c554aebc631",
+  "backport_commit": "092758703e25644cc6f867ec8a4fbd4e23e8cd3a",
+  "description": "main \u2192 jdk17u-dev",
+  "skip_validation": false,
+  "skip_test": false,
+  "agents": {
+    "agent1_localizer": {
+      "elapsed_s": 2.05,
+      "error": null,
+      "java_hunks": 9,
+      "aux_hunks": 2,
+      "localization_results": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1,
+          "end_line": 5,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "method_used": "fuzzy",
+          "confidence": 0.808,
+          "start_line": 27,
+          "end_line": 32,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 64,
+          "end_line": 69,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 110,
+          "end_line": 115,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 136,
+          "end_line": 142,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 151,
+          "end_line": 156,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 740,
+          "end_line": 745,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1194,
+          "end_line": 1199,
+          "symbol_mappings": {}
+        },
+        {
+          "hunk_index": 8,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "method_used": "git_exact",
+          "confidence": 1.0,
+          "start_line": 1588,
+          "end_line": 1593,
+          "symbol_mappings": {}
+        }
+      ]
+    },
+    "agent2_classifier": {
+      "elapsed_s": 3.16,
+      "error": null,
+      "classification": {
+        "patch_type": "PatchType.TYPE_III",
+        "confidence": 0.95,
+        "reasoning": "The patch introduces new fields, methods, and logic to handle font charset decoding in RTF parsing, including CharsetDecoder usage and mapping Windows font charsets to code pages. It modifies existing methods to integrate charset decoding and adds a new test file. The changes involve structural additions and modifications to parsing logic, indicating structural changes rather than simple string replacements or formatting fixes. The localization evidence shows mostly exact matches with one fuzzy match, supporting a high confidence in classification as TYPE_III. The token budget is estimated to be moderately high due to the complexity and size of the patch.",
+        "is_auto_generated": false
+      }
+    },
+    "agent3_fastapply": {
+      "elapsed_s": 0.01,
+      "error": null,
+      "applied_count": 8,
+      "applied_hunks": [
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "error": null
+        },
+        {
+          "applied": true,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "error": null
+        }
+      ]
+    },
+    "agent4_namespace": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "adapted_count": 0
+    },
+    "agent5_structural": {
+      "elapsed_s": 0.09,
+      "error": null,
+      "refactored_count": 0
+    },
+    "agent6_synthesizer": {
+      "elapsed_s": 0.0,
+      "error": null,
+      "synthesized_count": 1,
+      "failed_count": 0,
+      "synthesis_status": "success",
+      "synthesized_hunks": [
+        {
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "old_string": " */\npackage javax.swing.text.rtf;\n\nimport java.lang.*;\nimport java.util.*;\nimport java.io.*;\nimport java.awt.Color;\nimport java.security.AccessController;\nimport java.security.PrivilegedAction;\nimport javax.swing.text.*;\n\n/**\n",
+          "new_string": " */\npackage javax.swing.text.rtf;\n\nimport java.io.InputStreamReader;\nimport java.io.OutputStream;\nimport java.io.StreamTokenizer;\nimport java.nio.ByteBuffer;\nimport java.nio.CharBuffer;\nimport java.nio.charset.Charset;\nimport java.nio.charset.CharsetDecoder;\nimport java.nio.charset.CodingErrorAction;\nimport java.security.AccessController;\nimport java.security.PrivilegedAction;\nimport java.util.Dictionary;\nimport javax.swing.text.*;\n\n/**\n",
+          "confidence": 1.0,
+          "context_lines_included": 3,
+          "verified": true
+        }
+      ]
+    },
+    "agent8_syntax_repair": {
+      "elapsed_s": 0.11,
+      "error": null,
+      "syntax_repair_status": "clean",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": [
+        {
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "outcome": "clean"
+        }
+      ],
+      "synthesized_count_after_repair": 1
+    },
+    "agent7_validator": {
+      "validation_passed": false,
+      "validation_failure_category": "api_mismatch",
+      "validation_error_context": "Build failed (jdk17u-dev-helper) \u2014 compile errors:\nsrc/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:74: error: cannot find symbol\nsrc/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:76: error: cannot find symbol\nsrc/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:78: error: cannot find symbol\nsrc/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:80: error: cannot find symbol\nsrc/java.desktop/share/classes/javax/swing/text/rtf/RTFReader",
+      "validation_attempts": 1,
+      "retry_files": [
+        "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java"
+      ],
+      "build_success": false,
+      "build_mode": "jdk17u-dev-helper",
+      "test_success": null,
+      "test_mode": null,
+      "test_state": null,
+      "test_state_transition": null,
+      "compile_errors": [
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 74,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 76,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 78,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 80,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 252,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 332,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 616,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 639,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 640,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 673,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 837,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 1058,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 107,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 142,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 170,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 202,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 203,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 204,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 254,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 275,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 334,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 589,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 621,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 622,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 623,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 644,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 658,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 662,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 802,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 806,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 823,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 844,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 853,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 854,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 864,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 903,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 913,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 914,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 915,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 916,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 924,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 1377,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 1485,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 1496,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 1580,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 1604,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 1617,
+          "message": "error: cannot find symbol"
+        },
+        {
+          "file": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "line": 1064,
+          "message": "error: cannot find symbol"
+        }
+      ]
+    },
+    "agent9_fallback_1": {
+      "fallback_status": "failed",
+      "fallback_attempts": 1,
+      "synthesized_count": 0,
+      "hunk_descriptions": [
+        {
+          "hunk_index": 0,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "what_changed": "Updated the copyright year from 2021 to 2023 in the file header comment.",
+          "where_in_code": "File header comment",
+          "intent": "To reflect the current copyright year and maintain legal correctness.",
+          "change_type": "other",
+          "key_symbols": []
+        },
+        {
+          "hunk_index": 1,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "what_changed": "Added imports for java.nio classes including ByteBuffer, CharBuffer, Charset, CharsetDecoder, and CodingErrorAction.",
+          "where_in_code": "Import statements at the top of RTFReader.java",
+          "intent": "To support character set decoding and byte buffer management for enhanced charset handling.",
+          "change_type": "modify_import",
+          "key_symbols": [
+            "ByteBuffer",
+            "CharsetDecoder",
+            "CodingErrorAction"
+          ]
+        },
+        {
+          "hunk_index": 2,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "what_changed": "Added new fields: a Dictionary mapping font numbers to Charset objects (fcharsetTable) and a static Dictionary mapping font charset strings to code page names (fcharsetToCP).",
+          "where_in_code": "RTFReader class fields",
+          "intent": "To enable tracking and mapping of font character sets for proper text decoding based on font charset information.",
+          "change_type": "add_field",
+          "key_symbols": [
+            "fcharsetTable",
+            "fcharsetToCP"
+          ]
+        },
+        {
+          "hunk_index": 3,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "what_changed": "Inserted a new text keyword mapping for \"line\" to the newline character '\\n' in the textKeywords dictionary.",
+          "where_in_code": "RTFReader static initialization block or constructor where textKeywords are defined",
+          "intent": "To support the RTF control word 'line' by mapping it to a newline character in the parsed text.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "textKeywords",
+            "line"
+          ]
+        },
+        {
+          "hunk_index": 4,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "what_changed": "Added constants defining Windows font charset integer values and a static initializer block that populates the fcharsetToCP dictionary mapping charset constants to corresponding code page names. Also added a replacement character constant.",
+          "where_in_code": "RTFReader class static fields and static initializer",
+          "intent": "To provide a mapping from RTF font charset codes to Java charset names for accurate charset decoding, enabling support for multiple character sets in fonts.",
+          "change_type": "add_field",
+          "key_symbols": [
+            "ANSI_CHARSET",
+            "fcharsetToCP",
+            "REPLACEMENT_CHAR"
+          ]
+        },
+        {
+          "hunk_index": 5,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "what_changed": "Initialized the newly added fcharsetTable dictionary in the RTFReader constructor alongside fontTable and parserState.",
+          "where_in_code": "RTFReader constructor",
+          "intent": "To prepare the data structure for storing font charset mappings when parsing RTF documents.",
+          "change_type": "add_field",
+          "key_symbols": [
+            "fcharsetTable"
+          ]
+        },
+        {
+          "hunk_index": 6,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "what_changed": "Extended the keyword processing logic to handle the 'fcharset' control word by mapping the font charset number to a Charset object and storing it in fcharsetTable for the current font number.",
+          "where_in_code": "RTFReader method handling RTF control words (likely parseKeyword or similar)",
+          "intent": "To support per-font character set specification in RTF, enabling correct decoding of font-specific text encodings.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "fcharset",
+            "fcharsetTable"
+          ]
+        },
+        {
+          "hunk_index": 7,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "what_changed": "Enhanced the handling of the 'f' (font) control word to reset the decoder byte buffer, insert a replacement character if a lead byte is pending, and set up a CharsetDecoder based on the font's charset from fcharsetTable or disable decoding if none is set.",
+          "where_in_code": "RTFReader method handling RTF control words (likely parseKeyword or similar)",
+          "intent": "To properly initialize or reset character decoding state when switching fonts, ensuring correct decoding of multi-byte character sets and avoiding corrupted characters.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "f",
+            "decoder",
+            "decoderBB",
+            "fcharsetTable"
+          ]
+        },
+        {
+          "hunk_index": 8,
+          "file_path": "src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java",
+          "what_changed": "Modified the handling of the 'par' (paragraph) control word to check for a pending lead byte in the decoder buffer, insert a replacement character if needed, and reset the decoder buffer before ending the paragraph.",
+          "where_in_code": "RTFReader method handling RTF control words (likely parseKeyword or similar)",
+          "intent": "To ensure that incomplete multi-byte sequences are handled gracefully at paragraph boundaries by inserting replacement characters and resetting decoding state.",
+          "change_type": "modify_logic",
+          "key_symbols": [
+            "par",
+            "decoderBB",
+            "handleText"
+          ]
+        }
+      ]
+    },
+    "agent8_syntax_repair_fallback_1": {
+      "syntax_repair_status": "skipped",
+      "syntax_repair_attempts": 0,
+      "syntax_repair_log": []
+    },
+    "agent7_validator_retry1": {
+      "validation_passed": true,
+      "validation_failure_category": "",
+      "validation_error_context": "",
+      "validation_attempts": 2,
+      "retry_files": [],
+      "build_success": true,
+      "build_mode": "jdk17u-dev-helper",
+      "test_success": false,
+      "test_mode": "jdk17u-dev-helper",
+      "test_state": {
+        "xml_reports": [
+          "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/javax/swing/text/rtf/RTFReadFontCharsetTest.jtr.xml"
+        ],
+        "target_classes": [],
+        "test_cases": {
+          "javax/swing/text/rtf/RTFReadFontCharsetTest.java#RTFReadFontCharsetTest": "failed"
+        },
+        "classes": {
+          "javax/swing/text/rtf/RTFReadFontCharsetTest.java": "failed"
+        },
+        "summary": {
+          "passed": 0,
+          "failed": 1,
+          "skipped": 0,
+          "total": 1
+        }
+      },
+      "test_state_transition": {
+        "valid_backport_signal": false,
+        "fail_to_pass": [],
+        "pass_to_fail": [],
+        "newly_passing": [],
+        "baseline_total": 0,
+        "patched_total": 1,
+        "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+      },
+      "compile_errors": []
+    }
+  },
+  "summary": {
+    "total_hunks_in_patch": 18,
+    "developer_aux_hunks_from_target": 2,
+    "phase0_baseline": {
+      "mode": "baseline-jdk17u-dev-helper",
+      "skipped": false,
+      "cached": false,
+      "test_cases_total": 1
+    },
+    "java_production_hunks": 9,
+    "developer_aux_hunks": 2,
+    "processed_hunk_indices": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "tokens_used": 98466,
+    "llm_token_usage": {
+      "agent2_classifier": {
+        "input": 0,
+        "output": 0
+      },
+      "agent5_structural": {
+        "input": 0,
+        "output": 0
+      },
+      "agent6_synthesizer": {
+        "input": 0,
+        "output": 0
+      },
+      "agent8_syntax_repair": {
+        "input": 0,
+        "output": 0
+      },
+      "agent9_fallback": {
+        "input": 96191,
+        "output": 2275
+      }
+    },
+    "synthesis_status": "success",
+    "applied_on_disk_ag3": 8,
+    "synthesized_count": 0,
+    "failed_hunks_total": 0,
+    "syntax_repair_status": "skipped",
+    "fallback_status": "failed",
+    "fallback_attempts": 1,
+    "retry_contexts": [
+      {
+        "error_type": "api_mismatch",
+        "error_message": "ol\n  symbol:   class Color\n/repo/src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:853: error: cannot find symbol\n  symbol:   class Color\n/repo/src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:854: error: cannot find symbol\n  symbol:   class Color\n/repo/src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:864: error: cannot find symbol\n  symbol:   class Color\n/repo/src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:903: error: cannot find symbol\n  symbol:   class Hashtable\n/repo/src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:913: error: cannot find symbol\n  symbol:   class Map\n/repo/src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:913: error: cannot find symbol\n  symbol:   class HashMap\n/repo/src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:914: error: cannot find symbol\n  symbol:   class Map\n/repo/src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:914: error: cannot find symbol\n  symbol:   class HashMap\n/repo/src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:915: error: cannot find symbol\n  symbol:   class Map\n/repo/src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:915: error: cannot find symbol\n  symbol:   class HashMap\n/repo/src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:916: error: cannot find symbol\n  symbol:   class Enumeration\n/repo/src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:924: error: cannot find symbol\n  symbol:   class Map\n/repo/src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:1377: error: cannot find symbol\n  symbol:   class Hashtable\n/repo/src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:1485: error: cannot find symbol\n  symbol:   class Color\n/repo/src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:1496: error: cannot find symbol\n  symbol:   class Color\n/repo/src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:1580: error: cannot find symbol\n  symbol:   class Enumeration\n/repo/src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:1604: error: cannot find symbol\n  symbol:   class Enumeration\n/repo/src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:1617: error: cannot find symbol\n  symbol:   class Enumeration\n/repo/src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:1064: error: cannot find symbol\n  symbol:   class HashSet\nERROR: Build failed for target 'images' in configuration '/repo/build_shared' (exit code 2) \n/repo/src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:74: error: cannot find symbol\n  symbol:   class Color\n/repo/src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:76: error: cannot find symbol\n  symbol:   class Map\n/repo/src/java.desktop/share/classes/javax/swing/text/rtf/RTFReader.java:78: error: cannot find symbol\n  symbol:   class Map\n=== Build FAILED for 26b5597 ===",
+        "attempt_count": 1,
+        "suggested_action": "route_to_namespace_or_structural"
+      }
+    ],
+    "failed_hunks": [],
+    "generated_patch_bytes": 8112,
+    "target_patch_bytes": 18525,
+    "patch_exact_match": false,
+    "validation_passed": true,
+    "validation_failure_category": "",
+    "build_success": true,
+    "test_success": false,
+    "test_mode": "jdk17u-dev-helper",
+    "test_transition": {
+      "valid_backport_signal": false,
+      "fail_to_pass": [],
+      "pass_to_fail": [],
+      "newly_passing": [],
+      "baseline_total": 0,
+      "patched_total": 1,
+      "reason": "Invalid: No fail-to-pass or newly passing tests observed."
+    },
+    "fail_to_pass_count": 0,
+    "newly_passing_count": 0,
+    "pass_to_fail_count": 0,
+    "backport_success": false
+  }
+}

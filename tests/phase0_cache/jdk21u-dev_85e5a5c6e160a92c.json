@@ -1,0 +1,23 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/sun/security/pkcs11/Provider/RequiredMechCheck.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/sun/security/pkcs11/Provider/RequiredMechCheck.testng-results.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "sun/security/pkcs11/Provider/RequiredMechCheck.java#RequiredMechCheck": "passed"
+    },
+    "classes": {
+      "sun/security/pkcs11/Provider/RequiredMechCheck.java": "passed"
+    },
+    "summary": {
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "total": 1
+    }
+  },
+  "mode": "baseline-jdk21u-dev-helper",
+  "skipped": false
+}

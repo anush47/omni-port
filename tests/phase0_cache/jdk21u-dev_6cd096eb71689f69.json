@@ -1,0 +1,22 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/sun/security/jca/NullPreferredList.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "sun/security/jca/NullPreferredList.java#NullPreferredList": "passed"
+    },
+    "classes": {
+      "sun/security/jca/NullPreferredList.java": "passed"
+    },
+    "summary": {
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "total": 1
+    }
+  },
+  "mode": "baseline-jdk21u-dev-helper",
+  "skipped": false
+}

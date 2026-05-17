@@ -1,0 +1,22 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk17u-dev/JTwork/java/net/httpclient/http2/ConnectionReuseTest.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "java/net/httpclient/http2/ConnectionReuseTest.java#ConnectionReuseTest": "failed"
+    },
+    "classes": {
+      "java/net/httpclient/http2/ConnectionReuseTest.java": "failed"
+    },
+    "summary": {
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "total": 1
+    }
+  },
+  "mode": "baseline-jdk17u-dev-helper",
+  "skipped": false
+}

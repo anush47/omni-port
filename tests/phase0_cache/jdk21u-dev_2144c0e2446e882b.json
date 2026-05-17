@@ -1,0 +1,22 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk21u-dev/JTwork/java/io/ByteArrayOutputStream/WriteToReleasesCarrier.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "java/io/ByteArrayOutputStream/WriteToReleasesCarrier.java#WriteToReleasesCarrier": "failed"
+    },
+    "classes": {
+      "java/io/ByteArrayOutputStream/WriteToReleasesCarrier.java": "failed"
+    },
+    "summary": {
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "total": 1
+    }
+  },
+  "mode": "baseline-jdk21u-dev-helper",
+  "skipped": false
+}

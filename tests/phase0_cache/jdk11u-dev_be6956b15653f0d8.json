@@ -1,0 +1,34 @@
+{
+  "test_state": {
+    "xml_reports": [
+      "/home/cseroot/omni-port/repos/jdk11u-dev/JTwork/runtime/modules/AccessCheck/MethodAccessReadTwice.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk11u-dev/JTwork/tools/javac/StringConcat/StringAppendEvaluatesInOrder.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk11u-dev/JTwork/tools/javac/StringConcat/WellKnownTypeSignatures.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk11u-dev/JTwork/tools/javac/StringConcat/WellKnownTypes.jtr.xml",
+      "/home/cseroot/omni-port/repos/jdk11u-dev/JTwork/tools/javac/StringConcat/access/Test.jtr.xml"
+    ],
+    "target_classes": [],
+    "test_cases": {
+      "runtime/modules/AccessCheck/MethodAccessReadTwice.java#MethodAccessReadTwice": "failed",
+      "tools/javac/StringConcat/StringAppendEvaluatesInOrder.java#StringAppendEvaluatesInOrder": "failed",
+      "tools/javac/StringConcat/WellKnownTypeSignatures.java#WellKnownTypeSignatures": "failed",
+      "tools/javac/StringConcat/WellKnownTypes.java#WellKnownTypes": "passed",
+      "tools/javac/StringConcat/access/Test.java#Test": "failed"
+    },
+    "classes": {
+      "runtime/modules/AccessCheck/MethodAccessReadTwice.java": "failed",
+      "tools/javac/StringConcat/StringAppendEvaluatesInOrder.java": "failed",
+      "tools/javac/StringConcat/WellKnownTypeSignatures.java": "failed",
+      "tools/javac/StringConcat/WellKnownTypes.java": "passed",
+      "tools/javac/StringConcat/access/Test.java": "failed"
+    },
+    "summary": {
+      "passed": 1,
+      "failed": 4,
+      "skipped": 0,
+      "total": 5
+    }
+  },
+  "mode": "baseline-jdk11u-dev-helper",
+  "skipped": false
+}
