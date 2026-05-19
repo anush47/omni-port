@@ -1,0 +1,3432 @@
+[
+  {
+    "patch_id": "TYPE-III",
+    "repo": "crate",
+    "patch_type": "TYPE-III",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-III",
+    "repo": "crate",
+    "patch_type": "TYPE-III",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "crate",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-IV_",
+    "repo": "crate",
+    "patch_type": "TYPE-IV",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-IV_",
+    "repo": "crate",
+    "patch_type": "TYPE-IV",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_0",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_0",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_0",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_1",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_1",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_2",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_2",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_2",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_3",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_3",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_3",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_4",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_4",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-I_4",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_4",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_5",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_5",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_6",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_6",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_6",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_7",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_7",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_8",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_8",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_8",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_8",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_9",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_9",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_a",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_a",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_a",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_a",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_b",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_b",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_b",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_b",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_b",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_b",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_c",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_d",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_d",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_d",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_d",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-I_e",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_e",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_e",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_e",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_f",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_f",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_f",
+    "repo": "crate",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_0",
+    "repo": "crate",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_1",
+    "repo": "crate",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_1",
+    "repo": "crate",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_1",
+    "repo": "crate",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_1",
+    "repo": "crate",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_2",
+    "repo": "crate",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_2",
+    "repo": "crate",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_2",
+    "repo": "crate",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_2",
+    "repo": "crate",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_3",
+    "repo": "crate",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_3",
+    "repo": "crate",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_3",
+    "repo": "crate",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_6",
+    "repo": "crate",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_7",
+    "repo": "crate",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_a",
+    "repo": "crate",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_a",
+    "repo": "crate",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_b",
+    "repo": "crate",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_b",
+    "repo": "crate",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_c",
+    "repo": "crate",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_d",
+    "repo": "crate",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_d",
+    "repo": "crate",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_e",
+    "repo": "crate",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_e",
+    "repo": "crate",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "druid",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_3",
+    "repo": "druid",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_5",
+    "repo": "druid",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_a",
+    "repo": "druid",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_c",
+    "repo": "druid",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_f",
+    "repo": "druid",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_0",
+    "repo": "druid",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-III",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-III",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-III",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-III",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_0",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_0",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-I_1",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_1",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_1",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_3",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_3",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_3",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_3",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_3",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_4",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_4",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_4",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_4",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_4",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_4",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_4",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_4",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_4",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_4",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_4",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_5",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_5",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_5",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_6",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_6",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_7",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_7",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_7",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_7",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_7",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_8",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_8",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_9",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_9",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_9",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_a",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_a",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_a",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_a",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_a",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_c",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_c",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-I_c",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_d",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_e",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_e",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_e",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_f",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_1",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_1",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_2",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_2",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_4",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_5",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_6",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_7",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_7",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_8",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_a",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_c",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_d",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_d",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_f",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_f",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_f",
+    "repo": "elasticsearch",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-III",
+    "repo": "graylog2-server",
+    "patch_type": "TYPE-III",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "graylog2-server",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "graylog2-server",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "graylog2-server",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "graylog2-server",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "graylog2-server",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-I_1",
+    "repo": "graylog2-server",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-I_2",
+    "repo": "graylog2-server",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_7",
+    "repo": "graylog2-server",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_9",
+    "repo": "graylog2-server",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_9",
+    "repo": "graylog2-server",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_a",
+    "repo": "graylog2-server",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_b",
+    "repo": "graylog2-server",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_b",
+    "repo": "graylog2-server",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_b",
+    "repo": "graylog2-server",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_d",
+    "repo": "graylog2-server",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_d",
+    "repo": "graylog2-server",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_f",
+    "repo": "graylog2-server",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_4",
+    "repo": "graylog2-server",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_4",
+    "repo": "graylog2-server",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_4",
+    "repo": "graylog2-server",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-IV_",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-IV",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-I_0",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_1",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_2",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_2",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_2",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_3",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_3",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_4",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_4",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_5",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_5",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_6",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_6",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_7",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_7",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_7",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_8",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_a",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_c",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_d",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_d",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_e",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_f",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_d",
+    "repo": "grpc-java",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "hadoop",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "hadoop",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-I_8",
+    "repo": "hadoop",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_a",
+    "repo": "hadoop",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_f",
+    "repo": "hadoop",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_e",
+    "repo": "hadoop",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_0",
+    "repo": "hbase",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_0",
+    "repo": "hbase",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_0",
+    "repo": "hbase",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_1",
+    "repo": "hbase",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_1",
+    "repo": "hbase",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_1",
+    "repo": "hbase",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_3",
+    "repo": "hbase",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_3",
+    "repo": "hbase",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_4",
+    "repo": "hbase",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_5",
+    "repo": "hbase",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_6",
+    "repo": "hbase",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_7",
+    "repo": "hbase",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-I_7",
+    "repo": "hbase",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-I_8",
+    "repo": "hbase",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-I_9",
+    "repo": "hbase",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_a",
+    "repo": "hbase",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_b",
+    "repo": "hbase",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_c",
+    "repo": "hbase",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_e",
+    "repo": "hbase",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_f",
+    "repo": "hbase",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_4",
+    "repo": "hbase",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-III",
+    "repo": "hibernate-orm",
+    "patch_type": "TYPE-III",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-III",
+    "repo": "hibernate-orm",
+    "patch_type": "TYPE-III",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-III",
+    "repo": "hibernate-orm",
+    "patch_type": "TYPE-III",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-III",
+    "repo": "hibernate-orm",
+    "patch_type": "TYPE-III",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "hibernate-orm",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "hibernate-orm",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "hibernate-orm",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "hibernate-orm",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-IV_",
+    "repo": "hibernate-orm",
+    "patch_type": "TYPE-IV",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_6",
+    "repo": "hibernate-orm",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_3",
+    "repo": "hibernate-orm",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_6",
+    "repo": "hibernate-orm",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_7",
+    "repo": "hibernate-orm",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk11u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk11u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk11u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk11u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk11u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_1",
+    "repo": "jdk11u-dev",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_4",
+    "repo": "jdk11u-dev",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_a",
+    "repo": "jdk11u-dev",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_b",
+    "repo": "jdk11u-dev",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_f",
+    "repo": "jdk11u-dev",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-III",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-III",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-III",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-III",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-III",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-III",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-III",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-III",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-III",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-III",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-III",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-III",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-III",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-III",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-III",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-III",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-III",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-III",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-IV_",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-IV",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_1",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_3",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_3",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_4",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_5",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_5",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_6",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_8",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_a",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_c",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_c",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_e",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_f",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_1",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_2",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_2",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_3",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_4",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_9",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_a",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_f",
+    "repo": "jdk17u-dev",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-III",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-III",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-III",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-III",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-III",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-III",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_0",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_0",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_1",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-I_1",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_2",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_3",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_4",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_8",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_8",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_8",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_8",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_9",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_9",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_a",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_a",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_a",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_b",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_c",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_c",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_d",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_d",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_d",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_d",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_e",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_e",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_f",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-I_f",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_f",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_1",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_2",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_3",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_3",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_4",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_6",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_7",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_f",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_f",
+    "repo": "jdk21u-dev",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_0",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_1",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_2",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_2",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_3",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_5",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_6",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_8",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_8",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_8",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_8",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_8",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_8",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_9",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_b",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_c",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_c",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_c",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_d",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_e",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_f",
+    "repo": "jdk25u-dev",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_7",
+    "repo": "logstash",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_c",
+    "repo": "logstash",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_c",
+    "repo": "logstash",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "spring-framework",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "spring-framework",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "spring-framework",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "spring-framework",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_1",
+    "repo": "spring-framework",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_5",
+    "repo": "spring-framework",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_7",
+    "repo": "spring-framework",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-I_a",
+    "repo": "spring-framework",
+    "patch_type": "TYPE-I",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_f",
+    "repo": "spring-framework",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-III",
+    "repo": "sql",
+    "patch_type": "TYPE-III",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-III",
+    "repo": "sql",
+    "patch_type": "TYPE-III",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "sql",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "sql",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "sql",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-II_",
+    "repo": "sql",
+    "patch_type": "TYPE-II",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_0",
+    "repo": "sql",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": true,
+    "succeed_after_fallback_agent": true
+  },
+  {
+    "patch_id": "TYPE-V_0",
+    "repo": "sql",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_2",
+    "repo": "sql",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_4",
+    "repo": "sql",
+    "patch_type": "unknown",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_6",
+    "repo": "sql",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_6",
+    "repo": "sql",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": false
+  },
+  {
+    "patch_id": "TYPE-V_d",
+    "repo": "sql",
+    "patch_type": "TYPE-V",
+    "succeed_before_fallback_agent": false,
+    "succeed_after_fallback_agent": true
+  }
+]
